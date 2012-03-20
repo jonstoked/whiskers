@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+	<dict>
+		<key>header.png</key>
+		<string>512:668</string>
+		<key>starPowerupDesc.png</key>
+		<string>494:523</string>
+		<key>lightningPowerupDesc.png</key>
+		<string>393:403</string>
+		<key>cateyesPowerupDesc.png</key>
+		<string>412:283</string>
+		<key>bombPowerupDesc.png</key>
+		<string>492:163</string>
+		<key>questionPowerupDesc.png</key>
+		<string>522:17</string>
+		<key>suggestPowerup.png</key>
+		<string>330:-124</string>
+		<key>twitterButton.png</key>
+		<string>707:-89</string>
+		<key>backButtonPowerups.png</key>
+		<string>45:724</string>
+		<key>facebookButton.png</key>
+		<string>751:-173</string>
+	</dict>
+</plist>
+
