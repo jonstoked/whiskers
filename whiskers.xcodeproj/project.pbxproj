@@ -15,7 +15,6 @@
 		6804AF9215182AF7000918D4 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6804AF9115182AF7000918D4 /* UIKit.framework */; };
 		6804AF9415182AF7000918D4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6804AF9315182AF7000918D4 /* Foundation.framework */; };
 		6804AF9615182AF7000918D4 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6804AF9515182AF7000918D4 /* CoreGraphics.framework */; };
-		6804AF9A15182AF7000918D4 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 6804AF9915182AF7000918D4 /* Default.png */; };
 		6804AF9C15182AF7000918D4 /* fps_images.png in Resources */ = {isa = PBXBuildFile; fileRef = 6804AF9B15182AF7000918D4 /* fps_images.png */; };
 		6804AF9E15182AF7000918D4 /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = 6804AF9D15182AF7000918D4 /* Icon-72.png */; };
 		6804AFA015182AF7000918D4 /* Icon-Small-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 6804AF9F15182AF7000918D4 /* Icon-Small-50.png */; };
@@ -303,6 +302,7 @@
 		6804B2AC15182D5F000918D4 /* cb4depressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 6804B22315182D5F000918D4 /* cb4depressed.png */; };
 		6804B2AD15182D5F000918D4 /* cb4.png in Resources */ = {isa = PBXBuildFile; fileRef = 6804B22415182D5F000918D4 /* cb4.png */; };
 		6804B2AE15182D5F000918D4 /* lightningWhite.png in Resources */ = {isa = PBXBuildFile; fileRef = 6804B22515182D5F000918D4 /* lightningWhite.png */; };
+		68962B961518381E00A3E40E /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 68962B951518381E00A3E40E /* Default.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -315,7 +315,6 @@
 		6804AF9115182AF7000918D4 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		6804AF9315182AF7000918D4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		6804AF9515182AF7000918D4 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		6804AF9915182AF7000918D4 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = Resources/Default.png; sourceTree = "<group>"; };
 		6804AF9B15182AF7000918D4 /* fps_images.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = fps_images.png; path = Resources/fps_images.png; sourceTree = "<group>"; };
 		6804AF9D15182AF7000918D4 /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-72.png"; path = "Resources/Icon-72.png"; sourceTree = "<group>"; };
 		6804AF9F15182AF7000918D4 /* Icon-Small-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-Small-50.png"; path = "Resources/Icon-Small-50.png"; sourceTree = "<group>"; };
@@ -778,6 +777,7 @@
 		6804B22315182D5F000918D4 /* cb4depressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cb4depressed.png; sourceTree = "<group>"; };
 		6804B22415182D5F000918D4 /* cb4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cb4.png; sourceTree = "<group>"; };
 		6804B22515182D5F000918D4 /* lightningWhite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lightningWhite.png; sourceTree = "<group>"; };
+		68962B951518381E00A3E40E /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -855,84 +855,84 @@
 		6804AF9815182AF7000918D4 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				6804B1A515182D5F000918D4 /* swipeText.png */,
-				6804B1A615182D5F000918D4 /* swipeArrow.png */,
-				6804B1A715182D5F000918D4 /* mustacheYoffsets.plist */,
-				6804B1A815182D5F000918D4 /* powerupsSceneLayout.plist */,
-				6804B1A915182D5F000918D4 /* twitterButton.png */,
-				6804B1AA15182D5F000918D4 /* suggestPowerup.png */,
-				6804B1AB15182D5F000918D4 /* facebookButton.png */,
-				6804B1AC15182D5F000918D4 /* backButtonPowerups.png */,
-				6804B1AD15182D5F000918D4 /* questionPowerupDesc.png */,
-				6804B1AE15182D5F000918D4 /* lightningPowerupDesc.png */,
-				6804B1AF15182D5F000918D4 /* cateyesPowerupDesc.png */,
-				6804B1B015182D5F000918D4 /* bombPowerupDesc.png */,
-				6804B1B115182D5F000918D4 /* starPowerupDesc.png */,
-				6804B1B215182D5F000918D4 /* header.png */,
-				6804B1B415182D5F000918D4 /* byJonStokes.png */,
-				6804B1B515182D5F000918D4 /* whiskersLogo2.png */,
-				6804B1B615182D5F000918D4 /* powerupsButtonDepressed.png */,
-				6804B1B715182D5F000918D4 /* powerupsButton2Depressed.png */,
-				6804B1B815182D5F000918D4 /* powerupsButton2.png */,
-				6804B1B915182D5F000918D4 /* powerupsButton.png */,
-				6804B1BA15182D5F000918D4 /* playButton2Depressed.png */,
-				6804B1BB15182D5F000918D4 /* playButton2.png */,
-				6804B1BC15182D5F000918D4 /* musicButtonOn.png */,
-				6804B1BD15182D5F000918D4 /* musicButtonOff.png */,
-				6804B1BE15182D5F000918D4 /* musicButtonDepressed.png */,
-				6804B1BF15182D5F000918D4 /* psSparks.plist */,
-				6804B1C015182D5F000918D4 /* starIcon.png */,
-				6804B1C115182D5F000918D4 /* lightningIcon copy.png */,
-				6804B1C215182D5F000918D4 /* bulletIcon.png */,
-				6804B1C315182D5F000918D4 /* bombIcon.png */,
-				6804B1C415182D5F000918D4 /* margieWins.png */,
-				6804B1C515182D5F000918D4 /* helenWins.png */,
-				6804B1C615182D5F000918D4 /* johnrWins.png */,
-				6804B1C715182D5F000918D4 /* clarenceWins.png */,
-				6804B1C815182D5F000918D4 /* playAgainButtonDepressed.png */,
-				6804B1C915182D5F000918D4 /* playAgainButton.png */,
-				6804B1CA15182D5F000918D4 /* homeButtonDepressed.png */,
-				6804B1CB15182D5F000918D4 /* homeButton.png */,
-				6804B1CC15182D5F000918D4 /* psStarTrail.plist */,
-				6804B1CD15182D5F000918D4 /* francineBackground.png */,
-				6804B1CE15182D5F000918D4 /* bomb.png */,
-				6804B1CF15182D5F000918D4 /* pellet.png */,
-				6804B1D015182D5F000918D4 /* whiskersLogo.png */,
-				6804B1D115182D5F000918D4 /* playButton.png */,
-				6804B1D215182D5F000918D4 /* optionsButton.png */,
-				6804B1D315182D5F000918D4 /* joinButtonDepressed.png */,
-				6804B1D415182D5F000918D4 /* joinButton.png */,
-				6804B1D515182D5F000918D4 /* furiousFrancineWithTail.png */,
-				6804B1D615182D5F000918D4 /* eyeBullet2.png */,
-				6804B1D715182D5F000918D4 /* bigWhiteLightning.png */,
-				6804B1D815182D5F000918D4 /* PlayButtonBigDepressed.png */,
-				6804B1D915182D5F000918D4 /* PlayButtonBig.png */,
-				6804B1DA15182D5F000918D4 /* Icon-72.png */,
-				6804B1DB15182D5F000918D4 /* BackButtonDepressed.png */,
 				6804B1DC15182D5F000918D4 /* BackButton.png */,
-				6804B1DD15182D5F000918D4 /* playButtonDepressed.png */,
-				6804B1DE15182D5F000918D4 /* orangeMustaches.pvr.ccz */,
-				6804B1DF15182D5F000918D4 /* orangeMustaches.plist */,
-				6804B1E015182D5F000918D4 /* optionsButtonDepressed.png */,
-				6804B1E115182D5F000918D4 /* mustachesPNG */,
-				6804B21515182D5F000918D4 /* francineWhiteWithTail.png */,
-				6804B21615182D5F000918D4 /* francineWhite.png */,
-				6804B21715182D5F000918D4 /* sewingmachine.caf */,
-				6804B21815182D5F000918D4 /* pausebutton2.png */,
-				6804B21915182D5F000918D4 /* munch.caf */,
-				6804B21A15182D5F000918D4 /* mouthpop.caf */,
-				6804B21B15182D5F000918D4 /* MapleLeafRag.mp3 */,
-				6804B21C15182D5F000918D4 /* HeliotropeBouquet2.mp3 */,
-				6804B21D15182D5F000918D4 /* cb7depressed.png */,
-				6804B21E15182D5F000918D4 /* cb7.png */,
-				6804B21F15182D5F000918D4 /* cb6depressed.png */,
-				6804B22015182D5F000918D4 /* cb6.png */,
-				6804B22115182D5F000918D4 /* cb5depressed.png */,
-				6804B22215182D5F000918D4 /* cb5.png */,
-				6804B22315182D5F000918D4 /* cb4depressed.png */,
+				6804B1DB15182D5F000918D4 /* BackButtonDepressed.png */,
+				6804B1AC15182D5F000918D4 /* backButtonPowerups.png */,
+				6804B1D715182D5F000918D4 /* bigWhiteLightning.png */,
+				6804B1CE15182D5F000918D4 /* bomb.png */,
+				6804B1C315182D5F000918D4 /* bombIcon.png */,
+				6804B1B015182D5F000918D4 /* bombPowerupDesc.png */,
+				6804B1C215182D5F000918D4 /* bulletIcon.png */,
+				6804B1B415182D5F000918D4 /* byJonStokes.png */,
+				6804B1AF15182D5F000918D4 /* cateyesPowerupDesc.png */,
 				6804B22415182D5F000918D4 /* cb4.png */,
-				6804B22515182D5F000918D4 /* lightningWhite.png */,
+				6804B22315182D5F000918D4 /* cb4depressed.png */,
+				6804B22215182D5F000918D4 /* cb5.png */,
+				6804B22115182D5F000918D4 /* cb5depressed.png */,
+				6804B22015182D5F000918D4 /* cb6.png */,
+				6804B21F15182D5F000918D4 /* cb6depressed.png */,
+				6804B21E15182D5F000918D4 /* cb7.png */,
+				6804B21D15182D5F000918D4 /* cb7depressed.png */,
+				6804B1C715182D5F000918D4 /* clarenceWins.png */,
 				6804B1A415182D3E000918D4 /* Default */,
+				6804B1D615182D5F000918D4 /* eyeBullet2.png */,
+				6804B1AB15182D5F000918D4 /* facebookButton.png */,
+				6804B1CD15182D5F000918D4 /* francineBackground.png */,
+				6804B21615182D5F000918D4 /* francineWhite.png */,
+				6804B21515182D5F000918D4 /* francineWhiteWithTail.png */,
+				6804B1D515182D5F000918D4 /* furiousFrancineWithTail.png */,
+				6804B1B215182D5F000918D4 /* header.png */,
+				6804B1C515182D5F000918D4 /* helenWins.png */,
+				6804B21C15182D5F000918D4 /* HeliotropeBouquet2.mp3 */,
+				6804B1CB15182D5F000918D4 /* homeButton.png */,
+				6804B1CA15182D5F000918D4 /* homeButtonDepressed.png */,
+				6804B1DA15182D5F000918D4 /* Icon-72.png */,
+				6804B1C615182D5F000918D4 /* johnrWins.png */,
+				6804B1D415182D5F000918D4 /* joinButton.png */,
+				6804B1D315182D5F000918D4 /* joinButtonDepressed.png */,
+				6804B1C115182D5F000918D4 /* lightningIcon copy.png */,
+				6804B1AE15182D5F000918D4 /* lightningPowerupDesc.png */,
+				6804B22515182D5F000918D4 /* lightningWhite.png */,
+				6804B21B15182D5F000918D4 /* MapleLeafRag.mp3 */,
+				6804B1C415182D5F000918D4 /* margieWins.png */,
+				6804B21A15182D5F000918D4 /* mouthpop.caf */,
+				6804B21915182D5F000918D4 /* munch.caf */,
+				6804B1BE15182D5F000918D4 /* musicButtonDepressed.png */,
+				6804B1BD15182D5F000918D4 /* musicButtonOff.png */,
+				6804B1BC15182D5F000918D4 /* musicButtonOn.png */,
+				6804B1E115182D5F000918D4 /* mustachesPNG */,
+				6804B1A715182D5F000918D4 /* mustacheYoffsets.plist */,
+				6804B1D215182D5F000918D4 /* optionsButton.png */,
+				6804B1E015182D5F000918D4 /* optionsButtonDepressed.png */,
+				6804B1DF15182D5F000918D4 /* orangeMustaches.plist */,
+				6804B1DE15182D5F000918D4 /* orangeMustaches.pvr.ccz */,
+				6804B21815182D5F000918D4 /* pausebutton2.png */,
+				6804B1CF15182D5F000918D4 /* pellet.png */,
+				6804B1C915182D5F000918D4 /* playAgainButton.png */,
+				6804B1C815182D5F000918D4 /* playAgainButtonDepressed.png */,
+				6804B1D115182D5F000918D4 /* playButton.png */,
+				6804B1BB15182D5F000918D4 /* playButton2.png */,
+				6804B1BA15182D5F000918D4 /* playButton2Depressed.png */,
+				6804B1D915182D5F000918D4 /* PlayButtonBig.png */,
+				6804B1D815182D5F000918D4 /* PlayButtonBigDepressed.png */,
+				6804B1DD15182D5F000918D4 /* playButtonDepressed.png */,
+				6804B1B915182D5F000918D4 /* powerupsButton.png */,
+				6804B1B815182D5F000918D4 /* powerupsButton2.png */,
+				6804B1B715182D5F000918D4 /* powerupsButton2Depressed.png */,
+				6804B1B615182D5F000918D4 /* powerupsButtonDepressed.png */,
+				6804B1A815182D5F000918D4 /* powerupsSceneLayout.plist */,
+				6804B1BF15182D5F000918D4 /* psSparks.plist */,
+				6804B1CC15182D5F000918D4 /* psStarTrail.plist */,
+				6804B1AD15182D5F000918D4 /* questionPowerupDesc.png */,
+				6804B21715182D5F000918D4 /* sewingmachine.caf */,
+				6804B1C015182D5F000918D4 /* starIcon.png */,
+				6804B1B115182D5F000918D4 /* starPowerupDesc.png */,
+				6804B1AA15182D5F000918D4 /* suggestPowerup.png */,
+				6804B1A615182D5F000918D4 /* swipeArrow.png */,
+				6804B1A515182D5F000918D4 /* swipeText.png */,
+				6804B1A915182D5F000918D4 /* twitterButton.png */,
+				6804B1D015182D5F000918D4 /* whiskersLogo.png */,
+				6804B1B515182D5F000918D4 /* whiskersLogo2.png */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -1420,10 +1420,10 @@
 		6804B1A415182D3E000918D4 /* Default */ = {
 			isa = PBXGroup;
 			children = (
-				6804AF9915182AF7000918D4 /* Default.png */,
 				6804AF9B15182AF7000918D4 /* fps_images.png */,
 				6804AF9D15182AF7000918D4 /* Icon-72.png */,
 				6804AF9F15182AF7000918D4 /* Icon-Small-50.png */,
+				68962B951518381E00A3E40E /* Default.png */,
 				6804AFA115182AF7000918D4 /* Icon-Small.png */,
 				6804AFA315182AF7000918D4 /* Icon-Small@2x.png */,
 				6804AFA515182AF7000918D4 /* Icon.png */,
@@ -1543,7 +1543,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6804AF9A15182AF7000918D4 /* Default.png in Resources */,
 				6804AF9C15182AF7000918D4 /* fps_images.png in Resources */,
 				6804AF9E15182AF7000918D4 /* Icon-72.png in Resources */,
 				6804AFA015182AF7000918D4 /* Icon-Small-50.png in Resources */,
@@ -1681,6 +1680,7 @@
 				6804B2AC15182D5F000918D4 /* cb4depressed.png in Resources */,
 				6804B2AD15182D5F000918D4 /* cb4.png in Resources */,
 				6804B2AE15182D5F000918D4 /* lightningWhite.png in Resources */,
+				68962B961518381E00A3E40E /* Default.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1940,6 +1940,7 @@
 				6804B17215182AFD000918D4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
