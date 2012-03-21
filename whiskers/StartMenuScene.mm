@@ -98,7 +98,7 @@
             logo.position = ccp(screenSize.width/2.0f, screenSize.height/2.0f);
             [self addChild:logo];
             
-            float t = 1.0f;
+            float t = 0.25f;
             id move = [CCMoveTo actionWithDuration:t position:ccp(571 + 413/2, screenHeight-177 - 177/2)];
             id shrink = [CCScaleTo actionWithDuration:t scale:0.557951482];
             [logo runAction:move];
@@ -121,55 +121,51 @@
     float shrinkScale = 0.97f;
     playButton.selectedImage.scale = shrinkScale;
     playButton.selectedImage.position = ccp((playButton.normalImage.contentSize.width - playButton.normalImage.contentSize.width*shrinkScale)/2.0f, (playButton.normalImage.contentSize.height - playButton.normalImage.contentSize.height*shrinkScale)/2.0f);
-    playButton.opacity = 0;  
     
     //powerups button
-    CCMenuItemImage *powerupsButton = [CCMenuItemImage itemFromNormalImage:@"powerupsButton2.png" selectedImage:@"powerupsButton2.png" target:self selector:@selector(powerupsButtonTouched:)];
+    powerupsButton = [CCMenuItemImage itemFromNormalImage:@"powerupsButton2.png" selectedImage:@"powerupsButton2.png" target:self selector:@selector(powerupsButtonTouched:)];
     powerupsButton.selectedImage.scale = shrinkScale;
     powerupsButton.selectedImage.position = ccp((powerupsButton.normalImage.contentSize.width - powerupsButton.normalImage.contentSize.width*shrinkScale)/2.0f, (powerupsButton.normalImage.contentSize.height - powerupsButton.normalImage.contentSize.height*shrinkScale)/2.0f);
-    powerupsButton.opacity = 0;
     powerupsButton.tag = 1;
     
     CCMenu* playMenu = [CCMenu menuWithItems:playButton, nil];
     CCMenu* powerupsMenu = [CCMenu menuWithItems:powerupsButton, nil];
     
     //position values taken directly from AI file
-    playMenu.position = CGPointMake(300, screenHeight-275);
-    powerupsMenu.position = CGPointMake(512, screenHeight-468); 
+    playMenu.position = CGPointMake(300 - [[CCDirector sharedDirector] winSize].width, screenHeight-275);
+    powerupsMenu.position = CGPointMake(512 - [[CCDirector sharedDirector] winSize].width, screenHeight-468); 
     
     [self addChild:playMenu];
     [self addChild:powerupsMenu];
     
     CCSprite *logo2 = [CCSprite spriteWithFile:@"byJonStokes.png"];
-    logo2.position = CGPointMake(581, screenHeight-561);
+    logo2.position = CGPointMake(581 - [[CCDirector sharedDirector] winSize].width, screenHeight-561);
     logo2.anchorPoint = ccp(0,1.0f);
     [self addChild:logo2];
-    logo2.opacity = 0;
     logo2.tag = 2;
     
-    float t2 = 0.25f;
-    id fadeIn = [CCFadeIn actionWithDuration:0.5];
-    [playButton runAction:fadeIn];
-    [self schedule:@selector(fadeInPowerupsButton) interval:t2];
-    [self schedule:@selector(fadeInLogo2) interval:t2*2];
+    float t2 = 0.1f;
+    id movein = [CCMoveBy actionWithDuration:0.25f position:ccp([[CCDirector sharedDirector] winSize].width, 0)];
+    [playButton runAction:movein];
+    [self schedule:@selector(moveInPowerupsButton) interval:t2];
+    [self schedule:@selector(moveInLogo2) interval:t2*2];
 
     
 
 }
 
--(void) fadeInPowerupsButton {
+-(void) moveInPowerupsButton {
     
-    [self unschedule:@selector(fadeInPowerupsButton)];
-    CCMenuItemImage *powerupsButton = (CCMenuItemImage *) [self getChildByTag:1];
-    id fadeIn = [CCFadeIn actionWithDuration:0.5];
-    [powerupsButton runAction:fadeIn];
+    [self unschedule:@selector(moveInPowerupsButton)];
+    id movein = [CCMoveBy actionWithDuration:0.25f position:ccp([[CCDirector sharedDirector] winSize].width, 0)];
+    [powerupsButton runAction:movein];
 }
 
--(void) fadeInLogo2 {
-    [self unschedule:@selector(fadeInLogo2)];
+-(void) moveInLogo2 {
+    [self unschedule:@selector(moveInLogo2)];
     id logo2 = [self getChildByTag:2];
-    id fadeIn = [CCFadeIn actionWithDuration:0.5];
-    [logo2 runAction:fadeIn];
+    id movein = [CCMoveBy actionWithDuration:0.25f position:ccp([[CCDirector sharedDirector] winSize].width, 0)];
+    [logo2 runAction:movein];
 }
 
 

@@ -19,6 +19,7 @@
 	int mustacheCount;
 	float offset;
 	float kittyScale;
+    CCMenuItemImage *powerupsButton;
 }
 
 +(id) scene;
