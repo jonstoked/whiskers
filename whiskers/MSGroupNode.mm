@@ -34,15 +34,19 @@
 		[self addChild:msNode];
 		[msNode makeInactive];
 		
-		CCSprite *joinButtonSprite = [CCSprite spriteWithFile:@"joinButton.png"];
-		CCSprite *joinButtonDepressedSprite = [CCSprite spriteWithFile:@"joinButtonDepressed.png"];
-		CCMenuItemSprite *joinButton = [CCMenuItemSprite itemFromNormalSprite:joinButtonSprite selectedSprite:joinButtonDepressedSprite 
-															   disabledSprite:nil target:self selector:@selector(join:)];
-		
-		//offset depressed sprite so it looks as if button drops directly onto the dropshadow
-		joinButtonDepressedSprite.anchorPoint = ccp(-4.0/joinButtonDepressedSprite.contentSize.width,
-													-2.0/joinButtonDepressedSprite.contentSize.height);
-		
+//		CCSprite *joinButtonSprite = [CCSprite spriteWithFile:@"joinButton.png"];
+//		CCSprite *joinButtonDepressedSprite = [CCSprite spriteWithFile:@"joinButtonDepressed.png"];
+//		CCMenuItemSprite *joinButton = [CCMenuItemSprite itemFromNormalSprite:joinButtonSprite selectedSprite:joinButtonDepressedSprite 
+//															   disabledSprite:nil target:self selector:@selector(join:)];
+//		
+//		//offset depressed sprite so it looks as if button drops directly onto the dropshadow
+//		joinButtonDepressedSprite.anchorPoint = ccp(-4.0/joinButtonDepressedSprite.contentSize.width,
+//													-2.0/joinButtonDepressedSprite.contentSize.height);
+        
+        float shrinkScale = 0.97f;
+        CCMenuItemImage * joinButton = [CCMenuItemImage itemFromNormalImage:@"joinButtonDepressed.png" selectedImage:@"joinButtonDepressed.png" target:self selector:@selector(join:)];
+        joinButton.selectedImage.scale = shrinkScale;
+        joinButton.selectedImage.position = ccp((joinButton.normalImage.contentSize.width - joinButton.normalImage.contentSize.width*shrinkScale)/2.0f, (joinButton.normalImage.contentSize.height - joinButton.normalImage.contentSize.height*shrinkScale)/2.0f);
 		
 		joinMenu = [CCMenu menuWithItems:joinButton, nil];
 		
@@ -54,7 +58,6 @@
 		[swipeInstruction addChild:swipeText];
 		[swipeInstruction addChild:swipeArrow];
 		swipeInstruction.visible = NO;
-		
 		
 		//position values taken directly from AI file
 		joinMenu.position = ccp(0, -125);
@@ -89,6 +92,12 @@
 	
 	
 }
+
+-(void) done {
+    
+    
+}
+
 
 -(void) fadeSwipeText {
     if(!fadeSwipeTextCalled)

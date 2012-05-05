@@ -20,7 +20,6 @@
     CCSprite *swipeText;
     BOOL fadeSwipeTextCalled;
 	
-	
 }
 
 @property (nonatomic,readwrite) BOOL isActive;

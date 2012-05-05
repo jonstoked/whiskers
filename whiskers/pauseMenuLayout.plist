@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+	<dict>
+		<key>musicButtonOn.png</key>
+		<string>785:83</string>
+		<key>musicButtonOff.png</key>
+		<string>828:-146</string>
+		<key>soundButtonOn.png</key>
+		<string>785:5</string>
+		<key>soundButtonOff.png</key>
+		<string>828:-218</string>
+		<key>quitButton.png</key>
+		<string>816:435</string>
+		<key>thanksButton.png</key>
+		<string>387:44</string>
+		<key>playButtonPauseMenu.png</key>
+		<string>506:260</string>
+	</dict>
+</plist>

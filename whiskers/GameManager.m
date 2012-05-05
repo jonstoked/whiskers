@@ -58,14 +58,28 @@ static GameManager* _sharedGameManager = nil;
 		for (int i=0; i<=3; ++i)
 			[finalKittyScales addObject:[NSNumber numberWithFloat:0.0f]];
         
-        musicOn = NO;
+        musicOn = YES;
         sfxOn = YES;
+        
+        gameDict = [[NSMutableDictionary alloc] init];
+        
 
 
 
     }
     return self;
 }
+
+//not done!
+
+//-(void) storeGameDict {
+//    [[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject: [GameManager gm].usersFriends] forKey:@"usersFriends"];   
+//}
+//
+//-(void) loadGameDict {
+//    gameDict = [NSKeyedUnarchiver unarchiveObjectWithData:dataRepresentingSavedArray];
+//    
+//}
 
 
 @end

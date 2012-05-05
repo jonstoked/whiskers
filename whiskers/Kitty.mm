@@ -253,6 +253,17 @@ _isTouchingKitty, leftEyePos, rightEyePos, smallerKitty, isTouchingKittyCount, p
 	fixdef.filter.groupIndex = kittyCollisionFilter;
 	body->DestroyFixture(fixture);
 	fixture = body->CreateFixture(&fixdef);
+    
+//    if(_hasTurret) {
+//        [self stopActionByTag:103];
+//        
+//        //start auto-firing bullets
+//		float rateOfFire = sprite.scale;
+//		CCSequence* shootTurretCall = [CCSequence actions:[CCDelayTime actionWithDuration:rateOfFire], [CCCallFunc actionWithTarget:self selector:@selector(shootTurret)], nil];
+//		CCRepeatForever* repeatSequence = [CCRepeatForever actionWithAction:shootTurretCall];
+//		repeatSequence.tag = 103;
+//		[self runAction:repeatSequence];
+//    }
 }
 
 -(void) shrinkWithScale: (float) myScale
@@ -282,6 +293,17 @@ _isTouchingKitty, leftEyePos, rightEyePos, smallerKitty, isTouchingKittyCount, p
 		fixture = body->CreateFixture(&fixdef);
         
 	}
+    
+//    if(_hasTurret) {
+//        [self stopActionByTag:103];
+//        
+//        //start auto-firing bullets
+//		float rateOfFire = sprite.scale;
+//		CCSequence* shootTurretCall = [CCSequence actions:[CCDelayTime actionWithDuration:rateOfFire], [CCCallFunc actionWithTarget:self selector:@selector(shootTurret)], nil];
+//		CCRepeatForever* repeatSequence = [CCRepeatForever actionWithAction:shootTurretCall];
+//		repeatSequence.tag = 103;
+//		[self runAction:repeatSequence];
+//    }
 	
 }
 
@@ -317,6 +339,8 @@ _isTouchingKitty, leftEyePos, rightEyePos, smallerKitty, isTouchingKittyCount, p
 	[self stopActionByTag:101]; //stop CCCallFunc
 	
 }
+
+//todo: make rate of fire update when scale changes
 -(void) gotTurret
 {
 	if(!_hasTurret)

@@ -15,6 +15,7 @@
 	NSMutableArray *finalKittyScales;
     BOOL musicOn;
     BOOL sfxOn;
+    NSMutableDictionary *gameDict;
 	
 }
 
@@ -23,6 +24,8 @@
 @property (readwrite) NSMutableArray *finalKittyScales;
 @property (readwrite) BOOL musicOn;
 @property (readwrite) BOOL sfxOn;
+@property (readwrite) NSMutableDictionary *gameDict;
+
 
 
 

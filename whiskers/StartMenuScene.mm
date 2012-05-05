@@ -113,9 +113,7 @@
 
 -(void) showMenu {
     
-    int screenHeight = [[CCDirector sharedDirector] winSize].height;
-    float t = 1.0f;
-    
+    int screenHeight = [[CCDirector sharedDirector] winSize].height;    
     //play button
     CCMenuItemImage *playButton = [CCMenuItemImage itemFromNormalImage:@"playButton2.png" selectedImage:@"playButton2.png" target:self selector:@selector(playButtonTouched:)];
     float shrinkScale = 0.97f;
