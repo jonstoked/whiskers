@@ -1228,13 +1228,16 @@
 	
 	
 //	// set CCMenuItemFont default properties
-//	[CCMenuItemFont setFontName:@"Courier"];
-//	[CCMenuItemFont setFontSize:46];
+	[CCMenuItemFont setFontName:@"Courier"];
+	[CCMenuItemFont setFontSize:46];
+	CCMenuItemFont* item2 = [CCMenuItemFont itemFromString:@"Force Game End" target:self selector:@selector(menuItem2Touched:)];
+    CCMenu *menuuu = [CCMenu menuWithItems:item2, nil];
+    menuuu.position = ccp(screenSize.width/2.0f, screenSize.height*0.9f);
+    [self addChild:menuuu];
 //	
 //	
 //	// create a few labels with text and selector
 //	CCMenuItemFont* item1 = [CCMenuItemFont itemFromString:@"Restart" target:self selector:@selector(menuItem1Touched:)];
-//	CCMenuItemFont* item2 = [CCMenuItemFont itemFromString:@"Force Game End" target:self selector:@selector(menuItem2Touched:)];
 //    musicToggle = [CCMenuItemFont itemFromString:@"Music: Off" target:self selector:@selector(musicToggleTouched:)];
 //    sfxToggle = [CCMenuItemFont itemFromString:@"SFX: On" target:self selector:@selector(sfxToggleTouched:)];
     

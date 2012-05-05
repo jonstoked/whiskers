@@ -103,26 +103,45 @@
 		sortedKittySpriteArray = [kittySpriteArray sortedArrayUsingDescriptors:sortDescriptors];
 		
 		//the kitties will be stacked on top of each other, biggest to smallest, to show their relative size
-		//each consecutive kitty will be offset down and to the right by...
-		CGPoint kittyOffset = ccp(134,0); //some random screen math :)
-		CGPoint biggestKittyLowerRight = ccp(screenSize.width/2, screenSize.height/4);
+		//each consecutive kitty will be offset to the right by...
+		//CGPoint kittyOffset = ccp(134,0); //some random screen math :)
+        CGPoint kittyOffset = ccp(134,0); //some random screen math :)
 		
 		
+        float allKittiesWidth = 0.0f;
 		//add kitties to screen
 		for(int i = 0 ; i < [sortedKittySpriteArray count]; ++i)
 		{
 			CCSprite *sprite = (CCSprite*) [sortedKittySpriteArray objectAtIndex:i];
-			
+            CCLOG(@"kitty width: %f", sprite.boundingBox.size.width);
+
 			//resize largest kitty to exact winning scale and add winner text to top of screen
 			if(i==0)
 			{
 				[self addWinnerTextForSprite:sprite];
 				//if(sprite.scale > 0.8f)
 					sprite.scale = 0.8f;  //winning size
+                allKittiesWidth = allKittiesWidth + sprite.boundingBox.size.width;
 			}
+            else  {
+                allKittiesWidth = allKittiesWidth + 30.0f;
+            }
+        }
+        
+        //CGPoint biggestKittyLowerRight = ccp(screenSize.width/2, screenSize.height/4);
+        CGPoint biggestKittyLowerRight;
+
+        for(int i = 0 ; i < [sortedKittySpriteArray count]; ++i)
+		{
+			CCSprite *sprite = (CCSprite*) [sortedKittySpriteArray objectAtIndex:i];
+            if(i==0) {
+                 biggestKittyLowerRight = ccp(screenSize.width/2.0f - allKittiesWidth/2.0f + sprite.boundingBox.size.width, screenSize.height/4);
+            }
+                
 			
 			sprite.anchorPoint = ccp(1,0);
-			sprite.position = ccpAdd(biggestKittyLowerRight, ccpMult(kittyOffset, (float) i));
+            
+			sprite.position = ccpAdd(biggestKittyLowerRight, ccpMult(ccp(30.0f,0.0f), (float) i));
 			
 			//move a kitty on screen every half second
 			[self performSelector:@selector(moveNodeOnScreenFromLeft:) withObject:sprite afterDelay:0.5*i];
