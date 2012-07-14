@@ -106,27 +106,42 @@
 		//each consecutive kitty will be offset to the right by...
 		//CGPoint kittyOffset = ccp(134,0); //some random screen math :)
         CGPoint kittyOffset = ccp(134,0); //some random screen math :)
+        
+        NSMutableArray* kittySeparation = [[NSMutableArray alloc] init];
 		
 		
         float allKittiesWidth = 0.0f;
+        int bigKittyWidth = 0.0f;
 		//add kitties to screen
 		for(int i = 0 ; i < [sortedKittySpriteArray count]; ++i)
 		{
 			CCSprite *sprite = (CCSprite*) [sortedKittySpriteArray objectAtIndex:i];
-            CCLOG(@"kitty width: %f", sprite.boundingBox.size.width);
 
 			//resize largest kitty to exact winning scale and add winner text to top of screen
 			if(i==0)
 			{
 				[self addWinnerTextForSprite:sprite];
 				//if(sprite.scale > 0.8f)
-					sprite.scale = 0.8f;  //winning size
-                allKittiesWidth = allKittiesWidth + sprite.boundingBox.size.width;
+                sprite.scale = 0.8f;  //winning size        
+                bigKittyWidth = sprite.boundingBox.size.width;
+                allKittiesWidth = bigKittyWidth;
 			}
             else  {
-                allKittiesWidth = allKittiesWidth + 30.0f;
+                allKittiesWidth = allKittiesWidth + sprite.boundingBox.size.width*0.9f;
+                [kittySeparation addObject:[NSNumber numberWithFloat:sprite.boundingBox.size.width*0.9f]];
             }
+            CCLOG(@"kitty width: %f", sprite.boundingBox.size.width);
+            CCLOG(@"allKittiesWidth: %f", allKittiesWidth);
         }
+        
+        if(allKittiesWidth > screenSize.width*5.0f/6.0f) {
+            for(int i = 0; i < [kittySeparation count]; ++i) {
+                [kittySeparation replaceObjectAtIndex:i withObject:[NSNumber numberWithFloat:((screenSize.width*5.0f/6.0f - bigKittyWidth)/(float)[sortedKittySpriteArray count])]];
+            }
+            allKittiesWidth = screenSize.width*5.0f/6.0f;
+        }
+        
+            
         
         //CGPoint biggestKittyLowerRight = ccp(screenSize.width/2, screenSize.height/4);
         CGPoint biggestKittyLowerRight;
@@ -135,13 +150,18 @@
 		{
 			CCSprite *sprite = (CCSprite*) [sortedKittySpriteArray objectAtIndex:i];
             if(i==0) {
-                 biggestKittyLowerRight = ccp(screenSize.width/2.0f - allKittiesWidth/2.0f + sprite.boundingBox.size.width, screenSize.height/4);
+                 biggestKittyLowerRight = ccp(screenSize.width/2.0f - allKittiesWidth/2.0f + bigKittyWidth, screenSize.height/4);
             }
                 
 			
 			sprite.anchorPoint = ccp(1,0);
-            
-			sprite.position = ccpAdd(biggestKittyLowerRight, ccpMult(ccp(30.0f,0.0f), (float) i));
+            if(i == 0)
+                sprite.position = ccpAdd(biggestKittyLowerRight, ccpMult(ccp(30.0f,0.0f), (float) i));
+            else {
+                CCSprite *previousSprite = (CCSprite*) [sortedKittySpriteArray objectAtIndex:i-1];
+                sprite.position = ccpAdd(previousSprite.position, ccp([[kittySeparation objectAtIndex:i-1] floatValue],0.0f));
+
+            }
 			
 			//move a kitty on screen every half second
 			[self performSelector:@selector(moveNodeOnScreenFromLeft:) withObject:sprite afterDelay:0.5*i];

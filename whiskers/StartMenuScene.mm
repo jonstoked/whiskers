@@ -143,7 +143,7 @@
     logo2.tag = 2;
     
     float t2 = 0.1f;
-    id movein = [CCMoveBy actionWithDuration:0.25f position:ccp([[CCDirector sharedDirector] winSize].width, 0)];
+    id movein = [CCEaseBackOut actionWithAction:[CCMoveBy actionWithDuration:0.25f position:ccp([[CCDirector sharedDirector] winSize].width, 0)]];
     [playButton runAction:movein];
     [self schedule:@selector(moveInPowerupsButton) interval:t2];
     [self schedule:@selector(moveInLogo2) interval:t2*2];
@@ -155,14 +155,14 @@
 -(void) moveInPowerupsButton {
     
     [self unschedule:@selector(moveInPowerupsButton)];
-    id movein = [CCMoveBy actionWithDuration:0.25f position:ccp([[CCDirector sharedDirector] winSize].width, 0)];
+    id movein = [CCEaseBackOut actionWithAction:[CCMoveBy actionWithDuration:0.25f position:ccp([[CCDirector sharedDirector] winSize].width, 0)]];
     [powerupsButton runAction:movein];
 }
 
 -(void) moveInLogo2 {
     [self unschedule:@selector(moveInLogo2)];
     id logo2 = [self getChildByTag:2];
-    id movein = [CCMoveBy actionWithDuration:0.25f position:ccp([[CCDirector sharedDirector] winSize].width, 0)];
+    id movein = [CCEaseBackOut actionWithAction:[CCMoveBy actionWithDuration:0.25f position:ccp([[CCDirector sharedDirector] winSize].width, 0)]];
     [logo2 runAction:movein];
 }
 

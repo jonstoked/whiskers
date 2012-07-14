@@ -15,6 +15,7 @@
 #import "StartMenuScene.h"
 #import "Global.h"
 #import "HelloWorldScene.h"
+#import "LocalyticsSession.h"
 
 @implementation AppDelegate
 
@@ -120,6 +121,9 @@
         [[CCDirector sharedDirector] runWithScene: [StartMenuScene scene]];
     else 
         [[CCDirector sharedDirector] runWithScene: [HelloWorld scene]];
+    
+    [[LocalyticsSession sharedLocalyticsSession] startSession:@"128cc59ede29323b0642c1e-0e230c76-9ae7-11e1-38dd-00ef75f32667"];
+
 
 }
 
@@ -137,11 +141,17 @@
 }
 
 -(void) applicationDidEnterBackground:(UIApplication*)application {
+    
 	[[CCDirector sharedDirector] stopAnimation];
+    [[LocalyticsSession sharedLocalyticsSession] close];
+    [[LocalyticsSession sharedLocalyticsSession] upload];
+    
 }
 
 -(void) applicationWillEnterForeground:(UIApplication*)application {
 	[[CCDirector sharedDirector] startAnimation];
+    [[LocalyticsSession sharedLocalyticsSession] resume];
+    [[LocalyticsSession sharedLocalyticsSession] upload];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
@@ -154,6 +164,9 @@
 	[window release];
 	
 	[director end];	
+    
+    [[LocalyticsSession sharedLocalyticsSession] close];
+    [[LocalyticsSession sharedLocalyticsSession] upload];
 }
 
 - (void)applicationSignificantTimeChange:(UIApplication *)application {

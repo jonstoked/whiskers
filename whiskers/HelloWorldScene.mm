@@ -1224,7 +1224,7 @@
 	pauseMenuLayer.position = ccp(-screenSize.width/2 - 849*0.8f/2, screenSize.height/2 - 548*0.8f/2);
 	//pauseMenuLayer.position = ccp(screenSize.width/2, screenSize.height/2);
 	pauseMenuLayer.anchorPoint = ccp(0,0);
-	[self addChild:pauseMenuLayer z:8];
+	[self addChild:pauseMenuLayer z:8]; 
 	
 	
 //	// set CCMenuItemFont default properties
@@ -1233,7 +1233,7 @@
 	CCMenuItemFont* item2 = [CCMenuItemFont itemFromString:@"Force Game End" target:self selector:@selector(menuItem2Touched:)];
     CCMenu *menuuu = [CCMenu menuWithItems:item2, nil];
     menuuu.position = ccp(screenSize.width/2.0f, screenSize.height*0.9f);
-    [self addChild:menuuu];
+    //[self addChild:menuuu];
 //	
 //	
 //	// create a few labels with text and selector

@@ -9,7 +9,7 @@
 #ifndef whiskers_Global_h
 #define whiskers_Global_h
 
-#define AUTO_START 1
+#define AUTO_START 0
 
 
 

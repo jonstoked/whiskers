@@ -12,6 +12,8 @@
 
 @interface PowerupsScene : CCLayer {
     
+    CCLayer *scrollableLayer;
+    
 
     
 }

@@ -28,6 +28,9 @@
         
         [[CCTouchDispatcher sharedDispatcher] addTargetedDelegate:self priority:0 swallowsTouches:YES];
         
+        scrollableLayer = [CCLayer node];
+        [self addChild:scrollableLayer];
+        
         //CCLayerColor* colorLayer = [CCLayerColor layerWithColor:ccc4(70, 70, 70, 255)]; 
         CCLayerColor* colorLayer = [CCLayerColor layerWithColor:ccc4(70, 70, 70, 255) width:1024 height:993]; 
         colorLayer.position = ccp(0,768-993);
@@ -50,7 +53,7 @@
             if ([key rangeOfString:@"Button"].location == NSNotFound) {
                 CCSprite *sprite = [CCSprite spriteWithFile:key];
                 sprite.position = ccp(x,y);
-                [self addChild:sprite];
+                [scrollableLayer addChild:sprite];
             }
             
             //a button
@@ -76,7 +79,11 @@
                 
                 CCMenu* menu = [CCMenu menuWithItems:button, nil];
                 menu.position = ccp(x,y);
-                [self addChild:menu];   
+                
+                if([key isEqualToString:@"backButtonPowerups.png"])
+                    [self addChild:menu];
+                else 
+                    [scrollableLayer addChild:menu];
                 
 
             }
@@ -109,14 +116,14 @@
     CGPoint retval = newPos;
     retval.y = MIN(retval.y, 993-768);
     retval.y = MAX(retval.y, 0);
-    retval.x = self.position.x;
+    retval.x = scrollableLayer.position.x;
     return retval;
 }
 
 - (void)panForTranslation:(CGPoint)translation {    
     
-    CGPoint newPos = ccpAdd(self.position, translation);
-    self.position = [self boundLayerPos:newPos];      
+    CGPoint newPos = ccpAdd(scrollableLayer.position, translation);
+    scrollableLayer.position = [self boundLayerPos:newPos];      
 }
 
 -(void) backButtonTouched:(id)sender {

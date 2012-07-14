@@ -300,7 +300,14 @@
 		6804B2AC15182D5F000918D4 /* cb4depressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 6804B22315182D5F000918D4 /* cb4depressed.png */; };
 		6804B2AD15182D5F000918D4 /* cb4.png in Resources */ = {isa = PBXBuildFile; fileRef = 6804B22415182D5F000918D4 /* cb4.png */; };
 		6804B2AE15182D5F000918D4 /* lightningWhite.png in Resources */ = {isa = PBXBuildFile; fileRef = 6804B22515182D5F000918D4 /* lightningWhite.png */; };
+		6828674F15B0FC4600444BF5 /* okayButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 6828674D15B0FC4600444BF5 /* okayButton.png */; };
+		6828675015B0FC4600444BF5 /* ready.png in Resources */ = {isa = PBXBuildFile; fileRef = 6828674E15B0FC4600444BF5 /* ready.png */; };
 		68962B961518381E00A3E40E /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 68962B951518381E00A3E40E /* Default.png */; };
+		68A09B01155C6C67003DA47C /* LocalyticsDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 68A09AFB155C6C67003DA47C /* LocalyticsDatabase.m */; };
+		68A09B02155C6C67003DA47C /* LocalyticsSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 68A09AFD155C6C67003DA47C /* LocalyticsSession.m */; };
+		68A09B03155C6C67003DA47C /* LocalyticsUploader.m in Sources */ = {isa = PBXBuildFile; fileRef = 68A09AFF155C6C67003DA47C /* LocalyticsUploader.m */; };
+		68A09B06155C6EB3003DA47C /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 68A09B05155C6EB3003DA47C /* libz.dylib */; };
+		68A09B08155C6ED2003DA47C /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 68A09B07155C6ED2003DA47C /* libsqlite3.dylib */; };
 		68A8948115196A2E006FDFEE /* doneButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 68A8948015196A2E006FDFEE /* doneButton.png */; };
 		68D909EB15239914001965CA /* pauseMenuLayout.plist in Resources */ = {isa = PBXBuildFile; fileRef = 68D909EA15239914001965CA /* pauseMenuLayout.plist */; };
 		68D909F51523A0BB001965CA /* musicButtonOff.png in Resources */ = {isa = PBXBuildFile; fileRef = 68D909EE1523A0BB001965CA /* musicButtonOff.png */; };
@@ -783,7 +790,18 @@
 		6804B22315182D5F000918D4 /* cb4depressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cb4depressed.png; sourceTree = "<group>"; };
 		6804B22415182D5F000918D4 /* cb4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cb4.png; sourceTree = "<group>"; };
 		6804B22515182D5F000918D4 /* lightningWhite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lightningWhite.png; sourceTree = "<group>"; };
+		6828674D15B0FC4600444BF5 /* okayButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = okayButton.png; sourceTree = "<group>"; };
+		6828674E15B0FC4600444BF5 /* ready.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ready.png; sourceTree = "<group>"; };
 		68962B951518381E00A3E40E /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		68A09AFA155C6C67003DA47C /* LocalyticsDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalyticsDatabase.h; sourceTree = "<group>"; };
+		68A09AFB155C6C67003DA47C /* LocalyticsDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocalyticsDatabase.m; sourceTree = "<group>"; };
+		68A09AFC155C6C67003DA47C /* LocalyticsSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalyticsSession.h; sourceTree = "<group>"; };
+		68A09AFD155C6C67003DA47C /* LocalyticsSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocalyticsSession.m; sourceTree = "<group>"; };
+		68A09AFE155C6C67003DA47C /* LocalyticsUploader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalyticsUploader.h; sourceTree = "<group>"; };
+		68A09AFF155C6C67003DA47C /* LocalyticsUploader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocalyticsUploader.m; sourceTree = "<group>"; };
+		68A09B00155C6C67003DA47C /* WebserviceConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebserviceConstants.h; sourceTree = "<group>"; };
+		68A09B05155C6EB3003DA47C /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		68A09B07155C6ED2003DA47C /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		68A8948015196A2E006FDFEE /* doneButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = doneButton.png; sourceTree = "<group>"; };
 		68D909EA15239914001965CA /* pauseMenuLayout.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = pauseMenuLayout.plist; sourceTree = "<group>"; };
 		68D909EE1523A0BB001965CA /* musicButtonOff.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = musicButtonOff.png; sourceTree = "<group>"; };
@@ -800,6 +818,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				68A09B08155C6ED2003DA47C /* libsqlite3.dylib in Frameworks */,
+				68A09B06155C6EB3003DA47C /* libz.dylib in Frameworks */,
 				6804AF8815182AF7000918D4 /* QuartzCore.framework in Frameworks */,
 				6804AF8A15182AF7000918D4 /* OpenGLES.framework in Frameworks */,
 				6804AF8C15182AF7000918D4 /* OpenAL.framework in Frameworks */,
@@ -817,6 +837,8 @@
 		6804AF7815182AF6000918D4 = {
 			isa = PBXGroup;
 			children = (
+				68A09B07155C6ED2003DA47C /* libsqlite3.dylib */,
+				68A09B05155C6EB3003DA47C /* libz.dylib */,
 				6804AF9715182AF7000918D4 /* whiskers */,
 				6804AF8615182AF7000918D4 /* Frameworks */,
 				6804AF8415182AF7000918D4 /* Products */,
@@ -877,6 +899,8 @@
 				6804B1CE15182D5F000918D4 /* bomb.png */,
 				6804B1C315182D5F000918D4 /* bombIcon.png */,
 				6804B1B015182D5F000918D4 /* bombPowerupDesc.png */,
+				6828674D15B0FC4600444BF5 /* okayButton.png */,
+				6828674E15B0FC4600444BF5 /* ready.png */,
 				6804B1C215182D5F000918D4 /* bulletIcon.png */,
 				6804B1B415182D5F000918D4 /* byJonStokes.png */,
 				6804B1AF15182D5F000918D4 /* cateyesPowerupDesc.png */,
@@ -956,6 +980,7 @@
 		6804AFAC15182AF7000918D4 /* libs */ = {
 			isa = PBXGroup;
 			children = (
+				68A09AF9155C6C67003DA47C /* Localytics */,
 				6804B0A515182AFB000918D4 /* LICENSE_cocos2d.txt */,
 				6804B0B415182AFB000918D4 /* LICENSE_CocosDenshion.txt */,
 				6804B0BF15182AFB000918D4 /* LICENSE_TouchJSON.txt */,
@@ -1510,6 +1535,21 @@
 			path = mustachesPNG;
 			sourceTree = "<group>";
 		};
+		68A09AF9155C6C67003DA47C /* Localytics */ = {
+			isa = PBXGroup;
+			children = (
+				68A09AFA155C6C67003DA47C /* LocalyticsDatabase.h */,
+				68A09AFB155C6C67003DA47C /* LocalyticsDatabase.m */,
+				68A09AFC155C6C67003DA47C /* LocalyticsSession.h */,
+				68A09AFD155C6C67003DA47C /* LocalyticsSession.m */,
+				68A09AFE155C6C67003DA47C /* LocalyticsUploader.h */,
+				68A09AFF155C6C67003DA47C /* LocalyticsUploader.m */,
+				68A09B00155C6C67003DA47C /* WebserviceConstants.h */,
+			);
+			name = Localytics;
+			path = src;
+			sourceTree = "<group>";
+		};
 		68D909ED1523A0BB001965CA /* pauseMenu */ = {
 			isa = PBXGroup;
 			children = (
@@ -1719,6 +1759,8 @@
 				68D909F91523A0BB001965CA /* soundButtonOff.png in Resources */,
 				68D909FA1523A0BB001965CA /* soundButtonOn.png in Resources */,
 				68D909FB1523A0BB001965CA /* thanksButton.png in Resources */,
+				6828674F15B0FC4600444BF5 /* okayButton.png in Resources */,
+				6828675015B0FC4600444BF5 /* ready.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1879,6 +1921,9 @@
 				6804B19F15182D05000918D4 /* PowerupsScene.mm in Sources */,
 				6804B1A015182D05000918D4 /* StartMenuScene.mm in Sources */,
 				6804B1A115182D05000918D4 /* ThanksLayer.mm in Sources */,
+				68A09B01155C6C67003DA47C /* LocalyticsDatabase.m in Sources */,
+				68A09B02155C6C67003DA47C /* LocalyticsSession.m in Sources */,
+				68A09B03155C6C67003DA47C /* LocalyticsUploader.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
