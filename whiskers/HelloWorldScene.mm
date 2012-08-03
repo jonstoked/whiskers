@@ -189,7 +189,8 @@
     float scaleScale = 1.2f; //how fast that game gon' end?
 	float pelletScale = 1.2f*scaleScale;
 	float bulletScale = 1.03f;
-	float lightningScale = 1.4f*scaleScale;
+	float lightningGrowScale = 1.4f*scaleScale;
+    float lightningShrinkScale = 1.2f*scaleScale;
 	
 	
 	//Iterate over the bodies in the physics world
@@ -388,11 +389,11 @@
 						if(i!=spriteB.tag)
 						{
 							[kittiesToShrink addObject: [NSNumber numberWithInteger:i]];
-							[shrinkScales addObject: [NSNumber numberWithFloat:lightningScale]];
+							[shrinkScales addObject: [NSNumber numberWithFloat:lightningShrinkScale]];
 						}
 						else {
 							[kittiesToGrow addObject: [NSNumber numberWithInteger:i]];
-							[growScales addObject: [NSNumber numberWithFloat:lightningScale]];
+							[growScales addObject: [NSNumber numberWithFloat:lightningGrowScale]];
 						}
 						
 						[self lightningAnimation];
@@ -411,11 +412,11 @@
 						if(i!=spriteA.tag)
 						{
 							[kittiesToShrink addObject: [NSNumber numberWithInteger:i]];
-							[shrinkScales addObject: [NSNumber numberWithFloat:lightningScale]];
+							[shrinkScales addObject: [NSNumber numberWithFloat:lightningShrinkScale]];
 						}
 						else {
 							[kittiesToGrow addObject: [NSNumber numberWithInteger:i]];
-							[growScales addObject: [NSNumber numberWithFloat:lightningScale]];
+							[growScales addObject: [NSNumber numberWithFloat:lightningGrowScale]];
 						}
 						
 						
@@ -937,49 +938,36 @@
 
 -(void) addPowerup: (ccTime) dt 
 {
-	int mod = _powerupCallCount%9;
-	++_powerupCallCount;
-    	
-	if(mod == 2)
-		[self addTurret];
-	else if(mod==5)
-		[self addBombs];
-	else if(mod==8)
-		[self addLightning];
-	else 
-		[self addStar];
-	
-	
-	
-	/*
-	 switch (mod) {
-	 case 0:
-	 {
-	 [self addStar];
-	 break;
-	 }
-	 case 1:
-	 {
-	 [self addStar];
-	 break;
-	 
-	 }
-	 case 2:
-	 {
-	 [self addLightning];
-	 break;
-	 }
-	 case 3:
-	 {
-	 [self addLightning];
-	 break;
-	 }
-	 case 4:
-	 {
-	 [self addTurret];
-	 break;
-	 }
-	 }*/
+//	int mod = _powerupCallCount%9;
+//	++_powerupCallCount;
+//        	
+//	if(mod == 2)
+//		[self addTurre[t];
+//	else if(mod==5)
+//		[self addBombs];
+//	else if(mod==8)
+//		[self addLightning];
+//	else 
+//		[self addStar];
+    
+    
+    int lightningProb = 15;
+    int turretProb = 20;
+    int bombProb = 20;
+    int starProb = 45;
+    
+    int rand = arc4random()%100 + 1;
+    
+    if(rand <= lightningProb)
+        [self addLightning];
+    else if(rand <= lightningProb + turretProb)
+         [self addTurret];
+    else if(rand <= lightningProb + turretProb + bombProb)
+        [self addBombs];
+    else 
+        [self addStar];
+    
+
 	
 }
 
