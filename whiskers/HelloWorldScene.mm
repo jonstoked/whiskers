@@ -65,6 +65,15 @@
             for (int i=0; i<=3; ++i)
                 [[[GameManager sharedGameManager]isPlayerActiveArray] replaceObjectAtIndex:i withObject:[NSNumber numberWithBool:YES]];
         }
+        
+        gameLayer = [CCLayer node];
+        uiLayer = [CCLayer node];
+        [self addChild:gameLayer z:-2];
+        [self addChild:uiLayer z:-1];
+        
+        //having trouble changing the bg color.  I'm just going to add another layer below everything.
+		bgLayer = [CCLayerColor layerWithColor:ccc4(70, 70, 70, 255)];
+		[self addChild:bgLayer z:-10];
 		
 		_buttonSize = 100;
 		_pelletScale = 2.5f;  //should be 2.0
@@ -73,10 +82,6 @@
 		_powerupInterval = 10.0f;
 		
 		kittyArray = [[ NSMutableArray alloc ] init];
-		
-		//having trouble changing the bg color.  I'm just going to add another layer below everything.
-		bgLayer = [CCLayerColor layerWithColor:ccc4(70, 70, 70, 255)];
-		[self addChild:bgLayer z:-10];
 		
 		
 		//music and sfx
@@ -449,7 +454,7 @@
 						toDestroy.push_back(bodyA);
 					
 					Kitty *kitty = (Kitty*) bodyB->GetUserData();
-					[self addChild:[Bomb makeBombInWorld:_world bomberKitty:kitty]];
+					[gameLayer addChild:[Bomb makeBombInWorld:_world bomberKitty:kitty]];
 				}
 				else 
 				{
@@ -457,7 +462,7 @@
 						toDestroy.push_back(bodyB);
 					
 					Kitty *kitty = (Kitty*) bodyA->GetUserData();
-					[self addChild:[Bomb makeBombInWorld:_world bomberKitty:kitty]];
+					[gameLayer addChild:[Bomb makeBombInWorld:_world bomberKitty:kitty]];
 				}
 				
 			}
@@ -512,7 +517,7 @@
 		b2Body *body = *pos2;     
 		if ((body->GetUserData() != NULL) && ([body->GetUserData() isKindOfClass:[CCSprite class]])) {
 			CCSprite *sprite = (CCSprite *) body->GetUserData();
-			[self removeChild:sprite cleanup:YES];
+			[gameLayer removeChild:sprite cleanup:YES];
 		}
 		
 		else if ((body->GetUserData() != NULL) && ([body->GetUserData() isKindOfClass:[Bullet class]]))
@@ -557,10 +562,10 @@
 		
 		if(!_paused)
 		{
-			CCSprite *button4 = (CCSprite*) [self getChildByTag:4];
+			CCSprite *button4 = (CCSprite*) [uiLayer getChildByTag:4];
 			if(ccpDistance(location, button4.position) < buttonPressTolerance*button4.contentSize.width/2)
 			{
-				Kitty *myKitty = (Kitty *) [self getChildByTag:0];
+				Kitty *myKitty = (Kitty *) [gameLayer getChildByTag:0];
 				//[myKitty turnRight];
 				[myKitty startTurning];
 				[self animateButtonPressWithTag:4];
@@ -568,36 +573,36 @@
 				
 			}
 			
-			CCSprite *button5 = (CCSprite*) [self getChildByTag:5];
+			CCSprite *button5 = (CCSprite*) [uiLayer getChildByTag:5];
 			if(ccpDistance(location, button5.position) < buttonPressTolerance*button5.contentSize.width/2)
 			{
-				Kitty *myKitty = (Kitty *) [self getChildByTag:1];
+				Kitty *myKitty = (Kitty *) [gameLayer getChildByTag:1];
 				//[myKitty turnRight];
 				[myKitty startTurning];
 				[self animateButtonPressWithTag:5];
 				
 			}
 			
-			CCSprite *button6 = (CCSprite*) [self getChildByTag:6];
+			CCSprite *button6 = (CCSprite*) [uiLayer getChildByTag:6];
 			if(ccpDistance(location, button6.position) < buttonPressTolerance*button6.contentSize.width/2)
 			{
-				Kitty *myKitty = (Kitty *) [self getChildByTag:2];
+				Kitty *myKitty = (Kitty *) [gameLayer getChildByTag:2];
 				//[myKitty turnRight];
 				[myKitty startTurning];
 				[self animateButtonPressWithTag:6];
 				
 			}
-			CCSprite *button7 = (CCSprite*) [self getChildByTag:7];
+			CCSprite *button7 = (CCSprite*) [uiLayer getChildByTag:7];
 			if(ccpDistance(location, button7.position) < buttonPressTolerance*button7.contentSize.width/2)
 			{
-				Kitty *myKitty = (Kitty *) [self getChildByTag:3];
+				Kitty *myKitty = (Kitty *) [gameLayer getChildByTag:3];
 				//[myKitty turnRight];
 				[myKitty startTurning];
 				[self animateButtonPressWithTag:7];
 			}
 		}
 		
-		CCSprite *pauseButton = (CCSprite*) [self getChildByTag:13];
+		CCSprite *pauseButton = (CCSprite*) [uiLayer getChildByTag:13];
 		if(ccpDistance(location, pauseButton.position) < 3.0f*pauseButton.contentSize.width/2)  //tolerance of three times the button size
 		{
 			if(_paused)
@@ -629,14 +634,14 @@
 		location = [[CCDirector sharedDirector] convertToGL: location];
 		float buttonReleaseTolerance = 4.0f;  //how far away you can lift off your finger from the button and still have it register
 		
-		CCSprite *button4 = (CCSprite*) [self getChildByTag:4];
-		CCSprite *button5 = (CCSprite*) [self getChildByTag:5];
-		CCSprite *button6 = (CCSprite*) [self getChildByTag:6];
-		CCSprite *button7 = (CCSprite*) [self getChildByTag:7];
+		CCSprite *button4 = (CCSprite*) [uiLayer getChildByTag:4];
+		CCSprite *button5 = (CCSprite*) [uiLayer getChildByTag:5];
+		CCSprite *button6 = (CCSprite*) [uiLayer getChildByTag:6];
+		CCSprite *button7 = (CCSprite*) [uiLayer getChildByTag:7];
 		
 		if(ccpDistance(location, button4.position) < buttonReleaseTolerance*button4.contentSize.width/2)
 		{
-			Kitty *myKitty = (Kitty *) [self getChildByTag:0];
+			Kitty *myKitty = (Kitty *) [gameLayer getChildByTag:0];
 			if(myKitty._isTurning)
 				[myKitty stopTurning];
 			[self animateButtonReleaseWithTag:4];
@@ -644,7 +649,7 @@
 		}
 		if(ccpDistance(location, button5.position) < buttonReleaseTolerance*button5.contentSize.width/2)
 		{
-			Kitty *myKitty = (Kitty *) [self getChildByTag:1];
+			Kitty *myKitty = (Kitty *) [gameLayer getChildByTag:1];
 			if(myKitty._isTurning)
 				[myKitty stopTurning];
 			[self animateButtonReleaseWithTag:5];
@@ -652,7 +657,7 @@
 		}
 		if(ccpDistance(location, button6.position) < buttonReleaseTolerance * button6.contentSize.width/2)
 		{
-			Kitty *myKitty = (Kitty *) [self getChildByTag:2];
+			Kitty *myKitty = (Kitty *) [gameLayer getChildByTag:2];
 			if(myKitty._isTurning)
 				[myKitty stopTurning];	
 			[self animateButtonReleaseWithTag:6];
@@ -660,7 +665,7 @@
 		}
 		if(ccpDistance(location, button7.position) < buttonReleaseTolerance * button7.contentSize.width/2)
 		{
-			Kitty *myKitty = (Kitty *) [self getChildByTag:3];
+			Kitty *myKitty = (Kitty *) [gameLayer getChildByTag:3];
 			if(myKitty._isTurning)
 				[myKitty stopTurning];	
 			[self animateButtonReleaseWithTag:7];
@@ -716,7 +721,7 @@
 			_maxButtonScale = myScale; //used in animateButtonPress function
 			[mySprite runAction: [CCScaleBy actionWithDuration:0.05 scale:myScale]];
 			
-			[self addChild:mySprite z:10];
+			[uiLayer addChild:mySprite z:10];
 		}
 	}
 	
@@ -726,14 +731,14 @@
 	CCSprite* pausebutton = [CCSprite spriteWithFile:@"pausebutton2.png"];
 	pausebutton.tag = 13;
 	pausebutton.position = ccp(screenSize.width / 2.0, (screenSize.height - (pausebutton.contentSize.height/2 + padding)));
-	[self addChild:pausebutton z:10];
+	[uiLayer addChild:pausebutton z:10];
 	
 	
 }
 
 -(void) animateButtonPressWithTag: (int)tag
 {	
-	CCSprite *button = (CCSprite*) [self getChildByTag:tag];
+	CCSprite *button = (CCSprite*) [uiLayer getChildByTag:tag];
 	
 	if((button.scale == _maxButtonScale) && (![button numberOfRunningActions]))
 	{
@@ -754,7 +759,7 @@
 
 -(void) animateButtonReleaseWithTag: (int)tag
 {
-	CCSprite *button = (CCSprite*) [self getChildByTag:tag];
+	CCSprite *button = (CCSprite*) [uiLayer getChildByTag:tag];
 	
 	
 	if((button.scale == _minButtonScale) && (![button numberOfRunningActions]))
@@ -793,8 +798,8 @@
 			}
 			
 			//initialize and add kitty
-			Kitty *kitty = [Kitty kittyWithParentNode:self position:position tag:i world:_world];
-			[self addChild:kitty];
+			Kitty *kitty = [Kitty kittyWithParentNode:gameLayer position:position tag:i world:_world];
+			[gameLayer addChild:kitty];
 			
 			//add kitty to kittyArray
 			[kittyArray addObject:kitty];
@@ -830,7 +835,7 @@
 	CCSprite* mySprite = [CCSprite spriteWithFile:@"pellet.png"];
 	[mySprite setColor:ccc3(244,131,96)];
 	mySprite.tag = 8;
-	[self addChild:mySprite];
+	[gameLayer addChild:mySprite];
 	[mySprite runAction: [CCScaleBy actionWithDuration:0.1 scale:myScale]];
 	
 	// Create body 
@@ -908,7 +913,7 @@
 	CCSprite* mySprite = [CCSprite spriteWithFile:fileName];
 	mySprite.tag = tag;
 	mySprite.scale = myScale;
-	[self addChild:mySprite];
+	[gameLayer addChild:mySprite];
 	
 	//add pulsing animation
 	float pulseScale = 0.9;
@@ -986,7 +991,7 @@
 	CGSize screenSize = [CCDirector sharedDirector].winSize;
 	for(int i = 0; i < [kittiesToGrow count]; ++i) {
 		int tag = [[kittiesToGrow objectAtIndex:i] integerValue];
-		Kitty* myKitty = (Kitty*) [self getChildByTag:tag];
+		Kitty* myKitty = (Kitty*) [gameLayer getChildByTag:tag];
 		float myScale = [[growScales objectAtIndex:i] floatValue];
 		[myKitty growWithScale: myScale];
 		
@@ -998,7 +1003,7 @@
 	CGSize screenSize = [CCDirector sharedDirector].winSize;
 	for(int i = 0; i < [kittiesToShrink count]; ++i) {
 		int tag = [[kittiesToShrink objectAtIndex:i] integerValue];
-		Kitty* myKitty = (Kitty*) [self getChildByTag:tag];
+		Kitty* myKitty = (Kitty*) [gameLayer getChildByTag:tag];
 		float myScale = [[shrinkScales objectAtIndex:i] floatValue];
 		[myKitty shrinkWithScale: myScale];
 		
@@ -1021,7 +1026,7 @@
 		pos = ccp(randomX, randomY);
 		for(int i = 0; i<=3; ++i)
 		{
-			Kitty* kitty = (Kitty*)[self getChildByTag:i];
+			Kitty* kitty = (Kitty*)[gameLayer getChildByTag:i];
 			float halfWidth = [kitty.sprite boundingBox].size.width/2;
 			float distance = ccpDistance(pos, kitty.position);
 			if(distance < 1.5*halfWidth)
@@ -1087,7 +1092,7 @@
 	CCSprite* lightning1 = [CCSprite spriteWithFile:@"lightningWhite.png"];
 	lightning1.tag = 14;
 	lightning1.position = ccp(screenSize.width/2, screenSize.height*3/2);
-	[self addChild:lightning1 z:-1];
+	[gameLayer addChild:lightning1 z:-1];
 	
 	delay = 0.2f;
 	
@@ -1104,7 +1109,7 @@
 {
 	CCLOG(@"removelightning called!");
 	//for(int i = 14; i<=16; ++i)
-	[self removeChildByTag:14 cleanup:YES];
+	[gameLayer removeChildByTag:14 cleanup:YES];
 }
 
 
@@ -1141,16 +1146,16 @@
     float kittyHeight = kitty.sprite.scale * kitty.sprite.contentSize.height;
     float screenHeight = [CCDirector sharedDirector].winSize.height;
     float padding = 0.2f;
-    float selfScale = screenHeight/(kittyHeight + padding * kittyHeight);
+    float gameLayerScale = screenHeight/(kittyHeight + padding * kittyHeight);
     
     float dur = 0.2f;
     
-    [self runAction:[CCScaleTo actionWithDuration:dur scale:selfScale]];
+    [gameLayer runAction:[CCScaleTo actionWithDuration:dur scale:gameLayerScale]];
     
-    [self runAction:[CCRotateTo actionWithDuration:dur angle:kitty.rotation]];
+    [gameLayer runAction:[CCRotateTo actionWithDuration:dur angle:kitty.rotation]];
     
-    self.anchorPoint = ccp(0.5f, 0.5f);
-    [self runAction:[CCMoveTo actionWithDuration:dur position:kitty.position]];
+    gameLayer.anchorPoint = ccp(0.5f, 0.5f);
+    [gameLayer runAction:[CCMoveTo actionWithDuration:dur position:kitty.position]];
     
     
     [self schedule:@selector(zoomOut) interval:2.0f];
@@ -1162,10 +1167,10 @@
     [self unschedule:@selector(zoomOut)];
     
     float dur = 0.2f;
-    [self runAction:[CCScaleTo actionWithDuration:dur scale:1.0f]];
-    [self runAction:[CCRotateTo actionWithDuration:dur angle:0]];
-    self.anchorPoint = ccp(0,0);
-    [self runAction:[CCMoveTo actionWithDuration:dur position:ccp(0,0)]];
+    [gameLayer runAction:[CCScaleTo actionWithDuration:dur scale:1.0f]];
+    [gameLayer runAction:[CCRotateTo actionWithDuration:dur angle:0]];
+    gameLayer.anchorPoint = ccp(0,0);
+    [gameLayer runAction:[CCMoveTo actionWithDuration:dur position:ccp(0,0)]];
     
 }
      
@@ -1194,7 +1199,7 @@
 	//pause all Kitties
 	for(int i = 0; i <= 3; ++i)
 	{
-		Kitty* myCat = (Kitty*) [self getChildByTag:i];
+		Kitty* myCat = (Kitty*) [gameLayer getChildByTag:i];
 		[myCat pauseKitty];
 	}
 	
@@ -1232,7 +1237,7 @@
 	//pause all Kitties
 	for(int i = 0; i <= 3; ++i)
 	{
-		Kitty* myCat = (Kitty*) [self getChildByTag:i];
+		Kitty* myCat = (Kitty*) [gameLayer getChildByTag:i];
 		[myCat unpauseKitty];
 	}
 	
