@@ -9,6 +9,7 @@
 #import "Kitty.h"
 #import "Bullet.h"
 #import "Bomb.h"
+#import "Global.h"
 
 
 
@@ -35,8 +36,11 @@ _isTouchingKitty, leftEyePos, rightEyePos, smallerKitty, isTouchingKittyCount, p
 {
 	if ((self = [super init]))
 	{
-		float kittyScale = 0.08f;  //original size of kitty, 0.08f is the usual
-		_bulletCount = 0;
+        float kittyScale = 0.08f;
+        if(DEBUG_KITTY_SCALE != 0)
+            kittyScale = DEBUG_KITTY_SCALE;
+            
+        _bulletCount = 0;
 		_maxExtent = 9.0f; 
 		_hasStar = NO;
 		_hasTurret = NO;

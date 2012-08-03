@@ -10,6 +10,10 @@
 #define whiskers_Global_h
 
 #define AUTO_START 1
+#define DEBUG_KITTY_SCALE 0.4f
+
+#define WIN_SCALE 1.0f
+#define ABOUT_TO_WIN_SCALE 0.45f
 
 typedef enum {
     POWERUP_TYPE_NONE,

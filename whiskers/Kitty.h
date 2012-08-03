@@ -82,6 +82,8 @@
 -(void) stopTurning;
 -(void) scaleBodyMass: (float) myScale;
 -(void) updateAngularVelocity;
+-(void) aboutToWin;
+-(void) notAboutToWin;
 
 
 

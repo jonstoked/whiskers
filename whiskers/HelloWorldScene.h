@@ -45,6 +45,8 @@
 	NSMutableArray *kittyArray;  //array of active kitties, can contain less than 4 objects
     CCMenuItemFont *musicToggle;
     CCMenuItemFont *sfxToggle;
+    CCLayer *gameLayer;
+    CCLayer *uiLayer;
 
 	
 	

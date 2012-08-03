@@ -238,10 +238,21 @@
 			kitty._isTouchingKitty = NO;
 			
 			//check for win condition
-			if([kitty.sprite boundingBox].size.width > screenSize.height/2)
-			{
-				[self gameDone];
-			}
+//			if([kitty.sprite boundingBox].size.width > screenSize.height/2)
+//				[self gameDone];
+            
+            if(kitty.sprite.scale >= WIN_SCALE)
+                [self gameDone];
+            
+            if(kitty.sprite.scale >= ABOUT_TO_WIN_SCALE * WIN_SCALE && !kitty._aboutToWin) {
+                [kitty aboutToWin];
+                [self zoomInOnKitty:kitty];
+                
+            } else if (kitty.sprite.scale < ABOUT_TO_WIN_SCALE && kitty._aboutToWin) {
+                [kitty notAboutToWin];
+            }
+                
+			
 			
 		}
 	} // end iteration over all bodies
@@ -1123,6 +1134,42 @@
 {
 	[bgLayer setColor:ccc3(70, 70, 70)];
 }
+
+-(void) zoomInOnKitty: (Kitty*) kitty {
+    
+    //zoom in so kitty fills 80% of screen height
+    float kittyHeight = kitty.sprite.scale * kitty.sprite.contentSize.height;
+    float screenHeight = [CCDirector sharedDirector].winSize.height;
+    float padding = 0.2f;
+    float selfScale = screenHeight/(kittyHeight + padding * kittyHeight);
+    
+    float dur = 0.2f;
+    
+    [self runAction:[CCScaleTo actionWithDuration:dur scale:selfScale]];
+    
+    [self runAction:[CCRotateTo actionWithDuration:dur angle:kitty.rotation]];
+    
+    self.anchorPoint = ccp(0.5f, 0.5f);
+    [self runAction:[CCMoveTo actionWithDuration:dur position:kitty.position]];
+    
+    
+    [self schedule:@selector(zoomOut) interval:2.0f];
+    
+}
+
+-(void) zoomOut {
+    
+    [self unschedule:@selector(zoomOut)];
+    
+    float dur = 0.2f;
+    [self runAction:[CCScaleTo actionWithDuration:dur scale:1.0f]];
+    [self runAction:[CCRotateTo actionWithDuration:dur angle:0]];
+    self.anchorPoint = ccp(0,0);
+    [self runAction:[CCMoveTo actionWithDuration:dur position:ccp(0,0)]];
+    
+}
+     
+     
 
 
 -(void) pause
