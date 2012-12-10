@@ -24,7 +24,6 @@
 //30+ kitty children
 
 
-
 // HelloWorld implementation
 @implementation HelloWorld
 
@@ -207,12 +206,12 @@
 			myActor.position = CGPointMake( b->GetPosition().x * PTM_RATIO, b->GetPosition().y * PTM_RATIO);
 			
 			
-			if(myActor.tag!=11) //exempt bullet from angle update
+			if(myActor.tag!=kTagBullet) //exempt bullet from angle update
 				myActor.rotation = -1 * CC_RADIANS_TO_DEGREES(b->GetAngle());
 			
 			
 			//check if body went off screen
-			if(myActor.tag != 11)
+			if(myActor.tag != kTagBullet)
 			{
 				if(b->GetPosition().x > screenSize.width/PTM_RATIO)
 					b->SetTransform(b2Vec2(0,b->GetPosition().y), b->GetAngle());
@@ -249,13 +248,13 @@
             if(kitty.sprite.scale >= WIN_SCALE)
                 [self gameDone];
             
-            if(kitty.sprite.scale >= ABOUT_TO_WIN_SCALE * WIN_SCALE && !kitty._aboutToWin) {
-                [kitty aboutToWin];
-                [self zoomInOnKitty:kitty];
-                
-            } else if (kitty.sprite.scale < ABOUT_TO_WIN_SCALE && kitty._aboutToWin) {
-                [kitty notAboutToWin];
-            }
+//            if(kitty.sprite.scale >= ABOUT_TO_WIN_SCALE * WIN_SCALE && !kitty._aboutToWin) {
+//                [kitty aboutToWin];
+//                [self zoomInOnKitty:kitty];
+//                
+//            } else if (kitty.sprite.scale < ABOUT_TO_WIN_SCALE && kitty._aboutToWin) {
+//                [kitty notAboutToWin];
+//            }
                 
 			
 			
@@ -274,10 +273,10 @@
 			CCSprite *spriteB = (CCSprite*) bodyB->GetUserData();
 			
 			//kitty-pellet collision
-			if ((spriteA.tag == 8 && spriteB.tag >= 0 && spriteB.tag <= 3) ||
-				(spriteB.tag == 8 && spriteA.tag >= 0 && spriteA.tag <= 3)) 
+			if ((spriteA.tag == kTagPellet && spriteB.tag >= 0 && spriteB.tag <= 3) ||
+				(spriteB.tag == kTagPellet && spriteA.tag >= 0 && spriteA.tag <= 3)) 
 			{
-				if(spriteA.tag == 8) {
+				if(spriteA.tag == kTagPellet) {
 					if (std::find(toDestroy.begin(), toDestroy.end(), bodyA) == toDestroy.end()) {
 						toDestroy.push_back(bodyA);
 					}
@@ -300,10 +299,10 @@
 			}
 			
 			//kitty-star collision
-			if ((spriteA.tag == 9 && spriteB.tag >= 0 && spriteB.tag <= 3) ||
-				(spriteB.tag == 9 && spriteA.tag >= 0 && spriteA.tag <= 3)) 
+			if ((spriteA.tag == kTagStar && spriteB.tag >= 0 && spriteB.tag <= 3) ||
+				(spriteB.tag == kTagStar && spriteA.tag >= 0 && spriteA.tag <= 3))
 			{
-				if(spriteA.tag == 9) 
+				if(spriteA.tag == kTagStar) 
 				{
 					if (std::find(toDestroy.begin(), toDestroy.end(), bodyA) == toDestroy.end()) 
 						toDestroy.push_back(bodyA);
@@ -366,10 +365,10 @@
 			}
 			
 			//kitty-turret collision
-			if ((spriteA.tag == 10 && spriteB.tag >= 0 && spriteB.tag <= 3) ||
-				(spriteB.tag == 10 && spriteA.tag >= 0 && spriteA.tag <= 3)) 
+			if ((spriteA.tag == kTagTurret && spriteB.tag >= 0 && spriteB.tag <= 3) ||
+				(spriteB.tag == kTagTurret && spriteA.tag >= 0 && spriteA.tag <= 3)) 
 			{
-				if(spriteA.tag == 10) 
+				if(spriteA.tag == kTagTurret) 
 				{
 					if (std::find(toDestroy.begin(), toDestroy.end(), bodyA) == toDestroy.end()) 
 						toDestroy.push_back(bodyA);
@@ -389,11 +388,11 @@
 			}
 			
 			//kitty-lightning collision
-			if ((spriteA.tag == 12 && spriteB.tag >= 0 && spriteB.tag <= 3) ||
-				(spriteB.tag == 12 && spriteA.tag >= 0 && spriteA.tag <= 3)) 
+			if ((spriteA.tag == kTagLightning && spriteB.tag >= 0 && spriteB.tag <= 3) ||
+				(spriteB.tag == kTagLightning && spriteA.tag >= 0 && spriteA.tag <= 3)) 
 			{
 				CCLOG(@"kitty-kitty collision!");
-				if(spriteA.tag == 12) 
+				if(spriteA.tag == kTagLightning) 
 				{
 					if (std::find(toDestroy.begin(), toDestroy.end(), bodyA) == toDestroy.end()) 
 						toDestroy.push_back(bodyA);
@@ -445,10 +444,10 @@
 			
 			
 			//kitty-bombs collision
-			if ((spriteA.tag == 14 && spriteB.tag >= 0 && spriteB.tag <= 3) ||
-				(spriteB.tag == 14 && spriteA.tag >= 0 && spriteA.tag <= 3)) 
+			if ((spriteA.tag == kTagBombs && spriteB.tag >= 0 && spriteB.tag <= 3) ||
+				(spriteB.tag == kTagBombs && spriteA.tag >= 0 && spriteA.tag <= 3)) 
 			{
-				if(spriteA.tag == 14) 
+				if(spriteA.tag == kTagBombs) 
 				{
 					if (std::find(toDestroy.begin(), toDestroy.end(), bodyA) == toDestroy.end()) 
 						toDestroy.push_back(bodyA);
@@ -466,13 +465,37 @@
 				}
 				
 			}
+            
+            
+            //kitty-magnet collision
+			if ((spriteA.tag == kTagMagnet && spriteB.tag >= 0 && spriteB.tag <= 3) ||
+				(spriteB.tag == kTagMagnet && spriteA.tag >= 0 && spriteA.tag <= 3))
+			{
+				if(spriteA.tag == kTagMagnet)
+				{
+					if (std::find(toDestroy.begin(), toDestroy.end(), bodyA) == toDestroy.end())
+						toDestroy.push_back(bodyA);
+					
+					Kitty *kitty = (Kitty*) bodyB->GetUserData();
+					[kitty gotMagnet];
+				}
+				else
+				{
+					if (std::find(toDestroy.begin(), toDestroy.end(), bodyB) == toDestroy.end())
+						toDestroy.push_back(bodyB);
+					
+					Kitty *kitty = (Kitty*) bodyA->GetUserData();
+					[kitty gotMagnet];
+				}
+				
+			}
 			
 			
 			//kitty-bullet collision
-			if ((spriteA.tag == 11 && spriteB.tag >= 0 && spriteB.tag <= 3) ||
-				(spriteB.tag == 11 && spriteA.tag >= 0 && spriteA.tag <= 3)) 
+			if ((spriteA.tag == kTagBullet && spriteB.tag >= 0 && spriteB.tag <= 3) ||
+				(spriteB.tag == kTagBullet && spriteA.tag >= 0 && spriteA.tag <= 3)) 
 			{
-				if(spriteA.tag == 11) 
+				if(spriteA.tag == kTagBullet) 
 				{
 					Bullet *bullet = (Bullet*) bodyA->GetUserData();
 					Kitty *shooterKitty = (Kitty*) bullet._shooterKitty;
@@ -506,7 +529,6 @@
 	} //end collision detection
 	
 	
-	
 	[self increaseBallSizeWithScale: kittiesToGrow scales:growScales];
 	[self decreaseBallSizeWithScale: kittiesToShrink scales:shrinkScales];
 	
@@ -535,19 +557,47 @@
 	{
 		Kitty *kitty = (Kitty *) [kittyArray objectAtIndex:i];
 		[kitty tick];
+        
+
 	}
-	
-	
-	
+    
+    //magnet
+    Kitty *magnetKitty;
+    for (int i=0; i<[kittyArray count]; ++i) {
+        Kitty *kitty = (Kitty *) [kittyArray objectAtIndex:i];
+        if(kitty.hasMagnet)
+            magnetKitty = kitty;
+    }
+    
+    for (int i=0; i<[kittyArray count]; ++i) {
+        Kitty *kitty = (Kitty *) [kittyArray objectAtIndex:i];
+        if(kitty.isBeingSucked) {
+            
+            //move kittiesBeingSucked towards kitty w/ magnet
+            b2Vec2 v = [self unitVectorFromPoint:kitty.body->GetPosition() toPoint:magnetKitty.body->GetPosition()];            
+            kitty.body->ApplyForce(100.0f*v, kitty.body->GetPosition());
+
+        }
+    }
+
 	//dealocate NSMutableArrays
 	[kittiesToGrow dealloc];
 	[kittiesToShrink dealloc];
 	[growScales dealloc];
 	[shrinkScales dealloc];
-	
-	
-	
-	
+
+}
+
+- (b2Vec2) unitVectorFromPoint:(b2Vec2)v1 toPoint:(b2Vec2)v2 {
+    
+    // Get the distance between the two objects
+    b2Vec2 d = v2 - v1;
+    float distance = d.Length();
+    b2Vec2 dUnit = d;
+    dUnit.Normalize();
+    
+    return dUnit;
+    
 }
 
 -(void) ccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -602,7 +652,7 @@
 			}
 		}
 		
-		CCSprite *pauseButton = (CCSprite*) [uiLayer getChildByTag:13];
+		CCSprite *pauseButton = (CCSprite*) [uiLayer getChildByTag:kTagPauseButton];
 		if(ccpDistance(location, pauseButton.position) < 3.0f*pauseButton.contentSize.width/2)  //tolerance of three times the button size
 		{
 			if(_paused)
@@ -729,7 +779,7 @@
 	
 	//add pause button
 	CCSprite* pausebutton = [CCSprite spriteWithFile:@"pausebutton2.png"];
-	pausebutton.tag = 13;
+	pausebutton.tag = kTagPauseButton;
 	pausebutton.position = ccp(screenSize.width / 2.0, (screenSize.height - (pausebutton.contentSize.height/2 + padding)));
 	[uiLayer addChild:pausebutton z:10];
 	
@@ -803,6 +853,7 @@
 			
 			//add kitty to kittyArray
 			[kittyArray addObject:kitty];
+            [[GameManager sharedGameManager].kitties addObject:kitty];
 			
 		}
 		
@@ -834,7 +885,7 @@
 	
 	CCSprite* mySprite = [CCSprite spriteWithFile:@"pellet.png"];
 	[mySprite setColor:ccc3(244,131,96)];
-	mySprite.tag = 8;
+	mySprite.tag = kTagPellet;
 	[gameLayer addChild:mySprite];
 	[mySprite runAction: [CCScaleBy actionWithDuration:0.1 scale:myScale]];
 	
@@ -884,25 +935,31 @@
 
 -(void) addStar {
 	
-	[self createPowerupCollectible:9 fileName:@"starIcon.png"];
+	[self createPowerupCollectible:kTagStar fileName:@"starIcon.png"];
 	
 }
 
 -(void) addTurret {
 	
-	[self createPowerupCollectible:10 fileName:@"bulletIcon.png"];
+	[self createPowerupCollectible:kTagTurret fileName:@"bulletIcon.png"];
 	
 }
 
 -(void) addLightning {
 	
-	[self createPowerupCollectible:12 fileName:@"lightningIcon copy.png"];
+	[self createPowerupCollectible:kTagLightning fileName:@"lightningIcon copy.png"];
 }
 
 -(void) addBombs {
 	
-	[self createPowerupCollectible:14 fileName:@"bombIcon.png"];
+	[self createPowerupCollectible:kTagBombs fileName:@"bombIcon.png"];
 }
+
+-(void) addMagnet {
+	
+	[self createPowerupCollectible:kTagMagnet fileName:@"magnetIcon.png"];
+}
+
 
 -(void) createPowerupCollectible:(int) tag fileName:(NSString*) fileName
 {
@@ -966,24 +1023,36 @@
 //	else 
 //		[self addStar];
     
-    
-    int lightningProb = 15;
-    int turretProb = 20;
-    int bombProb = 20;
-    int starProb = 45;
-    
-    int rand = arc4random()%100 + 1;
-    
-    if(rand <= lightningProb)
-        [self addLightning];
-    else if(rand <= lightningProb + turretProb)
-         [self addTurret];
-    else if(rand <= lightningProb + turretProb + bombProb)
-        [self addBombs];
-    else 
+    if(TEST_POWERUP == @"star") 
         [self addStar];
+    else if(TEST_POWERUP == @"turret")
+        [self addTurret];
+    else if(TEST_POWERUP == @"lightning")
+        [self addLightning];
+    else if(TEST_POWERUP == @"bombs")
+        [self addBombs];
+    else if(TEST_POWERUP == @"magnet")
+        [self addMagnet];
+    else {
+        
+        int lightningProb = 15;
+        int turretProb = 20;
+        int bombProb = 20;
+        int starProb = 45;
+        
+        int rand = arc4random()%100 + 1;
+        
+        if(rand <= lightningProb)
+            [self addLightning];
+        else if(rand <= lightningProb + turretProb)
+             [self addTurret];
+        else if(rand <= lightningProb + turretProb + bombProb)
+            [self addBombs];
+        else 
+            [self addStar];
+        
+    }
     
-
 	
 }
 
@@ -1054,43 +1123,9 @@
 							   nil];
 	CCSequence* repeatBlinkScreen = [CCSequence actions:blinkScreen, blinkScreen, blinkScreen,nil];
 	[self runAction:repeatBlinkScreen];
-	
-	/*
-	 //move three lightning bolts onto screen
-	 //change the size, placement and timing of each bolt
-	 int spacing = 50;
-	 
-	 CCSprite* lightning1 = [CCSprite spriteWithFile:@"bigWhiteLightning.png"];
-	 lightning1.tag = 14;
-	 lightning1.position = ccp(screenSize.width/2, screenSize.height*3/2);
-	 [self addChild:lightning1 z:-1];
-	 
-	 CCSprite* lightning2 = [CCSprite spriteWithFile:@"bigWhiteLightning.png"];
-	 lightning2.tag = 15;
-	 lightning2.position = ccp(screenSize.width/2-spacing, screenSize.height*3/2);
-	 lightning2.scale = 0.8;
-	 [self addChild:lightning2 z:-2];
-	 
-	 CCSprite* lightning3 = [CCSprite spriteWithFile:@"bigWhiteLightning.png"];
-	 lightning3.tag = 16;
-	 lightning3.scale = 0.6;
-	 lightning3.position = ccp(screenSize.width/2+spacing, screenSize.height*3/2);
-	 [self addChild:lightning3 z:-3];
-	 
-	 CCSequence* lightningSequence = [CCSequence actions:[lightning1 runAction:moveLightning],
-	 [CCDelayTime actionWithDuration:delay],
-	 [lightning2 runAction:moveLightning],
-	 [CCDelayTime actionWithDuration:delay],
-	 [lightning3 runAction:moveLightning],
-	 [CCDelayTime actionWithDuration:removeDelay],
-	 [CCCallFunc actionWithTarget:self selector:@selector(removeLightning)], nil];
-	 
-	 */
-	
-	//lets try just one bolt, I'm having trouble with that sequence
-	
+		
 	CCSprite* lightning1 = [CCSprite spriteWithFile:@"lightningWhite.png"];
-	lightning1.tag = 14;
+	lightning1.tag = kTagLightningSprite;
 	lightning1.position = ccp(screenSize.width/2, screenSize.height*3/2);
 	[gameLayer addChild:lightning1 z:-1];
 	
@@ -1108,8 +1143,7 @@
 -(void) removeLightning
 {
 	CCLOG(@"removelightning called!");
-	//for(int i = 14; i<=16; ++i)
-	[gameLayer removeChildByTag:14 cleanup:YES];
+	[gameLayer removeChildByTag:kTagLightningSprite cleanup:YES];
 }
 
 

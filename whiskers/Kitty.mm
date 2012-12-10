@@ -10,6 +10,7 @@
 #import "Bullet.h"
 #import "Bomb.h"
 #import "Global.h"
+#import "GameManager.h"
 
 
 
@@ -24,7 +25,8 @@
 
 @synthesize sprite, body, fixture, _hasStar, _aboutToWin, _hasTurret,
 _bulletCount, _isTurning, _currentExtent, _maxExtent, _minExtent, sewingMachineSound,
-_isTouchingKitty, leftEyePos, rightEyePos, smallerKitty, isTouchingKittyCount, particleSystemStarTrail;
+_isTouchingKitty, leftEyePos, rightEyePos, smallerKitty, isTouchingKittyCount, particleSystemStarTrail,
+hasMagnet, isBeingSucked, shouldSuck;
 
 
 +(id) kittyWithParentNode:(CCNode*)parentNode position:(CGPoint)position tag:(int)tag world:(b2World*)world
@@ -75,7 +77,7 @@ _isTouchingKitty, leftEyePos, rightEyePos, smallerKitty, isTouchingKittyCount, p
         
         
 		//set color of kitty
-		//used colorblender to pick complementing colors http://www.colorblender.com/
+		//used colorblender to pick complementary colors http://www.colorblender.com/
 		switch (tag) {
 			case 0:
 			{
@@ -107,21 +109,23 @@ _isTouchingKitty, leftEyePos, rightEyePos, smallerKitty, isTouchingKittyCount, p
 		boxBodyDef.userData = self;
 		boxBodyDef.linearDamping = 6.0f;  //adds air resistance to box
 		body = world->CreateBody(&boxBodyDef);
+        
+        [self createFixtureWithDensity:KITTY_DENSITY friction:0 restitution:0];
 		
-		b2PolygonShape platformShape;
-		float width = [sprite boundingBox].size.width/PTM_RATIO/2.0f; 
-		float height = [sprite boundingBox].size.height/PTM_RATIO/2.0f; 
-		_currentExtent = width;
-		platformShape.SetAsBox(width, height);// SetAsBox uses the half width and height (extents)
-		
-		// Create shape definition and add to body
-		b2FixtureDef boxFixtureDef;
-		boxFixtureDef.shape = &platformShape;
-		boxFixtureDef.density = KITTY_DENSITY;  //1.0f
-		boxFixtureDef.friction = 0.0f;
-		boxFixtureDef.restitution = 0.0f;
-		boxFixtureDef.filter.groupIndex = kittyCollisionFilter;  //used for collision filtering so eye bullets don't collide with shooter kitty
-		fixture = body->CreateFixture(&boxFixtureDef);
+//		b2PolygonShape platformShape;
+//		float width = [sprite boundingBox].size.width/PTM_RATIO/2.0f; 
+//		float height = [sprite boundingBox].size.height/PTM_RATIO/2.0f; 
+//		_currentExtent = width;
+//		platformShape.SetAsBox(width, height);// SetAsBox uses the half width and height (extents)
+//		
+//		// Create shape definition and add to body
+//		b2FixtureDef boxFixtureDef;
+//		boxFixtureDef.shape = &platformShape;
+//		boxFixtureDef.density = KITTY_DENSITY;  //1.0f
+//		boxFixtureDef.friction = 0.0f;
+//		boxFixtureDef.restitution = 0.0f;
+//		boxFixtureDef.filter.groupIndex = kittyCollisionFilter;  //used for collision filtering so eye bullets don't collide with shooter kitty
+//		fixture = body->CreateFixture(&boxFixtureDef);
 		
 		_isMoving = YES;  //set to YES if you want the kitty to move
 		
@@ -139,7 +143,7 @@ _isTouchingKitty, leftEyePos, rightEyePos, smallerKitty, isTouchingKittyCount, p
 	CGSize screenSize = [[CCDirector sharedDirector] winSize];
 	
 	//make kitty move forward automatically by applying a force every tick
-	if(_isMoving) 
+	if(_isMoving && !isBeingSucked)
 	{
 		float angleRad = body->GetAngle();
 		
@@ -298,6 +302,15 @@ _isTouchingKitty, leftEyePos, rightEyePos, smallerKitty, isTouchingKittyCount, p
         
 	}
     
+    //apply a hurt animation
+    //js wip
+//    id fadeKitty = [CCActionTween actionWithDuration:0.5f key:@"opacity" from:1.0f to:0.2f];
+//    id repeat = [CCRepeat actionWithAction:fadeKitty times:5];
+//    [sprite runAction:repeat];
+//    [self schedule:@selector(showKitty) interval:3.0f];
+    
+    
+    //change rate of fire of bullets when you change size??
 //    if(_hasTurret) {
 //        [self stopActionByTag:103];
 //        
@@ -393,6 +406,98 @@ _isTouchingKitty, leftEyePos, rightEyePos, smallerKitty, isTouchingKittyCount, p
 	
 	[self.parent addChild:[Bullet makeBulletInWorld:_world shooterKitty:self]];
 	
+}
+
+
+//js wip
+-(void) gotMagnet {
+    
+    if(!hasMagnet) {
+        hasMagnet = YES;
+        for(int i = 0; i <=3; ++i) {
+            if(i != self.tag) { //tags should be same as kitties array indeces
+                
+                Kitty *kittyToSuck = (Kitty*) [[GameManager sharedGameManager].kitties objectAtIndex:i];
+                [kittyToSuck suckKittyTowardsKitty:self];
+            
+            }
+        }
+        
+        [self schedule:@selector(lostMagnet) interval:4.0f];
+    }
+}
+
+-(void) lostMagnet {
+    
+    [self unschedule:@selector(lostMagnet)];
+    
+    if(hasMagnet) {
+        
+        hasMagnet = NO;
+        
+        //shoot kitties off you
+        for(int i = 0; i < [[GameManager sharedGameManager].kitties count]; ++i) {
+            Kitty *kittyBeingSucked = (Kitty*) [[GameManager sharedGameManager].kitties objectAtIndex:i];
+            if(kittyBeingSucked.isBeingSucked) {
+                [kittyBeingSucked stopBeingSucked];
+                kittyBeingSucked.body->ApplyLinearImpulse(b2Vec2(100.0,0.0), kittyBeingSucked.body->GetPosition());
+            }
+            
+        }
+        
+    }
+    
+}
+
+-(void) suckKittyTowardsKitty:(Kitty*) kitty {
+    
+    if(!isBeingSucked) {
+        isBeingSucked = YES;
+        shouldSuck = YES;
+#define BEING_SUCKED_DENSITY 0.05
+        [self createFixtureWithDensity:BEING_SUCKED_DENSITY friction:0 restitution:0];
+    }
+    
+}
+
+-(void) stopBeingSucked {
+    
+    if(isBeingSucked) {
+        isBeingSucked = NO;
+        shouldSuck = NO;
+        [self createFixtureWithDensity:KITTY_DENSITY friction:0 restitution:0];
+        
+    }
+    
+}
+
+//js wip
+-(void) createFixtureWithDensity:(float)density friction:(float)friction restitution:(float)restitution {
+    
+    //destroy current fixture(s)
+    b2Fixture* f;
+    for (f = body->GetFixtureList(); f; f = f->GetNext())
+    {
+        body->DestroyFixture(f);
+        break;
+    }
+    
+    //create new one
+    b2PolygonShape platformShape;
+    float width = [sprite boundingBox].size.width/PTM_RATIO/2.0f;
+    float height = [sprite boundingBox].size.height/PTM_RATIO/2.0f;
+    _currentExtent = width;
+    platformShape.SetAsBox(width, height);// SetAsBox uses the half width and height (extents)
+    
+    // Create shape definition and add to body
+    b2FixtureDef boxFixtureDef;
+    boxFixtureDef.shape = &platformShape;
+    boxFixtureDef.density = density; 
+    boxFixtureDef.friction = friction;
+    boxFixtureDef.restitution = restitution;
+    boxFixtureDef.filter.groupIndex = kittyCollisionFilter;  //used for collision filtering so eye bullets don't collide with shooter kitty
+    fixture = body->CreateFixture(&boxFixtureDef);
+    
 }
 
 
@@ -496,6 +601,11 @@ _isTouchingKitty, leftEyePos, rightEyePos, smallerKitty, isTouchingKittyCount, p
 {
 	if(_hasTurret)
 		[sewingMachineSound play];
+}
+
+-(void) showKitty {
+    [self unschedule:@selector(showKitty)];
+    sprite.opacity = 1.0f;
 }
 
 -(void) dealloc

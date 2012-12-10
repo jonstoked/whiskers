@@ -8,6 +8,7 @@
 //
 
 #import "Bullet.h"
+#import "Global.h"
 
 #define PTM_RATIO 32
 
@@ -35,8 +36,8 @@
 		float bulletSpeed = 20.0f;
 		
 		sprite = [CCSprite spriteWithFile:@"eyeBullet2.png"];
-		sprite.tag = 11;
-		self.tag = 11;
+		sprite.tag = kTagBullet;
+		self.tag = kTagBullet;
 		sprite.scale = shooterKitty.sprite.scale;
 		sprite.color = shooterKitty.sprite.color;
 		[self addChild:sprite];

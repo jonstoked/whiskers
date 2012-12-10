@@ -40,8 +40,11 @@
 	int isTouchingKittyCount; //number of consecutive frames that kitty is touching another kitty
 	CCParticleSystemQuad *particleSystemStarTrail;
 	
-	
 	CDSoundSource* sewingMachineSound;
+    
+    BOOL hasMagnet;
+    BOOL isBeingSucked;
+    BOOL shouldSuck;
 	
 }
 
@@ -64,6 +67,12 @@
 @property (nonatomic,readwrite) BOOL smallerKitty;
 @property (nonatomic,readwrite) int isTouchingKittyCount;
 @property (nonatomic,readwrite) CCParticleSystemQuad *particleSystemStarTrail;
+@property (nonatomic,readwrite) BOOL hasMagnet;
+@property (nonatomic,readwrite) BOOL isBeingSucked;
+@property (nonatomic,readwrite) BOOL shouldSuck;
+
+
+
 
 
 
@@ -84,6 +93,8 @@
 -(void) updateAngularVelocity;
 -(void) aboutToWin;
 -(void) notAboutToWin;
+-(void) createFixtureWithDensity:(float)density friction:(float)friction restitution:(float)restitution;
+
 
 
 

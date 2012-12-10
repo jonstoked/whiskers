@@ -123,8 +123,16 @@
         [[CCDirector sharedDirector] runWithScene: [HelloWorld scene]];
     
     [[LocalyticsSession sharedLocalyticsSession] startSession:@"128cc59ede29323b0642c1e-0e230c76-9ae7-11e1-38dd-00ef75f32667"];
+    
+    NSSetUncaughtExceptionHandler(&uncaughtExceptionHandler);
 
+}
 
+void uncaughtExceptionHandler(NSException *exception) {
+    
+    CCLOG(@"CRASH: %@", exception);
+    CCLOG(@"Stack Trace: %@", [exception callStackSymbols]);
+    
 }
 
 

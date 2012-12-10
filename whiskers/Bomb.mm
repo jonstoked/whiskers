@@ -7,6 +7,7 @@
 //
 
 #import "Bomb.h"
+#import "Global.h"
 
 #define PTM_RATIO 32
 
@@ -36,8 +37,8 @@
 		self.position = bombPositionInitial;
 		
 		sprite = [CCSprite spriteWithFile:@"bomb.png"];
-		self.tag = 15;
-		sprite.tag = 15;
+		self.tag = kTagBomb;
+		sprite.tag = kTagBomb;
 		sprite.color = bomberKitty.sprite.color;
 		sprite.position = ccp(18, 6);  //value taken directly from Adobe Illustrator file
 		//sprite.anchorPoint = ccp(50/[sprite boundingBox].size.width,50/[sprite boundingBox].size.height); //take from AI file
@@ -166,7 +167,7 @@
 		}
 	}
 	
-	[self.parent removeChildByTag:15 cleanup:YES];  //remove the bomb
+	[self.parent removeChildByTag:kTagBomb cleanup:YES];  //remove the bomb
 		
 }
 

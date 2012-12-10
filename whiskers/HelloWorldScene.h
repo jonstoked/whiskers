@@ -79,6 +79,8 @@
 -(void) unpause;
 -(void) resetGame;
 -(void) addPauseMenu;
+- (b2Vec2) unitVectorFromPoint:(b2Vec2)v1 toPoint:(b2Vec2)v2;
+
 
 
 @end

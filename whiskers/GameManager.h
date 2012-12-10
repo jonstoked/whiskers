@@ -16,15 +16,18 @@
     BOOL musicOn;
     BOOL sfxOn;
     NSMutableDictionary *gameDict;
+    NSMutableArray *kitties;
 	
 }
 
-@property (readwrite) NSMutableArray *isPlayerActiveArray;
-@property (readwrite) NSMutableArray *selectedMustacheArray;
-@property (readwrite) NSMutableArray *finalKittyScales;
+@property (nonatomic,readwrite) NSMutableArray *isPlayerActiveArray;
+@property (nonatomic,readwrite) NSMutableArray *selectedMustacheArray;
+@property (nonatomic,readwrite) NSMutableArray *finalKittyScales;
 @property (readwrite) BOOL musicOn;
 @property (readwrite) BOOL sfxOn;
 @property (readwrite) NSMutableDictionary *gameDict;
+@property (nonatomic,readwrite) NSMutableArray *kitties;
+
 
 
 

@@ -12,7 +12,7 @@
 @implementation GameManager
 static GameManager* _sharedGameManager = nil;                      
 
-@synthesize isPlayerActiveArray, selectedMustacheArray, finalKittyScales, musicOn, sfxOn;
+@synthesize isPlayerActiveArray, selectedMustacheArray, finalKittyScales, musicOn, sfxOn, kitties;
 
 
 +(GameManager*)sharedGameManager 
@@ -57,6 +57,8 @@ static GameManager* _sharedGameManager = nil;
 		finalKittyScales = [[NSMutableArray alloc] init];
 		for (int i=0; i<=3; ++i)
 			[finalKittyScales addObject:[NSNumber numberWithFloat:0.0f]];
+        
+        kitties = [[NSMutableArray alloc] init];
         
         //todo change back to yes
         musicOn = NO;
