@@ -26,7 +26,7 @@
 @synthesize sprite, body, fixture, _hasStar, _aboutToWin, _hasTurret,
 _bulletCount, _isTurning, _currentExtent, _maxExtent, _minExtent, sewingMachineSound,
 _isTouchingKitty, leftEyePos, rightEyePos, smallerKitty, isTouchingKittyCount, particleSystemStarTrail,
-hasMagnet, isBeingSucked, shouldSuck;
+hasMagnet, isBeingSucked, shouldSuck, tailPosition;
 
 
 +(id) kittyWithParentNode:(CCNode*)parentNode position:(CGPoint)position tag:(int)tag world:(b2World*)world
@@ -55,10 +55,8 @@ hasMagnet, isBeingSucked, shouldSuck;
 		//values taken from francine18x18 psd file
 		//used as spawn positions for eye bullets!
 		leftEyePos = ccp(28*1.5,28*5.5);
-		rightEyePos = ccp(28*5.5,28*5.5); 
-        
-		CGSize screenSize = [[CCDirector sharedDirector] winSize];
-		
+		rightEyePos = ccp(28*5.5,28*5.5);
+        		
 		//initialize sound effects
 		sewingMachineSound = [[[SimpleAudioEngine sharedEngine] soundSourceForFile:@"sewingmachine.caf"] retain];
 		sewingMachineSound.looping = YES;
@@ -112,22 +110,7 @@ hasMagnet, isBeingSucked, shouldSuck;
         
         [self createFixtureWithDensity:KITTY_DENSITY friction:0 restitution:0];
 		
-//		b2PolygonShape platformShape;
-//		float width = [sprite boundingBox].size.width/PTM_RATIO/2.0f; 
-//		float height = [sprite boundingBox].size.height/PTM_RATIO/2.0f; 
-//		_currentExtent = width;
-//		platformShape.SetAsBox(width, height);// SetAsBox uses the half width and height (extents)
-//		
-//		// Create shape definition and add to body
-//		b2FixtureDef boxFixtureDef;
-//		boxFixtureDef.shape = &platformShape;
-//		boxFixtureDef.density = KITTY_DENSITY;  //1.0f
-//		boxFixtureDef.friction = 0.0f;
-//		boxFixtureDef.restitution = 0.0f;
-//		boxFixtureDef.filter.groupIndex = kittyCollisionFilter;  //used for collision filtering so eye bullets don't collide with shooter kitty
-//		fixture = body->CreateFixture(&boxFixtureDef);
-		
-		_isMoving = YES;  //set to YES if you want the kitty to move
+		_isMoving = YES;
 		
         
 	}
@@ -235,9 +218,10 @@ hasMagnet, isBeingSucked, shouldSuck;
 		particleSystemStarTrail.position = self.position;
 		particleSystemStarTrail.angle = -self.rotation + 180.0f;
 	}
-	
-	
-}	 
+    
+    tailPosition = ccp(-[sprite boundingBox].size.width/2.0f,-[sprite boundingBox].size.height/2.0f);
+		
+}
 
 -(void) growWithScale: (float) myScale
 {		

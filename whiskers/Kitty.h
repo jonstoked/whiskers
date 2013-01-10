@@ -45,6 +45,8 @@
     BOOL hasMagnet;
     BOOL isBeingSucked;
     BOOL shouldSuck;
+    
+    CGPoint tailPostion;
 	
 }
 
@@ -70,6 +72,8 @@
 @property (nonatomic,readwrite) BOOL hasMagnet;
 @property (nonatomic,readwrite) BOOL isBeingSucked;
 @property (nonatomic,readwrite) BOOL shouldSuck;
+@property (nonatomic,readwrite) CGPoint tailPosition;
+
 
 
 

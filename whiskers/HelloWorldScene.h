@@ -69,7 +69,7 @@
 -(void) addPellet: (ccTime) dt;
 -(void) addStar;
 -(void) addTurret;
--(void) addPowerup: (ccTime) dt;
+-(void) addPowerup;
 -(void) increaseBallSize: (NSMutableArray *) kittiesToGrow;
 -(void) decreaseBallSize: (NSMutableArray *) kittiesToShrink;
 -(void) increaseBallSizeWithScale: (NSMutableArray *) kittiesToGrow scales:(NSMutableArray *) growScales;

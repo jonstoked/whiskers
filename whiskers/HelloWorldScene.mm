@@ -75,10 +75,11 @@
 		[self addChild:bgLayer z:-10];
 		
 		_buttonSize = 100;
-		_pelletScale = 2.5f;  //should be 2.0
+		_pelletScale = 2.5f; 
 		_powerupCallCount = 0;
-		_pelletInterval = 7.0f; 
-		_powerupInterval = 10.0f;
+		_pelletInterval = 7.0f;
+        
+        _powerupInterval = 10.0f;
 		
 		kittyArray = [[ NSMutableArray alloc ] init];
 		
@@ -110,17 +111,17 @@
 		_world->SetContinuousPhysics(true);
 		
 		
-//		 // Debug Drawing
-//		 m_debugDraw = new GLESDebugDraw( PTM_RATIO );
-//		 _world->SetDebugDraw(m_debugDraw);
-//		 
-//		 uint32 flags = 0;
-//		 flags += b2DebugDraw::e_shapeBit;
-//		 //		flags += b2DebugDraw::e_jointBit;
-//		 //		flags += b2DebugDraw::e_aabbBit;
-//		 //		flags += b2DebugDraw::e_pairBit;
-//		 //		flags += b2DebugDraw::e_centerOfMassBit;
-//		 m_debugDraw->SetFlags(flags);	
+		 // Debug Drawing
+		 m_debugDraw = new GLESDebugDraw( PTM_RATIO );
+		 _world->SetDebugDraw(m_debugDraw);
+		 
+		 uint32 flags = 0;
+		 flags += b2DebugDraw::e_shapeBit;
+		 //		flags += b2DebugDraw::e_jointBit;
+		 //		flags += b2DebugDraw::e_aabbBit;
+		 //		flags += b2DebugDraw::e_pairBit;
+		 //		flags += b2DebugDraw::e_centerOfMassBit;
+		 m_debugDraw->SetFlags(flags);	
 		 
 		
 		
@@ -140,7 +141,10 @@
 		
 		[self schedule: @selector(tick:)];
 		
-		//[self addBombs];
+        if(TEST_POWERUP != @"") {
+            [self addPowerup];
+        }
+
 				
 	}
 	return self;
@@ -1006,10 +1010,10 @@
 
 -(void) startAddPowerup
 {
-	[self schedule: @selector(addPowerup:) interval:_powerupInterval];
+	[self schedule: @selector(addPowerup) interval:_powerupInterval];
 }
 
--(void) addPowerup: (ccTime) dt 
+-(void) addPowerup/*: (ccTime) dt*/
 {
 //	int mod = _powerupCallCount%9;
 //	++_powerupCallCount;
@@ -1029,7 +1033,7 @@
         [self addTurret];
     else if(TEST_POWERUP == @"lightning")
         [self addLightning];
-    else if(TEST_POWERUP == @"bombs")
+    else if(TEST_POWERUP == @"bomb")
         [self addBombs];
     else if(TEST_POWERUP == @"magnet")
         [self addMagnet];

@@ -9,13 +9,13 @@
 #ifndef whiskers_Global_h
 #define whiskers_Global_h
 
-#define AUTO_START 0
+#define AUTO_START 1
 #define DEBUG_KITTY_SCALE 0 //normal start is 0.08f
 
 #define WIN_SCALE 1.0f
 #define ABOUT_TO_WIN_SCALE 0.45f
 
-#define TEST_POWERUP @"" // @"magnet"
+#define TEST_POWERUP @"bomb"
 
 
 typedef enum {

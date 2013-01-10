@@ -28,13 +28,12 @@
 		CCLOG(@"Initialize Bomb!");
 		_world = world;
 		_bomberKitty = bomberKitty;
-		scaleInitial = 0.7f;
-		CGSize screenSize = [CCDirector sharedDirector].winSize;
-		
-		CGPoint bombPositionFinal = [self makeRandomPointWithPadding:150];
-		CGPoint bombPositionInitial = ccp(bombPositionFinal.x, screenSize.height + 75);
-		_position = bombPositionFinal;
-		self.position = bombPositionInitial;
+		scaleInitial = 0.7f;		
+        
+//        CGPoint leftEyePos = ccpMult(_shooterKitty.leftEyePos, _shooterKitty.sprite.scale);
+//		CGPoint worldPos = [_shooterKitty convertToWorldSpace:leftEyePos];
+//		self.position = ccpMult(bomberKitty.tailPosition, bomberKitty.sprite.scale);
+        self.position = [bomberKitty convertToWorldSpace:bomberKitty.tailPosition];
 		
 		sprite = [CCSprite spriteWithFile:@"bomb.png"];
 		self.tag = kTagBomb;
@@ -51,11 +50,21 @@
 		psSparks.endColor = ccc4FFromccc3B(sprite.color);
 		[self addChild:psSparks z:-9];
 				
-		//drop bomb on screen and then add physics body
-		CCAction *dropBomb = [CCMoveTo actionWithDuration:0.8f position:bombPositionFinal];
-		CCAction *ease = [CCEaseIn actionWithAction:dropBomb rate:2];
-		CCSequence *sequence = [CCSequence actions:ease, [CCCallFunc actionWithTarget:self selector:@selector(createBody)], nil];
+		//make kitty poop bomb, then create physics body
+        self.scale = 0.3f;
+        float dur = 0.5f;
+		id scaleUp = [CCScaleTo actionWithDuration:dur scale:1.0f];
+		id ease = [CCEaseIn actionWithAction:scaleUp rate:2];
+		id sequence = [CCSequence actions:ease, [CCCallFunc actionWithTarget:self selector:@selector(createBody)], nil];
 		[self runAction:sequence];
+        
+        float angle = CC_DEGREES_TO_RADIANS(fmodf(bomberKitty.rotation,360.0f));
+        CGPoint finalBombPos = ccpMult(ccpForAngle(angle), 80);
+        finalBombPos = ccp(-finalBombPos.x, finalBombPos.y);  //not sure why I have to do this
+        
+        id move = [CCMoveBy actionWithDuration:dur position:finalBombPos];
+        id ease2 = [CCEaseOut actionWithAction:move rate:2];
+        [self runAction:ease2];
 		
 		float explosionDelay = 8.0f;
 		[self schedule: @selector(explode:) interval:explosionDelay];
@@ -70,7 +79,6 @@
 
 -(void) tick: (ccTime) dt
 {
-	//CCLOG(@"bomb tick");
 	psSparks.position = ccpAdd(sprite.position,ccp(66,50));
 }
 
@@ -88,7 +96,7 @@
 	dynamicBodyDef.type = b2_dynamicBody;
 	
 	//set position
-	dynamicBodyDef.position.Set(_position.x/PTM_RATIO, _position.y/PTM_RATIO);
+	dynamicBodyDef.position.Set(self.position.x/PTM_RATIO, self.position.y/PTM_RATIO);
 	dynamicBodyDef.userData = self;  //assign body's reference back to its owning object
 	
 	// Create circle shape
@@ -169,36 +177,6 @@
 	
 	[self.parent removeChildByTag:kTagBomb cleanup:YES];  //remove the bomb
 		
-}
-
--(CGPoint) makeRandomPointWithPadding: (int) padding
-{
-	//create a random spawn point that does not conflict with current body positions
-	int randomX, randomY;
-	BOOL isBehindKitty = YES;
-	CGSize screenSize = [CCDirector sharedDirector].winSize;
-	CGPoint pos;
-	
-	//make a point, then ceck the point against all body positions, if they overlap, make another one
-	while(isBehindKitty){
-		isBehindKitty = NO;
-		randomX = padding + (arc4random() % (int)(screenSize.width - 2 * padding)); 
-		randomY = padding + (arc4random() % (int)(screenSize.height - 2 * padding)); 
-		pos = ccp(randomX, randomY);
-		for(int i = 0; i<=3; ++i)
-		{
-			Kitty* kitty = (Kitty*)[self.parent getChildByTag:i];
-			float halfWidth = [kitty.sprite boundingBox].size.width/2;
-			float distance = ccpDistance(pos, kitty.position);
-			if(distance < 1.5*halfWidth)
-			{
-				isBehindKitty = YES;
-				CCLOG(@"Bomb attempting to spawn behind kitty");
-			}
-		}
-	}
-	
-	return pos;
 }
 
 -(void) dealloc
