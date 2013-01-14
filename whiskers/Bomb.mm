@@ -28,11 +28,7 @@
 		CCLOG(@"Initialize Bomb!");
 		_world = world;
 		_bomberKitty = bomberKitty;
-		scaleInitial = 0.7f;		
         
-//        CGPoint leftEyePos = ccpMult(_shooterKitty.leftEyePos, _shooterKitty.sprite.scale);
-//		CGPoint worldPos = [_shooterKitty convertToWorldSpace:leftEyePos];
-//		self.position = ccpMult(bomberKitty.tailPosition, bomberKitty.sprite.scale);
         self.position = [bomberKitty convertToWorldSpace:bomberKitty.tailPosition];
 		
 		sprite = [CCSprite spriteWithFile:@"bomb.png"];
@@ -101,8 +97,7 @@
 	
 	// Create circle shape
 	b2CircleShape circle;
-	//circle.m_radius =  scaleInitial*mySprite.contentSize.width/2/PTM_RATIO;
-	circle.m_radius =  63/PTM_RATIO;
+	circle.m_radius = 50.0f/PTM_RATIO;
 
 	
 	// Create shape definition and add to body
@@ -111,7 +106,7 @@
 	dynamicFixtureDef.density = 0.1f;
 	dynamicFixtureDef.friction = 0.3f;
 	dynamicFixtureDef.restitution = 0.0f; 
-	//dynamicFixtureDef.filter.groupIndex = -(_bomberKitty.tag+1);  //this would allow the shooterKitty to travel through the bomb
+	//dynamicFixtureDef.filter.groupIndex = -(_bomberKitty.tag+1);  //this would allow the bomberKitty to travel through the bomb
 	b2Body* myBody = _world->CreateBody(&dynamicBodyDef);
 	myBody->CreateFixture(&dynamicFixtureDef);
 	
@@ -122,6 +117,8 @@
 -(void) explode: (ccTime) dt  //modified from http://www.vellios.com/2010/06/12/bombs-with-box2d-cocos2d/
 {
 	CCLOG(@"explode called");
+    
+    float explosionRadius = 256.0f;
 
 	//apply outward explosion force to each body in world
 	for (b2Body* b = _world->GetBodyList(); b; b = b->GetNext())
@@ -134,55 +131,60 @@
 			b2Vec2 bodyPosition = b->GetPosition();
 			b2Vec2 bombPosition = body->GetPosition();
 			
-			// Get the distance between the two objects
-			b2Vec2 d = bodyPosition - bombPosition;
-			float distance = d.Length();
-			b2Vec2 dUnit = d;
-			dUnit.Normalize();
+			b2Vec2 d = bodyPosition - bombPosition; // Get the distance between the two objects
+            float distance = d.Length();
 			
-			//multiply the vector by a constant force
-			float explosionForce = 2000.0f;
-			dUnit *= (explosionForce/distance);
-			CCLOG(@"d.Length():     %f", distance);
-			CCLOG(@"dUnit.Length(): %f", dUnit.Length());
-			
-			//apply linear impulse to body
-			b->ApplyLinearImpulse(dUnit, bodyPosition);
-			
-			//shrink kitty depending on how far it is from bomb
-			
-			if(distance < 16.0f)
-			{
-				//y = mx+b
-				//independent(x):distance
-				//dependent(y):shrinkScale
-				float x1 = 0.0;
-				float x2 = 16.0;
-				float y1 = 3.0;  
-				float y2 = 1.0;  
-				
-				//determine slope and y-intercept of scaling function
-				float m = (y1 - y2)/(x1 - x2);
-				float b = y1 - m*x1;
-				
-				//determine force
-				float shrinkScale = m * distance + b;
-				CCLOG(@"bomb shrinkScale: %f", shrinkScale);
-				[kitty shrinkWithScale:shrinkScale];
-			}
+            if(d.Length()*PTM_RATIO < explosionRadius) {
+                b2Vec2 dUnit = d;
+                dUnit.Normalize();
+                
+                //multiply the vector by a constant force
+                float explosionForce = 2000.0f;
+                dUnit *= (explosionForce/distance);
+                CCLOG(@"d.Length():     %f", distance);
+                CCLOG(@"dUnit.Length(): %f", dUnit.Length());
+                
+                //apply linear impulse to body
+                b->ApplyLinearImpulse(dUnit, bodyPosition);
+                
+                //shrink kitty depending on how far it is from bomb
+                
+                if(distance < 16.0f)
+                {
+                    //y = mx+b
+                    //independent(x):distance
+                    //dependent(y):shrinkScale
+                    float x1 = 0.0;
+                    float x2 = 16.0;
+                    float y1 = 3.0;  
+                    float y2 = 1.0;  
+                    
+                    //determine slope and y-intercept of scaling function
+                    float m = (y1 - y2)/(x1 - x2);
+                    float b = y1 - m*x1;
+                    
+                    //determine force
+                    float shrinkScale = m * distance + b;
+                    CCLOG(@"bomb shrinkScale: %f", shrinkScale);
+                    [kitty shrinkWithScale:shrinkScale];
+                }
+            }
 			
 			
 		}
 	}
+    
+    CGPoint pos = [self.parent convertToWorldSpace:self.position];
+    
+    [[GameManager sharedGameManager].helloWorldScene animateExplosionAtPosition:pos withColor:sprite.color];
 	
 	[self.parent removeChildByTag:kTagBomb cleanup:YES];  //remove the bomb
-		
 }
 
 -(void) dealloc
 {
 	
-	 if(body!=NULL)
+    if(body!=NULL && _world!=NULL)
 	 {
 		 body->SetAwake(false);
 		 _world->DestroyBody(body); 

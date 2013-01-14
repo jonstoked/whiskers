@@ -49,10 +49,6 @@
     CCLayer *uiLayer;
 
 	
-	
-	
-	
-	
 }
 
 @property (nonatomic,readwrite) CCLayerColor* pauseMenuLayer;
@@ -80,6 +76,7 @@
 -(void) resetGame;
 -(void) addPauseMenu;
 - (b2Vec2) unitVectorFromPoint:(b2Vec2)v1 toPoint:(b2Vec2)v2;
+-(void) animateExplosionAtPosition:(CGPoint)position withColor:(ccColor3B)color;
 
 
 

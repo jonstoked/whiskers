@@ -1,4 +1,4 @@
-//  GameManager.m
+//  GameManager.mm
 //  cake
 //
 //  Created by Jon Stokes on 7/6/11.
@@ -12,7 +12,7 @@
 @implementation GameManager
 static GameManager* _sharedGameManager = nil;                      
 
-@synthesize isPlayerActiveArray, selectedMustacheArray, finalKittyScales, musicOn, sfxOn, kitties;
+@synthesize isPlayerActiveArray, selectedMustacheArray, finalKittyScales, musicOn, sfxOn, kitties, helloWorldScene, debugRects, debugPoints;
 
 
 +(GameManager*)sharedGameManager 
@@ -59,6 +59,8 @@ static GameManager* _sharedGameManager = nil;
 			[finalKittyScales addObject:[NSNumber numberWithFloat:0.0f]];
         
         kitties = [[NSMutableArray alloc] init];
+        debugRects = [[NSMutableArray alloc] init];
+        debugPoints = [[NSMutableArray alloc] init];
         
         //todo change back to yes
         musicOn = NO;

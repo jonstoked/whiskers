@@ -49,16 +49,10 @@
 {
 	if( (self=[super initWithColor:ccc4(255, 255, 0, 255)])) 
 	{
+        [GameManager sharedGameManager].helloWorldScene = self;
 		
 		//gameManager tests
 		isPlayerActiveArray =  [[GameManager sharedGameManager] isPlayerActiveArray];
-		/*
-		 for(int i=0; i < isPlayerActiveArray.count; ++i)
-		 CCLOG(@"isPlayerActiveArray[%i] = %d", i, [[isPlayerActiveArray objectAtIndex:i] integerValue]);
-		 for(int i=0; i <=3 ; ++i)
-		 CCLOG(@"selectedMustacheArray[%i] = %d", i, [[[[GameManager sharedGameManager] selectedMustacheArray] objectAtIndex:i] integerValue]);
-        
-		 */
         
         if(AUTO_START) {
             for (int i=0; i<=3; ++i)
@@ -94,9 +88,7 @@
 		
 		// enable touches
 		self.isTouchEnabled = YES;
-		
-		CGSize screenSize = [CCDirector sharedDirector].winSize;
-		
+				
 		// Define the gravity vector.
 		b2Vec2 gravity;
 		gravity.Set(0.0f, 0.0f);
@@ -115,14 +107,13 @@
 		 m_debugDraw = new GLESDebugDraw( PTM_RATIO );
 		 _world->SetDebugDraw(m_debugDraw);
 		 
-		 uint32 flags = 0;
-		 flags += b2DebugDraw::e_shapeBit;
-		 //		flags += b2DebugDraw::e_jointBit;
-		 //		flags += b2DebugDraw::e_aabbBit;
-		 //		flags += b2DebugDraw::e_pairBit;
-		 //		flags += b2DebugDraw::e_centerOfMassBit;
-		 m_debugDraw->SetFlags(flags);	
-		 
+//		 uint32 flags = 0;
+//		 flags += b2DebugDraw::e_shapeBit;
+//		 //		flags += b2DebugDraw::e_jointBit;
+//		 //		flags += b2DebugDraw::e_aabbBit;
+//		 //		flags += b2DebugDraw::e_pairBit;
+//		 //		flags += b2DebugDraw::e_centerOfMassBit;
+//		 m_debugDraw->SetFlags(flags);	
 		
 		
 		[self addPauseMenu];
@@ -165,7 +156,29 @@
 	glEnable(GL_TEXTURE_2D);
 	glEnableClientState(GL_COLOR_ARRAY);
 	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-	
+        
+    //debug points and rects must be added every frame
+    for(NSValue *value in [GameManager sharedGameManager].debugPoints) {
+        CGPoint point = [value CGPointValue];
+        ccDrawPoint(point);
+    }
+    [[GameManager sharedGameManager].debugPoints removeAllObjects];
+
+
+    //not really working, doesn't support rotated rects
+//    for(NSValue *value in [GameManager sharedGameManager].debugRects) {
+//        CGRect rect = [value CGRectValue];
+//        CGPoint vertices[4]={
+//            ccp(rect.origin.x,rect.origin.y - rect.size.height),
+//            ccp(rect.origin.x + rect.size.width,rect.origin.y - rect.size.height),
+//            ccp(rect.origin.x + rect.size.width,rect.origin.y),
+//            ccp(rect.origin.x,rect.origin.y),
+//        };
+//        ccDrawPoly(vertices, 4, YES);
+//
+//    }
+//    [[GameManager sharedGameManager].debugRects removeAllObjects];
+    
 }
 
 -(void) tick: (ccTime) dt
@@ -553,7 +566,9 @@
 			[bullet removeSprite];
 		}
 		body->SetAwake(false);  //very important!! always do this before you remove a body
-		_world->DestroyBody(body);
+        
+        if(_world->GetBodyCount() > 0)
+            _world->DestroyBody(body);
 	}
 	
 	//call update function for each instance of Kitty
@@ -837,6 +852,8 @@
 		if([[isPlayerActiveArray objectAtIndex:i] integerValue])
 		{
 			//set position of kitty
+            // 3 2
+            // 0 1
 			CGPoint position;
 			if(i == 0) {
 				position = ccp(screenSize.width/4, screenSize.height/4);
@@ -1211,7 +1228,35 @@
     [gameLayer runAction:[CCMoveTo actionWithDuration:dur position:ccp(0,0)]];
     
 }
-     
+
+-(void) animateExplosionAtPosition:(CGPoint)position withColor:(ccColor3B)color {
+    
+    CCSprite *circle = [CCSprite spriteWithFile:@"circle171.png"];
+    circle.scale = 0;
+    circle.tag = kTagExplosion;
+    circle.color = color;
+    circle.position = position;
+    [gameLayer addChild:circle];
+    
+    float dur = 0.3f;
+    float finalScale = 256.0f/171.0f;
+    
+    id scaleUp = [CCScaleTo actionWithDuration:dur scale:finalScale];
+    [circle runAction:[CCEaseExponentialOut actionWithAction:scaleUp]];
+    
+    id fadeOut = [CCFadeOut actionWithDuration:dur];
+    [circle runAction:fadeOut];
+    
+    id remove = [CCSequence actions:[CCDelayTime actionWithDuration:dur], [CCCallFunc actionWithTarget:self selector:@selector(removeExplosion)], nil];
+    [circle runAction:remove];
+    
+}
+
+-(void) removeExplosion {
+    
+    [gameLayer removeChildByTag:kTagExplosion cleanup:YES];
+    
+}
      
 
 
@@ -1222,15 +1267,13 @@
 	//[[CCDirector sharedDirector] pause];
 	[self unschedule: @selector(tick:)];
 	[self unschedule: @selector(addPellet:)];
-	[self unschedule: @selector(addPowerup:)];
-	//[[CCActionManager sharedManager] pauseAllActionsForTarget:self];
+	[self unschedule: @selector(addPowerup)];
 	[[SimpleAudioEngine sharedEngine] pauseBackgroundMusic];
 	_paused = YES;
 	
 	//pause all actions
 	for(CCNode *child in self.children)
 	{
-//		[[CCActionManager sharedManager] pauseAllActionsForTarget:child];
         [[CCActionManager sharedManager] pauseTarget:child];
 	}
 	
@@ -1241,7 +1284,6 @@
 		[myCat pauseKitty];
 	}
 	
-	//CCAction* moveOnScreen = [CCMoveBy actionWithDuration:0.3f position:ccp(screenSize.width, 0) ];
     CCAction* moveOnScreen = [CCMoveTo actionWithDuration:0.3f position:ccp(screenSize.width/2 - 849*0.8f/2, screenSize.height/2 - 548*0.8f/2) ];
     ccp(-screenSize.width/2 - 849*0.8f/2, screenSize.height/2 - 548*0.8f/2);
 	CCEaseInOut* ease = [CCEaseInOut actionWithAction:moveOnScreen rate:3];
@@ -1253,11 +1295,9 @@
 {
 	CGSize screenSize = [CCDirector sharedDirector].winSize;
 	
-	//[[CCDirector sharedDirector] resume];
 	[self schedule: @selector(tick:)];
 	[self schedule: @selector(addPellet:) interval:_pelletInterval];
-	[self schedule: @selector(addPowerup:) interval:_powerupInterval];
-	//[[CCActionManager sharedManager] resumeAllActionsForTarget:self];
+	[self schedule: @selector(addPowerup) interval:_powerupInterval];
 	
     if([[GameManager sharedGameManager] musicOn])
         [[SimpleAudioEngine sharedEngine] resumeBackgroundMusic];
@@ -1266,21 +1306,17 @@
 	//pause all actions
 	for(CCNode *child in self.children)
 	{
-//		[[CCActionManager sharedManager] resumeAllActionsForTarget:child];
         [[CCActionManager sharedManager] resumeTarget:child];
 
 	}
 	
 	//unpause all kitties
-	//pause all Kitties
 	for(int i = 0; i <= 3; ++i)
 	{
 		Kitty* myCat = (Kitty*) [gameLayer getChildByTag:i];
 		[myCat unpauseKitty];
 	}
-	
-	//CCAction* moveOffScreen = [CCMoveBy actionWithDuration:0.3f position:ccp(-screenSize.width, 0)];
-	
+		
     CCAction* moveOffScreen = [CCMoveTo actionWithDuration:0.3f position:ccp(-screenSize.width/2 - 849*0.8f/2, screenSize.height/2 - 548*0.8f/2) ];
     CCEaseInOut* ease = [CCEaseInOut actionWithAction:moveOffScreen rate:3];
 	[pauseMenuLayer runAction:ease];
@@ -1469,11 +1505,16 @@
 
 // on "dealloc" you need to release all your retained objects
 - (void) dealloc
-{
-	// in case you have something to dealloc, do it in this method
-	
+{	
     //[[SimpleAudioEngine sharedEngine] stopBackgroundMusic];
 	//[SimpleAudioEngine end];
+    
+    //remove any sprites that have physics bodies before you delete the world
+    for(CCSprite *sprite in gameLayer.children) {
+        if(sprite.tag == kTagBomb) {
+			[gameLayer removeChild:sprite cleanup:YES];
+        }
+    }
 	
 	[kittyArray dealloc];
 	

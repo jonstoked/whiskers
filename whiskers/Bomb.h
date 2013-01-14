@@ -10,7 +10,7 @@
 #import "cocos2d.h"
 #import "Box2D.h"
 #import "Kitty.h"
-
+#import "GameManager.h"
 
 
 @interface Bomb : CCNode {
@@ -20,7 +20,6 @@
 	b2World* _world;
 	Kitty* _bomberKitty; // kitty that dropped the BOMB!
 	CGPoint _position;
-	float scaleInitial;  //bomb starts at this scale (below 1.0f) and grows to its original scale 1.0f
 	CCParticleSystemQuad *psSparks;
 	
 	

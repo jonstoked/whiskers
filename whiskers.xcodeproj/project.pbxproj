@@ -156,7 +156,7 @@
 		6804B19315182D05000918D4 /* AudioCode.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6804B17515182D05000918D4 /* AudioCode.mm */; };
 		6804B19415182D05000918D4 /* Bomb.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6804B17715182D05000918D4 /* Bomb.mm */; };
 		6804B19515182D05000918D4 /* Bullet.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6804B17915182D05000918D4 /* Bullet.mm */; };
-		6804B19615182D05000918D4 /* GameManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6804B17C15182D05000918D4 /* GameManager.m */; };
+		6804B19615182D05000918D4 /* GameManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6804B17C15182D05000918D4 /* GameManager.mm */; };
 		6804B19715182D05000918D4 /* GameOverScene.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6804B17E15182D05000918D4 /* GameOverScene.mm */; };
 		6804B19815182D05000918D4 /* HelloWorldScene.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6804B18015182D05000918D4 /* HelloWorldScene.mm */; };
 		6804B19915182D05000918D4 /* Kitty.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6804B18215182D05000918D4 /* Kitty.mm */; };
@@ -303,6 +303,7 @@
 		68A09B06155C6EB3003DA47C /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 68A09B05155C6EB3003DA47C /* libz.dylib */; };
 		68A09B08155C6ED2003DA47C /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 68A09B07155C6ED2003DA47C /* libsqlite3.dylib */; };
 		68A8948115196A2E006FDFEE /* doneButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 68A8948015196A2E006FDFEE /* doneButton.png */; };
+		68BBB7B5169F800400701FB1 /* circle171.png in Resources */ = {isa = PBXBuildFile; fileRef = 68BBB7B4169F800400701FB1 /* circle171.png */; };
 		68D909EB15239914001965CA /* pauseMenuLayout.plist in Resources */ = {isa = PBXBuildFile; fileRef = 68D909EA15239914001965CA /* pauseMenuLayout.plist */; };
 		68D909F51523A0BB001965CA /* musicButtonOff.png in Resources */ = {isa = PBXBuildFile; fileRef = 68D909EE1523A0BB001965CA /* musicButtonOff.png */; };
 		68D909F61523A0BB001965CA /* musicButtonOn.png in Resources */ = {isa = PBXBuildFile; fileRef = 68D909EF1523A0BB001965CA /* musicButtonOn.png */; };
@@ -637,7 +638,7 @@
 		6804B17915182D05000918D4 /* Bullet.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Bullet.mm; sourceTree = "<group>"; };
 		6804B17A15182D05000918D4 /* GameConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameConstants.h; sourceTree = "<group>"; };
 		6804B17B15182D05000918D4 /* GameManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameManager.h; sourceTree = "<group>"; };
-		6804B17C15182D05000918D4 /* GameManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameManager.m; sourceTree = "<group>"; };
+		6804B17C15182D05000918D4 /* GameManager.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GameManager.mm; sourceTree = "<group>"; };
 		6804B17D15182D05000918D4 /* GameOverScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameOverScene.h; sourceTree = "<group>"; };
 		6804B17E15182D05000918D4 /* GameOverScene.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GameOverScene.mm; sourceTree = "<group>"; };
 		6804B17F15182D05000918D4 /* HelloWorldScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelloWorldScene.h; sourceTree = "<group>"; };
@@ -799,6 +800,7 @@
 		68A09B05155C6EB3003DA47C /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		68A09B07155C6ED2003DA47C /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		68A8948015196A2E006FDFEE /* doneButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = doneButton.png; sourceTree = "<group>"; };
+		68BBB7B4169F800400701FB1 /* circle171.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = circle171.png; sourceTree = "<group>"; };
 		68D909EA15239914001965CA /* pauseMenuLayout.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = pauseMenuLayout.plist; sourceTree = "<group>"; };
 		68D909EE1523A0BB001965CA /* musicButtonOff.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = musicButtonOff.png; sourceTree = "<group>"; };
 		68D909EF1523A0BB001965CA /* musicButtonOn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = musicButtonOn.png; sourceTree = "<group>"; };
@@ -901,6 +903,7 @@
 				6804B1DB15182D5F000918D4 /* BackButtonDepressed.png */,
 				6804B1AC15182D5F000918D4 /* backButtonPowerups.png */,
 				6804B1D715182D5F000918D4 /* bigWhiteLightning.png */,
+				68BBB7B4169F800400701FB1 /* circle171.png */,
 				6804B1CE15182D5F000918D4 /* bomb.png */,
 				6804B1C315182D5F000918D4 /* bombIcon.png */,
 				6804B1B015182D5F000918D4 /* bombPowerupDesc.png */,
@@ -1437,7 +1440,7 @@
 				6804B17915182D05000918D4 /* Bullet.mm */,
 				6804B17A15182D05000918D4 /* GameConstants.h */,
 				6804B17B15182D05000918D4 /* GameManager.h */,
-				6804B17C15182D05000918D4 /* GameManager.m */,
+				6804B17C15182D05000918D4 /* GameManager.mm */,
 				6804B17D15182D05000918D4 /* GameOverScene.h */,
 				6804B17E15182D05000918D4 /* GameOverScene.mm */,
 				6804B17F15182D05000918D4 /* HelloWorldScene.h */,
@@ -1777,6 +1780,7 @@
 				68EE772F161BFFC30095DC21 /* Icon-Small@2x.png in Resources */,
 				68EE7730161BFFC30095DC21 /* Icon.png in Resources */,
 				68EE7731161BFFC30095DC21 /* Icon@2x.png in Resources */,
+				68BBB7B5169F800400701FB1 /* circle171.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1925,7 +1929,7 @@
 				6804B19315182D05000918D4 /* AudioCode.mm in Sources */,
 				6804B19415182D05000918D4 /* Bomb.mm in Sources */,
 				6804B19515182D05000918D4 /* Bullet.mm in Sources */,
-				6804B19615182D05000918D4 /* GameManager.m in Sources */,
+				6804B19615182D05000918D4 /* GameManager.mm in Sources */,
 				6804B19715182D05000918D4 /* GameOverScene.mm in Sources */,
 				6804B19815182D05000918D4 /* HelloWorldScene.mm in Sources */,
 				6804B19915182D05000918D4 /* Kitty.mm in Sources */,

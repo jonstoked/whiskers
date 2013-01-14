@@ -10,12 +10,15 @@
 #define whiskers_Global_h
 
 #define AUTO_START 1
-#define DEBUG_KITTY_SCALE 0 //normal start is 0.08f
+#define DEBUG_KITTY_SCALE 0 // 0.5f //normal start is 0.08f
+
+#define ONE_KITTY_MOVING 0
+#define NO_KITTIES_MOVING 0
 
 #define WIN_SCALE 1.0f
 #define ABOUT_TO_WIN_SCALE 0.45f
 
-#define TEST_POWERUP @"bomb"
+#define TEST_POWERUP @"" // @"bomb"
 
 
 typedef enum {
@@ -46,9 +49,18 @@ typedef enum {
     kTagBombs,                  //15
     kTagBomb,                   
     kTagMagnet,
+    kTagExplosion,
     kTagCount
     
 } kTag;
+
+//typedef enum {
+//    kZorderKitty = -10,
+//    kZorderMustache,
+//    kZorderBomb,
+//    kZorderPowerupCollectible,
+//    
+//} kZorder;
 
 
 

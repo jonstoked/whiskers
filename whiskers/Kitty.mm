@@ -26,7 +26,7 @@
 @synthesize sprite, body, fixture, _hasStar, _aboutToWin, _hasTurret,
 _bulletCount, _isTurning, _currentExtent, _maxExtent, _minExtent, sewingMachineSound,
 _isTouchingKitty, leftEyePos, rightEyePos, smallerKitty, isTouchingKittyCount, particleSystemStarTrail,
-hasMagnet, isBeingSucked, shouldSuck, tailPosition;
+hasMagnet, isBeingSucked, shouldSuck, tailPosition, isFacingOtherKitty;
 
 
 +(id) kittyWithParentNode:(CCNode*)parentNode position:(CGPoint)position tag:(int)tag world:(b2World*)world
@@ -64,7 +64,7 @@ hasMagnet, isBeingSucked, shouldSuck, tailPosition;
 		//add kitty sprite
 		sprite = [CCSprite spriteWithFile:@"francineWhite.png"];
 		sprite.scale = kittyScale;
-		[self addChild:sprite];
+		[self addChild:sprite z:-1];
 		self.tag = tag;
 		sprite.tag = tag;
 		
@@ -110,7 +110,15 @@ hasMagnet, isBeingSucked, shouldSuck, tailPosition;
         
         [self createFixtureWithDensity:KITTY_DENSITY friction:0 restitution:0];
 		
-		_isMoving = YES;
+        if(ONE_KITTY_MOVING) {
+            if(self.tag == kTagKitty1) {
+                _isMoving = YES;
+            }
+        } else if(NO_KITTIES_MOVING) {
+          //do nothing
+        } else {
+            _isMoving = YES;
+        }
 		
         
 	}
@@ -123,7 +131,6 @@ hasMagnet, isBeingSucked, shouldSuck, tailPosition;
 	
 	float f;
 	
-	CGSize screenSize = [[CCDirector sharedDirector] winSize];
 	
 	//make kitty move forward automatically by applying a force every tick
 	if(_isMoving && !isBeingSucked)
@@ -152,7 +159,6 @@ hasMagnet, isBeingSucked, shouldSuck, tailPosition;
 		
 		forceVec *= f; //multiply force unit vector by scalar
 		b2Vec2 linVel = body->GetLinearVelocity();
-		float currentSpeed = linVel.Length();
 		body->ApplyForce(forceVec, body->GetPosition());
 		
 	}
@@ -220,7 +226,27 @@ hasMagnet, isBeingSucked, shouldSuck, tailPosition;
 	}
     
     tailPosition = ccp(-[sprite boundingBox].size.width/2.0f,-[sprite boundingBox].size.height/2.0f);
-		
+    
+    //check if another kitty is in front of you
+    CGPoint justInFront = [self convertToWorldSpace:ccp([sprite boundingBox].size.width/2.0f + 5, 0)];
+//    [[GameManager sharedGameManager].debugPoints addObject:[NSValue valueWithCGPoint:justInFront]];
+    
+    isFacingOtherKitty = NO;
+    for(Kitty *kitty in [GameManager sharedGameManager].kitties) {
+        if(kitty.tag != self.tag) {
+            //do circular distance check to other kitty (kinda janky)
+            float distanceToOtherKitty = ccpDistance(justInFront, kitty.position);
+            if(distanceToOtherKitty < sqrtf(2.0f)*[kitty.sprite boundingBox].size.width/2.0f) {
+                isFacingOtherKitty = YES;
+            }
+
+        }
+    }
+    
+//        CCLOG(@"justInFront: x: %f, y: %f ", justInFront.x, justInFront.y);
+//        CCLOG(@"isFacingOtherKitty %i", isFacingOtherKitty);
+    
+    
 }
 
 -(void) growWithScale: (float) myScale
@@ -361,8 +387,7 @@ hasMagnet, isBeingSucked, shouldSuck, tailPosition;
 		[self runAction:repeatSequence];
 		
 		//play sewing machine sound
-		if(!sewingMachineSound.isPlaying)
-		{
+		if(!sewingMachineSound.isPlaying && [[GameManager sharedGameManager] sfxOn]) {
 			[sewingMachineSound play];
 		}
 		
@@ -544,7 +569,7 @@ hasMagnet, isBeingSucked, shouldSuck, tailPosition;
 //makes kitty turn around if he is touching another kitty for too long
 -(void) turnAround
 {
-	if((!turnAroundRecentlyCalled) && (smallerKitty))
+	if(!turnAroundRecentlyCalled && smallerKitty && isFacingOtherKitty)
 	{
 		turnAroundRecentlyCalled = YES;
 		

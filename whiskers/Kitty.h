@@ -47,6 +47,11 @@
     BOOL shouldSuck;
     
     CGPoint tailPostion;
+    
+    BOOL isFacingOtherKitty;
+    
+    CGRect debugRect;
+    CGPoint debugPoint;
 	
 }
 
@@ -73,6 +78,8 @@
 @property (nonatomic,readwrite) BOOL isBeingSucked;
 @property (nonatomic,readwrite) BOOL shouldSuck;
 @property (nonatomic,readwrite) CGPoint tailPosition;
+@property (nonatomic,readwrite) BOOL isFacingOtherKitty;
+
 
 
 

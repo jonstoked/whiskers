@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
 
+@class HelloWorld;
+
 @interface GameManager : NSObject {
 	NSMutableArray *isPlayerActiveArray;
 	NSMutableArray *selectedMustacheArray;
@@ -17,6 +19,9 @@
     BOOL sfxOn;
     NSMutableDictionary *gameDict;
     NSMutableArray *kitties;
+    HelloWorld *helloWorldScene;
+    NSMutableArray *debugRects;
+    NSMutableArray *debugPoints;
 	
 }
 
@@ -27,6 +32,10 @@
 @property (readwrite) BOOL sfxOn;
 @property (readwrite) NSMutableDictionary *gameDict;
 @property (nonatomic,readwrite) NSMutableArray *kitties;
+@property (nonatomic,readwrite) HelloWorld *helloWorldScene;
+@property (nonatomic,readwrite) NSMutableArray *debugRects;
+@property (nonatomic,readwrite) NSMutableArray *debugPoints;
+
 
 
 
