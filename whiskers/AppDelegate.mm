@@ -115,7 +115,7 @@
 	
 	// Removes the startup flicker
 	[self removeStartupFlicker];
-	
+    	
 	// Run the intro Scene
     if(!AUTO_START)
         [[CCDirector sharedDirector] runWithScene: [StartMenuScene scene]];
@@ -125,6 +125,7 @@
     [[LocalyticsSession sharedLocalyticsSession] startSession:@"128cc59ede29323b0642c1e-0e230c76-9ae7-11e1-38dd-00ef75f32667"];
     
     NSSetUncaughtExceptionHandler(&uncaughtExceptionHandler);
+    
 
 }
 
@@ -138,6 +139,7 @@ void uncaughtExceptionHandler(NSException *exception) {
 
 - (void)applicationWillResignActive:(UIApplication *)application {
 	[[CCDirector sharedDirector] pause];
+    [[GameManager sharedGameManager] saveToDisk];
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
@@ -153,6 +155,7 @@ void uncaughtExceptionHandler(NSException *exception) {
 	[[CCDirector sharedDirector] stopAnimation];
     [[LocalyticsSession sharedLocalyticsSession] close];
     [[LocalyticsSession sharedLocalyticsSession] upload];
+    [[GameManager sharedGameManager] saveToDisk];
     
 }
 
@@ -175,6 +178,8 @@ void uncaughtExceptionHandler(NSException *exception) {
     
     [[LocalyticsSession sharedLocalyticsSession] close];
     [[LocalyticsSession sharedLocalyticsSession] upload];
+    
+    [[GameManager sharedGameManager] saveToDisk];
 }
 
 - (void)applicationSignificantTimeChange:(UIApplication *)application {

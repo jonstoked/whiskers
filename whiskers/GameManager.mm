@@ -12,7 +12,7 @@
 @implementation GameManager
 static GameManager* _sharedGameManager = nil;                      
 
-@synthesize isPlayerActiveArray, selectedMustacheArray, finalKittyScales, musicOn, sfxOn, kitties, helloWorldScene, debugRects, debugPoints;
+@synthesize isPlayerActiveArray, selectedMustacheArray, finalKittyScales, musicOn, sfxOn, kitties, helloWorldScene, debugRects, debugPoints, playCount;
 
 
 +(GameManager*)sharedGameManager 
@@ -62,12 +62,14 @@ static GameManager* _sharedGameManager = nil;
         debugRects = [[NSMutableArray alloc] init];
         debugPoints = [[NSMutableArray alloc] init];
         
-        //todo change back to yes
-        musicOn = NO;
-        sfxOn = NO;
-        
         gameDict = [[NSMutableDictionary alloc] init];
         
+        [self loadFromDisk];
+        if(playCount == 0) {
+            sfxOn = YES;
+            musicOn = YES;
+        }
+        ++playCount;
 
 
 
@@ -75,16 +77,23 @@ static GameManager* _sharedGameManager = nil;
     return self;
 }
 
-//todo: store game settings to disk
+-(void) loadFromDisk {
+    
+    sfxOn = [[NSUserDefaults standardUserDefaults] boolForKey: @"sfxOn"];
+    musicOn = [[NSUserDefaults standardUserDefaults] boolForKey: @"musicOn"];
+    playCount = [[NSUserDefaults standardUserDefaults] integerForKey: @"playCount"];
+    
+}
 
-//-(void) storeGameDict {
-//    [[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject: [GameManager gm].usersFriends] forKey:@"usersFriends"];   
-//}
-//
-//-(void) loadGameDict {
-//    gameDict = [NSKeyedUnarchiver unarchiveObjectWithData:dataRepresentingSavedArray];
-//    
-//}
+-(void) saveToDisk {
+    
+    [[NSUserDefaults standardUserDefaults] setBool:sfxOn forKey:@"sfxOn"];
+    [[NSUserDefaults standardUserDefaults] setBool:musicOn forKey:@"musicOn"];
+    [[NSUserDefaults standardUserDefaults] setBool:playCount forKey:@"playCount"];
+
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+}
 
 
 @end

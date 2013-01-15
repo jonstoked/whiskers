@@ -12,6 +12,7 @@
 @class HelloWorld;
 
 @interface GameManager : NSObject {
+    
 	NSMutableArray *isPlayerActiveArray;
 	NSMutableArray *selectedMustacheArray;
 	NSMutableArray *finalKittyScales;
@@ -22,27 +23,29 @@
     HelloWorld *helloWorldScene;
     NSMutableArray *debugRects;
     NSMutableArray *debugPoints;
+    int playCount;
 	
 }
 
 @property (nonatomic,readwrite) NSMutableArray *isPlayerActiveArray;
 @property (nonatomic,readwrite) NSMutableArray *selectedMustacheArray;
 @property (nonatomic,readwrite) NSMutableArray *finalKittyScales;
-@property (readwrite) BOOL musicOn;
-@property (readwrite) BOOL sfxOn;
-@property (readwrite) NSMutableDictionary *gameDict;
+@property (nonatomic, assign) BOOL musicOn;
+@property (nonatomic, assign) BOOL sfxOn;
+@property (nonatomic, readwrite) NSMutableDictionary *gameDict;
 @property (nonatomic,readwrite) NSMutableArray *kitties;
 @property (nonatomic,readwrite) HelloWorld *helloWorldScene;
 @property (nonatomic,readwrite) NSMutableArray *debugRects;
 @property (nonatomic,readwrite) NSMutableArray *debugPoints;
+@property (nonatomic, assign) int playCount;
 
 
 
 
++(GameManager*)sharedGameManager;
+-(void) saveToDisk;
+-(void) loadFromDisk;
 
 
-
-
-+(GameManager*)sharedGameManager;                                  
 
 @end

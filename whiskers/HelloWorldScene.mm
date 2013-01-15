@@ -9,7 +9,6 @@
 
 // Import the interfaces
 #import "HelloWorldScene.h"
-#import "Global.h"
 
 
 //Pixel to metres ratio. Box2D uses metres as the unit for measurement.

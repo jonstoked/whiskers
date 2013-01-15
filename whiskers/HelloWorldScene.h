@@ -17,9 +17,7 @@
 #import "Bullet.h"
 #import "GameOverScene.h"
 #import "StartMenuScene.h"
-#import "GameManager.h"
 #import "Bomb.h"
-#import "Global.h"  
 
 
 

@@ -9,8 +9,6 @@
 #import "Kitty.h"
 #import "Bullet.h"
 #import "Bomb.h"
-#import "Global.h"
-#import "GameManager.h"
 
 
 
