@@ -45,6 +45,9 @@
     CCMenuItemFont *sfxToggle;
     CCLayer *gameLayer;
     CCLayer *uiLayer;
+    
+    CGPoint pauseMenuPositionPaused;
+    CGPoint PauseMenuPositionUnpaused;
 
 	
 }
@@ -75,6 +78,9 @@
 -(void) addPauseMenu;
 - (b2Vec2) unitVectorFromPoint:(b2Vec2)v1 toPoint:(b2Vec2)v2;
 -(void) animateExplosionAtPosition:(CGPoint)position withColor:(ccColor3B)color;
+-(CCMenu*) menuWithAdobePosition:(CGPoint)pos imageName:(NSString*)imageName target:(id)t selector:(SEL)s;
+-(CCMenu*) toggleMenuWithAdobePosition:(CGPoint)pos imageNameOn:(NSString*)imageNameOn imageNameOff:(NSString*)imageNameOff
+                                target:(id)t selector:(SEL)s;
 
 
 

@@ -1283,9 +1283,11 @@
 		[myCat pauseKitty];
 	}
 	
-    CCAction* moveOnScreen = [CCMoveTo actionWithDuration:0.3f position:ccp(screenSize.width/2 - 849*0.8f/2, screenSize.height/2 - 548*0.8f/2) ];
-    ccp(-screenSize.width/2 - 849*0.8f/2, screenSize.height/2 - 548*0.8f/2);
-	CCEaseInOut* ease = [CCEaseInOut actionWithAction:moveOnScreen rate:3];
+//    CCAction* moveOnScreen = [CCMoveTo actionWithDuration:0.3f position:
+//                              ccp(screenSize.width/2 - 849*0.8f/2, screenSize.height/2 - 548*0.8f/2) ];
+    id moveOnScreen = [CCMoveTo actionWithDuration:0.3f position:pauseMenuPositionPaused];
+    
+	id ease = [CCEaseInOut actionWithAction:moveOnScreen rate:3];
 	[pauseMenuLayer runAction:ease];
 	
 }
@@ -1316,8 +1318,9 @@
 		[myCat unpauseKitty];
 	}
 		
-    CCAction* moveOffScreen = [CCMoveTo actionWithDuration:0.3f position:ccp(-screenSize.width/2 - 849*0.8f/2, screenSize.height/2 - 548*0.8f/2) ];
-    CCEaseInOut* ease = [CCEaseInOut actionWithAction:moveOffScreen rate:3];
+//    CCAction* moveOffScreen = [CCMoveTo actionWithDuration:0.3f position:ccp(-screenSize.width/2 - 849*0.8f/2, screenSize.height/2 - 548*0.8f/2) ];
+    id moveOffScreen = [CCMoveTo actionWithDuration:0.3f position:PauseMenuPositionUnpaused];
+    id ease = [CCEaseInOut actionWithAction:moveOffScreen rate:3];
 	[pauseMenuLayer runAction:ease];
 }
 
@@ -1327,93 +1330,88 @@
 	
 }
 
+-(CCMenu*) menuWithAdobePosition:(CGPoint)pos imageName:(NSString*)imageName target:(id)t selector:(SEL)s {
+    
+    //create's a single button that will shrink a bit when touched
+    float shrinkScale = 0.97f;
+    
+    CCMenuItemImage *button = [CCMenuItemImage itemFromNormalImage:imageName selectedImage:imageName target:t selector:s];
+    button.selectedImage.scale = shrinkScale;
+    button.selectedImage.position = ccp((button.normalImage.contentSize.width - button.normalImage.contentSize.width*shrinkScale)/2.0f, (button.normalImage.contentSize.height - button.normalImage.contentSize.height*shrinkScale)/2.0f);
+    
+    CCMenu *menu = [CCMenu menuWithItems:button, nil];
+
+    menu.position = [self cocosPosFromAdobePos:pos forSprite:button.normalImage];
+    
+    return menu;
+}
+
+-(CCMenu*) toggleMenuWithAdobePosition:(CGPoint)pos imageNameOn:(NSString*)imageNameOn imageNameOff:(NSString*)imageNameOff
+                                target:(id)t selector:(SEL)s {
+
+    CCMenuItemImage* on = [[CCMenuItemImage itemFromNormalImage:imageNameOn
+                                    selectedImage:imageNameOff target:nil selector:nil] retain];
+    CCMenuItemImage* off = [[CCMenuItemImage itemFromNormalImage:imageNameOff
+                                     selectedImage:imageNameOn target:nil selector:nil] retain];
+    CCMenuItemToggle *toggle = [CCMenuItemToggle itemWithTarget:t
+                                                       selector:s items:on, off, nil];
+    CCMenu *menu = [CCMenu menuWithItems:toggle, nil];
+    menu.position = [self cocosPosFromAdobePos:pos forSprite:on.normalImage];
+    
+    return menu;
+    
+}
+
+-(CGPoint) cocosPosFromAdobePos:(CGPoint)pos forSprite:(CCSprite*)sprite {
+    
+    return ccpAdd(pos, ccp(sprite.contentSize.width/2.0f, -sprite.contentSize.height/2.0f));
+    
+}
+
+
+
 -(void) addPauseMenu
 {
 	CGSize screenSize = [[CCDirector sharedDirector] winSize];
 	
-	
-	pauseMenuLayer = [CCLayerColor layerWithColor:ccc4(150, 150, 150, 150) width:849 height:548]; 
-    pauseMenuLayer.scale = 0.8f;
-	pauseMenuLayer.position = ccp(-screenSize.width/2 - 849*0.8f/2, screenSize.height/2 - 548*0.8f/2);
-	//pauseMenuLayer.position = ccp(screenSize.width/2, screenSize.height/2);
-	pauseMenuLayer.anchorPoint = ccp(0,0);
-	[self addChild:pauseMenuLayer z:8]; 
-	
-	
-//	// set CCMenuItemFont default properties
-	[CCMenuItemFont setFontName:@"Courier"];
-	[CCMenuItemFont setFontSize:46];
-	CCMenuItemFont* item2 = [CCMenuItemFont itemFromString:@"Force Game End" target:self selector:@selector(menuItem2Touched:)];
-    CCMenu *menuuu = [CCMenu menuWithItems:item2, nil];
-    menuuu.position = ccp(screenSize.width/2.0f, screenSize.height*0.9f);
-    //[self addChild:menuuu];
-//	
-//	
-//	// create a few labels with text and selector
-//	CCMenuItemFont* item1 = [CCMenuItemFont itemFromString:@"Restart" target:self selector:@selector(menuItem1Touched:)];
-//    musicToggle = [CCMenuItemFont itemFromString:@"Music: Off" target:self selector:@selector(musicToggleTouched:)];
-//    sfxToggle = [CCMenuItemFont itemFromString:@"SFX: On" target:self selector:@selector(sfxToggleTouched:)];
+    pauseMenuLayer = [CCLayer node];
+    pauseMenuLayer.position = PauseMenuPositionUnpaused = ccp(-screenSize.width,0);
+    pauseMenuPositionPaused = ccp(0,0);
+	[self addChild:pauseMenuLayer z:8];
     
-    float shrinkScale = 0.97f;
-    CCMenuItemImage * playButton = [CCMenuItemImage itemFromNormalImage:@"playButtonPauseMenu.png" selectedImage:@"playButtonPauseMenu.png" target:self selector:@selector(playPressed:)];
-    playButton.selectedImage.scale = shrinkScale;
-    playButton.selectedImage.position = ccp((playButton.normalImage.contentSize.width - playButton.normalImage.contentSize.width*shrinkScale)/2.0f, (playButton.normalImage.contentSize.height - playButton.normalImage.contentSize.height*shrinkScale)/2.0f);
+    CCSprite *pauseMenuBG = [CCSprite spriteWithFile:@"pauseMenuBG.png"];
+    pauseMenuBG.opacity = 0.3f*255;
+    pauseMenuBG.position = [self cocosPosFromAdobePos:ccp(157,555) forSprite:pauseMenuBG];
+    [pauseMenuLayer addChild:pauseMenuBG];
+	
+//    [CCMenuItemFont setFontName:@"Courier"];
+//	[CCMenuItemFont setFontSize:46];
+//	CCMenuItemFont* item2 = [CCMenuItemFont itemFromString:@"Force Game End" target:self selector:@selector(menuItem2Touched:)];
+//    CCMenu *menuuu = [CCMenu menuWithItems:item2, nil];
+//    menuuu.position = ccp(screenSize.width/2.0f, screenSize.height*0.9f);
+//    [self addChild:menuuu];
     
-    CCMenu *playMenu = [CCMenu menuWithItems:playButton, nil];
-    playMenu.position = CGPointMake(424,314);
+    
+    //play button
+    CCMenu* playMenu = [self menuWithAdobePosition:ccp(189,527) imageName:@"playButtonPauseMenu.png"
+                                            target:self selector:@selector(playPressed:)];
     [pauseMenuLayer addChild:playMenu];
     
     
-    CCMenuItemImage * thanksButton = [CCMenuItemImage itemFromNormalImage:@"thanksButton.png" selectedImage:@"thanksButton.png" target:self selector:@selector(thanksPressed:)];
-    thanksButton.selectedImage.scale = shrinkScale;
-    thanksButton.selectedImage.position = ccp((thanksButton.normalImage.contentSize.width - thanksButton.normalImage.contentSize.width*shrinkScale)/2.0f, (thanksButton.normalImage.contentSize.height - thanksButton.normalImage.contentSize.height*shrinkScale)/2.0f);
     
-    CCMenu *thanksMenu = [CCMenu menuWithItems:thanksButton, nil];
-    thanksMenu.position = CGPointMake(305, 96);
-    [pauseMenuLayer addChild:thanksMenu];
-    
-    CCMenuItemImage * quitButton = [CCMenuItemImage itemFromNormalImage:@"quitButton.png" selectedImage:@"quitButton.png" target:self selector:@selector(quitPressed:)];
-    quitButton.selectedImage.scale = shrinkScale;
-    quitButton.selectedImage.position = ccp((quitButton.normalImage.contentSize.width - quitButton.normalImage.contentSize.width*shrinkScale)/2.0f, (quitButton.normalImage.contentSize.height - quitButton.normalImage.contentSize.height*shrinkScale)/2.0f);
-    
-    CCMenu *quitMenu = [CCMenu menuWithItems:quitButton, nil];
-    quitMenu.position = CGPointMake(734,489);
+    //quit button
+    CCMenu* quitMenu = [self menuWithAdobePosition:ccp(676,298) imageName:@"quitButton.png"
+                                            target:self selector:@selector(quitPressed:)];
     [pauseMenuLayer addChild:quitMenu];
     
     
     //music and sound buttons
-    id on = [[CCMenuItemImage itemFromNormalImage:@"MusicButtonOn.png" 
-                                    selectedImage:@"MusicButtonOff.png" target:nil selector:nil] retain];
-    id off = [[CCMenuItemImage itemFromNormalImage:@"MusicButtonOff.png" 
-                                     selectedImage:@"MusicButtonOn.png" target:nil selector:nil] retain];
-    CCMenuItemToggle *toggle = [CCMenuItemToggle itemWithTarget:self 
-                                     selector:@selector(musicToggleTouched:) items:on, off, nil];
-    CCMenu *toggleMenu = [CCMenu menuWithItems:toggle, nil];
-    toggleMenu.position = ccp(703,137); 
-    [pauseMenuLayer addChild:toggleMenu];
+    CCMenu *toggleMenu1 = [self toggleMenuWithAdobePosition:ccp(188,298) imageNameOn:@"musicButtonOn.png" imageNameOff:@"musicButtonOff.png" target:self selector:@selector(musicToggleTouched:)];
+    [pauseMenuLayer addChild:toggleMenu1];
     
-    id on2 = [[CCMenuItemImage itemFromNormalImage:@"soundButtonOn.png" 
-                                    selectedImage:@"soundButtonOff.png" target:nil selector:nil] retain];
-    id off2 = [[CCMenuItemImage itemFromNormalImage:@"soundButtonOff.png" 
-                                     selectedImage:@"soundButtonOn.png" target:nil selector:nil] retain];
-    CCMenuItemToggle *toggle2 = [CCMenuItemToggle itemWithTarget:self 
-                                                       selector:@selector(sfxToggleTouched:) items:on2, off2, nil];
-    CCMenu *toggleMenu2 = [CCMenu menuWithItems:toggle2, nil];
-    toggleMenu2.position = ccp(703,59);
+    CCMenu *toggleMenu2 = [self toggleMenuWithAdobePosition:ccp(429,298) imageNameOn:@"soundButtonOn.png" imageNameOff:@"soundButtonOff.png" target:self selector:@selector(sfxToggleTouched:)];
     [pauseMenuLayer addChild:toggleMenu2];
 
-
-
-	
-//	// create the menu using the items
-//	CCMenu* menu = [CCMenu menuWithItems:item1, item2, musicToggle, sfxToggle, nil];
-//	menu.position = ccp(pauseMenuLayer.contentSize.width/2, pauseMenuLayer.contentSize.height/2);
-//	menu.tag = 200;
-//    [menu setColor:ccWHITE];
-//	[pauseMenuLayer addChild:menu z:1];
-//	
-//	// calling one of the align methods is important, otherwise all labels will occupy the same location
-//	[menu alignItemsVerticallyWithPadding:40];
 	
 }
 
