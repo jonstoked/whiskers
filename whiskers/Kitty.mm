@@ -352,6 +352,8 @@ hasMagnet, isBeingSucked, shouldSuck, tailPosition, isFacingOtherKitty;
 		CCSequence* lostStarCall = [CCSequence actions:[CCDelayTime actionWithDuration:5.0f], [CCCallFunc actionWithTarget:self selector:@selector(lostStar)], nil];
 		lostStarCall.tag = 101;
 		[self runAction:lostStarCall];
+        
+//        CCMotionStreak *streak
 		
 	}
 }
