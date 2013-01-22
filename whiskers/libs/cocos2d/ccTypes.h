@@ -126,6 +126,13 @@ static inline ccColor4F ccc4FFromccc4B(ccColor4B c)
 	return (ccColor4F){c.r/255.f, c.g/255.f, c.b/255.f, c.a/255.f};
 }
 
+//JS added
+static inline ccColor4B ccc4BFromccc3B(ccColor3B c)
+{
+    return (ccColor4B){c.r, c.g, c.b, 255};
+}
+//JS
+
 /** returns YES if both ccColor4F are equal. Otherwise it returns NO.
  @since v0.99.1
  */

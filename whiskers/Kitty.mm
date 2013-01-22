@@ -9,6 +9,7 @@
 #import "Kitty.h"
 #import "Bullet.h"
 #import "Bomb.h"
+#import "Global.h"
 
 
 
@@ -77,22 +78,22 @@ hasMagnet, isBeingSucked, shouldSuck, tailPosition, isFacingOtherKitty;
 		switch (tag) {
 			case 0:
 			{
-				[sprite setColor:ccc3(96, 246, 133)];
+				[sprite setColor:whiskersGreen];
 				break;
 			}
 			case 1:
 			{
-				[sprite setColor:ccc3(246, 207, 95)];
+				[sprite setColor:whiskersYellow];
 				break;
 			}
 			case 2:
 			{
-				[sprite setColor:ccc3(95, 134, 246)];
+				[sprite setColor:whiskersBlue];
 				break;
 			}
 			case 3:
 			{
-				[sprite setColor:ccc3(246, 95, 209)];
+				[sprite setColor:whiskersPink];
 				break;
 			}
 				
@@ -117,8 +118,7 @@ hasMagnet, isBeingSucked, shouldSuck, tailPosition, isFacingOtherKitty;
         } else {
             _isMoving = YES;
         }
-		
-        
+		  
 	}
 	
 	return self;
@@ -157,6 +157,7 @@ hasMagnet, isBeingSucked, shouldSuck, tailPosition, isFacingOtherKitty;
 		
 		forceVec *= f; //multiply force unit vector by scalar
 		b2Vec2 linVel = body->GetLinearVelocity();
+        speed = linVel.Length()*PTM_RATIO;
 		body->ApplyForce(forceVec, body->GetPosition());
 		
 	}
@@ -219,15 +220,14 @@ hasMagnet, isBeingSucked, shouldSuck, tailPosition, isFacingOtherKitty;
 	//update star trail position and angle
 	if(_hasStar)
 	{
-		particleSystemStarTrail.position = self.position;
-		particleSystemStarTrail.angle = -self.rotation + 180.0f;
+//		particleSystemStarTrail.position = self.position;
+//		particleSystemStarTrail.angle = -self.rotation + 180.0f;
 	}
     
     tailPosition = ccp(-[sprite boundingBox].size.width/2.0f,-[sprite boundingBox].size.height/2.0f);
     
     //check if another kitty is in front of you
     CGPoint justInFront = [self convertToWorldSpace:ccp([sprite boundingBox].size.width/2.0f + 5, 0)];
-//    [[GameManager sharedGameManager].debugPoints addObject:[NSValue valueWithCGPoint:justInFront]];
     
     isFacingOtherKitty = NO;
     for(Kitty *kitty in [GameManager sharedGameManager].kitties) {
@@ -241,8 +241,6 @@ hasMagnet, isBeingSucked, shouldSuck, tailPosition, isFacingOtherKitty;
         }
     }
     
-//        CCLOG(@"justInFront: x: %f, y: %f ", justInFront.x, justInFront.y);
-//        CCLOG(@"isFacingOtherKitty %i", isFacingOtherKitty);
     
     
 }
@@ -284,7 +282,7 @@ hasMagnet, isBeingSucked, shouldSuck, tailPosition, isFacingOtherKitty;
 
 -(void) shrinkWithScale: (float) myScale
 {	
-	CCLOG(@"scale: %f", sprite.scale);	
+	CCLOG(@"scale: %f", sprite.scale);
 	
 	if(sprite.scale/myScale > 0.08f)
 	{
@@ -340,20 +338,23 @@ hasMagnet, isBeingSucked, shouldSuck, tailPosition, isFacingOtherKitty;
 		//a star makes you speedup and blink.  If you hit another kitty, they will shrink once.
 		_hasStar = YES;
 		
-		//add the particle emitter to leave trail of stars behind kitty
-		particleSystemStarTrail = [CCParticleSystemQuad particleWithFile:@"psStarTrail.plist"];
-		particleSystemStarTrail.positionType = kCCPositionTypeFree;
-		particleSystemStarTrail.tag = 300+self.tag;
-		particleSystemStarTrail.startColor = ccc4FFromccc3B(sprite.color);
-		particleSystemStarTrail.endColor = ccc4FFromccc3B(sprite.color);
-		particleSystemStarTrail.startSize = particleSystemStarTrail.startSize*sprite.scale;
-		[self.parent addChild:particleSystemStarTrail z:-9];
+//		//add the particle emitter to leave trail of stars behind kitty
+//		particleSystemStarTrail = [CCParticleSystemQuad particleWithFile:@"psStarTrail.plist"];
+//		particleSystemStarTrail.positionType = kCCPositionTypeFree;
+//		particleSystemStarTrail.tag = 300+self.tag;
+//		particleSystemStarTrail.startColor = ccc4FFromccc3B(sprite.color);
+//		particleSystemStarTrail.endColor = ccc4FFromccc3B(sprite.color);
+//		particleSystemStarTrail.startSize = particleSystemStarTrail.startSize*sprite.scale;
+//		[self.parent addChild:particleSystemStarTrail z:-9];
 		
 		CCSequence* lostStarCall = [CCSequence actions:[CCDelayTime actionWithDuration:5.0f], [CCCallFunc actionWithTarget:self selector:@selector(lostStar)], nil];
 		lostStarCall.tag = 101;
 		[self runAction:lostStarCall];
         
-//        CCMotionStreak *streak
+        [self schedule:@selector(addStreakSprite) interval:3.0f/speed];
+        
+        
+
 		
 	}
 }
@@ -362,9 +363,44 @@ hasMagnet, isBeingSucked, shouldSuck, tailPosition, isFacingOtherKitty;
 {
 	_hasStar = NO;
 	
-	[self.parent removeChildByTag:300+self.tag cleanup:YES];  //remove particle emitter
-	[self stopActionByTag:101]; //stop CCCallFunc
+//	[self.parent removeChildByTag:300+self.tag cleanup:YES];  //remove particle emitter
+	[self stopActionByTag:101];
+    
+    [self unschedule:@selector(addStreakSprite)];
+    
+//    //remove the streak
+//    for(CCSprite *s in self.parent.children) {
+//        if(s.tag == kTagKitty0Streak + self.tag) {
+//            [self.parent removeChild:s cleanup:YES];
+//        }
+//    }
+
 	
+}
+
+-(void) addStreakSprite {
+    
+    float life = 0.4f;
+    
+    CCSprite *s = [CCSprite spriteWithFile:@"whiteSquare504.png"];
+    s.tag = kTagKitty0Streak + self.tag;
+    [self.parent addChild:s z:-10];
+    s.scale = sprite.scale;
+    s.rotation = self.rotation;
+    s.color = [[GameManager sharedGameManager] randomWhiskersColor];
+    s.position = self.position;
+    
+    id call = [CCCallFuncND actionWithTarget:self selector:@selector(removeSpriteFromParent:data:) data:s];
+    id delay = [CCDelayTime actionWithDuration:life];
+    id seq = [CCSequence actions:delay,call, nil];
+    [self runAction:seq];
+    
+}
+
+- (void) removeSpriteFromParent:(id)sender data:(CCSprite*)s {
+    
+        [s.parent removeChild:s cleanup:YES];
+
 }
 
 //todo: make rate of fire update when scale changes

@@ -52,6 +52,8 @@
     
     CGRect debugRect;
     CGPoint debugPoint;
+        
+    float speed;
 	
 }
 

@@ -95,5 +95,32 @@ static GameManager* _sharedGameManager = nil;
     
 }
 
+-(ccColor3B) randomWhiskersColor {
+    
+    int rand = arc4random() % 4;
+    ccColor3B c;
+    
+    switch (rand) {
+        case 0:
+            c = whiskersGreen;
+            break;
+        case 1:
+            c = whiskersYellow;
+            break;
+        case 2:
+            c = whiskersBlue;
+            break;
+        case 3:
+            c = whiskersPink;
+            break;
+            
+        default:
+            c = ccWHITE;
+            break;
+    }
+    
+    return c;
+}
+
 
 @end

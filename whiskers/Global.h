@@ -9,7 +9,7 @@
 #ifndef whiskers_Global_h
 #define whiskers_Global_h
 
-#define AUTO_START 1
+#define AUTO_START 0
 #define DEBUG_KITTY_SCALE 0 // 0.5f //normal start is 0.08f
 
 #define ONE_KITTY_MOVING 0
@@ -18,7 +18,13 @@
 #define WIN_SCALE 1.0f
 #define ABOUT_TO_WIN_SCALE 0.45f
 
-#define TEST_POWERUP @"" // @"bomb"
+#define TEST_POWERUP @"" // @"star"
+
+
+static const ccColor3B whiskersGreen = {96, 246, 133};
+static const ccColor3B whiskersYellow = {246, 207, 95};
+static const ccColor3B whiskersBlue = {95, 134, 246};
+static const ccColor3B whiskersPink = {246, 95, 209};
 
 
 typedef enum {
@@ -50,6 +56,10 @@ typedef enum {
     kTagBomb,                   
     kTagMagnet,
     kTagExplosion,
+    kTagKitty0Streak,
+    kTagKitty1Streak,
+    kTagKitty2Streak,
+    kTagKitty3Streak,
     kTagCount
     
 } kTag;

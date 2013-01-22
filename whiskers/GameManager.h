@@ -45,6 +45,7 @@
 +(GameManager*)sharedGameManager;
 -(void) saveToDisk;
 -(void) loadFromDisk;
+-(ccColor3B) randomWhiskersColor;
 
 
 

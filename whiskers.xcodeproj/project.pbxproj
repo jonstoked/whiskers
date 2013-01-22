@@ -150,7 +150,6 @@
 		6804B15E15182AFD000918D4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6804B15D15182AFD000918D4 /* main.m */; };
 		6804B16115182AFD000918D4 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6804B16015182AFD000918D4 /* AppDelegate.mm */; };
 		6804B16415182AFD000918D4 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6804B16315182AFD000918D4 /* RootViewController.m */; };
-		6804B16715182AFD000918D4 /* HelloWorldLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6804B16615182AFD000918D4 /* HelloWorldLayer.mm */; };
 		6804B16A15182AFD000918D4 /* GLES-Render.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6804B16915182AFD000918D4 /* GLES-Render.mm */; };
 		6804B19315182D05000918D4 /* AudioCode.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6804B17515182D05000918D4 /* AudioCode.mm */; };
 		6804B19415182D05000918D4 /* Bomb.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6804B17715182D05000918D4 /* Bomb.mm */; };
@@ -166,7 +165,6 @@
 		6804B19E15182D05000918D4 /* PauseMenuLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6804B18C15182D05000918D4 /* PauseMenuLayer.mm */; };
 		6804B19F15182D05000918D4 /* PowerupsScene.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6804B18E15182D05000918D4 /* PowerupsScene.mm */; };
 		6804B1A015182D05000918D4 /* StartMenuScene.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6804B19015182D05000918D4 /* StartMenuScene.mm */; };
-		6804B1A115182D05000918D4 /* ThanksLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6804B19215182D05000918D4 /* ThanksLayer.mm */; };
 		6804B1A315182D1F000918D4 /* exportLayersAndPostions.jsx in Resources */ = {isa = PBXBuildFile; fileRef = 6804B1A215182D1F000918D4 /* exportLayersAndPostions.jsx */; };
 		6804B22F15182D5F000918D4 /* swipeText.png in Resources */ = {isa = PBXBuildFile; fileRef = 6804B1A515182D5F000918D4 /* swipeText.png */; };
 		6804B23015182D5F000918D4 /* swipeArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 6804B1A615182D5F000918D4 /* swipeArrow.png */; };
@@ -299,6 +297,7 @@
 		68D909F81523A0BB001965CA /* quitButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 68D909F11523A0BB001965CA /* quitButton.png */; };
 		68D909F91523A0BB001965CA /* soundButtonOff.png in Resources */ = {isa = PBXBuildFile; fileRef = 68D909F21523A0BB001965CA /* soundButtonOff.png */; };
 		68D909FA1523A0BB001965CA /* soundButtonOn.png in Resources */ = {isa = PBXBuildFile; fileRef = 68D909F31523A0BB001965CA /* soundButtonOn.png */; };
+		68DA48B916AE49A5009A4D8B /* whiteSquare504.png in Resources */ = {isa = PBXBuildFile; fileRef = 68DA48B816AE49A5009A4D8B /* whiteSquare504.png */; };
 		68EE772A161BFFC30095DC21 /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = 68EE7722161BFFC30095DC21 /* Icon-72.png */; };
 		68EE772B161BFFC30095DC21 /* Icon-72@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 68EE7723161BFFC30095DC21 /* Icon-72@2x.png */; };
 		68EE772C161BFFC30095DC21 /* Icon-Small-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 68EE7724161BFFC30095DC21 /* Icon-Small-50.png */; };
@@ -611,8 +610,6 @@
 		6804B16015182AFD000918D4 /* AppDelegate.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = AppDelegate.mm; sourceTree = "<group>"; };
 		6804B16215182AFD000918D4 /* RootViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
 		6804B16315182AFD000918D4 /* RootViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
-		6804B16515182AFD000918D4 /* HelloWorldLayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HelloWorldLayer.h; sourceTree = "<group>"; };
-		6804B16615182AFD000918D4 /* HelloWorldLayer.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = HelloWorldLayer.mm; sourceTree = "<group>"; };
 		6804B16815182AFD000918D4 /* GLES-Render.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GLES-Render.h"; sourceTree = "<group>"; };
 		6804B16915182AFD000918D4 /* GLES-Render.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = "GLES-Render.mm"; sourceTree = "<group>"; };
 		6804B16B15182AFD000918D4 /* GameConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameConfig.h; sourceTree = "<group>"; };
@@ -645,8 +642,6 @@
 		6804B18E15182D05000918D4 /* PowerupsScene.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PowerupsScene.mm; sourceTree = "<group>"; };
 		6804B18F15182D05000918D4 /* StartMenuScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartMenuScene.h; sourceTree = "<group>"; };
 		6804B19015182D05000918D4 /* StartMenuScene.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = StartMenuScene.mm; sourceTree = "<group>"; };
-		6804B19115182D05000918D4 /* ThanksLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThanksLayer.h; sourceTree = "<group>"; };
-		6804B19215182D05000918D4 /* ThanksLayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ThanksLayer.mm; sourceTree = "<group>"; };
 		6804B1A215182D1F000918D4 /* exportLayersAndPostions.jsx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = exportLayersAndPostions.jsx; sourceTree = "<group>"; };
 		6804B1A515182D5F000918D4 /* swipeText.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = swipeText.png; sourceTree = "<group>"; };
 		6804B1A615182D5F000918D4 /* swipeArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = swipeArrow.png; sourceTree = "<group>"; };
@@ -783,6 +778,7 @@
 		68D909F11523A0BB001965CA /* quitButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = quitButton.png; sourceTree = "<group>"; };
 		68D909F21523A0BB001965CA /* soundButtonOff.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = soundButtonOff.png; sourceTree = "<group>"; };
 		68D909F31523A0BB001965CA /* soundButtonOn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = soundButtonOn.png; sourceTree = "<group>"; };
+		68DA48B816AE49A5009A4D8B /* whiteSquare504.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = whiteSquare504.png; sourceTree = "<group>"; };
 		68EE7722161BFFC30095DC21 /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72.png"; sourceTree = "<group>"; };
 		68EE7723161BFFC30095DC21 /* Icon-72@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72@2x.png"; sourceTree = "<group>"; };
 		68EE7724161BFFC30095DC21 /* Icon-Small-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small-50.png"; sourceTree = "<group>"; };
@@ -856,8 +852,6 @@
 				6804B16015182AFD000918D4 /* AppDelegate.mm */,
 				6804B16215182AFD000918D4 /* RootViewController.h */,
 				6804B16315182AFD000918D4 /* RootViewController.m */,
-				6804B16515182AFD000918D4 /* HelloWorldLayer.h */,
-				6804B16615182AFD000918D4 /* HelloWorldLayer.mm */,
 				6804B16815182AFD000918D4 /* GLES-Render.h */,
 				6804B16915182AFD000918D4 /* GLES-Render.mm */,
 				6804B16B15182AFD000918D4 /* GameConfig.h */,
@@ -1361,8 +1355,6 @@
 				6804B18E15182D05000918D4 /* PowerupsScene.mm */,
 				6804B18F15182D05000918D4 /* StartMenuScene.h */,
 				6804B19015182D05000918D4 /* StartMenuScene.mm */,
-				6804B19115182D05000918D4 /* ThanksLayer.h */,
-				6804B19215182D05000918D4 /* ThanksLayer.mm */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -1560,6 +1552,7 @@
 				6804B1D715182D5F000918D4 /* bigWhiteLightning.png */,
 				68BBB7B4169F800400701FB1 /* circle171.png */,
 				6804B1CE15182D5F000918D4 /* bomb.png */,
+				68DA48B816AE49A5009A4D8B /* whiteSquare504.png */,
 			);
 			name = Gameplay;
 			sourceTree = "<group>";
@@ -1785,6 +1778,7 @@
 				68BBB7B5169F800400701FB1 /* circle171.png in Resources */,
 				6816733616A633C8001FA7F8 /* pauseMenuBG.png in Resources */,
 				6816733816A633D5001FA7F8 /* blackOverlay.png in Resources */,
+				68DA48B916AE49A5009A4D8B /* whiteSquare504.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1928,7 +1922,6 @@
 				6804B15E15182AFD000918D4 /* main.m in Sources */,
 				6804B16115182AFD000918D4 /* AppDelegate.mm in Sources */,
 				6804B16415182AFD000918D4 /* RootViewController.m in Sources */,
-				6804B16715182AFD000918D4 /* HelloWorldLayer.mm in Sources */,
 				6804B16A15182AFD000918D4 /* GLES-Render.mm in Sources */,
 				6804B19315182D05000918D4 /* AudioCode.mm in Sources */,
 				6804B19415182D05000918D4 /* Bomb.mm in Sources */,
@@ -1944,7 +1937,6 @@
 				6804B19E15182D05000918D4 /* PauseMenuLayer.mm in Sources */,
 				6804B19F15182D05000918D4 /* PowerupsScene.mm in Sources */,
 				6804B1A015182D05000918D4 /* StartMenuScene.mm in Sources */,
-				6804B1A115182D05000918D4 /* ThanksLayer.mm in Sources */,
 				68A09B01155C6C67003DA47C /* LocalyticsDatabase.m in Sources */,
 				68A09B02155C6C67003DA47C /* LocalyticsSession.m in Sources */,
 				68A09B03155C6C67003DA47C /* LocalyticsUploader.m in Sources */,
