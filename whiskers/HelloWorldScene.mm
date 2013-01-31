@@ -108,8 +108,10 @@
 //		 //		flags += b2DebugDraw::e_aabbBit;
 //		 //		flags += b2DebugDraw::e_pairBit;
 //		 //		flags += b2DebugDraw::e_centerOfMassBit;
-//		 m_debugDraw->SetFlags(flags);	
-		
+//		 m_debugDraw->SetFlags(flags);
+        
+        starStreakBatch = [CCSpriteBatchNode batchNodeWithFile:@"whiteSquare504.png"];
+        [self addChild:starStreakBatch z:-10];
 		
 		[self addPauseMenu];
 		[self addKitties];
@@ -871,8 +873,7 @@
             [[GameManager sharedGameManager].kitties addObject:kitty];
             
             //for star trail
-            kitty.starStreakBatch = [CCSpriteBatchNode batchNodeWithFile:@"whiteSquare504.png"];
-            [self addChild:kitty.starStreakBatch z:-10];
+            kitty.starStreakBatch = starStreakBatch;
 			
 		}
 		

@@ -10,7 +10,7 @@
 #define whiskers_Global_h
 
 #define AUTO_START 1
-#define DEBUG_KITTY_SCALE 0 // 0.5f //normal start is 0.08f
+#define DEBUG_KITTY_SCALE 0 //0.5f //normal start is 0.08f
 
 #define ONE_KITTY_MOVING 0
 #define NO_KITTIES_MOVING 0
@@ -18,8 +18,7 @@
 #define WIN_SCALE 1.0f
 #define ABOUT_TO_WIN_SCALE 0.45f
 
-#define TEST_POWERUP @"" // @"star"
-
+#define TEST_POWERUP @"star"
 
 static const ccColor3B whiskersGreen = {96, 246, 133};
 static const ccColor3B whiskersYellow = {246, 207, 95};

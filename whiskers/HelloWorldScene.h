@@ -49,6 +49,8 @@
     CGPoint pauseMenuPositionPaused;
     CGPoint PauseMenuPositionUnpaused;
     
+    CCSpriteBatchNode *starStreakBatch;
+    
 
 	
 }

@@ -351,7 +351,9 @@ hasMagnet, isBeingSucked, shouldSuck, tailPosition, isFacingOtherKitty, starStre
 		lostStarCall.tag = 101;
 		[self runAction:lostStarCall];
         
-        [self schedule:@selector(addStreakSprite) interval:3.0f/speed];
+        float delay = 3.0f/speed;
+        
+        [self schedule:@selector(addStreakSprite) interval:delay];
         
         
 
@@ -390,7 +392,6 @@ hasMagnet, isBeingSucked, shouldSuck, tailPosition, isFacingOtherKitty, starStre
     s.position = self.position;
     
     [starStreakBatch addChild:s];
-
     
     id call = [CCCallFuncND actionWithTarget:self selector:@selector(removeSpriteFromParent:data:) data:s];
     id delay = [CCDelayTime actionWithDuration:life];
