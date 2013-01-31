@@ -9,7 +9,7 @@
 #ifndef whiskers_Global_h
 #define whiskers_Global_h
 
-#define AUTO_START 0
+#define AUTO_START 1
 #define DEBUG_KITTY_SCALE 0 // 0.5f //normal start is 0.08f
 
 #define ONE_KITTY_MOVING 0

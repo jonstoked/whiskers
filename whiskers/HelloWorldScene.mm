@@ -23,10 +23,7 @@
 //30+ kitty children
 
 
-// HelloWorld implementation
 @implementation HelloWorld
-
-//@synthesize pauseMenuLayer;
 
 +(id) scene
 {
@@ -75,7 +72,6 @@
         _powerupInterval = 10.0f;
 		
 		kittyArray = [[ NSMutableArray alloc ] init];
-		
 		
 		//music and sfx
         if([[GameManager sharedGameManager] musicOn])
@@ -814,7 +810,6 @@
 		CCTexture2D* tex = [[CCTextureCache sharedTextureCache] addImage: textureName];
 		[button setTexture: tex];
 		
-		
 		CCAction* scaleDown = [CCScaleBy actionWithDuration:0.015 scale:0.94];
 		scaleDown.tag = 104;
 		[button runAction:scaleDown];
@@ -874,6 +869,10 @@
 			//add kitty to kittyArray
 			[kittyArray addObject:kitty];
             [[GameManager sharedGameManager].kitties addObject:kitty];
+            
+            //for star trail
+            kitty.starStreakBatch = [CCSpriteBatchNode batchNodeWithFile:@"whiteSquare504.png"];
+            [self addChild:kitty.starStreakBatch z:-10];
 			
 		}
 		
@@ -899,9 +898,7 @@
 
 -(void) addPellet: (ccTime) dt {
 	
-	CGSize screenSize = [CCDirector sharedDirector].winSize;
 	float myScale = 0.5f;
-	BOOL isBehindKitty = YES;
 	
 	CCSprite* mySprite = [CCSprite spriteWithFile:@"pellet.png"];
 	[mySprite setColor:ccc3(244,131,96)];
@@ -916,7 +913,6 @@
 	int padding = _buttonSize;
 	CGPoint pos = [self makeRandomPointWithPadding:padding];
 	
-	//dynamicBodyDef.position.Set(randomX/PTM_RATIO, randomY/PTM_RATIO);
 	dynamicBodyDef.position.Set(pos.x/PTM_RATIO, pos.y/PTM_RATIO);
 	
 	dynamicBodyDef.userData = mySprite;
@@ -1029,19 +1025,7 @@
 	[self schedule: @selector(addPowerup) interval:_powerupInterval];
 }
 
--(void) addPowerup/*: (ccTime) dt*/
-{
-//	int mod = _powerupCallCount%9;
-//	++_powerupCallCount;
-//        	
-//	if(mod == 2)
-//		[self addTurre[t];
-//	else if(mod==5)
-//		[self addBombs];
-//	else if(mod==8)
-//		[self addLightning];
-//	else 
-//		[self addStar];
+-(void) addPowerup {
     
     if(TEST_POWERUP == @"star") 
         [self addStar];
@@ -1077,7 +1061,6 @@
 }
 
 -(void) increaseBallSizeWithScale: (NSMutableArray *) kittiesToGrow scales:(NSMutableArray *) growScales {
-	CGSize screenSize = [CCDirector sharedDirector].winSize;
 	for(int i = 0; i < [kittiesToGrow count]; ++i) {
 		int tag = [[kittiesToGrow objectAtIndex:i] integerValue];
 		Kitty* myKitty = (Kitty*) [gameLayer getChildByTag:tag];
@@ -1089,7 +1072,6 @@
 }
 
 -(void) decreaseBallSizeWithScale: (NSMutableArray *) kittiesToShrink scales:(NSMutableArray *) shrinkScales {
-	CGSize screenSize = [CCDirector sharedDirector].winSize;
 	for(int i = 0; i < [kittiesToShrink count]; ++i) {
 		int tag = [[kittiesToShrink objectAtIndex:i] integerValue];
 		Kitty* myKitty = (Kitty*) [gameLayer getChildByTag:tag];
@@ -1169,7 +1151,6 @@
 
 -(void) setBGColorGreen
 {
-	//bgLayer.color = ccc3(96, 246, 133);
     [bgLayer setColor:ccc3(96, 246, 133)];
     
 }
@@ -1283,8 +1264,6 @@
 		[myCat pauseKitty];
 	}
 	
-//    CCAction* moveOnScreen = [CCMoveTo actionWithDuration:0.3f position:
-//                              ccp(screenSize.width/2 - 849*0.8f/2, screenSize.height/2 - 548*0.8f/2) ];
     id moveOnScreen = [CCMoveTo actionWithDuration:0.3f position:pauseMenuPositionPaused];
     
 	id ease = [CCEaseInOut actionWithAction:moveOnScreen rate:3];
@@ -1293,9 +1272,7 @@
 }
 
 -(void) unpause
-{
-	CGSize screenSize = [CCDirector sharedDirector].winSize;
-	
+{	
 	[self schedule: @selector(tick:)];
 	[self schedule: @selector(addPellet:) interval:_pelletInterval];
 	[self schedule: @selector(addPowerup) interval:_powerupInterval];
@@ -1318,7 +1295,6 @@
 		[myCat unpauseKitty];
 	}
 		
-//    CCAction* moveOffScreen = [CCMoveTo actionWithDuration:0.3f position:ccp(-screenSize.width/2 - 849*0.8f/2, screenSize.height/2 - 548*0.8f/2) ];
     id moveOffScreen = [CCMoveTo actionWithDuration:0.3f position:PauseMenuPositionUnpaused];
     id ease = [CCEaseInOut actionWithAction:moveOffScreen rate:3];
 	[pauseMenuLayer runAction:ease];
@@ -1393,10 +1369,9 @@
     
     
     //play button
-    CCMenu* playMenu = [self menuWithAdobePosition:ccp(189,527) imageName:@"playButtonPauseMenu.png"
+    CCMenu* playMenu = [self menuWithAdobePosition:ccp(189,531) imageName:@"playButtonPauseMenu.png"
                                             target:self selector:@selector(playPressed:)];
     [pauseMenuLayer addChild:playMenu];
-    
     
     
     //quit button
@@ -1406,25 +1381,25 @@
     
     
     //music and sound buttons
-    CCMenu *toggleMenu1 = [self toggleMenuWithAdobePosition:ccp(188,298) imageNameOn:@"musicButtonOn.png" imageNameOff:@"musicButtonOff.png" target:self selector:@selector(musicToggleTouched:)];
-    [pauseMenuLayer addChild:toggleMenu1];
+    NSString *imageNameOnMusic = [GameManager sharedGameManager].musicOn ? @"musicButtonOn.png" : @"musicButtonOff.png";
+    NSString *imageNameOffMusic = ![GameManager sharedGameManager].musicOn ? @"musicButtonOn.png" : @"musicButtonOff.png";
+    CCMenu *musicMenu = [self toggleMenuWithAdobePosition:ccp(188,298) imageNameOn:imageNameOnMusic imageNameOff:imageNameOffMusic target:self selector:@selector(musicToggleTouched:)];
+    [pauseMenuLayer addChild:musicMenu];
     
-    CCMenu *toggleMenu2 = [self toggleMenuWithAdobePosition:ccp(429,298) imageNameOn:@"soundButtonOn.png" imageNameOff:@"soundButtonOff.png" target:self selector:@selector(sfxToggleTouched:)];
-    [pauseMenuLayer addChild:toggleMenu2];
+    NSString *imageNameOnSfx = [GameManager sharedGameManager].sfxOn ? @"soundButtonOn.png" : @"soundButtonOff.png";
+    NSString *imageNameOffSfx = ![GameManager sharedGameManager].sfxOn ? @"soundButtonOn.png" : @"soundButtonOff.png";
 
+    CCMenu *sfxMenu = [self toggleMenuWithAdobePosition:ccp(429,298) imageNameOn:imageNameOnSfx imageNameOff:imageNameOffSfx target:self selector:@selector(sfxToggleTouched:)];
+    [pauseMenuLayer addChild:sfxMenu];
 	
 }
 
 -(void) menuItem1Touched:(id)sender {
-	
 	[self resetGame];
-	
 }
 
 -(void) menuItem2Touched:(id)sender {
-	
 	[self gameDone];
-	
 }
 
 -(void) playPressed: (id) sender {

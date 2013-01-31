@@ -54,7 +54,8 @@
     CGPoint debugPoint;
         
     float speed;
-	
+    
+    CCSpriteBatchNode *starStreakBatch;
 }
 
 @property (nonatomic,readwrite) CCSprite* sprite;
@@ -81,6 +82,7 @@
 @property (nonatomic,readwrite) BOOL shouldSuck;
 @property (nonatomic,readwrite) CGPoint tailPosition;
 @property (nonatomic,readwrite) BOOL isFacingOtherKitty;
+@property (nonatomic,readwrite) CCSpriteBatchNode *starStreakBatch;
 
 
 

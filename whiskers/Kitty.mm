@@ -25,7 +25,7 @@
 @synthesize sprite, body, fixture, _hasStar, _aboutToWin, _hasTurret,
 _bulletCount, _isTurning, _currentExtent, _maxExtent, _minExtent, sewingMachineSound,
 _isTouchingKitty, leftEyePos, rightEyePos, smallerKitty, isTouchingKittyCount, particleSystemStarTrail,
-hasMagnet, isBeingSucked, shouldSuck, tailPosition, isFacingOtherKitty;
+hasMagnet, isBeingSucked, shouldSuck, tailPosition, isFacingOtherKitty, starStreakBatch;
 
 
 +(id) kittyWithParentNode:(CCNode*)parentNode position:(CGPoint)position tag:(int)tag world:(b2World*)world
@@ -384,11 +384,13 @@ hasMagnet, isBeingSucked, shouldSuck, tailPosition, isFacingOtherKitty;
     
     CCSprite *s = [CCSprite spriteWithFile:@"whiteSquare504.png"];
     s.tag = kTagKitty0Streak + self.tag;
-    [self.parent addChild:s z:-10];
     s.scale = sprite.scale;
     s.rotation = self.rotation;
     s.color = [[GameManager sharedGameManager] randomWhiskersColor];
     s.position = self.position;
+    
+    [starStreakBatch addChild:s];
+
     
     id call = [CCCallFuncND actionWithTarget:self selector:@selector(removeSpriteFromParent:data:) data:s];
     id delay = [CCDelayTime actionWithDuration:life];
