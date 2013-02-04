@@ -220,8 +220,8 @@ hasMagnet, isBeingSucked, shouldSuck, tailPosition, isFacingOtherKitty, starStre
 	//update star trail position and angle
 	if(_hasStar)
 	{
-//		particleSystemStarTrail.position = self.position;
-//		particleSystemStarTrail.angle = -self.rotation + 180.0f;
+		particleSystemStarTrail.position = self.position;
+		particleSystemStarTrail.angle = -self.rotation + 180.0f;
 	}
     
     tailPosition = ccp(-[sprite boundingBox].size.width/2.0f,-[sprite boundingBox].size.height/2.0f);
@@ -339,21 +339,21 @@ hasMagnet, isBeingSucked, shouldSuck, tailPosition, isFacingOtherKitty, starStre
 		_hasStar = YES;
 		
 //		//add the particle emitter to leave trail of stars behind kitty
-//		particleSystemStarTrail = [CCParticleSystemQuad particleWithFile:@"psStarTrail.plist"];
-//		particleSystemStarTrail.positionType = kCCPositionTypeFree;
-//		particleSystemStarTrail.tag = 300+self.tag;
-//		particleSystemStarTrail.startColor = ccc4FFromccc3B(sprite.color);
-//		particleSystemStarTrail.endColor = ccc4FFromccc3B(sprite.color);
-//		particleSystemStarTrail.startSize = particleSystemStarTrail.startSize*sprite.scale;
-//		[self.parent addChild:particleSystemStarTrail z:-9];
+		particleSystemStarTrail = [CCParticleSystemQuad particleWithFile:@"psStarTrail.plist"];
+		particleSystemStarTrail.positionType = kCCPositionTypeFree;
+		particleSystemStarTrail.tag = 300+self.tag;
+		particleSystemStarTrail.startColor = ccc4FFromccc3B(sprite.color);
+		particleSystemStarTrail.endColor = ccc4FFromccc3B(sprite.color);
+		particleSystemStarTrail.startSize = particleSystemStarTrail.startSize*sprite.scale;
+		[self.parent addChild:particleSystemStarTrail z:-9];
 		
 		CCSequence* lostStarCall = [CCSequence actions:[CCDelayTime actionWithDuration:5.0f], [CCCallFunc actionWithTarget:self selector:@selector(lostStar)], nil];
 		lostStarCall.tag = 101;
 		[self runAction:lostStarCall];
         
-        float delay = 3.0f/speed;
         
-        [self schedule:@selector(addStreakSprite) interval:delay];
+//        float delay = 3.0f/speed;
+//        [self schedule:@selector(addStreakSprite) interval:delay];
         
         
 
@@ -365,17 +365,10 @@ hasMagnet, isBeingSucked, shouldSuck, tailPosition, isFacingOtherKitty, starStre
 {
 	_hasStar = NO;
 	
-//	[self.parent removeChildByTag:300+self.tag cleanup:YES];  //remove particle emitter
+	[self.parent removeChildByTag:300+self.tag cleanup:YES];  //remove particle emitter
 	[self stopActionByTag:101];
     
-    [self unschedule:@selector(addStreakSprite)];
-    
-//    //remove the streak
-//    for(CCSprite *s in self.parent.children) {
-//        if(s.tag == kTagKitty0Streak + self.tag) {
-//            [self.parent removeChild:s cleanup:YES];
-//        }
-//    }
+//    [self unschedule:@selector(addStreakSprite)];
 
 	
 }
@@ -387,8 +380,9 @@ hasMagnet, isBeingSucked, shouldSuck, tailPosition, isFacingOtherKitty, starStre
     CCSprite *s = [CCSprite spriteWithFile:@"whiteSquare504.png"];
     s.tag = kTagKitty0Streak + self.tag;
     s.scale = sprite.scale;
+//    s.scale = 0.6f;
     s.rotation = self.rotation;
-    s.color = [[GameManager sharedGameManager] randomWhiskersColor];
+//    s.color = [[GameManager sharedGameManager] randomWhiskersColor];
     s.position = self.position;
     
     [starStreakBatch addChild:s];
