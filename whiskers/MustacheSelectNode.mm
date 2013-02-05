@@ -45,7 +45,19 @@
 			NSString *imageName = [NSString stringWithFormat: @"Layer-%i.png", i];
 			[mustacheArray addObject:imageName]; 
 		}
-		
+        
+        //hackerrific - make the logo staches the first four staches after the mario stache
+        // swap...
+        // 2 for 51
+        // 3 for 32
+        // 4 for 43
+        // 5 for 15
+        
+        [self swapIndecesForArray:mustacheArray index1:1 index2:50];
+        [self swapIndecesForArray:mustacheArray index1:2 index2:31];
+        [self swapIndecesForArray:mustacheArray index1:3 index2:42];
+        [self swapIndecesForArray:mustacheArray index1:4 index2:14];
+
 		//add kitty
 		kitty = [CCSprite spriteWithFile:@"francineWhiteWithTail.png"];
 		
@@ -94,6 +106,12 @@
         //NSString *posString = [layoutDict objectForKey:key];
         //NSMutableArray *offsets = [[NSMutableArray alloc] initWithContentsOfFile:path];
         NSMutableArray *offsets = [dict objectForKey:@"Root"];
+        
+        //hackerific again, make mustache offsets match new first five mustaches
+//        [self swapIndecesForArray:offsets index1:1 index2:50];
+//        [self swapIndecesForArray:offsets index1:2 index2:31];
+//        [self swapIndecesForArray:offsets index1:3 index2:42];
+//        [self swapIndecesForArray:offsets index1:4 index2:14];
 
         CCLOG(@"offsets count: %i", [offsets count]);
 		
@@ -157,6 +175,14 @@
 	
 	return self;
 	
+}
+
+-(void) swapIndecesForArray:(NSMutableArray*)array index1:(int)index1 index2:(int)index2 {
+    
+    NSObject *placeHolder = [array objectAtIndex:index1];
+    [mustacheArray replaceObjectAtIndex:index1 withObject:[mustacheArray objectAtIndex:index2]];
+    [mustacheArray replaceObjectAtIndex:index2 withObject:placeHolder];
+    
 }
 
 -(void) tick: (ccTime) dt
