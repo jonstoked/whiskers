@@ -871,7 +871,7 @@
 			//add kitty to kittyArray
 			[kittyArray addObject:kitty];
             [[GameManager sharedGameManager].kitties addObject:kitty];
-            
+                
             //for star trail
 //            kitty.starStreakBatch = starStreakBatch;
 			

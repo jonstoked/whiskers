@@ -35,6 +35,8 @@
     BOOL isSwipe;
     
     CGPoint touchStart;
+    
+    CCLabelTTF *rewardLabel;
 	
 
 }

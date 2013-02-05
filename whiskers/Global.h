@@ -20,10 +20,14 @@
 
 #define TEST_POWERUP @"star"
 
+#define GAME_FONT @"HelveticaNeue-Bold"
+
 static const ccColor3B whiskersGreen = {96, 246, 133};
 static const ccColor3B whiskersYellow = {246, 207, 95};
 static const ccColor3B whiskersBlue = {95, 134, 246};
 static const ccColor3B whiskersPink = {246, 95, 209};
+static const ccColor3B whiskersOrange = {246, 132, 95};
+
 
 
 typedef enum {

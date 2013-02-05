@@ -106,27 +106,18 @@
         //NSString *posString = [layoutDict objectForKey:key];
         //NSMutableArray *offsets = [[NSMutableArray alloc] initWithContentsOfFile:path];
         NSMutableArray *offsets = [dict objectForKey:@"Root"];
-        
-        //hackerific again, make mustache offsets match new first five mustaches
-//        [self swapIndecesForArray:offsets index1:1 index2:50];
-//        [self swapIndecesForArray:offsets index1:2 index2:31];
-//        [self swapIndecesForArray:offsets index1:3 index2:42];
-//        [self swapIndecesForArray:offsets index1:4 index2:14];
 
         CCLOG(@"offsets count: %i", [offsets count]);
+        
+        mustacheCount = [GameManager sharedGameManager].mustachesUnlocked-1;
 		
 		//create mustache sprites
-		for(int i = 0; i <= mustacheCount; ++i) 
+		for(int i = 0; i <= mustacheCount; ++i)
 		{
 			NSString *image = [mustacheArray objectAtIndex:i];
 			CCSprite *sprite = [CCSprite spriteWithSpriteFrameName:image];
-			//mustache needs to be at x value of 438 pixels from the left of the kitty
-			//int xOffset = kittyScale* (438 - kitty.contentSize.width/2);
-			//sprite.position = ccp((kitty.position.x + xOffset + mustacheSeparationDistance*i), kitty.position.y);
-			
+			//mustache needs to be at x value of 438 pixels from the left of the kitty			
             sprite.position = ccp((kitty.position.x + mustacheSeparationDistance*i), kitty.position.y - kittyScale*[[offsets objectAtIndex:i] intValue]);
-//            CCLOG(@"mustache %i offset: %i", i, [[offsets objectAtIndex:i] intValue]);
-//            CCLOG(@"mustache %i offset: %@", i, [offsets objectAtIndex:i]);
 
 			sprite.tag = i;
 			sprite.opacity = 0;
@@ -136,8 +127,6 @@
 		
 		maxX = [mustacheBatchNode getChildByTag:0].position.x;
 		minX = -[mustacheBatchNode getChildByTag:mustacheCount].position.x;
-		//CCLOG(@"minX: %i", minX);
-		//CCLOG(@"maxX: %i", maxX);
 		
 		//define touchable area
 		switch (tag) {
@@ -170,11 +159,52 @@
 		
 		//schedule update to selected mustache each half second
 		[self schedule:@selector(updateSelectedMustaches:) interval:0.5];
+        
+//        [self schedule:@selector(displayRewardMessage) interval:2.0f];
 
 	}
 	
 	return self;
 	
+}
+
+-(void) displayRewardMessage {
+    
+    [self displayRewardMessageWithText:@"a new stache!"];
+    
+}
+
+-(void) displayRewardMessageWithText: (NSString*) text {
+    
+    if(rewardLabel==nil) {
+        
+        rewardLabel = [CCLabelTTF labelWithString:text fontName:GAME_FONT fontSize:22];
+        rewardLabel.color = whiskersOrange;
+        
+        rewardLabel.anchorPoint = ccp(1, 0);
+        rewardLabel.position = ccp(40,65);
+        [self addChild:rewardLabel];
+        
+        float dur = 1.2f;
+        id rise = [CCMoveBy actionWithDuration:dur position:ccp(0,20)];
+        id fade = [CCSequence actions:[CCDelayTime actionWithDuration:0.5*dur],[CCFadeOut actionWithDuration:0.5*dur],nil];
+        [rewardLabel runAction:rise];
+        [rewardLabel runAction:fade];
+        
+        [self schedule:@selector(removeRewardMessage) interval:dur];
+        
+    }
+    
+}
+
+-(void) removeRewardMessage {
+    
+    [self unschedule:@selector(removeRewardMessage)];
+    
+    if(rewardLabel!=nil) {
+        [self removeChild:rewardLabel cleanup:NO];
+        rewardLabel = nil;
+    }
 }
 
 -(void) swapIndecesForArray:(NSMutableArray*)array index1:(int)index1 index2:(int)index2 {
@@ -216,7 +246,13 @@
 
 	 }
 	
-	timeCurrent += dt;  
+	timeCurrent += dt;
+    
+    if(currentMustacheTag == [GameManager sharedGameManager].mustachesUnlocked - 1 && ![GameManager sharedGameManager].hasShownNewStacheMessage) {
+        [GameManager sharedGameManager].hasShownNewStacheMessage = YES;
+        [self displayRewardMessage];
+        
+    }
 	
 	
 }
@@ -308,7 +344,7 @@
 				
 				//CCLOG(@"dx: %f", dx);
 				//CCLOG(@"dt: %f", dt);
-				CCLOG(@"swipeVelocity: %f", swipeVelocity);
+//				CCLOG(@"swipeVelocity: %f", swipeVelocity);
                 //CCLOG(@"swipeAcceleration: %f", swipeAcceleration);
 
 
@@ -370,9 +406,9 @@
 //updates selectedMustachesArray in GameManager to carry mustache over to HelloWorldScene
 - (void) updateSelectedMustaches: (ccTime) dt
 {
-	//CCLOG(@"self.tag:      %i", self.tag);
-	//CCLOG(@"currentMusTag: %i", currentMustacheTag);	
+	CCLOG(@"currentMusTag: %i", currentMustacheTag);
 	[[[GameManager sharedGameManager] selectedMustacheArray] replaceObjectAtIndex:self.tag withObject:[NSNumber numberWithInt:currentMustacheTag]];
+    
 }
 
 - (void)onEnter

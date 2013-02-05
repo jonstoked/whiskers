@@ -18,16 +18,6 @@
 	
 		self.isTouchEnabled = YES;
 		
-		CGSize screenSize = [[CCDirector sharedDirector] winSize];
-		
-		/*
-		CCColorLayer* colorLayer = [CCColorLayer layerWithColor:ccc4(150, 150, 150, 150) width:screenSize.width/4 height:screenSize.height/4]; 
-		//self.anchorPoint = CGPointMake(0.5, 0.5);
-		[self addChild:colorLayer z:0];
-		colorLayer.position = ccp(self.contentSize.width/2, self.contentSize.height/2);
-*/
-		
-		
 		// set CCMenuItemFont default properties
 		[CCMenuItemFont setFontName:@"Courier"];
 		[CCMenuItemFont setFontSize:46];

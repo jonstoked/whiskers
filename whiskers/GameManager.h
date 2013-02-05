@@ -24,6 +24,8 @@
     NSMutableArray *debugRects;
     NSMutableArray *debugPoints;
     int playCount;
+    int mustachesUnlocked;
+    BOOL hasShownNewStacheMessage;
 	
 }
 
@@ -38,6 +40,10 @@
 @property (nonatomic,readwrite) NSMutableArray *debugRects;
 @property (nonatomic,readwrite) NSMutableArray *debugPoints;
 @property (nonatomic, assign) int playCount;
+@property (nonatomic, assign) int mustachesUnlocked;
+@property (nonatomic, assign) BOOL hasShownNewStacheMessage;
+
+
 
 
 

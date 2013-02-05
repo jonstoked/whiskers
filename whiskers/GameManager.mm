@@ -12,7 +12,7 @@
 @implementation GameManager
 static GameManager* _sharedGameManager = nil;                      
 
-@synthesize isPlayerActiveArray, selectedMustacheArray, finalKittyScales, musicOn, sfxOn, kitties, helloWorldScene, debugRects, debugPoints, playCount;
+@synthesize isPlayerActiveArray, selectedMustacheArray, finalKittyScales, musicOn, sfxOn, kitties, helloWorldScene, debugRects, debugPoints, playCount, mustachesUnlocked, hasShownNewStacheMessage;
 
 
 +(GameManager*)sharedGameManager 
@@ -68,6 +68,7 @@ static GameManager* _sharedGameManager = nil;
         if(playCount == 0) {
             sfxOn = YES;
             musicOn = YES;
+            mustachesUnlocked = 5;
         }
         ++playCount;
 
@@ -81,7 +82,10 @@ static GameManager* _sharedGameManager = nil;
     
     sfxOn = [[NSUserDefaults standardUserDefaults] boolForKey: @"sfxOn"];
     musicOn = [[NSUserDefaults standardUserDefaults] boolForKey: @"musicOn"];
+    hasShownNewStacheMessage = [[NSUserDefaults standardUserDefaults] boolForKey: @"hasShownNewStacheMessage"];
+    
     playCount = [[NSUserDefaults standardUserDefaults] integerForKey: @"playCount"];
+    mustachesUnlocked = [[NSUserDefaults standardUserDefaults] integerForKey: @"mustachesUnlocked"];
     
 }
 
@@ -89,7 +93,11 @@ static GameManager* _sharedGameManager = nil;
     
     [[NSUserDefaults standardUserDefaults] setBool:sfxOn forKey:@"sfxOn"];
     [[NSUserDefaults standardUserDefaults] setBool:musicOn forKey:@"musicOn"];
-    [[NSUserDefaults standardUserDefaults] setBool:playCount forKey:@"playCount"];
+    [[NSUserDefaults standardUserDefaults] setBool:hasShownNewStacheMessage forKey:@"hasShownNewStacheMessage"];
+    
+    [[NSUserDefaults standardUserDefaults] setInteger:playCount forKey:@"playCount"];
+    [[NSUserDefaults standardUserDefaults] setInteger:mustachesUnlocked forKey:@"mustachesUnlocked"];
+
 
     [[NSUserDefaults standardUserDefaults] synchronize];
     

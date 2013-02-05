@@ -34,9 +34,6 @@
 		CCLayerColor *bgLayer = [CCLayerColor layerWithColor:ccc4(70, 70, 70, 255)];
 		[self addChild:bgLayer z:-10];
 		
-//		CCMenuItem *playButton = [CCMenuItemImage itemFromNormalImage:@"PlayButtonBig.png" 
-//														selectedImage:@"PlayButtonBigDepressed.png" target:self selector:@selector(startGame:)];		
-		
         float shrinkScale = 0.97f;
         CCMenuItemImage * playButton = [CCMenuItemImage itemFromNormalImage:@"PlayButtonBigDepressed.png" selectedImage:@"PlayButtonBigDepressed.png" target:self selector:@selector(startGame:)];
         playButton.selectedImage.scale = shrinkScale;
@@ -46,9 +43,6 @@
 		playMenu = [CCMenu menuWithItems:playButton, nil];
 		playMenu.position = CGPointMake(-screenSize.width/2, screenSize.height/2);
 		[self addChild:playMenu];
-		
-//		CCMenuItem *backButton = [CCMenuItemImage itemFromNormalImage:@"BackButton.png" 
-//														selectedImage:@"BackButtonDepressed.png" target:self selector:@selector(backButtonPressed:)];				
         
         CCMenuItemImage * backButton = [CCMenuItemImage itemFromNormalImage:@"BackButtonDepressed.png" selectedImage:@"BackButtonDepressed.png" target:self selector:@selector(backButtonPressed:)];
         backButton.selectedImage.scale = shrinkScale;
@@ -84,10 +78,11 @@
 		[playerNodeArray retain];  //so you can use it in the startGame method
 		
 		[self schedule: @selector(tick:) interval:0.1];
-
+        
+        ++[GameManager sharedGameManager].mustachesUnlocked;
 
 		
-	}	
+	}
 	return self;
 }
 

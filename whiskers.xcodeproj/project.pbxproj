@@ -618,7 +618,6 @@
 		6804B17715182D05000918D4 /* Bomb.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Bomb.mm; sourceTree = "<group>"; };
 		6804B17815182D05000918D4 /* Bullet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bullet.h; sourceTree = "<group>"; };
 		6804B17915182D05000918D4 /* Bullet.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Bullet.mm; sourceTree = "<group>"; };
-		6804B17A15182D05000918D4 /* GameConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameConstants.h; sourceTree = "<group>"; };
 		6804B17B15182D05000918D4 /* GameManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameManager.h; sourceTree = "<group>"; };
 		6804B17C15182D05000918D4 /* GameManager.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GameManager.mm; sourceTree = "<group>"; };
 		6804B17D15182D05000918D4 /* GameOverScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameOverScene.h; sourceTree = "<group>"; };
@@ -1329,35 +1328,34 @@
 				680053D91554A04300A4EF5A /* Global.h */,
 				6804B17B15182D05000918D4 /* GameManager.h */,
 				6804B17C15182D05000918D4 /* GameManager.mm */,
-				6804B17415182D05000918D4 /* AudioCode.h */,
-				6804B17515182D05000918D4 /* AudioCode.mm */,
-				6804B17615182D05000918D4 /* Bomb.h */,
-				6804B17715182D05000918D4 /* Bomb.mm */,
-				6804B17815182D05000918D4 /* Bullet.h */,
-				6804B17915182D05000918D4 /* Bullet.mm */,
-				6804B17A15182D05000918D4 /* GameConstants.h */,
-				6804B17D15182D05000918D4 /* GameOverScene.h */,
-				6804B17E15182D05000918D4 /* GameOverScene.mm */,
+				6804B18F15182D05000918D4 /* StartMenuScene.h */,
+				6804B19015182D05000918D4 /* StartMenuScene.mm */,
 				6804B17F15182D05000918D4 /* HelloWorldScene.h */,
 				6804B18015182D05000918D4 /* HelloWorldScene.mm */,
 				6804B18115182D05000918D4 /* Kitty.h */,
 				6804B18215182D05000918D4 /* Kitty.mm */,
-				6804B18315182D05000918D4 /* MSGroupNode.h */,
-				6804B18415182D05000918D4 /* MSGroupNode.mm */,
-				6804B18515182D05000918D4 /* MustacheScene.h */,
-				6804B18615182D05000918D4 /* MustacheScene.mm */,
-				6804B18715182D05000918D4 /* MustacheSelectNode.h */,
-				6804B18815182D05000918D4 /* MustacheSelectNode.mm */,
-				6804B18915182D05000918D4 /* MyContactListener.h */,
-				6804B18A15182D05000918D4 /* MyContactListener.mm */,
+				6804B17615182D05000918D4 /* Bomb.h */,
+				6804B17715182D05000918D4 /* Bomb.mm */,
+				6804B17815182D05000918D4 /* Bullet.h */,
+				6804B17915182D05000918D4 /* Bullet.mm */,
 				6804B18B15182D05000918D4 /* PauseMenuLayer.h */,
 				6804B18C15182D05000918D4 /* PauseMenuLayer.mm */,
+				6804B17D15182D05000918D4 /* GameOverScene.h */,
+				6804B17E15182D05000918D4 /* GameOverScene.mm */,
+				6804B18515182D05000918D4 /* MustacheScene.h */,
+				6804B18615182D05000918D4 /* MustacheScene.mm */,
+				6804B18315182D05000918D4 /* MSGroupNode.h */,
+				6804B18415182D05000918D4 /* MSGroupNode.mm */,
+				6804B18715182D05000918D4 /* MustacheSelectNode.h */,
+				6804B18815182D05000918D4 /* MustacheSelectNode.mm */,
 				6804B18D15182D05000918D4 /* PowerupsScene.h */,
 				6804B18E15182D05000918D4 /* PowerupsScene.mm */,
-				6804B18F15182D05000918D4 /* StartMenuScene.h */,
-				6804B19015182D05000918D4 /* StartMenuScene.mm */,
 				68B4935816C18D8700E895E1 /* FLTwitter.h */,
 				68B4935916C18D8800E895E1 /* FLTwitter.mm */,
+				6804B17415182D05000918D4 /* AudioCode.h */,
+				6804B17515182D05000918D4 /* AudioCode.mm */,
+				6804B18915182D05000918D4 /* MyContactListener.h */,
+				6804B18A15182D05000918D4 /* MyContactListener.mm */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
