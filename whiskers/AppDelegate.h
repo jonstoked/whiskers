@@ -16,5 +16,10 @@
 }
 
 @property (nonatomic, retain) UIWindow *window;
+@property (nonatomic, assign) RootViewController * viewController;
+
+
++(AppDelegate *) get;
+
 
 @end

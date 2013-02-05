@@ -18,7 +18,12 @@
 
 @implementation AppDelegate
 
-@synthesize window;
+@synthesize window, viewController;
+
++(AppDelegate *) get {
+    
+    return (AppDelegate *) [[UIApplication sharedApplication] delegate];
+}
 
 - (void) removeStartupFlicker
 {

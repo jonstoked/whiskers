@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
 #import "StartMenuScene.h"
+#import "FLTwitter.h"
+#import "AppDelegate.h"
 
 @interface PowerupsScene : CCLayer {
     
