@@ -171,8 +171,6 @@
 		6804B23115182D5F000918D4 /* mustacheYoffsets.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6804B1A715182D5F000918D4 /* mustacheYoffsets.plist */; };
 		6804B23215182D5F000918D4 /* powerupsSceneLayout.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6804B1A815182D5F000918D4 /* powerupsSceneLayout.plist */; };
 		6804B23315182D5F000918D4 /* twitterButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 6804B1A915182D5F000918D4 /* twitterButton.png */; };
-		6804B23415182D5F000918D4 /* suggestPowerup.png in Resources */ = {isa = PBXBuildFile; fileRef = 6804B1AA15182D5F000918D4 /* suggestPowerup.png */; };
-		6804B23515182D5F000918D4 /* facebookButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 6804B1AB15182D5F000918D4 /* facebookButton.png */; };
 		6804B23615182D5F000918D4 /* backButtonPowerups.png in Resources */ = {isa = PBXBuildFile; fileRef = 6804B1AC15182D5F000918D4 /* backButtonPowerups.png */; };
 		6804B23715182D5F000918D4 /* questionPowerupDesc.png in Resources */ = {isa = PBXBuildFile; fileRef = 6804B1AD15182D5F000918D4 /* questionPowerupDesc.png */; };
 		6804B23815182D5F000918D4 /* lightningPowerupDesc.png in Resources */ = {isa = PBXBuildFile; fileRef = 6804B1AE15182D5F000918D4 /* lightningPowerupDesc.png */; };
@@ -283,7 +281,6 @@
 		6816733616A633C8001FA7F8 /* pauseMenuBG.png in Resources */ = {isa = PBXBuildFile; fileRef = 6816733516A633C8001FA7F8 /* pauseMenuBG.png */; };
 		6816733816A633D5001FA7F8 /* blackOverlay.png in Resources */ = {isa = PBXBuildFile; fileRef = 6816733716A633D5001FA7F8 /* blackOverlay.png */; };
 		6828675015B0FC4600444BF5 /* ready.png in Resources */ = {isa = PBXBuildFile; fileRef = 6828674E15B0FC4600444BF5 /* ready.png */; };
-		68507C361615F90C00B87D26 /* magnetIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 68507C351615F90C00B87D26 /* magnetIcon.png */; };
 		68962B961518381E00A3E40E /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 68962B951518381E00A3E40E /* Default.png */; };
 		68A09B01155C6C67003DA47C /* LocalyticsDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 68A09AFB155C6C67003DA47C /* LocalyticsDatabase.m */; };
 		68A09B02155C6C67003DA47C /* LocalyticsSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 68A09AFD155C6C67003DA47C /* LocalyticsSession.m */; };
@@ -648,8 +645,6 @@
 		6804B1A715182D5F000918D4 /* mustacheYoffsets.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = mustacheYoffsets.plist; sourceTree = "<group>"; };
 		6804B1A815182D5F000918D4 /* powerupsSceneLayout.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = powerupsSceneLayout.plist; sourceTree = "<group>"; };
 		6804B1A915182D5F000918D4 /* twitterButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = twitterButton.png; sourceTree = "<group>"; };
-		6804B1AA15182D5F000918D4 /* suggestPowerup.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = suggestPowerup.png; sourceTree = "<group>"; };
-		6804B1AB15182D5F000918D4 /* facebookButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = facebookButton.png; sourceTree = "<group>"; };
 		6804B1AC15182D5F000918D4 /* backButtonPowerups.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backButtonPowerups.png; sourceTree = "<group>"; };
 		6804B1AD15182D5F000918D4 /* questionPowerupDesc.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = questionPowerupDesc.png; sourceTree = "<group>"; };
 		6804B1AE15182D5F000918D4 /* lightningPowerupDesc.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lightningPowerupDesc.png; sourceTree = "<group>"; };
@@ -760,7 +755,6 @@
 		6816733516A633C8001FA7F8 /* pauseMenuBG.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pauseMenuBG.png; sourceTree = "<group>"; };
 		6816733716A633D5001FA7F8 /* blackOverlay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blackOverlay.png; sourceTree = "<group>"; };
 		6828674E15B0FC4600444BF5 /* ready.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ready.png; sourceTree = "<group>"; };
-		68507C351615F90C00B87D26 /* magnetIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = magnetIcon.png; sourceTree = "<group>"; };
 		68962B951518381E00A3E40E /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		68A09AFA155C6C67003DA47C /* LocalyticsDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalyticsDatabase.h; sourceTree = "<group>"; };
 		68A09AFB155C6C67003DA47C /* LocalyticsDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocalyticsDatabase.m; sourceTree = "<group>"; };
@@ -1326,6 +1320,8 @@
 			isa = PBXGroup;
 			children = (
 				680053D91554A04300A4EF5A /* Global.h */,
+				6804B17B15182D05000918D4 /* GameManager.h */,
+				6804B17C15182D05000918D4 /* GameManager.mm */,
 				6804B17415182D05000918D4 /* AudioCode.h */,
 				6804B17515182D05000918D4 /* AudioCode.mm */,
 				6804B17615182D05000918D4 /* Bomb.h */,
@@ -1333,8 +1329,6 @@
 				6804B17815182D05000918D4 /* Bullet.h */,
 				6804B17915182D05000918D4 /* Bullet.mm */,
 				6804B17A15182D05000918D4 /* GameConstants.h */,
-				6804B17B15182D05000918D4 /* GameManager.h */,
-				6804B17C15182D05000918D4 /* GameManager.mm */,
 				6804B17D15182D05000918D4 /* GameOverScene.h */,
 				6804B17E15182D05000918D4 /* GameOverScene.mm */,
 				6804B17F15182D05000918D4 /* HelloWorldScene.h */,
@@ -1496,21 +1490,14 @@
 		68DCAFD316AE36980030EDCD /* Powerups Scene */ = {
 			isa = PBXGroup;
 			children = (
-				6804B1C115182D5F000918D4 /* lightningIcon copy.png */,
 				6804B1A815182D5F000918D4 /* powerupsSceneLayout.plist */,
 				6804B1AD15182D5F000918D4 /* questionPowerupDesc.png */,
-				6804B1C015182D5F000918D4 /* starIcon.png */,
 				6804B1B115182D5F000918D4 /* starPowerupDesc.png */,
-				6804B1AA15182D5F000918D4 /* suggestPowerup.png */,
 				6804B1A915182D5F000918D4 /* twitterButton.png */,
-				6804B1C215182D5F000918D4 /* bulletIcon.png */,
 				6804B1AF15182D5F000918D4 /* cateyesPowerupDesc.png */,
-				6804B1AB15182D5F000918D4 /* facebookButton.png */,
-				68507C351615F90C00B87D26 /* magnetIcon.png */,
 				6804B1B215182D5F000918D4 /* header.png */,
 				6804B1AE15182D5F000918D4 /* lightningPowerupDesc.png */,
 				6804B1AC15182D5F000918D4 /* backButtonPowerups.png */,
-				6804B1C315182D5F000918D4 /* bombIcon.png */,
 				6804B1B015182D5F000918D4 /* bombPowerupDesc.png */,
 			);
 			name = "Powerups Scene";
@@ -1531,6 +1518,10 @@
 		68DCAFD516AE36D10030EDCD /* Gameplay */ = {
 			isa = PBXGroup;
 			children = (
+				6804B1C115182D5F000918D4 /* lightningIcon copy.png */,
+				6804B1C015182D5F000918D4 /* starIcon.png */,
+				6804B1C215182D5F000918D4 /* bulletIcon.png */,
+				6804B1C315182D5F000918D4 /* bombIcon.png */,
 				6816733716A633D5001FA7F8 /* blackOverlay.png */,
 				6804B1BF15182D5F000918D4 /* psSparks.plist */,
 				6804B1CC15182D5F000918D4 /* psStarTrail.plist */,
@@ -1649,8 +1640,6 @@
 				6804B23115182D5F000918D4 /* mustacheYoffsets.plist in Resources */,
 				6804B23215182D5F000918D4 /* powerupsSceneLayout.plist in Resources */,
 				6804B23315182D5F000918D4 /* twitterButton.png in Resources */,
-				6804B23415182D5F000918D4 /* suggestPowerup.png in Resources */,
-				6804B23515182D5F000918D4 /* facebookButton.png in Resources */,
 				6804B23615182D5F000918D4 /* backButtonPowerups.png in Resources */,
 				6804B23715182D5F000918D4 /* questionPowerupDesc.png in Resources */,
 				6804B23815182D5F000918D4 /* lightningPowerupDesc.png in Resources */,
@@ -1766,7 +1755,6 @@
 				68D909F91523A0BB001965CA /* soundButtonOff.png in Resources */,
 				68D909FA1523A0BB001965CA /* soundButtonOn.png in Resources */,
 				6828675015B0FC4600444BF5 /* ready.png in Resources */,
-				68507C361615F90C00B87D26 /* magnetIcon.png in Resources */,
 				68EE772A161BFFC30095DC21 /* Icon-72.png in Resources */,
 				68EE772B161BFFC30095DC21 /* Icon-72@2x.png in Resources */,
 				68EE772C161BFFC30095DC21 /* Icon-Small-50.png in Resources */,

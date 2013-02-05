@@ -122,5 +122,11 @@ static GameManager* _sharedGameManager = nil;
     return c;
 }
 
+-(CGPoint) cocosPosFromAdobePos:(CGPoint)pos forSprite:(CCSprite*)sprite {
+    
+    return ccpAdd(pos, ccp(sprite.contentSize.width/2.0f, -sprite.contentSize.height/2.0f));
+    
+}
+
 
 @end

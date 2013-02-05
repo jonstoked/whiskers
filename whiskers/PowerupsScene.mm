@@ -23,76 +23,65 @@
 -(id) init
 {
 	if( (self=[super init] )) {
-		
-		CGSize screenSize = [[CCDirector sharedDirector] winSize];
-        
+		        
         [[CCTouchDispatcher sharedDispatcher] addTargetedDelegate:self priority:0 swallowsTouches:YES];
         
         scrollableLayer = [CCLayer node];
         [self addChild:scrollableLayer];
         
-        //CCLayerColor* colorLayer = [CCLayerColor layerWithColor:ccc4(70, 70, 70, 255)]; 
         CCLayerColor* colorLayer = [CCLayerColor layerWithColor:ccc4(70, 70, 70, 255) width:1024 height:993]; 
         colorLayer.position = ccp(0,768-993);
 
 		[self addChild:colorLayer z:-1];
         
-        NSString * plistPath = [[NSBundle mainBundle] pathForResource:@"powerupsSceneLayout" ofType:@"plist"];        
-        NSDictionary * layoutDict = [NSDictionary dictionaryWithContentsOfFile:plistPath];
+        //add static spirtes
+        NSArray *spriteNames = [[[NSArray alloc] initWithObjects:@"header", @"starPowerupDesc", @"lightningPowerupDesc",
+                                 @"cateyesPowerupDesc", @"bombPowerupDesc", @"questionPowerupDesc",nil] autorelease];
         
-        for(NSString *key in layoutDict){
+        //cocos positions
+        NSArray *spritePositions =  [[[NSArray alloc] initWithObjects:
+                                      [NSValue valueWithCGPoint:ccp(512,628)],
+                                      [NSValue valueWithCGPoint:ccp(506,501)],
+                                      [NSValue valueWithCGPoint:ccp(411,381)],
+                                      [NSValue valueWithCGPoint:ccp(424,261)],
+                                      [NSValue valueWithCGPoint:ccp(427,141)],
+                                      [NSValue valueWithCGPoint:ccp(508,9)],
+                                      nil] autorelease];
+        
+        for(int i = 0; i < [spriteNames count]; ++i) {
             
-            CCLOG(@"%@", key);
-            
-            NSString *posString = [layoutDict objectForKey:key];
-            NSArray *components = [posString componentsSeparatedByString:@":"];
-            int x = [[components objectAtIndex:0] intValue];
-            int y = [[components objectAtIndex:1] intValue];
-            
-            //just a sprite
-            if ([key rangeOfString:@"Button"].location == NSNotFound) {
-                CCSprite *sprite = [CCSprite spriteWithFile:key];
-                sprite.position = ccp(x,y);
-                [scrollableLayer addChild:sprite];
-            }
-            
-            //a button
-            else {
-                CCMenuItemImage *button;
-                if ([key isEqualToString:@"backButtonPowerups.png"])  {
-                    button = [CCMenuItemImage itemFromNormalImage:key selectedImage:key target:self selector:@selector(backButtonTouched:)];
-                    CCLOG(@"made it");
-                }
-                else if ([key isEqualToString:@"twitterButton.png"]) {
-                    button = [CCMenuItemImage itemFromNormalImage:key selectedImage:key target:self selector:@selector(twitterButtonTouched:)];
-                    CCLOG(@"made it");
-
-                }
-                else if ([key isEqualToString:@"facebookButton.png"]) {
-                    button = [CCMenuItemImage itemFromNormalImage:key selectedImage:key target:self selector:@selector(facebookButtonTouched:)];
-                    CCLOG(@"made it");
-                }
-                    
-                float shrinkScale = 0.97f;
-                button.selectedImage.scale = shrinkScale;
-                button.selectedImage.position = ccp((button.normalImage.contentSize.width - button.normalImage.contentSize.width*shrinkScale)/2.0f, (button.normalImage.contentSize.height - button.normalImage.contentSize.height*shrinkScale)/2.0f);
-                
-                CCMenu* menu = [CCMenu menuWithItems:button, nil];
-                menu.position = ccp(x,y);
-                
-                if([key isEqualToString:@"backButtonPowerups.png"])
-                    [self addChild:menu];
-                else 
-                    [scrollableLayer addChild:menu];
-                
-
-            }
-            
+            NSString *name = [spriteNames objectAtIndex:i];
+            name = [name stringByAppendingString:@".png"];
+            CGPoint pos = [[spritePositions objectAtIndex:i] CGPointValue];
+            CCSprite *s = [CCSprite spriteWithFile:name];
+            s.position = pos;
+            [scrollableLayer addChild:s];
         }
+        
+        CCMenu *twitterButton = [self menuAtPosition:ccp(504,-113) imageName:@"twitterButton.png" target:self selector:@selector(twitterButtonTouched)];
+        [scrollableLayer addChild:twitterButton];
+        
+        CCMenu *backButton = [self menuAtPosition:ccp(79,737) imageName:@"backButtonPowerups.png" target:self selector:@selector(backButtonTouched)];
+        [scrollableLayer addChild:backButton];
 
             
 	}	
 	return self;
+}
+
+-(CCMenu*) menuAtPosition:(CGPoint)pos imageName:(NSString*)imageName target:(id)t selector:(SEL)s {
+    
+    //create's a single button that will shrink a bit when touched
+    float shrinkScale = 0.97f;
+    
+    CCMenuItemImage *button = [CCMenuItemImage itemFromNormalImage:imageName selectedImage:imageName target:t selector:s];
+    button.selectedImage.scale = shrinkScale;
+    button.selectedImage.position = ccp((button.normalImage.contentSize.width - button.normalImage.contentSize.width*shrinkScale)/2.0f, (button.normalImage.contentSize.height - button.normalImage.contentSize.height*shrinkScale)/2.0f);
+    
+    CCMenu *menu = [CCMenu menuWithItems:button, nil];
+    menu.position = pos;
+    
+    return menu;
 }
 
 - (BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
@@ -126,20 +115,12 @@
     scrollableLayer.position = [self boundLayerPos:newPos];      
 }
 
--(void) backButtonTouched:(id)sender {
+-(void) backButtonTouched {
     [[CCDirector sharedDirector] replaceScene:[StartMenuScene scene]];
 
 }
 
--(void) facebookButtonTouched:(id)sender {
-    //http://www.facebook.com/pages/Whiskers/275473359190039
-    
-    NSString *stringURL = @"http://www.facebook.com/pages/Whiskers/275473359190039";
-    NSURL *url = [NSURL URLWithString:stringURL];
-    [[UIApplication sharedApplication] openURL:url];
-}
-
--(void) twitterButtonTouched:(id)sender {
+-(void) twitterButtonTouched{
     //http://www.hightechdad.com/2011/05/18/how-to-pre-populate-twitter-status-updates-the-new-way-via-links-web-intents/
     
     NSString *stringURL = @"http://twitter.com/intent/tweet?text=%23whiskersPowerup+-+The+next+powerup+should+be...";

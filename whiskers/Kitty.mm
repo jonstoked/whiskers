@@ -380,7 +380,6 @@ hasMagnet, isBeingSucked, shouldSuck, tailPosition, isFacingOtherKitty, starStre
     CCSprite *s = [CCSprite spriteWithFile:@"whiteSquare504.png"];
     s.tag = kTagKitty0Streak + self.tag;
     s.scale = sprite.scale;
-//    s.scale = 0.6f;
     s.rotation = self.rotation;
 //    s.color = [[GameManager sharedGameManager] randomWhiskersColor];
     s.position = self.position;
