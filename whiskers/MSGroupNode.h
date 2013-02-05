@@ -23,6 +23,8 @@
 }
 
 @property (nonatomic,readwrite) BOOL isActive;
+@property (nonatomic, readwrite) MustacheSelectNode *msNode;
+
 
 +(id) msGroupNodeWithTag:(int)tag;
 -(id) initWithTag:(int)tag;

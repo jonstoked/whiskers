@@ -12,6 +12,8 @@
 
 @implementation MustacheSelectNode
 
+@synthesize hasShownNewStacheMessage;
+
 
 
 +(id) mustacheSelectNodeWithTag:(int)tag
@@ -248,8 +250,11 @@
 	
 	timeCurrent += dt;
     
-    if(currentMustacheTag == [GameManager sharedGameManager].mustachesUnlocked - 1 && ![GameManager sharedGameManager].hasShownNewStacheMessage) {
-        [GameManager sharedGameManager].hasShownNewStacheMessage = YES;
+    if(currentMustacheTag == [GameManager sharedGameManager].mustachesUnlocked - 1 &&
+       ![GameManager sharedGameManager].hasShownNewStacheMessage &&
+       !hasShownNewStacheMessage) {
+        
+        hasShownNewStacheMessage = YES;
         [self displayRewardMessage];
         
     }

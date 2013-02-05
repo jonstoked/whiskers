@@ -12,7 +12,6 @@
 #import "SimpleAudioEngine.h"
 #import	"MustacheSelectNode.h"
 #import "GameOverScene.h"
-#import "GameConstants.h"
 #import "PowerupsScene.h"
 
 
@@ -40,72 +39,19 @@
 		
 		CCLayerColor* colorLayer = [CCLayerColor layerWithColor:ccc4(70, 70, 70, 255)]; 
 		[self addChild:colorLayer z:-10];
-		
-        if(!CRAZY_START_SCREEN) {
             
-            //play button
-            CCSprite *playButtonSprite = [CCSprite spriteWithFile:@"playButton.png"];
-            CCSprite *playButtonDepressedSprite = [CCSprite spriteWithFile:@"playButtonDepressed.png"];
-            CCMenuItemSprite *playButton = [CCMenuItemSprite itemFromNormalSprite:playButtonSprite selectedSprite:playButtonDepressedSprite 
-                                                                   disabledSprite:nil target:self selector:@selector(playButtonTouched:)];
-            
-            //offset depressed sprite so it looks as if button drops directly onto the dropshadow
-            playButtonDepressedSprite.anchorPoint = ccp(-4.0/playButtonDepressedSprite.contentSize.width,0);
-            
-            
-            //optionsbutton
-            CCSprite *optionsButtonSprite = [CCSprite spriteWithFile:@"optionsButton.png"];
-            CCSprite *optionsButtonDepressedSprite = [CCSprite spriteWithFile:@"optionsButtonDepressed.png"];
-            CCMenuItemSprite *optionsButton = [CCMenuItemSprite itemFromNormalSprite:optionsButtonSprite selectedSprite:optionsButtonDepressedSprite disabledSprite:nil target:self selector:@selector(optionsButtonTouched:)];
-            
-            //offset depressed sprite so it looks as if button drops directly onto the dropshadow
-            optionsButtonDepressedSprite.anchorPoint = ccp(-4.0/optionsButtonDepressedSprite.contentSize.width,0);
-            
-            
-            //powerups button
-            CCSprite *powerupsButtonSprite = [CCSprite spriteWithFile:@"powerupsButton.png"];
-            CCSprite *powerupsButtonDepressedSprite = [CCSprite spriteWithFile:@"powerupsButtonDepressed.png"];
-            CCMenuItemSprite *powerupsButton = [CCMenuItemSprite itemFromNormalSprite:powerupsButtonSprite selectedSprite:powerupsButtonDepressedSprite disabledSprite:nil target:self selector:@selector(powerupsButtonTouched:)];
-            
-            //offset depressed sprite so it looks as if button drops directly onto the dropshadow
-            powerupsButtonDepressedSprite.anchorPoint = ccp(-4.0/powerupsButtonDepressedSprite.contentSize.width,0);
-            
-            
-            CCMenu* playMenu = [CCMenu menuWithItems:playButton, nil];
-            CCMenu* optionsMenu = [CCMenu menuWithItems:optionsButton, nil];
-            CCMenu* powerupsMenu = [CCMenu menuWithItems:powerupsButton, nil];
-            
-            //position values taken directly from AI file
-            playMenu.position = CGPointMake(652, screenHeight-490);
-            optionsMenu.position = CGPointMake(686, screenHeight-576);
-            powerupsMenu.position = CGPointMake(729, screenHeight-662); 
-            
-            [self addChild:playMenu];
-            [self addChild:optionsMenu];
-            [self addChild:powerupsMenu];
-            
-            //add the logo
-            CCSprite *logo = [CCSprite spriteWithFile:@"whiskersLogo.png"];
-            logo.position = CGPointMake(512, screenHeight-232);
-            [self addChild:logo];
-            
-        }
+        //add the logo
+        CCSprite *logo = [CCSprite spriteWithFile:@"whiskersLogo.png"];
+        logo.position = ccp(screenSize.width/2.0f, screenSize.height/2.0f);
+        [self addChild:logo];
         
-        else {
-            
-            //add the logo
-            CCSprite *logo = [CCSprite spriteWithFile:@"whiskersLogo.png"];
-            logo.position = ccp(screenSize.width/2.0f, screenSize.height/2.0f);
-            [self addChild:logo];
-            
-            float t = 0.25f;
-            id move = [CCMoveTo actionWithDuration:t position:ccp(571 + 413/2, screenHeight-177 - 177/2)];
-            id shrink = [CCScaleTo actionWithDuration:t scale:0.557951482];
-            [logo runAction:move];
-            [logo runAction:shrink];
-            [self showMenu];
-        }
-            
+        float t = 0.25f;
+        id move = [CCMoveTo actionWithDuration:t position:ccp(571 + 413/2, screenHeight-177 - 177/2)];
+        id shrink = [CCScaleTo actionWithDuration:t scale:0.557951482];
+        [logo runAction:move];
+        [logo runAction:shrink];
+        [self showMenu];
+        
 		
 	}	
 	return self;

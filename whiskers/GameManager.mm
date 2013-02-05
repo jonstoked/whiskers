@@ -71,6 +71,9 @@ static GameManager* _sharedGameManager = nil;
             mustachesUnlocked = 5;
         }
         ++playCount;
+        
+        ++[GameManager sharedGameManager].mustachesUnlocked;
+        [GameManager sharedGameManager].hasShownNewStacheMessage = NO;
 
 
 

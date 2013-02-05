@@ -11,7 +11,7 @@
 
 @implementation MSGroupNode
 
-@synthesize isActive;
+@synthesize isActive, msNode;
 
 +(id) msGroupNodeWithTag:(int)tag
 {

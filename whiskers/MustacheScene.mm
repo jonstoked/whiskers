@@ -25,7 +25,7 @@
 -(id) init
 {
 	if( (self=[super init] )) {
-		
+        
 		//self.isTouchEnabled = YES;
 		CGSize screenSize = [[CCDirector sharedDirector] winSize];
 		kittyScale = 1.5f;
@@ -78,9 +78,6 @@
 		[playerNodeArray retain];  //so you can use it in the startGame method
 		
 		[self schedule: @selector(tick:) interval:0.1];
-        
-        ++[GameManager sharedGameManager].mustachesUnlocked;
-
 		
 	}
 	return self;
@@ -173,9 +170,11 @@
 
 - (void) dealloc
 {
-	//CCLOG(@"PlayerNode1 tag: %i", playerNode1.tag);	
-	//CCLOG(@"PlayerNode3 tag: %i", playerNode3.tag);	
-
+    
+    for(MSGroupNode* node in playerNodeArray) {
+        if(node.msNode.hasShownNewStacheMessage == YES)
+            [GameManager sharedGameManager].hasShownNewStacheMessage = YES;
+    }
 	
 	
 	[playerNodeArray dealloc];

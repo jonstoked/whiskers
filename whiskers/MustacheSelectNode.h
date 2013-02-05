@@ -37,11 +37,14 @@
     CGPoint touchStart;
     
     CCLabelTTF *rewardLabel;
+    BOOL hasShownNewStacheMessage;
 	
 
 }
 
 @property (nonatomic,readwrite) BOOL isActive;
+@property (nonatomic,readwrite) BOOL hasShownNewStacheMessage;
+
 
 +(id) mustacheSelectNodeWithTag:(int)tag;
 -(id) initWithTag:(int)tag;
