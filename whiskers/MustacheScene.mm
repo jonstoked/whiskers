@@ -38,7 +38,7 @@
 		[self addChild:bgLayer z:-10];
         
         playMenu = [[GameManager sharedGameManager] menuAtPosition:ccp(screenSize.width/2, screenSize.height/2) imageName:@"playButtonMustacheScene.png" target:self selector:@selector(startGame:)];
-		playMenu.opacity = 100;
+		playMenu.opacity = 0;
         [self addChild:playMenu];
         
         CCMenu *backMenu = [[GameManager sharedGameManager] menuAtPosition:CGPointMake(516, screenSize.height-47) imageName:@"backButton.png" target:self selector:@selector(backButtonPressed:)];
@@ -127,6 +127,9 @@
 	[playerNode2 runAction:rotate3];
 	[playerNode3 runAction:move4];
 	[playerNode3 runAction:rotate4];
+    
+    id fadein = [CCFadeTo actionWithDuration:0.6f opacity:100];
+    [playMenu runAction:fadein];
 }
 
 -(void) startGame:(id)sender {

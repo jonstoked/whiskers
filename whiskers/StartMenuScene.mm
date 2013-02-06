@@ -46,8 +46,8 @@
         [self addChild:logo];
         
         float t = 0.25f;
-        id move = [CCMoveTo actionWithDuration:t position:ccp(571 + 413/2, screenHeight-177 - 177/2)];
-        id shrink = [CCScaleTo actionWithDuration:t scale:0.557951482];
+        id move = [CCMoveTo actionWithDuration:t position:ccp(780,504)];
+        id shrink = [CCScaleTo actionWithDuration:t scale:0.53];
         [logo runAction:move];
         [logo runAction:shrink];
         [self showMenu];
@@ -58,39 +58,22 @@
 }
 
 -(void) showMenu {
+        
+    CCMenu *playMenu = [[GameManager sharedGameManager] menuAtPosition:CGPointMake(311 - [[CCDirector sharedDirector] winSize].width,489) imageName:@"playButton.png" target:self selector:@selector(playButtonTouched:)];
     
-    int screenHeight = [[CCDirector sharedDirector] winSize].height;    
-    //play button
-    CCMenuItemImage *playButton = [CCMenuItemImage itemFromNormalImage:@"playButton2.png" selectedImage:@"playButton2.png" target:self selector:@selector(playButtonTouched:)];
-    float shrinkScale = 0.97f;
-    playButton.selectedImage.scale = shrinkScale;
-    playButton.selectedImage.position = ccp((playButton.normalImage.contentSize.width - playButton.normalImage.contentSize.width*shrinkScale)/2.0f, (playButton.normalImage.contentSize.height - playButton.normalImage.contentSize.height*shrinkScale)/2.0f);
-    
-    //powerups button
-    powerupsButton = [CCMenuItemImage itemFromNormalImage:@"powerupsButton2.png" selectedImage:@"powerupsButton2.png" target:self selector:@selector(powerupsButtonTouched:)];
-    powerupsButton.selectedImage.scale = shrinkScale;
-    powerupsButton.selectedImage.position = ccp((powerupsButton.normalImage.contentSize.width - powerupsButton.normalImage.contentSize.width*shrinkScale)/2.0f, (powerupsButton.normalImage.contentSize.height - powerupsButton.normalImage.contentSize.height*shrinkScale)/2.0f);
-    powerupsButton.tag = 1;
-    
-    CCMenu* playMenu = [CCMenu menuWithItems:playButton, nil];
-    CCMenu* powerupsMenu = [CCMenu menuWithItems:powerupsButton, nil];
-    
-    //position values taken directly from AI file
-    playMenu.position = CGPointMake(300 - [[CCDirector sharedDirector] winSize].width, screenHeight-275);
-    powerupsMenu.position = CGPointMake(512 - [[CCDirector sharedDirector] winSize].width, screenHeight-468); 
+    powerupsMenu = [[GameManager sharedGameManager] menuAtPosition:CGPointMake(511 - [[CCDirector sharedDirector] winSize].width,300) imageName:@"powerupsButton.png" target:self selector:@selector(powerupsButtonTouched:)];
     
     [self addChild:playMenu];
     [self addChild:powerupsMenu];
     
     CCSprite *logo2 = [CCSprite spriteWithFile:@"byJonStokes.png"];
-    logo2.position = CGPointMake(581 - [[CCDirector sharedDirector] winSize].width, screenHeight-561);
-    logo2.anchorPoint = ccp(0,1.0f);
+    logo2.position = CGPointMake(770 - [[CCDirector sharedDirector] winSize].width, 156);
     [self addChild:logo2];
     logo2.tag = 2;
     
     float t2 = 0.1f;
     id movein = [CCEaseBackOut actionWithAction:[CCMoveBy actionWithDuration:0.25f position:ccp([[CCDirector sharedDirector] winSize].width, 0)]];
-    [playButton runAction:movein];
+    [playMenu runAction:movein];
     [self schedule:@selector(moveInPowerupsButton) interval:t2];
     [self schedule:@selector(moveInLogo2) interval:t2*2];
 
@@ -102,7 +85,7 @@
     
     [self unschedule:@selector(moveInPowerupsButton)];
     id movein = [CCEaseBackOut actionWithAction:[CCMoveBy actionWithDuration:0.25f position:ccp([[CCDirector sharedDirector] winSize].width, 0)]];
-    [powerupsButton runAction:movein];
+    [powerupsMenu runAction:movein];
 }
 
 -(void) moveInLogo2 {
@@ -158,40 +141,11 @@
 
 
 
-
-/*
- //swipe code taken from http://www.sysapps.com/tutorials/2011/4/6/cocos2d-gestures-control.html
- -(BOOL)ccTouchBegan:(UITouch*)touch withEvent:(UIEvent*)event{
- 
- source = [self convertTouchToNodeSpace:touch];
- return YES;
- 
- }*
- 
- - (void)ccTouchMoved:(UITouch *)touch withEvent:(UIEvent *)event
- {
- 
- 
- }
- 
- 
- -(void)ccTouchEnded:(UITouch*)touch withEvent:(UIEvent*)event
- {
- 
- 
- }*/
-
-
-
-
 - (void)dealloc {
-	//[_label release];
-	//_label = nil;
-	
-	//[[SimpleAudioEngine sharedEngine] stopBackgroundMusic];
 	
 	[[CCTouchDispatcher sharedDispatcher] removeDelegate:self];
 	[super dealloc];
+    
 }
 
 @end

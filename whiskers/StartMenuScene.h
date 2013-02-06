@@ -20,6 +20,7 @@
 	float offset;
 	float kittyScale;
     CCMenuItemImage *powerupsButton;
+    CCMenu *powerupsMenu;
 }
 
 +(id) scene;
