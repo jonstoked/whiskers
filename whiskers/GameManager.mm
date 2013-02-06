@@ -72,8 +72,7 @@ static GameManager* _sharedGameManager = nil;
         }
         ++playCount;
         
-        ++[GameManager sharedGameManager].mustachesUnlocked;
-        [GameManager sharedGameManager].hasShownNewStacheMessage = NO;
+
 
 
 
@@ -137,6 +136,21 @@ static GameManager* _sharedGameManager = nil;
     
     return ccpAdd(pos, ccp(sprite.contentSize.width/2.0f, -sprite.contentSize.height/2.0f));
     
+}
+
+-(CCMenu*) menuAtPosition:(CGPoint)pos imageName:(NSString*)imageName target:(id)t selector:(SEL)s {
+    
+    //create's a single button that will shrink a bit when touched
+    float shrinkScale = 0.97f;
+    
+    CCMenuItemImage *button = [CCMenuItemImage itemFromNormalImage:imageName selectedImage:imageName target:t selector:s];
+    button.selectedImage.scale = shrinkScale;
+    button.selectedImage.position = ccp((button.normalImage.contentSize.width - button.normalImage.contentSize.width*shrinkScale)/2.0f, (button.normalImage.contentSize.height - button.normalImage.contentSize.height*shrinkScale)/2.0f);
+    
+    CCMenu *menu = [CCMenu menuWithItems:button, nil];
+    menu.position = pos;
+    
+    return menu;
 }
 
 

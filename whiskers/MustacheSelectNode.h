@@ -36,7 +36,7 @@
     
     CGPoint touchStart;
     
-    CCLabelTTF *rewardLabel;
+    CCSprite *rewardLabel;
     BOOL hasShownNewStacheMessage;
 	
 

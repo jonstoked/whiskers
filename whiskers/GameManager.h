@@ -48,10 +48,12 @@
 
 
 
+
 +(GameManager*)sharedGameManager;
 -(void) saveToDisk;
 -(void) loadFromDisk;
 -(ccColor3B) randomWhiskersColor;
+-(CCMenu*) menuAtPosition:(CGPoint)pos imageName:(NSString*)imageName target:(id)t selector:(SEL)s;
 
 
 

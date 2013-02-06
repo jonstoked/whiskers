@@ -200,13 +200,11 @@
 		6804B25815182D5F000918D4 /* bomb.png in Resources */ = {isa = PBXBuildFile; fileRef = 6804B1CE15182D5F000918D4 /* bomb.png */; };
 		6804B25915182D5F000918D4 /* pellet.png in Resources */ = {isa = PBXBuildFile; fileRef = 6804B1CF15182D5F000918D4 /* pellet.png */; };
 		6804B25A15182D5F000918D4 /* whiskersLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = 6804B1D015182D5F000918D4 /* whiskersLogo.png */; };
-		6804B25D15182D5F000918D4 /* joinButtonDepressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 6804B1D315182D5F000918D4 /* joinButtonDepressed.png */; };
 		6804B25E15182D5F000918D4 /* joinButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 6804B1D415182D5F000918D4 /* joinButton.png */; };
 		6804B26015182D5F000918D4 /* eyeBullet2.png in Resources */ = {isa = PBXBuildFile; fileRef = 6804B1D615182D5F000918D4 /* eyeBullet2.png */; };
 		6804B26115182D5F000918D4 /* bigWhiteLightning.png in Resources */ = {isa = PBXBuildFile; fileRef = 6804B1D715182D5F000918D4 /* bigWhiteLightning.png */; };
 		6804B26215182D5F000918D4 /* PlayButtonBigDepressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 6804B1D815182D5F000918D4 /* PlayButtonBigDepressed.png */; };
 		6804B26315182D5F000918D4 /* PlayButtonBig.png in Resources */ = {isa = PBXBuildFile; fileRef = 6804B1D915182D5F000918D4 /* PlayButtonBig.png */; };
-		6804B26515182D5F000918D4 /* BackButtonDepressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 6804B1DB15182D5F000918D4 /* BackButtonDepressed.png */; };
 		6804B26615182D5F000918D4 /* BackButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 6804B1DC15182D5F000918D4 /* BackButton.png */; };
 		6804B26815182D5F000918D4 /* orangeMustaches.pvr.ccz in Resources */ = {isa = PBXBuildFile; fileRef = 6804B1DE15182D5F000918D4 /* orangeMustaches.pvr.ccz */; };
 		6804B26915182D5F000918D4 /* orangeMustaches.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6804B1DF15182D5F000918D4 /* orangeMustaches.plist */; };
@@ -280,6 +278,8 @@
 		6804B2AE15182D5F000918D4 /* lightningWhite.png in Resources */ = {isa = PBXBuildFile; fileRef = 6804B22515182D5F000918D4 /* lightningWhite.png */; };
 		6816733616A633C8001FA7F8 /* pauseMenuBG.png in Resources */ = {isa = PBXBuildFile; fileRef = 6816733516A633C8001FA7F8 /* pauseMenuBG.png */; };
 		6816733816A633D5001FA7F8 /* blackOverlay.png in Resources */ = {isa = PBXBuildFile; fileRef = 6816733716A633D5001FA7F8 /* blackOverlay.png */; };
+		681D928916C2F891004F4BC4 /* newStache.png in Resources */ = {isa = PBXBuildFile; fileRef = 681D928816C2F891004F4BC4 /* newStache.png */; };
+		681D928B16C30730004F4BC4 /* playButtonMustacheScene.png in Resources */ = {isa = PBXBuildFile; fileRef = 681D928A16C30730004F4BC4 /* playButtonMustacheScene.png */; };
 		6828675015B0FC4600444BF5 /* ready.png in Resources */ = {isa = PBXBuildFile; fileRef = 6828674E15B0FC4600444BF5 /* ready.png */; };
 		68962B961518381E00A3E40E /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 68962B951518381E00A3E40E /* Default.png */; };
 		68A09B01155C6C67003DA47C /* LocalyticsDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 68A09AFB155C6C67003DA47C /* LocalyticsDatabase.m */; };
@@ -675,13 +675,11 @@
 		6804B1CE15182D5F000918D4 /* bomb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bomb.png; sourceTree = "<group>"; };
 		6804B1CF15182D5F000918D4 /* pellet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pellet.png; sourceTree = "<group>"; };
 		6804B1D015182D5F000918D4 /* whiskersLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = whiskersLogo.png; sourceTree = "<group>"; };
-		6804B1D315182D5F000918D4 /* joinButtonDepressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = joinButtonDepressed.png; sourceTree = "<group>"; };
 		6804B1D415182D5F000918D4 /* joinButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = joinButton.png; sourceTree = "<group>"; };
 		6804B1D615182D5F000918D4 /* eyeBullet2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = eyeBullet2.png; sourceTree = "<group>"; };
 		6804B1D715182D5F000918D4 /* bigWhiteLightning.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bigWhiteLightning.png; sourceTree = "<group>"; };
 		6804B1D815182D5F000918D4 /* PlayButtonBigDepressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PlayButtonBigDepressed.png; sourceTree = "<group>"; };
 		6804B1D915182D5F000918D4 /* PlayButtonBig.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PlayButtonBig.png; sourceTree = "<group>"; };
-		6804B1DB15182D5F000918D4 /* BackButtonDepressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BackButtonDepressed.png; sourceTree = "<group>"; };
 		6804B1DC15182D5F000918D4 /* BackButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BackButton.png; sourceTree = "<group>"; };
 		6804B1DE15182D5F000918D4 /* orangeMustaches.pvr.ccz */ = {isa = PBXFileReference; lastKnownFileType = file; path = orangeMustaches.pvr.ccz; sourceTree = "<group>"; };
 		6804B1DF15182D5F000918D4 /* orangeMustaches.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = orangeMustaches.plist; sourceTree = "<group>"; };
@@ -755,6 +753,8 @@
 		6804B22515182D5F000918D4 /* lightningWhite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lightningWhite.png; sourceTree = "<group>"; };
 		6816733516A633C8001FA7F8 /* pauseMenuBG.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pauseMenuBG.png; sourceTree = "<group>"; };
 		6816733716A633D5001FA7F8 /* blackOverlay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blackOverlay.png; sourceTree = "<group>"; };
+		681D928816C2F891004F4BC4 /* newStache.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = newStache.png; sourceTree = "<group>"; };
+		681D928A16C30730004F4BC4 /* playButtonMustacheScene.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playButtonMustacheScene.png; sourceTree = "<group>"; };
 		6828674E15B0FC4600444BF5 /* ready.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ready.png; sourceTree = "<group>"; };
 		68962B951518381E00A3E40E /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		68A09AFA155C6C67003DA47C /* LocalyticsDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalyticsDatabase.h; sourceTree = "<group>"; };
@@ -1486,10 +1486,10 @@
 				6804B1DE15182D5F000918D4 /* orangeMustaches.pvr.ccz */,
 				6828674E15B0FC4600444BF5 /* ready.png */,
 				6804B21515182D5F000918D4 /* francineWhiteWithTail.png */,
+				681D928816C2F891004F4BC4 /* newStache.png */,
+				681D928A16C30730004F4BC4 /* playButtonMustacheScene.png */,
 				6804B1D415182D5F000918D4 /* joinButton.png */,
-				6804B1D315182D5F000918D4 /* joinButtonDepressed.png */,
 				6804B1DC15182D5F000918D4 /* BackButton.png */,
-				6804B1DB15182D5F000918D4 /* BackButtonDepressed.png */,
 			);
 			name = "Mustache Scene";
 			sourceTree = "<group>";
@@ -1676,13 +1676,11 @@
 				6804B25815182D5F000918D4 /* bomb.png in Resources */,
 				6804B25915182D5F000918D4 /* pellet.png in Resources */,
 				6804B25A15182D5F000918D4 /* whiskersLogo.png in Resources */,
-				6804B25D15182D5F000918D4 /* joinButtonDepressed.png in Resources */,
 				6804B25E15182D5F000918D4 /* joinButton.png in Resources */,
 				6804B26015182D5F000918D4 /* eyeBullet2.png in Resources */,
 				6804B26115182D5F000918D4 /* bigWhiteLightning.png in Resources */,
 				6804B26215182D5F000918D4 /* PlayButtonBigDepressed.png in Resources */,
 				6804B26315182D5F000918D4 /* PlayButtonBig.png in Resources */,
-				6804B26515182D5F000918D4 /* BackButtonDepressed.png in Resources */,
 				6804B26615182D5F000918D4 /* BackButton.png in Resources */,
 				6804B26815182D5F000918D4 /* orangeMustaches.pvr.ccz in Resources */,
 				6804B26915182D5F000918D4 /* orangeMustaches.plist in Resources */,
@@ -1774,6 +1772,8 @@
 				6816733616A633C8001FA7F8 /* pauseMenuBG.png in Resources */,
 				6816733816A633D5001FA7F8 /* blackOverlay.png in Resources */,
 				68DA48B916AE49A5009A4D8B /* whiteSquare504.png in Resources */,
+				681D928916C2F891004F4BC4 /* newStache.png in Resources */,
+				681D928B16C30730004F4BC4 /* playButtonMustacheScene.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

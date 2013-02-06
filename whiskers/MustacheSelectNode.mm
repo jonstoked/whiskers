@@ -105,8 +105,6 @@
 
         
         // Build the array from the plist  
-        //NSString *posString = [layoutDict objectForKey:key];
-        //NSMutableArray *offsets = [[NSMutableArray alloc] initWithContentsOfFile:path];
         NSMutableArray *offsets = [dict objectForKey:@"Root"];
 
         CCLOG(@"offsets count: %i", [offsets count]);
@@ -162,8 +160,6 @@
 		//schedule update to selected mustache each half second
 		[self schedule:@selector(updateSelectedMustaches:) interval:0.5];
         
-//        [self schedule:@selector(displayRewardMessage) interval:2.0f];
-
 	}
 	
 	return self;
@@ -172,19 +168,11 @@
 
 -(void) displayRewardMessage {
     
-    [self displayRewardMessageWithText:@"a new stache!"];
-    
-}
-
--(void) displayRewardMessageWithText: (NSString*) text {
-    
     if(rewardLabel==nil) {
         
-        rewardLabel = [CCLabelTTF labelWithString:text fontName:GAME_FONT fontSize:22];
-        rewardLabel.color = whiskersOrange;
-        
-        rewardLabel.anchorPoint = ccp(1, 0);
-        rewardLabel.position = ccp(40,65);
+        rewardLabel = [CCSprite spriteWithFile:@"newStache.png"];
+        rewardLabel.position = ccp(135,-10);
+        rewardLabel.scale = 0.6f;
         [self addChild:rewardLabel];
         
         float dur = 1.2f;
@@ -310,7 +298,6 @@
 
 				CCMoveTo *swipeDecelerate = [CCMoveTo actionWithDuration:scrollDuration position:boundedDestination];
 				id ease = [CCEaseOut actionWithAction:swipeDecelerate rate:2];
-//                id ease = [CCEaseExponentialOut actionWithAction:swipeDecelerate];
 				[mustacheBatchNode runAction:ease];
                 
                 [(MSGroupNode *)self.parent fadeSwipeText];
@@ -370,7 +357,6 @@
 	CGPoint newPos = [self boundLayerPos:pos];
 	
 	mustacheBatchNode.position = newPos;  
-    //CCLOG(@"mustacheBatchNode pos x: %f, y: %f", mustacheBatchNode.position.x, mustacheBatchNode.position.y);
      
 }
 

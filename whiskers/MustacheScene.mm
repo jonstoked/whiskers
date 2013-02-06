@@ -26,6 +26,9 @@
 {
 	if( (self=[super init] )) {
         
+        ++[GameManager sharedGameManager].mustachesUnlocked;
+        [GameManager sharedGameManager].hasShownNewStacheMessage = NO;
+        
 		//self.isTouchEnabled = YES;
 		CGSize screenSize = [[CCDirector sharedDirector] winSize];
 		kittyScale = 1.5f;
@@ -33,23 +36,13 @@
 		//add background
 		CCLayerColor *bgLayer = [CCLayerColor layerWithColor:ccc4(70, 70, 70, 255)];
 		[self addChild:bgLayer z:-10];
-		
-        float shrinkScale = 0.97f;
-        CCMenuItemImage * playButton = [CCMenuItemImage itemFromNormalImage:@"PlayButtonBigDepressed.png" selectedImage:@"PlayButtonBigDepressed.png" target:self selector:@selector(startGame:)];
-        playButton.selectedImage.scale = shrinkScale;
-        playButton.selectedImage.position = ccp((playButton.normalImage.contentSize.width - playButton.normalImage.contentSize.width*shrinkScale)/2.0f, (playButton.normalImage.contentSize.height - playButton.normalImage.contentSize.height*shrinkScale)/2.0f);
         
+        playMenu = [[GameManager sharedGameManager] menuAtPosition:ccp(screenSize.width/2, screenSize.height/2) imageName:@"playButtonMustacheScene.png" target:self selector:@selector(startGame:)];
+		playMenu.opacity = 100;
+        [self addChild:playMenu];
         
-		playMenu = [CCMenu menuWithItems:playButton, nil];
-		playMenu.position = CGPointMake(-screenSize.width/2, screenSize.height/2);
-		[self addChild:playMenu];
+        CCMenu *backMenu = [[GameManager sharedGameManager] menuAtPosition:CGPointMake(516, screenSize.height-47) imageName:@"backButton.png" target:self selector:@selector(backButtonPressed:)];
         
-        CCMenuItemImage * backButton = [CCMenuItemImage itemFromNormalImage:@"BackButtonDepressed.png" selectedImage:@"BackButtonDepressed.png" target:self selector:@selector(backButtonPressed:)];
-        backButton.selectedImage.scale = shrinkScale;
-        backButton.selectedImage.position = ccp((backButton.normalImage.contentSize.width - backButton.normalImage.contentSize.width*shrinkScale)/2.0f, (backButton.normalImage.contentSize.height - backButton.normalImage.contentSize.height*shrinkScale)/2.0f);
-		
-		CCMenu *backMenu = [CCMenu menuWithItems:backButton, nil];
-		backMenu.position = CGPointMake(516, screenSize.height-47);
 		[self addChild:backMenu];
 
 		//initialize player nodes
@@ -98,9 +91,7 @@
 		
 	if(sum >= 2)
 	{
-		playMenu.position = CGPointMake(512, screenSize.height-384);
         playMenu.opacity = 255;
-        playMenu.visible = YES;
 	}
 		
 }
@@ -139,10 +130,14 @@
 }
 
 -(void) startGame:(id)sender {
+    
+    if(playMenu.opacity == 255) {
 	
-	//disable touches and switch scene
-	[[CCTouchDispatcher sharedDispatcher] removeDelegate:self];
-	[[CCDirector sharedDirector] replaceScene:[HelloWorld scene]];
+        //disable touches and switch scene
+        [[CCTouchDispatcher sharedDispatcher] removeDelegate:self];
+        [[CCDirector sharedDirector] replaceScene:[HelloWorld scene]];
+        
+    }
 		
 }
 
@@ -162,7 +157,6 @@
 		MSGroupNode *currentGroupNode = (MSGroupNode *) [playerNodeArray objectAtIndex:i];
 		BOOL isActive = [currentGroupNode isActive];
 		[[[GameManager sharedGameManager] isPlayerActiveArray] replaceObjectAtIndex:i withObject:[NSNumber numberWithBool:isActive]];
-		//CCLOG(@"isActive: %d", isActive);
 		
 	}
 }

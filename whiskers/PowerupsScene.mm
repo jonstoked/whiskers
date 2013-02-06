@@ -61,7 +61,7 @@
         CCMenu *twitterButton = [self menuAtPosition:ccp(504,-113) imageName:@"twitterButton.png" target:self selector:@selector(twitterButtonTouched)];
         [scrollableLayer addChild:twitterButton];
         
-        CCMenu *backButton = [self menuAtPosition:ccp(79,737) imageName:@"backButtonPowerups.png" target:self selector:@selector(backButtonTouched)];
+        CCMenu *backButton = [self menuAtPosition:ccp(92,730) imageName:@"backButton.png" target:self selector:@selector(backButtonTouched)];
         [scrollableLayer addChild:backButton];
 
             
