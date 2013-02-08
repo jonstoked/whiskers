@@ -26,9 +26,6 @@
 {
 	if( (self=[super init] )) {
         
-        ++[GameManager sharedGameManager].mustachesUnlocked;
-        [GameManager sharedGameManager].hasShownNewStacheMessage = NO;
-        
 		//self.isTouchEnabled = YES;
 		CGSize screenSize = [[CCDirector sharedDirector] winSize];
 		kittyScale = 1.5f;

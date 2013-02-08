@@ -1361,12 +1361,12 @@
     pauseMenuBG.position = [self cocosPosFromAdobePos:ccp(157,555) forSprite:pauseMenuBG];
     [pauseMenuLayer addChild:pauseMenuBG];
 	
-//    [CCMenuItemFont setFontName:@"Courier"];
-//	[CCMenuItemFont setFontSize:46];
-//	CCMenuItemFont* item2 = [CCMenuItemFont itemFromString:@"Force Game End" target:self selector:@selector(menuItem2Touched:)];
-//    CCMenu *menuuu = [CCMenu menuWithItems:item2, nil];
-//    menuuu.position = ccp(screenSize.width/2.0f, screenSize.height*0.9f);
-//    [self addChild:menuuu];
+    [CCMenuItemFont setFontName:@"Courier"];
+	[CCMenuItemFont setFontSize:46];
+	CCMenuItemFont* item2 = [CCMenuItemFont itemFromString:@"Force Game End" target:self selector:@selector(forceGameDone)];
+    CCMenu *menuuu = [CCMenu menuWithItems:item2, nil];
+    menuuu.position = ccp(screenSize.width/2.0f, screenSize.height*0.9f);
+    [self addChild:menuuu];
     
     
     //play button
@@ -1399,7 +1399,7 @@
 	[self resetGame];
 }
 
--(void) menuItem2Touched:(id)sender {
+-(void) forceGameDone {
 	[self gameDone];
 }
 

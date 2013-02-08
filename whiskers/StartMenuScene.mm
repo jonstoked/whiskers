@@ -32,7 +32,6 @@
 		
 		CGSize screenSize = [[CCDirector sharedDirector] winSize];
 		kittyScale = 2.0f;
-		int screenHeight = screenSize.height;
         
         if([[GameManager sharedGameManager] musicOn])
             [[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"HeliotropeBouquet2.mp3" loop:YES];

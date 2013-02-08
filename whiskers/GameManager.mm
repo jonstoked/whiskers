@@ -12,7 +12,7 @@
 @implementation GameManager
 static GameManager* _sharedGameManager = nil;                      
 
-@synthesize isPlayerActiveArray, selectedMustacheArray, finalKittyScales, musicOn, sfxOn, kitties, helloWorldScene, debugRects, debugPoints, playCount, mustachesUnlocked, hasShownNewStacheMessage;
+@synthesize isPlayerActiveArray, selectedMustacheArray, finalKittyScales, musicOn, sfxOn, kitties, helloWorldScene, debugRects, debugPoints, playCount, mustachesUnlocked, hasShownNewStacheMessage, matchCount;
 
 
 +(GameManager*)sharedGameManager 
@@ -88,6 +88,8 @@ static GameManager* _sharedGameManager = nil;
     
     playCount = [[NSUserDefaults standardUserDefaults] integerForKey: @"playCount"];
     mustachesUnlocked = [[NSUserDefaults standardUserDefaults] integerForKey: @"mustachesUnlocked"];
+    matchCount = [[NSUserDefaults standardUserDefaults] integerForKey: @"matchCount"];
+
     
 }
 
@@ -99,9 +101,24 @@ static GameManager* _sharedGameManager = nil;
     
     [[NSUserDefaults standardUserDefaults] setInteger:playCount forKey:@"playCount"];
     [[NSUserDefaults standardUserDefaults] setInteger:mustachesUnlocked forKey:@"mustachesUnlocked"];
-
+    [[NSUserDefaults standardUserDefaults] setInteger:matchCount forKey:@"matchCount"];
+    
 
     [[NSUserDefaults standardUserDefaults] synchronize];
+    
+}
+
+-(void) incrementMatchCount {
+    
+    ++matchCount;
+        
+    if(matchCount == 1 || matchCount % 3 == 0) {
+        
+        //give a new stache
+        ++mustachesUnlocked;
+        hasShownNewStacheMessage = NO;
+    }
+    
     
 }
 

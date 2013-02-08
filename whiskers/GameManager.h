@@ -26,6 +26,7 @@
     int playCount;
     int mustachesUnlocked;
     BOOL hasShownNewStacheMessage;
+    int matchCount;
 	
 }
 
@@ -42,6 +43,8 @@
 @property (nonatomic, assign) int playCount;
 @property (nonatomic, assign) int mustachesUnlocked;
 @property (nonatomic, assign) BOOL hasShownNewStacheMessage;
+@property (nonatomic, assign) int matchCount;
+
 
 
 
@@ -54,6 +57,7 @@
 -(void) loadFromDisk;
 -(ccColor3B) randomWhiskersColor;
 -(CCMenu*) menuAtPosition:(CGPoint)pos imageName:(NSString*)imageName target:(id)t selector:(SEL)s;
+-(void) incrementMatchCount;
 
 
 

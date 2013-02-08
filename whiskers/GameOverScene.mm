@@ -27,6 +27,8 @@
 
 	
 		CGSize screenSize = [[CCDirector sharedDirector] winSize];
+        
+        [[GameManager sharedGameManager] incrementMatchCount];
 		
 		CCLayerColor *bgLayer = [CCLayerColor layerWithColor:ccc4(70, 70, 70, 255)];
 		[self addChild:bgLayer z:-10];
