@@ -237,31 +237,15 @@
 
 - (void) addButtons
 {
-	//offset depressed sprite so it looks as if button drops directly onto the dropshadow
-	CGPoint depressedButtonOffset = ccp(6,2);
+    
+    //rematch button
+    CCMenu *rematchMenu = [[GameManager sharedGameManager] menuAtPosition:ccp(310,99) imageName:@"rematchButton.png" target:self selector:@selector(playAgain:)];
+    [self addChild:rematchMenu];
+    
+    //home button
+    CCMenu *homeMenu = [[GameManager sharedGameManager] menuAtPosition:ccp(757,99) imageName:@"homeButton.png" target:self selector:@selector(resetGame:)];
+    [self addChild:homeMenu];
 	
-	//playAgain Button
-	CCSprite *buttonNormal = [CCSprite spriteWithFile:@"playAgainButton.png"];
-	CCSprite *buttonDepressed = [CCSprite spriteWithFile:@"playAgainButtonDepressed.png"];
-	CCMenuItemSprite *menuItem = [CCMenuItemSprite itemFromNormalSprite:buttonNormal selectedSprite:buttonDepressed 
-										   disabledSprite:nil target:self selector:@selector(playAgain:)];
-	buttonDepressed.position = depressedButtonOffset;
-
-	CCMenu *menu = [CCMenu menuWithItems:menuItem, nil];
-	[self addChild:menu];
-	menu.position = CGPointMake(359,96);  //from AI file
-	
-	
-	//home Button
-	CCSprite *buttonNormal2 = [CCSprite spriteWithFile:@"homeButton.png"];
-	CCSprite *buttonDepressed2 = [CCSprite spriteWithFile:@"homeButtonDepressed.png"];
-	CCMenuItemSprite *menuItem2 = [CCMenuItemSprite itemFromNormalSprite:buttonNormal2 selectedSprite:buttonDepressed2 
-														 disabledSprite:nil target:self selector:@selector(resetGame:)];
-	buttonDepressed2.position = depressedButtonOffset;
-	
-	CCMenu *menu2 = [CCMenu menuWithItems:menuItem2, nil];
-	[self addChild:menu2];
-	menu2.position = CGPointMake(721,96);  //from AI file
 	
 }
 
