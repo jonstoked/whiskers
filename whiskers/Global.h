@@ -9,12 +9,13 @@
 #ifndef whiskers_Global_h
 #define whiskers_Global_h
 
-#define AUTO_START 0
-#define DEBUG_KITTY_SCALE 0 //normal start is 0.08f
+#define AUTO_START 1
+#define FORCE_GAME_END 0
 
 #define ONE_KITTY_MOVING 0
 #define NO_KITTIES_MOVING 0
 
+#define DEBUG_KITTY_SCALE 0 //normal start is 0.08f
 #define WIN_SCALE 1.0f
 #define ABOUT_TO_WIN_SCALE 0.45f
 

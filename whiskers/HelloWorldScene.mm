@@ -761,37 +761,39 @@
 	{		
 		if([[isPlayerActiveArray objectAtIndex:i] integerValue])
 		{
-			if(i==0) // bottom left
+            NSString *fileName = [NSString stringWithFormat: @"button%i.png", i+1];
+            mySprite = [CCSprite spriteWithFile:fileName];
+			
+            if(i==0) // bottom left
 			{
-				mySprite = [CCSprite spriteWithFile:@"cb4.png"];
 				mySprite.position = ccp(buttonPosition/2,buttonPosition/2);
 			}
 			else if(i==1) //bottom right
 			{
-				mySprite = [CCSprite spriteWithFile:@"cb5.png"];
 				mySprite.position = ccp(screenSize.width - buttonPosition/2, buttonPosition/2);
 			}
 			else if(i==2) // top right
 			{
-				mySprite = [CCSprite spriteWithFile:@"cb6.png"];
 				mySprite.position = ccp(screenSize.width - buttonPosition/2, screenSize.height - buttonPosition/2);
 			}
 			else if(i==3) // top left
 			{
-				mySprite = [CCSprite spriteWithFile:@"cb7.png"];
 				mySprite.position = ccp(buttonPosition/2, screenSize.height - buttonPosition/2);
 			}
+            
+            mySprite.position = ccpAdd(mySprite.position, ccp(mySprite.contentSize.width/2.0f, -mySprite.contentSize.height/2.0f));
+            mySprite.anchorPoint = ccp(1,0);
 			
 			mySprite.tag = 4 + i;
-			float myScale = _buttonSize/mySprite.contentSize.width;
-			_maxButtonScale = myScale; //used in animateButtonPress function
-			[mySprite runAction: [CCScaleBy actionWithDuration:0.05 scale:myScale]];
+//			float myScale = _buttonSize/mySprite.contentSize.width;
+//			_maxButtonScale = myScale; //used in animateButtonPress function
+//			[mySprite runAction: [CCScaleBy actionWithDuration:0.05 scale:myScale]];
 			
 			[uiLayer addChild:mySprite z:10];
 		}
 	}
 	
-	_minButtonScale = _maxButtonScale*0.94;
+//	_minButtonScale = _maxButtonScale*0.94;
 	
 	//add pause button
 	CCSprite* pausebutton = [CCSprite spriteWithFile:@"pausebutton2.png"];
@@ -806,16 +808,17 @@
 {	
 	CCSprite *button = (CCSprite*) [uiLayer getChildByTag:tag];
 	
-	if((button.scale == _maxButtonScale) && (![button numberOfRunningActions]))
-	{
-		NSString *textureName = [NSString stringWithFormat: @"cb%idepressed.png", tag];
+//	if((button.scale == _maxButtonScale) && (![button numberOfRunningActions]))
+//	{
+		NSString *textureName = [NSString stringWithFormat: @"button%idown.png", tag-3];
 		CCTexture2D* tex = [[CCTextureCache sharedTextureCache] addImage: textureName];
 		[button setTexture: tex];
+    button.scale = 0.94f;
 		
-		CCAction* scaleDown = [CCScaleBy actionWithDuration:0.015 scale:0.94];
-		scaleDown.tag = 104;
-		[button runAction:scaleDown];
-	}
+//		CCAction* scaleDown = [CCScaleBy actionWithDuration:0.015 scale:0.94];
+//		scaleDown.tag = 104;
+//		[button runAction:scaleDown];
+//	}
 	
 	
 	
@@ -827,16 +830,18 @@
 	CCSprite *button = (CCSprite*) [uiLayer getChildByTag:tag];
 	
 	
-	if((button.scale == _minButtonScale) && (![button numberOfRunningActions]))
-	{
-		NSString *textureName = [NSString stringWithFormat: @"cb%i.png", tag];
+//	if((button.scale == _minButtonScale) && (![button numberOfRunningActions]))
+//	{
+		NSString *textureName = [NSString stringWithFormat: @"button%i.png", tag-3];
 		CCTexture2D* tex = [[CCTextureCache sharedTextureCache] addImage: textureName];
 		[button setTexture: tex];
+    button.scale = 1;
+
 		
-		CCAction* scaleUp = [CCScaleBy actionWithDuration:0.03 scale:(1/0.94)];
-		scaleUp.tag = 105;
-		[button runAction:scaleUp];
-	}
+//		CCAction* scaleUp = [CCScaleBy actionWithDuration:0.03 scale:(1/0.94)];
+//		scaleUp.tag = 105;
+//		[button runAction:scaleUp];
+//	}
 	
 }
 
@@ -1360,14 +1365,17 @@
     pauseMenuBG.opacity = 0.3f*255;
     pauseMenuBG.position = [self cocosPosFromAdobePos:ccp(157,555) forSprite:pauseMenuBG];
     [pauseMenuLayer addChild:pauseMenuBG];
-	
-    [CCMenuItemFont setFontName:@"Courier"];
-	[CCMenuItemFont setFontSize:46];
-	CCMenuItemFont* item2 = [CCMenuItemFont itemFromString:@"Force Game End" target:self selector:@selector(forceGameDone)];
-    CCMenu *menuuu = [CCMenu menuWithItems:item2, nil];
-    menuuu.position = ccp(screenSize.width/2.0f, screenSize.height*0.9f);
-    [self addChild:menuuu];
     
+    if(FORCE_GAME_END == 1) {
+	
+        [CCMenuItemFont setFontName:@"Courier"];
+        [CCMenuItemFont setFontSize:46];
+        CCMenuItemFont* item2 = [CCMenuItemFont itemFromString:@"Force Game End" target:self selector:@selector(forceGameDone)];
+        CCMenu *menuuu = [CCMenu menuWithItems:item2, nil];
+        menuuu.position = ccp(screenSize.width/2.0f, screenSize.height*0.9f);
+        [self addChild:menuuu];
+        
+    }
     
     //play button
     CCMenu* playMenu = [self menuWithAdobePosition:ccp(189,531) imageName:@"playButtonPauseMenu.png"
