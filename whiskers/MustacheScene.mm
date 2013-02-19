@@ -38,7 +38,7 @@
 		playMenu.opacity = 0;
         [self addChild:playMenu];
         
-        CCMenu *backMenu = [[GameManager sharedGameManager] menuAtPosition:CGPointMake(516, screenSize.height-47) imageName:@"backButton.png" target:self selector:@selector(backButtonPressed:)];
+        CCMenu *backMenu = [[GameManager sharedGameManager] menuAtPosition:CGPointMake(516, screenSize.height-47) imageName:@"backButton3.png" target:self selector:@selector(backButtonPressed:)];
         
 		[self addChild:backMenu];
 

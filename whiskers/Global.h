@@ -9,8 +9,8 @@
 #ifndef whiskers_Global_h
 #define whiskers_Global_h
 
-#define AUTO_START 1
-#define FORCE_GAME_END 1
+#define AUTO_START 0
+#define FORCE_GAME_END 0
 
 #define ONE_KITTY_MOVING 0
 #define NO_KITTIES_MOVING 0
@@ -19,7 +19,7 @@
 #define WIN_SCALE 1.0f
 #define ABOUT_TO_WIN_SCALE 0.45f
 
-#define TEST_POWERUP @"star"
+#define TEST_POWERUP @"" // @"star"
 
 #define GAME_FONT @"HelveticaNeue-Bold"
 
