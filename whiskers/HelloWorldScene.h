@@ -37,8 +37,7 @@
 	float _powerupInterval;
 	CCLayerColor *pauseMenuLayer;
 	CCLayerColor *bgLayer;
-	float _minButtonScale;
-	float _maxButtonScale;
+	float minButtonScale;
 	NSMutableArray *isPlayerActiveArray;
 	NSMutableArray *kittyArray;  //array of active kitties, can contain less than 4 objects
     CCMenuItemFont *musicToggle;
@@ -50,6 +49,12 @@
     CGPoint PauseMenuPositionUnpaused;
     
     CCSpriteBatchNode *starStreakBatch;
+    
+    NSMutableArray *touchRects;
+    
+    CGSize screenSize;
+    
+    
     
 
 	

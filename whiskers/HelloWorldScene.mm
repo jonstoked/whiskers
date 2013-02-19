@@ -46,7 +46,9 @@
 	if( (self=[super initWithColor:ccc4(255, 255, 0, 255)])) 
 	{
         [GameManager sharedGameManager].helloWorldScene = self;
-		
+        
+        screenSize = [CCDirector sharedDirector].winSize;
+        
 		//gameManager tests
 		isPlayerActiveArray =  [[GameManager sharedGameManager] isPlayerActiveArray];
         
@@ -132,7 +134,13 @@
         if(TEST_POWERUP != @"") {
             [self addPowerup];
         }
-
+        
+        float l = 200;  //length of touch rect
+        touchRects = [[NSMutableArray alloc] init];
+        [touchRects addObject:[NSValue valueWithCGRect:CGRectMake(0,0,l,l)]];
+        [touchRects addObject:[NSValue valueWithCGRect:CGRectMake(screenSize.width-l,0,l,l)]];
+        [touchRects addObject:[NSValue valueWithCGRect:CGRectMake(screenSize.width-l,screenSize.height-l,l,l)]];
+        [touchRects addObject:[NSValue valueWithCGRect:CGRectMake(0,screenSize.height-l,l,l)]];
 				
 	}
 	return self;
@@ -191,9 +199,7 @@
 	// Instruct the world to perform a single step of simulation. It is
 	// generally best to keep the time step and iterations fixed.
 	_world->Step(dt, velocityIterations, positionIterations);
-	
-	CGSize screenSize = [CCDirector sharedDirector].winSize;
-	
+		
 	//declare collision detection arrays
 	std::vector<MyContact>::iterator pos;
 	std::vector<b2Body *>toDestroy;  //vector of bodies to destroy
@@ -608,7 +614,6 @@
     
     // Get the distance between the two objects
     b2Vec2 d = v2 - v1;
-    float distance = d.Length();
     b2Vec2 dUnit = d;
     dUnit.Normalize();
     
@@ -617,57 +622,26 @@
 }
 
 -(void) ccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-	CGSize screenSize = [CCDirector sharedDirector].winSize;
 	
 	//cycle through touches
 	for( UITouch *touch in touches ) {
 		
 		CGPoint location = [touch locationInView: [touch view]];
 		location = [[CCDirector sharedDirector] convertToGL: location];
-		float buttonPressTolerance = 1.5f;  //how far away you can press your finger from the button and still have it register
-		
+        
+        //turn some kitties
 		if(!_paused)
 		{
-			CCSprite *button4 = (CCSprite*) [uiLayer getChildByTag:4];
-			if(ccpDistance(location, button4.position) < buttonPressTolerance*button4.contentSize.width/2)
-			{
-				Kitty *myKitty = (Kitty *) [gameLayer getChildByTag:0];
-				//[myKitty turnRight];
-				[myKitty startTurning];
-				[self animateButtonPressWithTag:4];
-				
-				
-			}
-			
-			CCSprite *button5 = (CCSprite*) [uiLayer getChildByTag:5];
-			if(ccpDistance(location, button5.position) < buttonPressTolerance*button5.contentSize.width/2)
-			{
-				Kitty *myKitty = (Kitty *) [gameLayer getChildByTag:1];
-				//[myKitty turnRight];
-				[myKitty startTurning];
-				[self animateButtonPressWithTag:5];
-				
-			}
-			
-			CCSprite *button6 = (CCSprite*) [uiLayer getChildByTag:6];
-			if(ccpDistance(location, button6.position) < buttonPressTolerance*button6.contentSize.width/2)
-			{
-				Kitty *myKitty = (Kitty *) [gameLayer getChildByTag:2];
-				//[myKitty turnRight];
-				[myKitty startTurning];
-				[self animateButtonPressWithTag:6];
-				
-			}
-			CCSprite *button7 = (CCSprite*) [uiLayer getChildByTag:7];
-			if(ccpDistance(location, button7.position) < buttonPressTolerance*button7.contentSize.width/2)
-			{
-				Kitty *myKitty = (Kitty *) [gameLayer getChildByTag:3];
-				//[myKitty turnRight];
-				[myKitty startTurning];
-				[self animateButtonPressWithTag:7];
-			}
-		}
-		
+            for(int i = 0; i <= 3; ++i) {
+                CGRect touchRect = [[touchRects objectAtIndex:i] CGRectValue];
+                if(CGRectContainsPoint(touchRect, location)) {
+                    Kitty *myKitty = (Kitty *) [gameLayer getChildByTag:i];
+                    [myKitty startTurning];
+                    [self animateButtonPressWithTag:i+4];
+                }
+            }
+        }
+        
 		CCSprite *pauseButton = (CCSprite*) [uiLayer getChildByTag:kTagPauseButton];
 		if(ccpDistance(location, pauseButton.position) < 3.0f*pauseButton.contentSize.width/2)  //tolerance of three times the button size
 		{
@@ -681,76 +655,36 @@
 			}
 		}
 		
-		
-		
-		
-		
 	}
 }
 
 -(void) ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
-	
-	CGSize screenSize = [CCDirector sharedDirector].winSize;
-	float tolerance = 2.5f; //mutliply tolerance by buttonSize to allow accidentaly sliding fingers off of button area
-	
+		
 	//cycle through touches
 	for(UITouch *touch in touches) {
 		
 		CGPoint location = [touch locationInView: [touch view]];
 		location = [[CCDirector sharedDirector] convertToGL: location];
-		float buttonReleaseTolerance = 4.0f;  //how far away you can lift off your finger from the button and still have it register
+        
+        //stop turning some kities
+        for(int i = 0; i <= 3; ++i) {
+            CGRect touchRect = [[touchRects objectAtIndex:i] CGRectValue];
+            if(CGRectContainsPoint(touchRect, location)) {
+                Kitty *myKitty = (Kitty *) [gameLayer getChildByTag:i];
+                if(myKitty._isTurning)
+                    [myKitty stopTurning];
+                [self animateButtonReleaseWithTag:i+4];
+            }
+        }
+        
 		
-		CCSprite *button4 = (CCSprite*) [uiLayer getChildByTag:4];
-		CCSprite *button5 = (CCSprite*) [uiLayer getChildByTag:5];
-		CCSprite *button6 = (CCSprite*) [uiLayer getChildByTag:6];
-		CCSprite *button7 = (CCSprite*) [uiLayer getChildByTag:7];
-		
-		if(ccpDistance(location, button4.position) < buttonReleaseTolerance*button4.contentSize.width/2)
-		{
-			Kitty *myKitty = (Kitty *) [gameLayer getChildByTag:0];
-			if(myKitty._isTurning)
-				[myKitty stopTurning];
-			[self animateButtonReleaseWithTag:4];
-			
-		}
-		if(ccpDistance(location, button5.position) < buttonReleaseTolerance*button5.contentSize.width/2)
-		{
-			Kitty *myKitty = (Kitty *) [gameLayer getChildByTag:1];
-			if(myKitty._isTurning)
-				[myKitty stopTurning];
-			[self animateButtonReleaseWithTag:5];
-			
-		}
-		if(ccpDistance(location, button6.position) < buttonReleaseTolerance * button6.contentSize.width/2)
-		{
-			Kitty *myKitty = (Kitty *) [gameLayer getChildByTag:2];
-			if(myKitty._isTurning)
-				[myKitty stopTurning];	
-			[self animateButtonReleaseWithTag:6];
-			
-		}
-		if(ccpDistance(location, button7.position) < buttonReleaseTolerance * button7.contentSize.width/2)
-		{
-			Kitty *myKitty = (Kitty *) [gameLayer getChildByTag:3];
-			if(myKitty._isTurning)
-				[myKitty stopTurning];	
-			[self animateButtonReleaseWithTag:7];
-			
-			
-			
-		}
-		
-		
-		
-		
+
 		
 	}
 }
 
 -(void) addButtons {	
-	
-	CGSize screenSize = [CCDirector sharedDirector].winSize;
-	
+		
 	int padding = 8;
 	int buttonPosition = padding + _buttonSize;
 	
@@ -785,15 +719,13 @@
             mySprite.anchorPoint = ccp(1,0);
 			
 			mySprite.tag = 4 + i;
-//			float myScale = _buttonSize/mySprite.contentSize.width;
-//			_maxButtonScale = myScale; //used in animateButtonPress function
-//			[mySprite runAction: [CCScaleBy actionWithDuration:0.05 scale:myScale]];
 			
 			[uiLayer addChild:mySprite z:10];
 		}
 	}
 	
-//	_minButtonScale = _maxButtonScale*0.94;
+    
+    minButtonScale = 0.94f;
 	
 	//add pause button
 	CCSprite* pausebutton = [CCSprite spriteWithFile:@"pausebutton2.png"];
@@ -808,17 +740,14 @@
 {	
 	CCSprite *button = (CCSprite*) [uiLayer getChildByTag:tag];
 	
-//	if((button.scale == _maxButtonScale) && (![button numberOfRunningActions]))
-//	{
+	if(button.scale == 1.0f)
+	{
 		NSString *textureName = [NSString stringWithFormat: @"button%idown.png", tag-3];
 		CCTexture2D* tex = [[CCTextureCache sharedTextureCache] addImage: textureName];
 		[button setTexture: tex];
-    button.scale = 0.94f;
+        button.scale = minButtonScale;
 		
-//		CCAction* scaleDown = [CCScaleBy actionWithDuration:0.015 scale:0.94];
-//		scaleDown.tag = 104;
-//		[button runAction:scaleDown];
-//	}
+	}
 	
 	
 	
@@ -830,25 +759,19 @@
 	CCSprite *button = (CCSprite*) [uiLayer getChildByTag:tag];
 	
 	
-//	if((button.scale == _minButtonScale) && (![button numberOfRunningActions]))
-//	{
+	if(button.scale == minButtonScale)
+	{
 		NSString *textureName = [NSString stringWithFormat: @"button%i.png", tag-3];
 		CCTexture2D* tex = [[CCTextureCache sharedTextureCache] addImage: textureName];
 		[button setTexture: tex];
-    button.scale = 1;
+        button.scale = 1.0f;
 
-		
-//		CCAction* scaleUp = [CCScaleBy actionWithDuration:0.03 scale:(1/0.94)];
-//		scaleUp.tag = 105;
-//		[button runAction:scaleUp];
-//	}
+	}
 	
 }
 
 -(void) addKitties {
-	
-	CGSize screenSize = [CCDirector sharedDirector].winSize;
-	
+		
 	for (int i = 0; i <= 3; ++i) {
 		if([[isPlayerActiveArray objectAtIndex:i] integerValue])
 		{
@@ -985,9 +908,7 @@
 
 -(void) createPowerupCollectible:(int) tag fileName:(NSString*) fileName
 {
-	
-	CGSize screenSize = [CCDirector sharedDirector].winSize;
-	
+		
 	float myScale = 0.7;
 	CCSprite* mySprite = [CCSprite spriteWithFile:fileName];
 	mySprite.tag = tag;
@@ -1092,7 +1013,6 @@
 	//create a random spawn point that does not conflict with current body positions
 	int randomX, randomY;
 	BOOL isBehindKitty = YES;
-	CGSize screenSize = [CCDirector sharedDirector].winSize;
 	CGPoint pos;
 	
 	//make a point, then ceck the point against all body positions, if they overlap, make another one
@@ -1121,7 +1041,6 @@
 -(void) lightningAnimation
 {
 	//blink the screen diferent colors
-	CGSize screenSize = [CCDirector sharedDirector].winSize;
 	float delay = 0.04f;
 	CCSequence* blinkScreen = [CCSequence actions: [CCCallFunc actionWithTarget:self selector:@selector(setBGColorGreen)], [CCDelayTime actionWithDuration:delay],
 							   [CCCallFunc actionWithTarget:self selector:@selector(setBGColorBlue)], [CCDelayTime actionWithDuration:delay],
@@ -1248,8 +1167,6 @@
 
 -(void) pause
 {
-	CGSize screenSize = [CCDirector sharedDirector].winSize;
-	
 	//[[CCDirector sharedDirector] pause];
 	[self unschedule: @selector(tick:)];
 	[self unschedule: @selector(addPellet:)];
@@ -1353,9 +1270,7 @@
 
 
 -(void) addPauseMenu
-{
-	CGSize screenSize = [[CCDirector sharedDirector] winSize];
-	
+{	
     pauseMenuLayer = [CCLayer node];
     pauseMenuLayer.position = PauseMenuPositionUnpaused = ccp(-screenSize.width,0);
     pauseMenuPositionPaused = ccp(0,0);
@@ -1498,6 +1413,7 @@
     }
 	
 	[kittyArray dealloc];
+    [touchRects dealloc];
 	
 	delete _contactListener;
 	delete _world;
