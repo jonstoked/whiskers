@@ -794,7 +794,7 @@
 			
 			//initialize and add kitty
 			Kitty *kitty = [Kitty kittyWithParentNode:gameLayer position:position tag:i world:_world];
-			[gameLayer addChild:kitty];
+			[gameLayer addChild:kitty z:-1];
 			
 			//add kitty to kittyArray
 			[kittyArray addObject:kitty];
@@ -809,6 +809,17 @@
 	
 	
 	int mustacheXoffset = 70; //value taken from AI file
+    
+    //load mustache y offset array
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"mustacheYoffsets" ofType:@"plist"];
+    NSDictionary * dict = [NSDictionary dictionaryWithContentsOfFile:path];
+    NSMutableArray *offsets = [dict objectForKey:@"Root"];
+    
+    //not sure why the offsets look correct without this swapping
+//    [[GameManager sharedGameManager] swapIndecesForArray:offsets index1:1 index2:50];
+//    [[GameManager sharedGameManager] swapIndecesForArray:offsets index1:2 index2:31];
+//    [[GameManager sharedGameManager] swapIndecesForArray:offsets index1:3 index2:42];
+//    [[GameManager sharedGameManager] swapIndecesForArray:offsets index1:4 index2:14];
 	
 	//add mustaches to kitties
 	for (int i=0; i<[kittyArray count]; ++i)
@@ -817,8 +828,9 @@
 		int mustacheNumber = 1 + [[[[GameManager sharedGameManager] selectedMustacheArray] objectAtIndex:kitty.tag] integerValue];
 		NSString *imageName = [NSString stringWithFormat: @"Layer-%i.png", mustacheNumber];
 		CCSprite *musSprite = [CCSprite spriteWithFile:imageName];
-		musSprite.position = ccp(kitty.sprite.contentSize.width/2 + mustacheXoffset, kitty.sprite.contentSize.height/2);
-		[kitty.sprite addChild:musSprite];
+		musSprite.position = ccp(kitty.sprite.contentSize.width/2 + mustacheXoffset, kitty.sprite.contentSize.height/2 -
+                                 [[offsets objectAtIndex:mustacheNumber-1] intValue]);
+		[kitty.sprite addChild:musSprite z:10];
 		
 	}
 	

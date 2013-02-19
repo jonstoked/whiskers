@@ -170,5 +170,13 @@ static GameManager* _sharedGameManager = nil;
     return menu;
 }
 
+-(void) swapIndecesForArray:(NSMutableArray*)array index1:(int)index1 index2:(int)index2 {
+    
+    NSObject *placeHolder = [array objectAtIndex:index1];
+    [array replaceObjectAtIndex:index1 withObject:[array objectAtIndex:index2]];
+    [array replaceObjectAtIndex:index2 withObject:placeHolder];
+    
+}
+
 
 @end
