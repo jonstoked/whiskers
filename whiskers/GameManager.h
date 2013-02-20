@@ -60,6 +60,9 @@
 -(CCMenu*) menuAtPosition:(CGPoint)pos imageName:(NSString*)imageName target:(id)t selector:(SEL)s;
 -(void) incrementMatchCount;
 
+-(void) logFlurryEvent:(NSString*)eventName;
+-(void) logFlurryEvent: (NSString*) eventName withParameters:(NSDictionary*)eventDict;
+
 
 
 @end

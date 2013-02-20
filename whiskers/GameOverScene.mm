@@ -24,7 +24,8 @@
 -(id) init
 {
 	if( (self=[super init] )) {
-
+        
+        [[GameManager sharedGameManager] logFlurryEvent:@"Displayed Game Over"];
 	
 		CGSize screenSize = [[CCDirector sharedDirector] winSize];
         

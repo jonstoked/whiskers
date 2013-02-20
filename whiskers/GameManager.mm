@@ -71,7 +71,8 @@ static GameManager* _sharedGameManager = nil;
             sfxOn = YES;
             musicOn = YES;
             mustachesUnlocked = 5;
-            [Appirater setUsesUntilPrompt:2];
+            [Appirater setUsesUntilPrompt:4];
+            [Appirater setDaysUntilPrompt:2];
             
         }
         ++playCount;
@@ -179,7 +180,21 @@ static GameManager* _sharedGameManager = nil;
 }
 
 -(void) logFlurryEvent:(NSString*)eventName {
+
+    CCLOG(@"logging flurry event: %@", eventName);
+    if (DEBUG != 1) {
+//        [FlurryAnalytics logEvent:eventName];
+    }
     
+}
+
+-(void) logFlurryEvent: (NSString*) eventName withParameters:(NSDictionary*)eventDict {
+    
+    CCLOG(@"logging flurry event: %@ with parameters: %@", eventName, [eventDict description]);
+    
+    if (DEBUG != 1) {
+//        [FlurryAnalytics logEvent:eventName withParameters:eventDict];
+    }
     
 }
 

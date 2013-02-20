@@ -141,7 +141,9 @@
         [touchRects addObject:[NSValue valueWithCGRect:CGRectMake(screenSize.width-l,0,l,l)]];
         [touchRects addObject:[NSValue valueWithCGRect:CGRectMake(screenSize.width-l,screenSize.height-l,l,l)]];
         [touchRects addObject:[NSValue valueWithCGRect:CGRectMake(0,screenSize.height-l,l,l)]];
-				
+                
+        [Flurry logEvent:@"Gameplay" timed:YES];
+        
 	}
 	return self;
 }
@@ -347,7 +349,7 @@
 			//kitty-kitty collision
 			if (spriteA.tag >= 0 && spriteA.tag <= 3 && spriteB.tag >= 0 && spriteB.tag <= 3)
 			{
-				CCLOG(@"kitty-kitty collision!");
+//				CCLOG(@"kitty-kitty collision!");
 				Kitty *kittyA = (Kitty*) bodyA->GetUserData();
 				Kitty *kittyB = (Kitty*) bodyB->GetUserData();
 				kittyA._isTouchingKitty = YES;
@@ -411,7 +413,6 @@
 			if ((spriteA.tag == kTagLightning && spriteB.tag >= 0 && spriteB.tag <= 3) ||
 				(spriteB.tag == kTagLightning && spriteA.tag >= 0 && spriteA.tag <= 3)) 
 			{
-				CCLOG(@"kitty-kitty collision!");
 				if(spriteA.tag == kTagLightning) 
 				{
 					if (std::find(toDestroy.begin(), toDestroy.end(), bodyA) == toDestroy.end()) 
@@ -831,6 +832,10 @@
 		musSprite.position = ccp(kitty.sprite.contentSize.width/2 + mustacheXoffset, kitty.sprite.contentSize.height/2 -
                                  [[offsets objectAtIndex:mustacheNumber-1] intValue]);
 		[kitty.sprite addChild:musSprite z:10];
+        
+        //track mustaches in flurry
+        NSDictionary *eventDict = [NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"%i", mustacheNumber], @"mustacheNumber",nil];
+        [[GameManager sharedGameManager] logFlurryEvent:@"Mustache Selected" withParameters:eventDict];
 		
 	}
 	
@@ -1203,6 +1208,8 @@
     
 	id ease = [CCEaseInOut actionWithAction:moveOnScreen rate:3];
 	[pauseMenuLayer runAction:ease];
+    
+    [[GameManager sharedGameManager] logFlurryEvent:@"Displayed Pause Menu"];
 	
 }
 
@@ -1413,9 +1420,8 @@
 
 // on "dealloc" you need to release all your retained objects
 - (void) dealloc
-{	
-    //[[SimpleAudioEngine sharedEngine] stopBackgroundMusic];
-	//[SimpleAudioEngine end];
+{	    
+    [Flurry endTimedEvent:@"Gameplay" withParameters:nil];
     
     //remove any sprites that have physics bodies before you delete the world
     for(CCSprite *sprite in gameLayer.children) {

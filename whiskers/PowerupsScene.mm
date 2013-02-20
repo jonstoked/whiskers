@@ -23,7 +23,9 @@
 -(id) init
 {
 	if( (self=[super init] )) {
-		        
+        
+        [[GameManager sharedGameManager] logFlurryEvent:@"Displayed Powerups Menu"];
+		      
         [[CCTouchDispatcher sharedDispatcher] addTargetedDelegate:self priority:0 swallowsTouches:YES];
         
         scrollableLayer = [CCLayer node];
@@ -121,7 +123,8 @@
 }
 
 -(void) twitterButtonTouched{
-    //http://www.hightechdad.com/2011/05/18/how-to-pre-populate-twitter-status-updates-the-new-way-via-links-web-intents/
+    
+    [[GameManager sharedGameManager] logFlurryEvent:@"Tapped Twitter Button"];
     
     if ([[FLTwitter defaultManager] isTwitterAvailable]) {
         
@@ -131,6 +134,8 @@
 
     } else {
     
+        //http://www.hightechdad.com/2011/05/18/how-to-pre-populate-twitter-status-updates-the-new-way-via-links-web-intents/
+        
         NSString *stringURL = @"http://twitter.com/intent/tweet?text=%23whiskerspowerup+-+The+next+powerup+should+be...";
         NSURL *url = [NSURL URLWithString:stringURL];
         [[UIApplication sharedApplication] openURL:url];

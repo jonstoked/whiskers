@@ -15,6 +15,7 @@
 #import "Global.h"
 #import "HelloWorldScene.h"
 #import "Appirater.h"
+#import "Flurry.h"
 
 @implementation AppDelegate
 
@@ -130,7 +131,10 @@
     
     [Appirater setAppId:@"605524604"];
     [Appirater appLaunched:YES];
-//    [Appirater setDebug:YES]; //will make review prompt happen every time app is launched
+//    [Appirater setDebug:YES]; //review prompt happens every time app is launched
+    
+    [Flurry startSession:@"7WDH4KXPNSCCM9C875HD"];
+
     
 
 }
@@ -139,6 +143,8 @@ void uncaughtExceptionHandler(NSException *exception) {
     
     CCLOG(@"CRASH: %@", exception);
     CCLOG(@"Stack Trace: %@", [exception callStackSymbols]);
+    
+    [Flurry logError:@"Uncaught" message:[exception name] exception:exception];
     
 }
 

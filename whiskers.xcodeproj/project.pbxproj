@@ -162,7 +162,6 @@
 		6804B19B15182D05000918D4 /* MustacheScene.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6804B18615182D05000918D4 /* MustacheScene.mm */; };
 		6804B19C15182D05000918D4 /* MustacheSelectNode.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6804B18815182D05000918D4 /* MustacheSelectNode.mm */; };
 		6804B19D15182D05000918D4 /* MyContactListener.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6804B18A15182D05000918D4 /* MyContactListener.mm */; };
-		6804B19E15182D05000918D4 /* PauseMenuLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6804B18C15182D05000918D4 /* PauseMenuLayer.mm */; };
 		6804B19F15182D05000918D4 /* PowerupsScene.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6804B18E15182D05000918D4 /* PowerupsScene.mm */; };
 		6804B1A015182D05000918D4 /* StartMenuScene.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6804B19015182D05000918D4 /* StartMenuScene.mm */; };
 		6804B1A315182D1F000918D4 /* exportLayersAndPostions.jsx in Resources */ = {isa = PBXBuildFile; fileRef = 6804B1A215182D1F000918D4 /* exportLayersAndPostions.jsx */; };
@@ -269,6 +268,7 @@
 		6821DC7B16C996B5002A74E4 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6821DC7A16C996B5002A74E4 /* SystemConfiguration.framework */; };
 		6821DC7D16C996BC002A74E4 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6821DC7C16C996BC002A74E4 /* StoreKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		6828675015B0FC4600444BF5 /* ready.png in Resources */ = {isa = PBXBuildFile; fileRef = 6828674E15B0FC4600444BF5 /* ready.png */; };
+		682E615316D544C000D363BC /* libFlurry.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 682E615216D544BF00D363BC /* libFlurry.a */; };
 		68365ADB16C57EB0003078F4 /* button1.png in Resources */ = {isa = PBXBuildFile; fileRef = 68365AD316C57EB0003078F4 /* button1.png */; };
 		68365ADC16C57EB0003078F4 /* button1down.png in Resources */ = {isa = PBXBuildFile; fileRef = 68365AD416C57EB0003078F4 /* button1down.png */; };
 		68365ADD16C57EB0003078F4 /* button2.png in Resources */ = {isa = PBXBuildFile; fileRef = 68365AD516C57EB0003078F4 /* button2.png */; };
@@ -633,8 +633,6 @@
 		6804B18815182D05000918D4 /* MustacheSelectNode.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MustacheSelectNode.mm; sourceTree = "<group>"; };
 		6804B18915182D05000918D4 /* MyContactListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyContactListener.h; sourceTree = "<group>"; };
 		6804B18A15182D05000918D4 /* MyContactListener.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MyContactListener.mm; sourceTree = "<group>"; };
-		6804B18B15182D05000918D4 /* PauseMenuLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PauseMenuLayer.h; sourceTree = "<group>"; };
-		6804B18C15182D05000918D4 /* PauseMenuLayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PauseMenuLayer.mm; sourceTree = "<group>"; };
 		6804B18D15182D05000918D4 /* PowerupsScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PowerupsScene.h; sourceTree = "<group>"; };
 		6804B18E15182D05000918D4 /* PowerupsScene.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PowerupsScene.mm; sourceTree = "<group>"; };
 		6804B18F15182D05000918D4 /* StartMenuScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartMenuScene.h; sourceTree = "<group>"; };
@@ -743,6 +741,8 @@
 		6821DC7A16C996B5002A74E4 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		6821DC7C16C996BC002A74E4 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		6828674E15B0FC4600444BF5 /* ready.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ready.png; sourceTree = "<group>"; };
+		682E615116D544BF00D363BC /* Flurry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flurry.h; sourceTree = "<group>"; };
+		682E615216D544BF00D363BC /* libFlurry.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurry.a; sourceTree = "<group>"; };
 		68365AD316C57EB0003078F4 /* button1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button1.png; sourceTree = "<group>"; };
 		68365AD416C57EB0003078F4 /* button1down.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button1down.png; sourceTree = "<group>"; };
 		68365AD516C57EB0003078F4 /* button2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button2.png; sourceTree = "<group>"; };
@@ -825,6 +825,7 @@
 				6804AF9215182AF7000918D4 /* UIKit.framework in Frameworks */,
 				6804AF9415182AF7000918D4 /* Foundation.framework in Frameworks */,
 				6804AF9615182AF7000918D4 /* CoreGraphics.framework in Frameworks */,
+				682E615316D544C000D363BC /* libFlurry.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -907,6 +908,7 @@
 		6804AFAC15182AF7000918D4 /* libs */ = {
 			isa = PBXGroup;
 			children = (
+				682E615016D544BF00D363BC /* Flurry */,
 				689024A316C990B300B410B9 /* appirater-master */,
 				6804B0A515182AFB000918D4 /* LICENSE_cocos2d.txt */,
 				6804B0B415182AFB000918D4 /* LICENSE_CocosDenshion.txt */,
@@ -1363,8 +1365,6 @@
 				6804B17715182D05000918D4 /* Bomb.mm */,
 				6804B17815182D05000918D4 /* Bullet.h */,
 				6804B17915182D05000918D4 /* Bullet.mm */,
-				6804B18B15182D05000918D4 /* PauseMenuLayer.h */,
-				6804B18C15182D05000918D4 /* PauseMenuLayer.mm */,
 				6804B17D15182D05000918D4 /* GameOverScene.h */,
 				6804B17E15182D05000918D4 /* GameOverScene.mm */,
 				6804B18515182D05000918D4 /* MustacheScene.h */,
@@ -1452,6 +1452,15 @@
 				6804B21415182D5F000918D4 /* Layer-9.png */,
 			);
 			path = mustachesPNG;
+			sourceTree = "<group>";
+		};
+		682E615016D544BF00D363BC /* Flurry */ = {
+			isa = PBXGroup;
+			children = (
+				682E615116D544BF00D363BC /* Flurry.h */,
+				682E615216D544BF00D363BC /* libFlurry.a */,
+			);
+			path = Flurry;
 			sourceTree = "<group>";
 		};
 		689024A316C990B300B410B9 /* appirater-master */ = {
@@ -1968,7 +1977,6 @@
 				6804B19B15182D05000918D4 /* MustacheScene.mm in Sources */,
 				6804B19C15182D05000918D4 /* MustacheSelectNode.mm in Sources */,
 				6804B19D15182D05000918D4 /* MyContactListener.mm in Sources */,
-				6804B19E15182D05000918D4 /* PauseMenuLayer.mm in Sources */,
 				6804B19F15182D05000918D4 /* PowerupsScene.mm in Sources */,
 				6804B1A015182D05000918D4 /* StartMenuScene.mm in Sources */,
 				68B4935A16C18D8800E895E1 /* FLTwitter.mm in Sources */,
@@ -2060,6 +2068,10 @@
 				"GCC_THUMB_SUPPORT[arch=armv6]" = "";
 				INFOPLIST_FILE = whiskers/Resources/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/whiskers/Flurry\"",
+				);
 				OTHER_LDFLAGS = "-lz";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 2;
@@ -2078,6 +2090,10 @@
 				"GCC_THUMB_SUPPORT[arch=armv6]" = "";
 				INFOPLIST_FILE = whiskers/Resources/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/whiskers/Flurry\"",
+				);
 				OTHER_LDFLAGS = "-lz";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 2;

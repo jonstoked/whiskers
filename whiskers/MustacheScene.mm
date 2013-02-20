@@ -26,6 +26,8 @@
 {
 	if( (self=[super init] )) {
         
+        [[GameManager sharedGameManager] logFlurryEvent:@"Displayed Mustache Menu"];
+        
 		//self.isTouchEnabled = YES;
 		CGSize screenSize = [[CCDirector sharedDirector] winSize];
 		kittyScale = 1.5f;
@@ -75,7 +77,6 @@
 
 -(void) tick: (ccTime) dt
 {
-	CGSize screenSize = [[CCDirector sharedDirector] winSize];
 	[self updateIsPlayerActiveArray];
 	
 	//if two or more players have joined, show start game button

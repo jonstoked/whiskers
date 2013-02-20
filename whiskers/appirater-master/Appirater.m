@@ -37,6 +37,8 @@
 #import "Appirater.h"
 #import <SystemConfiguration/SCNetworkReachability.h>
 #include <netinet/in.h>
+#import "GameManager.h"
+
 
 #if ! __has_feature(objc_arc)
 #warning This file must be compiled with ARC. Use -fobjc-arc flag (or convert project to ARC).
@@ -391,7 +393,7 @@ static BOOL _modalOpen = false;
 }
 
 + (void)rateApp {
-	
+    	
 	NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
 	[userDefaults setBool:YES forKey:kAppiraterRatedCurrentVersion];
 	[userDefaults synchronize];
@@ -437,6 +439,8 @@ static BOOL _modalOpen = false;
 			if(self.delegate && [self.delegate respondsToSelector:@selector(appiraterDidDeclineToRate:)]){
 				[self.delegate appiraterDidDeclineToRate:self];
 			}
+            NSDictionary *eventDict = [NSDictionary dictionaryWithObjectsAndKeys:@"don't rate app", @"decision",nil];
+            [[GameManager sharedGameManager] logFlurryEvent:@"Appirater Prompt" withParameters:eventDict];
 			break;
 		}
 		case 1:
@@ -446,16 +450,22 @@ static BOOL _modalOpen = false;
 			if(self.delegate && [self.delegate respondsToSelector:@selector(appiraterDidOptToRate:)]){
 				[self.delegate appiraterDidOptToRate:self];
 			}
+            NSDictionary *eventDict = [NSDictionary dictionaryWithObjectsAndKeys:@"rate app", @"decision",nil];
+            [[GameManager sharedGameManager] logFlurryEvent:@"Appirater Prompt" withParameters:eventDict];
 			break;
 		}
 		case 2:
+        {
 			// remind them later
 			[userDefaults setDouble:[[NSDate date] timeIntervalSince1970] forKey:kAppiraterReminderRequestDate];
 			[userDefaults synchronize];
 			if(self.delegate && [self.delegate respondsToSelector:@selector(appiraterDidOptToRemindLater:)]){
 				[self.delegate appiraterDidOptToRemindLater:self];
 			}
+            NSDictionary *eventDict = [NSDictionary dictionaryWithObjectsAndKeys:@"remind me later", @"decision",nil];
+            [[GameManager sharedGameManager] logFlurryEvent:@"Appirater Prompt" withParameters:eventDict];
 			break;
+        }
 		default:
 			break;
 	}
