@@ -65,16 +65,16 @@ static GameManager* _sharedGameManager = nil;
         gameDict = [[NSMutableDictionary alloc] init];
         
         [self loadFromDisk];
+        
+        //first launch
         if(playCount == 0) {
             sfxOn = YES;
             musicOn = YES;
             mustachesUnlocked = 5;
+            [Appirater setUsesUntilPrompt:2];
+            
         }
         ++playCount;
-        
-
-
-
 
     }
     return self;
@@ -175,6 +175,11 @@ static GameManager* _sharedGameManager = nil;
     NSObject *placeHolder = [array objectAtIndex:index1];
     [array replaceObjectAtIndex:index1 withObject:[array objectAtIndex:index2]];
     [array replaceObjectAtIndex:index2 withObject:placeHolder];
+    
+}
+
+-(void) logFlurryEvent:(NSString*)eventName {
+    
     
 }
 

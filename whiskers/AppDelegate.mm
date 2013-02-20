@@ -14,7 +14,7 @@
 #import "StartMenuScene.h"
 #import "Global.h"
 #import "HelloWorldScene.h"
-#import "LocalyticsSession.h"
+#import "Appirater.h"
 
 @implementation AppDelegate
 
@@ -126,9 +126,11 @@
     else 
         [[CCDirector sharedDirector] runWithScene: [HelloWorld scene]];
     
-    [[LocalyticsSession sharedLocalyticsSession] startSession:@"128cc59ede29323b0642c1e-0e230c76-9ae7-11e1-38dd-00ef75f32667"];
-    
     NSSetUncaughtExceptionHandler(&uncaughtExceptionHandler);
+    
+    [Appirater setAppId:@"605524604"];
+    [Appirater appLaunched:YES];
+//    [Appirater setDebug:YES]; //will make review prompt happen every time app is launched
     
 
 }
@@ -157,16 +159,13 @@ void uncaughtExceptionHandler(NSException *exception) {
 -(void) applicationDidEnterBackground:(UIApplication*)application {
     
 	[[CCDirector sharedDirector] stopAnimation];
-    [[LocalyticsSession sharedLocalyticsSession] close];
-    [[LocalyticsSession sharedLocalyticsSession] upload];
     [[GameManager sharedGameManager] saveToDisk];
     
 }
 
 -(void) applicationWillEnterForeground:(UIApplication*)application {
 	[[CCDirector sharedDirector] startAnimation];
-    [[LocalyticsSession sharedLocalyticsSession] resume];
-    [[LocalyticsSession sharedLocalyticsSession] upload];
+    [Appirater appEnteredForeground:YES];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
@@ -179,9 +178,6 @@ void uncaughtExceptionHandler(NSException *exception) {
 	[window release];
 	
 	[director end];	
-    
-    [[LocalyticsSession sharedLocalyticsSession] close];
-    [[LocalyticsSession sharedLocalyticsSession] upload];
     
     [[GameManager sharedGameManager] saveToDisk];
 }
