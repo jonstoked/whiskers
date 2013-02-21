@@ -182,9 +182,9 @@ static GameManager* _sharedGameManager = nil;
 -(void) logFlurryEvent:(NSString*)eventName {
 
     CCLOG(@"logging flurry event: %@", eventName);
-    if (DEBUG != 1) {
-//        [FlurryAnalytics logEvent:eventName];
-    }
+//    if (DEBUG != 1) {
+        [Flurry logEvent:eventName];
+//    }
     
 }
 
@@ -192,9 +192,9 @@ static GameManager* _sharedGameManager = nil;
     
     CCLOG(@"logging flurry event: %@ with parameters: %@", eventName, [eventDict description]);
     
-    if (DEBUG != 1) {
-//        [FlurryAnalytics logEvent:eventName withParameters:eventDict];
-    }
+//    if (DEBUG != 1) {
+        [Flurry logEvent:eventName withParameters:eventDict];
+//    }
     
 }
 
