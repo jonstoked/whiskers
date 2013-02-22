@@ -97,8 +97,8 @@
 -(id) initWithParentNode:(CCNode*)parentNode position:(CGPoint)position tag:(int)tag world:(b2World*)world;
 -(void) tick: (ccTime) dt;
 -(void) dealloc;
--(void) growWithScale: (float) myScale;
--(void) shrinkWithScale: (float) myScale;
+-(void) growWithScale: (float) scale;
+-(void) shrinkWithScale: (float) scale;
 -(void) turnRight;
 -(void) changeRotation;
 -(void) shootTurret;

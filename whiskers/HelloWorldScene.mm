@@ -121,13 +121,17 @@
 		
 		_contactListener = new MyContactListener();
 		_world->SetContactListener(_contactListener);
+        
+        if(DONT_SPAWN_COLLECTIBLES != 1) {
 		
-		[self schedule: @selector(addPellet:) interval:_pelletInterval];
-		
-		//don't start adding powerups until 15 seconds in
-		CCSequence* delayedAddPowerupCall = [CCSequence actions:[CCDelayTime actionWithDuration:2.0f], [CCCallFunc actionWithTarget:self selector:@selector(startAddPowerup)], nil];
-		delayedAddPowerupCall.tag = 104;
-		[self runAction:delayedAddPowerupCall];
+            [self schedule: @selector(addPellet:) interval:_pelletInterval];
+            
+            //don't start adding powerups until 15 seconds in
+            CCSequence* delayedAddPowerupCall = [CCSequence actions:[CCDelayTime actionWithDuration:2.0f], [CCCallFunc actionWithTarget:self selector:@selector(startAddPowerup)], nil];
+            delayedAddPowerupCall.tag = 104;
+            [self runAction:delayedAddPowerupCall];
+        
+        }
 		
 		[self schedule: @selector(tick:)];
 		
@@ -141,8 +145,10 @@
         [touchRects addObject:[NSValue valueWithCGRect:CGRectMake(screenSize.width-l,0,l,l)]];
         [touchRects addObject:[NSValue valueWithCGRect:CGRectMake(screenSize.width-l,screenSize.height-l,l,l)]];
         [touchRects addObject:[NSValue valueWithCGRect:CGRectMake(0,screenSize.height-l,l,l)]];
-                
-        [Flurry logEvent:@"Gameplay" timed:YES];
+        
+        if(DEBUG != 1)
+            [Flurry logEvent:@"Gameplay" timed:YES];
+        
         
 	}
 	return self;
@@ -212,11 +218,10 @@
 	
 	
 	// grow/shrink scales for powerups
-    float scaleScale = 1.2f; //how fast that game gon' end?
-	float pelletScale = 1.2f*scaleScale;
+	float pelletScale, starScale, lightningShrinkScale;
+    pelletScale = starScale = lightningShrinkScale = 1.44f;
 	float bulletScale = 1.03f;
-	float lightningGrowScale = 1.4f*scaleScale;
-    float lightningShrinkScale = 1.2f*scaleScale;
+	float lightningGrowScale = 1.68f;
 	
 	
 	//Iterate over the bodies in the physics world
@@ -243,6 +248,13 @@
 					b->SetTransform(b2Vec2(b->GetPosition().x,0), b->GetAngle());
 				else if(b->GetPosition().y < 0)
 					b->SetTransform(b2Vec2(b->GetPosition().x,screenSize.height/PTM_RATIO), b->GetAngle());
+                
+//                if([b->GetUserData() isKindOfClass:[Kitty class]]) {
+//                    Kitty* kitty = (Kitty*) b->GetUserData();
+//                    [kitty wentOffScreen];
+//
+//                }
+
 			}
 			
 			else //destroy arrows that are fired off screen
@@ -369,17 +381,17 @@
 				if(kittyA._hasStar)
 				{
 					[kittiesToShrink addObject: [NSNumber numberWithInteger:spriteB.tag]];
-					[shrinkScales addObject: [NSNumber numberWithFloat:pelletScale]];
+					[shrinkScales addObject: [NSNumber numberWithFloat:starScale]];
 					[kittiesToGrow addObject: [NSNumber numberWithInteger:spriteA.tag]];
-					[growScales addObject: [NSNumber numberWithFloat:pelletScale]];
+					[growScales addObject: [NSNumber numberWithFloat:starScale]];
 					[kittyA lostStar];
 				}
 				else if (kittyB._hasStar)
 				{
 					[kittiesToShrink addObject: [NSNumber numberWithInteger:spriteA.tag]];
-					[shrinkScales addObject: [NSNumber numberWithFloat:pelletScale]];
+					[shrinkScales addObject: [NSNumber numberWithFloat:starScale]];
 					[kittiesToGrow addObject: [NSNumber numberWithInteger:spriteB.tag]];
-					[growScales addObject: [NSNumber numberWithFloat:pelletScale]];
+					[growScales addObject: [NSNumber numberWithFloat:starScale]];
 					[kittyB lostStar];
 					
 					
@@ -1209,6 +1221,7 @@
 	id ease = [CCEaseInOut actionWithAction:moveOnScreen rate:3];
 	[pauseMenuLayer runAction:ease];
     
+    
     [[GameManager sharedGameManager] logFlurryEvent:@"Displayed Pause Menu"];
 	
 }
@@ -1420,8 +1433,9 @@
 
 // on "dealloc" you need to release all your retained objects
 - (void) dealloc
-{	    
-    [Flurry endTimedEvent:@"Gameplay" withParameters:nil];
+{
+    if(DEBUG != 1)
+        [Flurry endTimedEvent:@"Gameplay" withParameters:nil];
     
     //remove any sprites that have physics bodies before you delete the world
     for(CCSprite *sprite in gameLayer.children) {

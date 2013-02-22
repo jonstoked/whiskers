@@ -37,8 +37,8 @@ hasMagnet, isBeingSucked, shouldSuck, tailPosition, isFacingOtherKitty, starStre
 {
 	if ((self = [super init]))
 	{
-        float kittyScale = 0.08f;
-        if(DEBUG_KITTY_SCALE != 0)
+        float kittyScale = START_SCALE;
+        if(DEBUG_KITTY_SCALE != 0 && tag==1)
             kittyScale = DEBUG_KITTY_SCALE;
             
         _bulletCount = 0;
@@ -128,7 +128,9 @@ hasMagnet, isBeingSucked, shouldSuck, tailPosition, isFacingOtherKitty, starStre
 {
 	
 	float f;
-	
+    
+    float minMass = 1.0;
+    float maxMass = 100.0;
 	
 	//make kitty move forward automatically by applying a force every tick
 	if(_isMoving && !isBeingSucked)
@@ -140,10 +142,10 @@ hasMagnet, isBeingSucked, shouldSuck, tailPosition, isFacingOtherKitty, starStre
 		
 		//scale applied force based on the mass
 		//define points for slope-intercept form
-		float minMass = 1.0; float x1 = minMass;
-		float maxMass = 100.0; float x2 = maxMass;
-		float minForce = 75.0; float y1 = minForce;  //was 50
-		float maxForce = 1600.0; float y2 = maxForce;  //was 2400
+		float x1 = minMass;
+		float x2 = maxMass;
+		float minForce = 75.0; float y1 = minForce; //75
+		float maxForce = 1100.0; float y2 = maxForce;  //1600
 		
 		//determine slope and y-intercept of scaling function
 		float slope = (y1 - y2)/(x1 - x2);
@@ -154,6 +156,24 @@ hasMagnet, isBeingSucked, shouldSuck, tailPosition, isFacingOtherKitty, starStre
 		f = mass*slope + b;
 		if(_hasStar)
 			f = 2.5*f;  //speed up kitty if he has a star
+        
+        //slightly speed up kitty in mid-range sizes because I can't fucking write a function to give quadratic coefficents
+        //FFUFFFUUFUFUCK
+        //http://www.wolframalpha.com/input/?i=y+%3D+-5x%5E2+%2B+5x
+        
+        float boostFactor = 3.5f;
+        float midRangeBoost = -boostFactor*sprite.scale*sprite.scale + boostFactor*sprite.scale;
+        
+        if(sprite.scale <= WIN_SCALE *0.7f) {
+            f += f * midRangeBoost;
+        }
+        
+        if(self.tag == 1) {
+            CCLOG(@"midRangeBoost: %f", midRangeBoost);
+            CCLOG(@"force: %f", f);
+            CCLOG(@"scale: %f", sprite.scale);
+            
+        }
 		
 		forceVec *= f; //multiply force unit vector by scalar
 		b2Vec2 linVel = body->GetLinearVelocity();
@@ -171,10 +191,10 @@ hasMagnet, isBeingSucked, shouldSuck, tailPosition, isFacingOtherKitty, starStre
 		
 		//scale applied torque based on the mass
 		//define points for slope-intercept form
-		float minMass = 1.0; float x1 = minMass;
-		float maxMass = 100.0; float x2 = maxMass;
+		float x1 = minMass;
+		float x2 = maxMass;
 		float minTorque = 3.0; float y1 = minTorque;
-		float maxTorque = 900.0; float y2 = maxTorque; //was 900
+		float maxTorque = 900.0; float y2 = maxTorque; //900
 		
 		//determine slope and y-intercept of scaling function
 		float slope = (y1 - y2)/(x1 - x2);
@@ -184,25 +204,31 @@ hasMagnet, isBeingSucked, shouldSuck, tailPosition, isFacingOtherKitty, starStre
 		
 		//scale maximum angular velocity based on mass
 		//define points for slope-intercept form
-		//float minMass = 1.0; float x1 = minMass;
-		//float maxMass = 100.0; float x2 = maxMass;
+        x1 = START_SCALE;
+        x2 = WIN_SCALE;
 		float minAngVel = 3.0; y1 = minAngVel;
-		float maxAngVel = 0.2; y2 = maxAngVel; 
+		float maxAngVel = 0.0; y2 = maxAngVel;  //0.2f
 		
 		//determine slope and y-intercept of scaling function
+//		slope = (y1 - y2)/(x1 - x2);
+//		b = y1 - slope*x1;
+//		mass = body->GetMass();
+//		float angVel = slope*mass + b;
 		slope = (y1 - y2)/(x1 - x2);
 		b = y1 - slope*x1;
-		mass = body->GetMass();
-		float angVel = slope*mass + b;
+		float angVel = slope*sprite.scale + b;
+        
 		
 		//set maximum angular velocity, so kitty can't spin faster as he gets bigger
-		if( body->GetAngularVelocity() > -angVel)
+		if( body->GetAngularVelocity() > -angVel) {
+            CCLOG(@"Applying Torque: %f", torque);
 			body->ApplyTorque(-torque);
+
+        }
 		
-		//CCLOG(@"Force: %f", f);
-		//CCLOG(@"Angular Velocity: %f", body->GetAngularVelocity());
-		//CCLOG(@"Angular Velocity: %f", angVel);
-		//CCLOG(@"Torque: %f", torque);
+		CCLOG(@"Force: %f", f);
+		CCLOG(@"Angular Velocity: %f", body->GetAngularVelocity());
+		CCLOG(@"Angular Velocity: %f", angVel);
 		
 	}
 	
@@ -245,8 +271,13 @@ hasMagnet, isBeingSucked, shouldSuck, tailPosition, isFacingOtherKitty, starStre
     
 }
 
--(void) growWithScale: (float) myScale
-{		
+-(void) growWithScale: (float) scale
+{
+    float myScale = scale;
+    if(sprite.scale > 0.65f && scale > 1.0f/0.85f) {
+        myScale = myScale * 0.85f; //don't grow so much when you are big
+    }
+    
 	[sprite runAction: [CCScaleBy actionWithDuration:0.1 scale:myScale]];
 	
 	//destroy current fixture and re-create a larger one
@@ -280,10 +311,9 @@ hasMagnet, isBeingSucked, shouldSuck, tailPosition, isFacingOtherKitty, starStre
 //    }
 }
 
--(void) shrinkWithScale: (float) myScale
-{	
-	CCLOG(@"scale: %f", sprite.scale);
-	
+-(void) shrinkWithScale: (float) scale
+{
+    float myScale = scale;
 	if(sprite.scale/myScale > 0.08f)
 	{
         

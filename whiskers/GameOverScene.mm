@@ -92,7 +92,6 @@
 			NSString *imageName = [NSString stringWithFormat: @"Layer-%i.png", mustacheNumber];
 			CCSprite *musSprite = [CCSprite spriteWithFile:imageName];
 			musSprite.position = ccp(kittySprite.contentSize.width/2 + mustacheXoffset, kittySprite.contentSize.height/2);
-			//musSprite.position = ccpAdd(musSprite.position, ccp(mustacheXoffset, 0));
 			[kittySprite addChild:musSprite];
 			
 		}
@@ -107,7 +106,6 @@
 		
 		//the kitties will be stacked on top of each other, biggest to smallest, to show their relative size
 		//each consecutive kitty will be offset to the right by...
-		//CGPoint kittyOffset = ccp(134,0); //some random screen math :)
         CGPoint kittyOffset = ccp(134,0); //some random screen math :)
         
         NSMutableArray* kittySeparation = [[NSMutableArray alloc] init];
@@ -124,12 +122,16 @@
 			if(i==0)
 			{
 				[self addWinnerTextForSprite:sprite];
-				//if(sprite.scale > 0.8f)
-                sprite.scale = 0.8f;  //winning size        
+                sprite.scale = 0.9f;  //win_scale is a little too big
                 bigKittyWidth = sprite.boundingBox.size.width;
                 allKittiesWidth = bigKittyWidth;
 			}
             else  {
+                if(sprite.scale > 0.9f) {
+                    sprite.scale = 0.9f;
+                } else {
+                    sprite.scale = sprite.scale *0.9f;
+                }
                 allKittiesWidth = allKittiesWidth + sprite.boundingBox.size.width*0.9f;
                 [kittySeparation addObject:[NSNumber numberWithFloat:sprite.boundingBox.size.width*0.9f]];
             }
@@ -146,14 +148,13 @@
         
             
         
-        //CGPoint biggestKittyLowerRight = ccp(screenSize.width/2, screenSize.height/4);
         CGPoint biggestKittyLowerRight;
 
         for(int i = 0 ; i < [sortedKittySpriteArray count]; ++i)
 		{
 			CCSprite *sprite = (CCSprite*) [sortedKittySpriteArray objectAtIndex:i];
             if(i==0) {
-                 biggestKittyLowerRight = ccp(screenSize.width/2.0f - allKittiesWidth/2.0f + bigKittyWidth, screenSize.height/4);
+                 biggestKittyLowerRight = ccp(screenSize.width/2.0f - allKittiesWidth/2.0f + bigKittyWidth, screenSize.height/4-14);
             }
                 
 			
@@ -240,11 +241,11 @@
 {
     
     //rematch button
-    CCMenu *rematchMenu = [[GameManager sharedGameManager] menuAtPosition:ccp(310,99) imageName:@"rematchButton.png" target:self selector:@selector(playAgain:)];
+    CCMenu *rematchMenu = [[GameManager sharedGameManager] menuAtPosition:ccp(310,83) imageName:@"rematchButton.png" target:self selector:@selector(playAgain:)];
     [self addChild:rematchMenu];
     
     //home button
-    CCMenu *homeMenu = [[GameManager sharedGameManager] menuAtPosition:ccp(757,99) imageName:@"homeButton.png" target:self selector:@selector(resetGame:)];
+    CCMenu *homeMenu = [[GameManager sharedGameManager] menuAtPosition:ccp(757,83) imageName:@"homeButton.png" target:self selector:@selector(resetGame:)];
     [self addChild:homeMenu];
 	
 	

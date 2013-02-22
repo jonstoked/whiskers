@@ -112,10 +112,9 @@ static GameManager* _sharedGameManager = nil;
 -(void) incrementMatchCount {
     
     ++matchCount;
-        
-    if(matchCount == 1 || matchCount % 3 == 0) {
-        
-        //give a new stache
+    
+    //heck, lets give a new mustache every round
+    if(mustachesUnlocked < 51) {
         ++mustachesUnlocked;
         hasShownNewStacheMessage = NO;
     }
@@ -182,9 +181,9 @@ static GameManager* _sharedGameManager = nil;
 -(void) logFlurryEvent:(NSString*)eventName {
 
     CCLOG(@"logging flurry event: %@", eventName);
-//    if (DEBUG != 1) {
+    if (DEBUG != 1) {
         [Flurry logEvent:eventName];
-//    }
+    }
     
 }
 
@@ -192,9 +191,9 @@ static GameManager* _sharedGameManager = nil;
     
     CCLOG(@"logging flurry event: %@ with parameters: %@", eventName, [eventDict description]);
     
-//    if (DEBUG != 1) {
+    if (DEBUG != 1) {
         [Flurry logEvent:eventName withParameters:eventDict];
-//    }
+    }
     
 }
 

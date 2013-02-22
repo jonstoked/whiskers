@@ -9,18 +9,22 @@
 #ifndef whiskers_Global_h
 #define whiskers_Global_h
 
-#define AUTO_START 0
-#define FORCE_GAME_END 0
 
+#ifdef DEBUG
+
+#define AUTO_START 1
+#define FORCE_GAME_END 1
 #define ONE_KITTY_MOVING 0
 #define NO_KITTIES_MOVING 0
+#define DEBUG_KITTY_SCALE 0.67f //normal start is 0.08f
+#define TEST_POWERUP @"" // @"star"
+#define DONT_SPAWN_COLLECTIBLES 0
 
-#define DEBUG_KITTY_SCALE 0 //normal start is 0.08f
+#endif
+
+#define START_SCALE 0.08f
 #define WIN_SCALE 1.0f
 #define ABOUT_TO_WIN_SCALE 0.45f
-
-#define TEST_POWERUP @"" // @"star"
-
 #define GAME_FONT @"HelveticaNeue-Bold"
 
 static const ccColor3B whiskersGreen = {96, 246, 133};
@@ -28,8 +32,6 @@ static const ccColor3B whiskersYellow = {246, 207, 95};
 static const ccColor3B whiskersBlue = {95, 134, 246};
 static const ccColor3B whiskersPink = {246, 95, 209};
 static const ccColor3B whiskersOrange = {246, 132, 95};
-
-
 
 typedef enum {
     POWERUP_TYPE_NONE,
