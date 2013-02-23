@@ -16,7 +16,7 @@
 #define FORCE_GAME_END 0
 #define ONE_KITTY_MOVING 0
 #define NO_KITTIES_MOVING 0
-#define DEBUG_KITTY_SCALE 0.65f //normal start is 0.08f
+#define DEBUG_KITTY_SCALE 0 //normal start is 0.08f
 #define TEST_POWERUP @"" // @"star"
 #define DONT_SPAWN_COLLECTIBLES 0
 #define DEBUG_WENT_OFFSCREEN 1

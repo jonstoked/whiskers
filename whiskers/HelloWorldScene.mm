@@ -149,9 +149,24 @@
         if(DEBUG != 1)
             [Flurry logEvent:@"Gameplay" timed:YES];
         
+        comingFeb = [CCSprite spriteWithFile:@"comingFeb.png"];
+        comingFeb.position = ccp(512,56);
+        [uiLayer addChild:comingFeb];
+        [self schedule:@selector(removeComingFeb)];
+        
         
 	}
 	return self;
+}
+
+-(void) removeComingFeb {
+    
+    [self unschedule:@selector(removeComingFeb)];
+    id delay = [CCDelayTime actionWithDuration:4.0f];
+    id fade = [CCFadeOut actionWithDuration:0.4f];
+    id seq  = [CCSequence actions:delay,fade, nil];
+    [comingFeb runAction:seq];
+
 }
 
 -(void) draw

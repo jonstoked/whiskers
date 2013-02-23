@@ -55,6 +55,8 @@
     
     CGSize screenSize;
     
+    CCSprite *comingFeb;
+    
     
     
 

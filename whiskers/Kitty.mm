@@ -164,19 +164,19 @@ hasMagnet, isBeingSucked, shouldSuck, tailPosition, isFacingOtherKitty, starStre
         //FFUFFFUUFUFUCK
         //http://www.wolframalpha.com/input/?i=y+%3D+-5x%5E2+%2B+5x
         
-        float boostFactor = 3.5f;
+        float boostFactor = 4.5f;
         float midRangeBoost = -boostFactor*sprite.scale*sprite.scale + boostFactor*sprite.scale;
         
         if(sprite.scale <= WIN_SCALE *0.7f) {
             f += f * midRangeBoost;
         }
         
-//        if(self.tag == 1) {
-//            CCLOG(@"midRangeBoost: %f", midRangeBoost);
-//            CCLOG(@"force: %f", f);
-//            CCLOG(@"scale: %f", sprite.scale);
-//            
-//        }
+        if(self.tag == 2) {
+            CCLOG(@"midRangeBoost: %f", midRangeBoost);
+            CCLOG(@"force: %f", f);
+            CCLOG(@"scale: %f", sprite.scale);
+            
+        }
 		
 		forceVec *= f; //multiply force unit vector by scalar
 		b2Vec2 linVel = body->GetLinearVelocity();
@@ -277,8 +277,8 @@ hasMagnet, isBeingSucked, shouldSuck, tailPosition, isFacingOtherKitty, starStre
 -(void) growWithScale: (float) scale
 {
     float myScale = scale;
-    if(sprite.scale > 0.65f && scale > 1.0f/0.85f) {
-        myScale = myScale * 0.85f; //don't grow so much when you are big
+    if(sprite.scale > 0.65f && scale > 1.0f/0.9f) {
+        myScale = myScale * 0.9f; //don't grow so much when you are big
     }
     
 	[sprite runAction: [CCScaleBy actionWithDuration:0.1 scale:myScale]];
@@ -628,40 +628,42 @@ hasMagnet, isBeingSucked, shouldSuck, tailPosition, isFacingOtherKitty, starStre
 -(void) stopTurningAgain: (ccTime) dt {
     [self unschedule:@selector(stopTurningAgain:)];
     body->SetAngularVelocity(0);
-    body->SetFixedRotation(false); 
+    body->SetFixedRotation(false);
 }
 
 //makes kitty turn around if he is touching another kitty for too long
 -(void) turnAround
 {
-	if(!turnAroundRecentlyCalled && smallerKitty && isFacingOtherKitty)
-	{
-		turnAroundRecentlyCalled = YES;
-		
-		//waits three seconds and then allows turnAround() to becalled again
-		CCSequence* resetTurnAroundSequence = [CCSequence actions:[CCDelayTime actionWithDuration:3.0f], [CCCallFunc actionWithTarget:self selector:@selector(resetTurnAroundRecentlyCalled)], nil];
-		[self runAction:resetTurnAroundSequence];
-		body->SetTransform(body->GetPosition(),(body->GetAngle() + M_PI));
-		
-	}
+	if(!turnAroundRecentlyCalled) {
+        
+        if((smallerKitty && isFacingOtherKitty) || recentlyWentOffScreen) {
+            turnAroundRecentlyCalled = YES;
+            
+            //waits three seconds and then allows turnAround() to becalled again
+            CCSequence* resetTurnAroundSequence = [CCSequence actions:[CCDelayTime actionWithDuration:3.0f], [CCCallFunc actionWithTarget:self selector:@selector(resetTurnAroundRecentlyCalled)], nil];
+            [self runAction:resetTurnAroundSequence];
+            body->SetTransform(body->GetPosition(),(body->GetAngle() + M_PI));
+            
+        }
+    }
 }
 
--(void) resetTurnAroundRecentlyCalled  //used so the function is not called more than one time per second
+-(void) resetTurnAroundRecentlyCalled  
 {
 	turnAroundRecentlyCalled = NO;
 }
 
 -(void) wentOffScreen {
     
-    CCLOG(@"kitty wentOffScreen");
+//    CCLOG(@"kitty wentOffScreen");
     
     if(!recentlyWentOffScreen ) {
         recentlyWentOffScreen = YES;
         [self schedule:@selector(resetWentOffScreen) interval:0.2f];
     } else {
         //force turnAround
-        body->SetTransform(body->GetPosition(),(body->GetAngle() + M_PI));
-        [self resetWentOffScreen];
+//        body->SetTransform(body->GetPosition(),(body->GetAngle() + M_PI));
+        [self turnAround];
     }
     
 }
