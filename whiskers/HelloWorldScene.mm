@@ -240,20 +240,29 @@
 			//check if body went off screen
 			if(myActor.tag != kTagBullet)
 			{
-				if(b->GetPosition().x > screenSize.width/PTM_RATIO)
+                BOOL wentOffScreen = NO;
+				if(b->GetPosition().x > screenSize.width/PTM_RATIO) {
 					b->SetTransform(b2Vec2(0,b->GetPosition().y), b->GetAngle());
-				else if(b->GetPosition().x < 0)
+                    wentOffScreen = YES;
+                }
+				else if(b->GetPosition().x < 0) {
 					b->SetTransform(b2Vec2(screenSize.width/PTM_RATIO,b->GetPosition().y), b->GetAngle());
-				else if(b->GetPosition().y > screenSize.height/PTM_RATIO)
+                    wentOffScreen = YES;
+                }
+				else if(b->GetPosition().y > screenSize.height/PTM_RATIO) {
 					b->SetTransform(b2Vec2(b->GetPosition().x,0), b->GetAngle());
-				else if(b->GetPosition().y < 0)
+                    wentOffScreen = YES;
+                }
+				else if(b->GetPosition().y < 0) {
 					b->SetTransform(b2Vec2(b->GetPosition().x,screenSize.height/PTM_RATIO), b->GetAngle());
+                    wentOffScreen = YES;
+                }
                 
-//                if([b->GetUserData() isKindOfClass:[Kitty class]]) {
-//                    Kitty* kitty = (Kitty*) b->GetUserData();
-//                    [kitty wentOffScreen];
-//
-//                }
+                if(wentOffScreen && [b->GetUserData() isKindOfClass:[Kitty class]]) {
+                    Kitty* kitty = (Kitty*) b->GetUserData();
+                    [kitty wentOffScreen];
+
+                }
 
 			}
 			
@@ -796,7 +805,11 @@
 				position = ccp(screenSize.width/4, screenSize.height/4);
 			}
 			else if(i == 1) {
-				position = ccp(screenSize.width*3/4, screenSize.height/4);
+                if(DEBUG_WENT_OFFSCREEN == 1) {
+                    position = ccp(screenSize.width/2, screenSize.height/4);
+                } else {
+                    position = ccp(screenSize.width*3/4, screenSize.height/4);
+                }
 			}
 			else if(i==2) {
 				position = ccp(screenSize.width*3/4, screenSize.height*3/4);

@@ -25,7 +25,7 @@
 @synthesize sprite, body, fixture, _hasStar, _aboutToWin, _hasTurret,
 _bulletCount, _isTurning, _currentExtent, _maxExtent, _minExtent, sewingMachineSound,
 _isTouchingKitty, leftEyePos, rightEyePos, smallerKitty, isTouchingKittyCount, particleSystemStarTrail,
-hasMagnet, isBeingSucked, shouldSuck, tailPosition, isFacingOtherKitty, starStreakBatch;
+hasMagnet, isBeingSucked, shouldSuck, tailPosition, isFacingOtherKitty, starStreakBatch, wentOffScreenCount;
 
 
 +(id) kittyWithParentNode:(CCNode*)parentNode position:(CGPoint)position tag:(int)tag world:(b2World*)world
@@ -40,6 +40,9 @@ hasMagnet, isBeingSucked, shouldSuck, tailPosition, isFacingOtherKitty, starStre
         float kittyScale = START_SCALE;
         if(DEBUG_KITTY_SCALE != 0 && tag==1)
             kittyScale = DEBUG_KITTY_SCALE;
+        
+        if(DEBUG_WENT_OFFSCREEN != 0 && tag == 1)
+            kittyScale = 0.65f;
             
         _bulletCount = 0;
 		_maxExtent = 9.0f; 
@@ -168,12 +171,12 @@ hasMagnet, isBeingSucked, shouldSuck, tailPosition, isFacingOtherKitty, starStre
             f += f * midRangeBoost;
         }
         
-        if(self.tag == 1) {
-            CCLOG(@"midRangeBoost: %f", midRangeBoost);
-            CCLOG(@"force: %f", f);
-            CCLOG(@"scale: %f", sprite.scale);
-            
-        }
+//        if(self.tag == 1) {
+//            CCLOG(@"midRangeBoost: %f", midRangeBoost);
+//            CCLOG(@"force: %f", f);
+//            CCLOG(@"scale: %f", sprite.scale);
+//            
+//        }
 		
 		forceVec *= f; //multiply force unit vector by scalar
 		b2Vec2 linVel = body->GetLinearVelocity();
@@ -646,6 +649,26 @@ hasMagnet, isBeingSucked, shouldSuck, tailPosition, isFacingOtherKitty, starStre
 -(void) resetTurnAroundRecentlyCalled  //used so the function is not called more than one time per second
 {
 	turnAroundRecentlyCalled = NO;
+}
+
+-(void) wentOffScreen {
+    
+    CCLOG(@"kitty wentOffScreen");
+    
+    if(!recentlyWentOffScreen ) {
+        recentlyWentOffScreen = YES;
+        [self schedule:@selector(resetWentOffScreen) interval:0.2f];
+    } else {
+        //force turnAround
+        body->SetTransform(body->GetPosition(),(body->GetAngle() + M_PI));
+        [self resetWentOffScreen];
+    }
+    
+}
+
+-(void) resetWentOffScreen {
+    [self unschedule:@selector(resetWentOffScreen)];
+    recentlyWentOffScreen = NO;
 }
 
 -(void) scaleBodyMass: (float) myScale  //use this function later with a powerup that modifies mass so one kitty can bounce

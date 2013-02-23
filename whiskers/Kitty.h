@@ -56,6 +56,10 @@
     float speed;
     
     CCSpriteBatchNode *starStreakBatch;
+    
+    int wentOffScreenCount;
+    
+    BOOL recentlyWentOffScreen;
 }
 
 @property (nonatomic,readwrite) CCSprite* sprite;
@@ -83,6 +87,8 @@
 @property (nonatomic,readwrite) CGPoint tailPosition;
 @property (nonatomic,readwrite) BOOL isFacingOtherKitty;
 @property (nonatomic,readwrite) CCSpriteBatchNode *starStreakBatch;
+@property (nonatomic,readwrite) int wentOffScreenCount;
+
 
 
 
