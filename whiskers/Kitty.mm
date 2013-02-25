@@ -455,11 +455,8 @@ hasMagnet, isBeingSucked, shouldSuck, tailPosition, isFacingOtherKitty, starStre
 		if(!sewingMachineSound.isPlaying && [[GameManager sharedGameManager] sfxOn]) {
 			[sewingMachineSound play];
 		}
-		
-		//change collision filter index
-		//fixture.filter.groupIndex = -1;
-	}
-	
+        
+    }
 	
 }
 
@@ -469,10 +466,7 @@ hasMagnet, isBeingSucked, shouldSuck, tailPosition, isFacingOtherKitty, starStre
 	
 	[sewingMachineSound stop];
 	[self stopActionByTag:103];  //stops bullet firing CCAction
-	
-	//change collision filter index
-	//fixture.filter.groupIndex = 1;
-	
+		
 }		
 
 -(void) shootTurret
@@ -704,12 +698,16 @@ hasMagnet, isBeingSucked, shouldSuck, tailPosition, isFacingOtherKitty, starStre
     sprite.opacity = 1.0f;
 }
 
+-(void) onExit
+{
+    if(_hasTurret)
+		[self lostTurret];
+    
+	[super onExit];
+}
+
 -(void) dealloc
 {
-	// Must manually unschedule, it is not done automatically for us.
-	//[[CCScheduler sharedScheduler] unscheduleUpdateForTarget:self];
-	if(_hasTurret)
-		[self lostTurret];
     
 	[super dealloc];
 }
