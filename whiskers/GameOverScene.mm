@@ -103,13 +103,8 @@
 		NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
 		NSArray *sortedKittySpriteArray;
 		sortedKittySpriteArray = [kittySpriteArray sortedArrayUsingDescriptors:sortDescriptors];
-		
-		//the kitties will be stacked on top of each other, biggest to smallest, to show their relative size
-		//each consecutive kitty will be offset to the right by...
-        CGPoint kittyOffset = ccp(134,0); //some random screen math :)
         
         NSMutableArray* kittySeparation = [[NSMutableArray alloc] init];
-		
 		
         float allKittiesWidth = 0.0f;
         int bigKittyWidth = 0.0f;

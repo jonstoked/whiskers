@@ -57,6 +57,14 @@
                 [[[GameManager sharedGameManager]isPlayerActiveArray] replaceObjectAtIndex:i withObject:[NSNumber numberWithBool:YES]];
         }
         
+        if (ONLY_TWO_KITTIES) {
+            [[[GameManager sharedGameManager]isPlayerActiveArray] replaceObjectAtIndex:0 withObject:[NSNumber numberWithBool:YES]];
+            [[[GameManager sharedGameManager]isPlayerActiveArray] replaceObjectAtIndex:1 withObject:[NSNumber numberWithBool:YES]];
+            [[[GameManager sharedGameManager]isPlayerActiveArray] replaceObjectAtIndex:2 withObject:[NSNumber numberWithBool:NO]];
+            [[[GameManager sharedGameManager]isPlayerActiveArray] replaceObjectAtIndex:3 withObject:[NSNumber numberWithBool:NO]];
+
+        }
+        
         gameLayer = [CCLayer node];
         uiLayer = [CCLayer node];
         [self addChild:gameLayer z:-2];
@@ -80,7 +88,6 @@
             [[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"MapleLeafRag.mp3" loop:YES];
 		
 		[[SimpleAudioEngine sharedEngine] preloadEffect:@"munch.caf"];
-		//[[SimpleAudioEngine sharedEngine] preloadEffect:@"sewingmachine.caf"];
 		
 		
 		// enable touches
@@ -149,10 +156,10 @@
         if(DEBUG != 1)
             [Flurry logEvent:@"Gameplay" timed:YES];
         
-        comingFeb = [CCSprite spriteWithFile:@"comingFeb.png"];
-        comingFeb.position = ccp(512,56);
-        [uiLayer addChild:comingFeb];
-        [self schedule:@selector(removeComingFeb)];
+//        comingFeb = [CCSprite spriteWithFile:@"comingFeb.png"];
+//        comingFeb.position = ccp(512,56);
+//        [uiLayer addChild:comingFeb];
+//        [self schedule:@selector(removeComingFeb)];
         
         
 	}
@@ -1444,7 +1451,7 @@
 		Kitty *kitty = (Kitty*) [kittyArray objectAtIndex:i];
 		
 		[[[GameManager sharedGameManager] finalKittyScales] 
-		 replaceObjectAtIndex:i withObject:[NSNumber numberWithFloat:kitty.sprite.scale]];
+		 replaceObjectAtIndex:kitty.tag withObject:[NSNumber numberWithFloat:kitty.sprite.scale]];
 	}
 	
 	//replace scene

@@ -10,7 +10,8 @@
 #define whiskers_Global_h
 
 
-#define AUTO_START 1
+#define AUTO_START 0 //four kitties
+#define ONLY_TWO_KITTIES 0
 #define FORCE_GAME_END 1
 #define ONE_KITTY_MOVING 0
 #define NO_KITTIES_MOVING 0
