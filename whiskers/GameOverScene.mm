@@ -83,6 +83,11 @@
 		}//end for
 		
 		int mustacheXoffset = 70; //value taken from AI file
+        
+        //load mustache y offset array
+        NSString *path = [[NSBundle mainBundle] pathForResource:@"mustacheYoffsets" ofType:@"plist"];
+        NSDictionary * dict = [NSDictionary dictionaryWithContentsOfFile:path];
+        NSMutableArray *offsets = [dict objectForKey:@"Root"];
 		
 		//add mustaches to kitties
 		for (int i=0; i<[kittySpriteArray count]; ++i)
@@ -91,7 +96,8 @@
 			int mustacheNumber = 1 + [[[[GameManager sharedGameManager] selectedMustacheArray] objectAtIndex:kittySprite.tag] integerValue];
 			NSString *imageName = [NSString stringWithFormat: @"Layer-%i.png", mustacheNumber];
 			CCSprite *musSprite = [CCSprite spriteWithFile:imageName];
-			musSprite.position = ccp(kittySprite.contentSize.width/2 + mustacheXoffset, kittySprite.contentSize.height/2);
+            musSprite.position = ccp(kittySprite.contentSize.width/2 + mustacheXoffset, kittySprite.contentSize.height/2 -
+                                     [[offsets objectAtIndex:mustacheNumber-1] intValue]);
 			[kittySprite addChild:musSprite];
 			
 		}
