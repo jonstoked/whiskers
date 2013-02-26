@@ -38,8 +38,10 @@ hasMagnet, isBeingSucked, shouldSuck, tailPosition, isFacingOtherKitty, starStre
 	if ((self = [super init]))
 	{
         float kittyScale = START_SCALE;
-        if(DEBUG_KITTY_SCALE != 0 && tag==1)
-            kittyScale = DEBUG_KITTY_SCALE;
+        if(DEBUG_KITTY_SCALE != 0) {
+            if(SCALE_ALL_KITTIES == 1 || tag == 1)
+                kittyScale = DEBUG_KITTY_SCALE;
+        }
         
         if(DEBUG_WENT_OFFSCREEN != 0 && tag == 1)
             kittyScale = 0.65f;
@@ -173,12 +175,11 @@ hasMagnet, isBeingSucked, shouldSuck, tailPosition, isFacingOtherKitty, starStre
             f += f * midRangeBoost;
         }
         
-        if(self.tag == 2) {
-            CCLOG(@"midRangeBoost: %f", midRangeBoost);
-            CCLOG(@"force: %f", f);
-            CCLOG(@"scale: %f", sprite.scale);
-            
-        }
+//        if(self.tag == 2) {
+//            CCLOG(@"midRangeBoost: %f", midRangeBoost);
+//            CCLOG(@"force: %f", f);
+//            CCLOG(@"scale: %f", sprite.scale);
+//        }
 		
 		forceVec *= f; //multiply force unit vector by scalar
 		b2Vec2 linVel = body->GetLinearVelocity();
@@ -226,14 +227,14 @@ hasMagnet, isBeingSucked, shouldSuck, tailPosition, isFacingOtherKitty, starStre
 		
 		//set maximum angular velocity, so kitty can't spin faster as he gets bigger
 		if( body->GetAngularVelocity() > -angVel) {
-            CCLOG(@"Applying Torque: %f", torque);
+//            CCLOG(@"Applying Torque: %f", torque);
 			body->ApplyTorque(-torque);
 
         }
 		
-		CCLOG(@"Force: %f", f);
-		CCLOG(@"Angular Velocity: %f", body->GetAngularVelocity());
-		CCLOG(@"Angular Velocity: %f", angVel);
+//		CCLOG(@"Force: %f", f);
+//		CCLOG(@"Angular Velocity: %f", body->GetAngularVelocity());
+//		CCLOG(@"Angular Velocity: %f", angVel);
 		
 	}
 	

@@ -76,6 +76,11 @@ static GameManager* _sharedGameManager = nil;
             
         }
         ++playCount;
+        
+        if(SOUND_OFF == 1) {
+            musicOn = NO;
+            sfxOn = NO;
+        }
 
     }
     return self;

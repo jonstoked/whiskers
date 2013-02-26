@@ -240,8 +240,9 @@
 	
 	
 	// grow/shrink scales for powerups
-	float pelletScale, starScale, lightningShrinkScale;
-    pelletScale = starScale = lightningShrinkScale = 1.44f;
+	float pelletScale = 1.44f;
+    float starScale = pelletScale;
+    float lightningShrinkScale = pelletScale;
 	float bulletScale = 1.03f;
 	float lightningGrowScale = 1.68f;
 	
@@ -1207,13 +1208,13 @@
     circle.position = position;
     [gameLayer addChild:circle];
     
-    float dur = 0.3f;
-    float finalScale = 256.0f/171.0f;
+    float dur = 0.2f;
+    float finalScale = BOMB_EXPLOSION_RADIUS/171.0f;
     
     id scaleUp = [CCScaleTo actionWithDuration:dur scale:finalScale];
     [circle runAction:[CCEaseExponentialOut actionWithAction:scaleUp]];
     
-    id fadeOut = [CCFadeOut actionWithDuration:dur];
+    id fadeOut = [CCFadeTo actionWithDuration:dur opacity:0.3f];  //if you fade all the way out, the player won't see the true explosion radus
     [circle runAction:fadeOut];
     
     id remove = [CCSequence actions:[CCDelayTime actionWithDuration:dur], [CCCallFunc actionWithTarget:self selector:@selector(removeExplosion)], nil];

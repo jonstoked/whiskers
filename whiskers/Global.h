@@ -10,28 +10,30 @@
 #define whiskers_Global_h
 
 
-#define AUTO_START 0 //four kitties
+#define AUTO_START 1 //four kitties, only one kitty debug scaled
+#define SCALE_ALL_KITTIES 1
 #define ONLY_TWO_KITTIES 0
 #define FORCE_GAME_END 1
 #define ONE_KITTY_MOVING 0
 #define NO_KITTIES_MOVING 0
-#define DEBUG_KITTY_SCALE 0 //normal start is 0.08f
+#define DEBUG_KITTY_SCALE 0.3f //normal start is 0.08f
 
-#define TEST_POWERUP @"turret"
-//@""
-//@"star"
-//@"turret"
-//@"bomb"
-//@"magnet"
+#define TEST_POWERUP @"bomb"
+//star
+//turret
+//bomb
+//magnet
 
 #define DONT_SPAWN_COLLECTIBLES 0
 #define DEBUG_WENT_OFFSCREEN 0
+#define SOUND_OFF 1
 
 
 #define START_SCALE 0.08f
 #define WIN_SCALE 1.0f
 #define ABOUT_TO_WIN_SCALE 0.45f
 #define GAME_FONT @"HelveticaNeue-Bold"
+#define BOMB_EXPLOSION_RADIUS 256.0f
 
 static const ccColor3B whiskersGreen = {96, 246, 133};
 static const ccColor3B whiskersYellow = {246, 207, 95};
