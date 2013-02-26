@@ -293,7 +293,22 @@
                 [(MSGroupNode *)self.parent fadeSwipeText];
 			}
 		}
-	}
+	} else { //not Active
+        
+        for( UITouch *touch in touches )
+		{
+			
+			CGPoint currentTouch = [self convertTouchToNodeSpace:touch];
+			CGPoint currentTouchWorld = [self convertToWorldSpace:currentTouch];
+            
+            
+            //if swipe is greater than threshold
+			if ((CGRectContainsPoint(touchableArea, currentTouchWorld)) && ccpDistance(currentTouch, kitty.position) < 120) {
+                [self.parent join];
+            }
+        }
+        
+    }
 	
 }
 

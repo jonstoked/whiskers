@@ -32,7 +32,7 @@
 		[self addChild:msNode];
 		[msNode makeInactive];
         
-        joinMenu = [[GameManager sharedGameManager] menuAtPosition:ccp(0,-125) imageName:@"joinButton.png" target:self selector:@selector(join)];
+        joinMenu = [[GameManager sharedGameManager] menuAtPosition:ccp(-13,-125) imageName:@"joinButton.png" target:self selector:@selector(join)];
         [self addChild:joinMenu];
 		
 		//add swipe instruction menu that tells user to swipe so they can select a  mustache
@@ -44,6 +44,30 @@
 		[swipeInstruction addChild:swipeArrow];
 		swipeInstruction.visible = NO;
         swipeInstruction.position = joinMenu.position;
+        
+        NSString *nameString;
+        switch (tag) {
+            case 0:
+                nameString = @"clarence.png";
+                break;
+            case 1:
+                nameString = @"helen.png";
+                break;
+            case 2:
+                nameString = @"johnr.png";
+                break;
+            case 3:
+                nameString = @"margie.png";
+                break;
+                
+            default:
+                break;
+        }
+        
+        name = [CCSprite spriteWithFile:nameString];
+        [self addChild:name];
+        name.position = swipeInstruction.position;
+        name.opacity = 0;
 		
 	}
 	
@@ -70,7 +94,14 @@
         id fadeout = [CCFadeOut actionWithDuration:0.5f];
         [swipeText runAction:fadeout];
         fadeSwipeTextCalled = YES;
+        [self schedule:@selector(fadeInName) interval:0.6f];
     }
+}
+
+-(void) fadeInName {
+    [self unschedule:@selector(fadeInName)];
+    id fadein = [CCFadeIn actionWithDuration:0.5f];
+    [name runAction:fadein];
 }
 
 @end

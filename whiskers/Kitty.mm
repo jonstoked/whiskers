@@ -160,6 +160,8 @@ hasMagnet, isBeingSucked, shouldSuck, tailPosition, isFacingOtherKitty, starStre
 		if(_hasStar)
 			f = 2.5*f;  //speed up kitty if he has a star
         
+//        f = minForce + mass/maxMass * maxForce * (_hasStar ? 2.5f : 1.0f);
+        
         //slightly speed up kitty in mid-range sizes because I can't fucking write a function to give quadratic coefficents
         //FFUFFFUUFUFUCK
         //http://www.wolframalpha.com/input/?i=y+%3D+-5x%5E2+%2B+5x

@@ -19,6 +19,7 @@
     CCSprite *swipeArrow;
     CCSprite *swipeText;
     BOOL fadeSwipeTextCalled;
+    CCSprite *name;
 	
 }
 
