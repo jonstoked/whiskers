@@ -123,6 +123,7 @@
 	CCLOG(@"explode called");
     
     float bombShrinkScale = 1.55f;
+    float bombGrowScale = 1.44f;
     
 	//apply outward explosion force to each body in world
 	for (b2Body* b = _world->GetBodyList(); b; b = b->GetNext())
@@ -131,7 +132,6 @@
 		if((node.tag != _bomberKitty.tag)  && (node.tag >=0) && (node.tag <=3))
 		{		
 			Kitty *kitty = (Kitty*) b->GetUserData();
-			// get body and bomb position
 			b2Vec2 bodyPosition = b->GetPosition();
 			b2Vec2 bombPosition = body->GetPosition();
 			
@@ -156,6 +156,8 @@
 			
 		}
 	}
+    
+    [_bomberKitty growWithScale:bombGrowScale];
     
     CGPoint pos = [self.parent convertToWorldSpace:self.position];
     

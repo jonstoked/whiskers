@@ -145,24 +145,13 @@ hasMagnet, isBeingSucked, shouldSuck, tailPosition, isFacingOtherKitty, starStre
 		b2Vec2 forceVec;
 		forceVec = b2Vec2(cos(angleRad), sin(angleRad));  //gives a unit vector
 		
-		//scale applied force based on the mass
-		//define points for slope-intercept form
-		float x1 = minMass;
-		float x2 = maxMass;
-		float minForce = 75.0; float y1 = minForce; //75
-		float maxForce = 1100.0; float y2 = maxForce;  //1600
-		
-		//determine slope and y-intercept of scaling function
-		float slope = (y1 - y2)/(x1 - x2);
-		float b = y1 - slope*x1;
+        //scale force from min to max as kitty's mass increases
+		float minForce = 60.0;
+		float maxForce = 1100.0; 
 		
 		//determine force
 		float mass = body->GetMass();
-		f = mass*slope + b;
-		if(_hasStar)
-			f = 2.5*f;  //speed up kitty if he has a star
-        
-//        f = minForce + mass/maxMass * maxForce * (_hasStar ? 2.5f : 1.0f);
+        f = minForce + mass/maxMass * maxForce * (_hasStar ? 2.5f : 1.0f);
         
         //slightly speed up kitty in mid-range sizes because I can't fucking write a function to give quadratic coefficents
         //FFUFFFUUFUFUCK
@@ -171,15 +160,15 @@ hasMagnet, isBeingSucked, shouldSuck, tailPosition, isFacingOtherKitty, starStre
         float boostFactor = 4.5f;
         float midRangeBoost = -boostFactor*sprite.scale*sprite.scale + boostFactor*sprite.scale;
         
-        if(sprite.scale <= WIN_SCALE *0.7f) {
+        if(sprite.scale <= WIN_SCALE *0.8f) {
             f += f * midRangeBoost;
         }
         
-//        if(self.tag == 2) {
-//            CCLOG(@"midRangeBoost: %f", midRangeBoost);
-//            CCLOG(@"force: %f", f);
-//            CCLOG(@"scale: %f", sprite.scale);
-//        }
+        if(self.tag == 1) {
+            CCLOG(@"midRangeBoost: %f", midRangeBoost);
+            CCLOG(@"force: %f", f);
+            CCLOG(@"scale: %f", sprite.scale);
+        }
 		
 		forceVec *= f; //multiply force unit vector by scalar
 		b2Vec2 linVel = body->GetLinearVelocity();
@@ -280,9 +269,9 @@ hasMagnet, isBeingSucked, shouldSuck, tailPosition, isFacingOtherKitty, starStre
 -(void) growWithScale: (float) scale
 {
     float myScale = scale;
-    if(sprite.scale > 0.65f && scale > 1.0f/0.9f) {
-        myScale = myScale * 0.9f; //don't grow so much when you are big
-    }
+//    if(sprite.scale > 0.65f && scale > 1.0f/0.9f) {
+//        myScale = myScale * 0.9f; //don't grow so much when you are big
+//    }
     
 	[sprite runAction: [CCScaleBy actionWithDuration:0.1 scale:myScale]];
 	
