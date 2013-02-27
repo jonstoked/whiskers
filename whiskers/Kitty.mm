@@ -110,6 +110,7 @@ hasMagnet, isBeingSucked, shouldSuck, tailPosition, isFacingOtherKitty, starStre
 		boxBodyDef.position.Set(position.x/PTM_RATIO, position.y/PTM_RATIO); 
 		boxBodyDef.userData = self;
 		boxBodyDef.linearDamping = 6.0f;  //adds air resistance to box
+        boxBodyDef.angularDamping = 9.0f;  
 		body = world->CreateBody(&boxBodyDef);
         
         [self createFixtureWithDensity:KITTY_DENSITY friction:0 restitution:0];
@@ -134,8 +135,10 @@ hasMagnet, isBeingSucked, shouldSuck, tailPosition, isFacingOtherKitty, starStre
 	
 	float f;
     
-    float minMass = 1.0;
+    float minMass = 1.111; //mass at scale 0.08
     float maxMass = 100.0;
+    float mass = body->GetMass();
+
 	
 	//make kitty move forward automatically by applying a force every tick
 	if(_isMoving && !isBeingSucked)
@@ -150,7 +153,6 @@ hasMagnet, isBeingSucked, shouldSuck, tailPosition, isFacingOtherKitty, starStre
 		float maxForce = 1100.0; 
 		
 		//determine force
-		float mass = body->GetMass();
         f = minForce + mass/maxMass * maxForce * (_hasStar ? 2.5f : 1.0f);
         
         //slightly speed up kitty in mid-range sizes because I can't fucking write a function to give quadratic coefficents
@@ -164,11 +166,11 @@ hasMagnet, isBeingSucked, shouldSuck, tailPosition, isFacingOtherKitty, starStre
             f += f * midRangeBoost;
         }
         
-        if(self.tag == 1) {
-            CCLOG(@"midRangeBoost: %f", midRangeBoost);
-            CCLOG(@"force: %f", f);
-            CCLOG(@"scale: %f", sprite.scale);
-        }
+//        if(self.tag == 1) {
+//            CCLOG(@"midRangeBoost: %f", midRangeBoost);
+//            CCLOG(@"force: %f", f);
+//            CCLOG(@"scale: %f", sprite.scale);
+//        }
 		
 		forceVec *= f; //multiply force unit vector by scalar
 		b2Vec2 linVel = body->GetLinearVelocity();
@@ -179,53 +181,22 @@ hasMagnet, isBeingSucked, shouldSuck, tailPosition, isFacingOtherKitty, starStre
 	
 	//make kitty turn by applying a torque
 	if(_isTurning)
-	{
-		//CCLOG(@"rot vel: %f", body->GetAngularVelocity());
-		//CCLOG(@"   mass: %f", body->GetMass()); 
-		//CCLOG(@"lin vel: %f", body->GetLinearVelocity().Length());
-		
+	{		
 		//scale applied torque based on the mass
-		//define points for slope-intercept form
-		float x1 = minMass;
-		float x2 = maxMass;
-		float minTorque = 3.0; float y1 = minTorque;
-		float maxTorque = 900.0; float y2 = maxTorque; //900
-		
-		//determine slope and y-intercept of scaling function
-		float slope = (y1 - y2)/(x1 - x2);
-		float b = y1 - slope*x1;
-		float mass = body->GetMass();
-		float torque = slope*mass + b;
-		
-		//scale maximum angular velocity based on mass
-		//define points for slope-intercept form
-        x1 = START_SCALE;
-        x2 = WIN_SCALE;
-		float minAngVel = 3.0; y1 = minAngVel; //3.0
-		float maxAngVel = 0.0; y2 = maxAngVel; //0.2f
-		
-		//determine slope and y-intercept of scaling function
-//		slope = (y1 - y2)/(x1 - x2);
-//		b = y1 - slope*x1;
-//		mass = body->GetMass();
-//		float angVel = slope*mass + b;
-        
-		slope = (y1 - y2)/(x1 - x2);
-		b = y1 - slope*x1;
-		float angVel = slope*sprite.scale + b;
-        
-		
-		//set maximum angular velocity, so kitty can't spin faster as he gets bigger
-		if( body->GetAngularVelocity() > -angVel) {
-//            CCLOG(@"Applying Torque: %f", torque);
-			body->ApplyTorque(-torque);
+        float scale = 1.4;
+		float minTorque = 7.5 * scale;
+		float maxTorque = 2500 * scale;
 
+        float torque = minTorque + (mass-minMass)/maxMass * maxTorque;
+        
+        if( body->GetAngularVelocity() > -3.4) {  //mid sizes were turning a little too fast
+            body->ApplyTorque(-torque);
         }
 		
-//		CCLOG(@"Force: %f", f);
-//		CCLOG(@"Angular Velocity: %f", body->GetAngularVelocity());
-//		CCLOG(@"Angular Velocity: %f", angVel);
-		
+		CCLOG(@"Angular Velocity: %f", body->GetAngularVelocity());
+        CCLOG(@"Applying Torque: %f", torque);
+        CCLOG(@"Mass: %f", mass);
+
 	}
 	
 	
@@ -310,7 +281,7 @@ hasMagnet, isBeingSucked, shouldSuck, tailPosition, isFacingOtherKitty, starStre
 -(void) shrinkWithScale: (float) scale
 {
     float myScale = scale;
-	if(sprite.scale/myScale > 0.08f)
+	if(sprite.scale/myScale > START_SCALE)
 	{
         
 		[sprite runAction: [CCScaleBy actionWithDuration:0.1 scale:1.0/myScale]];
