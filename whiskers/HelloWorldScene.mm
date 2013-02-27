@@ -1019,6 +1019,8 @@
 
 -(void) addPowerup {
     
+    ++addPowerupCount;
+    
     if(TEST_POWERUP == @"star") 
         [self addStar];
     else if(TEST_POWERUP == @"turret")
@@ -1038,14 +1040,26 @@
         
         int rand = arc4random()%100 + 1;
         
-        if(rand <= lightningProb)
+        BOOL spawnTwoPowerups = arc4random()%100+1 <= 15;
+        spawnTwoPowerups = (addPowerupCount == 1) ? NO : spawnTwoPowerups;
+        
+        if(rand <= lightningProb) {
             [self addLightning];
-        else if(rand <= lightningProb + turretProb)
+            if(spawnTwoPowerups)
+                [self addLightning];
+        } else if(rand <= lightningProb + turretProb) {
              [self addTurret];
-        else if(rand <= lightningProb + turretProb + bombProb)
+            if(spawnTwoPowerups)
+                [self addTurret];
+        } else if(rand <= lightningProb + turretProb + bombProb) {
             [self addBombs];
-        else 
+            if(spawnTwoPowerups)
+                [self addBombs];
+        } else {
             [self addStar];
+            if(spawnTwoPowerups)
+                [self addStar];
+        }
         
     }
     

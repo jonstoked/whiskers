@@ -57,6 +57,8 @@
     
     CCSprite *comingFeb;
     
+    int addPowerupCount;
+    
     
     
 

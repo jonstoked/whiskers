@@ -201,14 +201,15 @@ hasMagnet, isBeingSucked, shouldSuck, tailPosition, isFacingOtherKitty, starStre
 		//define points for slope-intercept form
         x1 = START_SCALE;
         x2 = WIN_SCALE;
-		float minAngVel = 3.0; y1 = minAngVel;
-		float maxAngVel = 0.0; y2 = maxAngVel;  //0.2f
+		float minAngVel = 3.0; y1 = minAngVel; //3.0
+		float maxAngVel = 0.0; y2 = maxAngVel; //0.2f
 		
 		//determine slope and y-intercept of scaling function
 //		slope = (y1 - y2)/(x1 - x2);
 //		b = y1 - slope*x1;
 //		mass = body->GetMass();
 //		float angVel = slope*mass + b;
+        
 		slope = (y1 - y2)/(x1 - x2);
 		b = y1 - slope*x1;
 		float angVel = slope*sprite.scale + b;
