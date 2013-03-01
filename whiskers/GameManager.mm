@@ -240,10 +240,17 @@ static GameManager* _sharedGameManager = nil;
 }
 
 -(void) playRandomMeow {
-    
-    int r = arc4random()%[meowNames count];
-    [[SimpleAudioEngine sharedEngine] playEffect:[meowNames objectAtIndex:r] pitch:1.0f pan:0 gain:0.70f];
+    if(sfxOn) {
+        int r = arc4random()%[meowNames count];
+        [[SimpleAudioEngine sharedEngine] playEffect:[meowNames objectAtIndex:r] pitch:1.0f pan:0 gain:0.70f];
+    }
+}
 
+-(void) playEffect:(NSString*) filePath pitch:(Float32) pitch pan:(Float32) pan gain:(Float32) gain
+{
+    if(sfxOn) {
+        [[SimpleAudioEngine sharedEngine] playEffect:filePath pitch:pitch pan:pan gain:gain];
+    }
 }
 
 

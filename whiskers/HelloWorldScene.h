@@ -41,8 +41,6 @@
 	float minButtonScale;
 	NSMutableArray *isPlayerActiveArray;
 	NSMutableArray *kittyArray;  //array of active kitties, can contain less than 4 objects
-    CCMenuItemFont *musicToggle;
-    CCMenuItemFont *sfxToggle;
     CCLayer *gameLayer;
     CCLayer *uiLayer;
     
@@ -54,12 +52,10 @@
     NSMutableArray *touchRects;
     
     CGSize screenSize;
-    
-    CCSprite *comingFeb;
-    
+        
     int addPowerupCount;
     
-    
+    NSMutableArray *fartNames;
     
 
 	

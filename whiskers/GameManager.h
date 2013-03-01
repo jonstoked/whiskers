@@ -67,6 +67,8 @@
 -(void) logFlurryEvent:(NSString*)eventName;
 -(void) logFlurryEvent: (NSString*) eventName withParameters:(NSDictionary*)eventDict;
 
+-(void) playEffect:(NSString*) filePath pitch:(Float32) pitch pan:(Float32) pan gain:(Float32) gain;
+
 
 
 @end

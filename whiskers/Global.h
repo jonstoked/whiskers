@@ -21,7 +21,7 @@
 #define DEBUG_WENT_OFFSCREEN 0
 #define SOUND_OFF 0
 
-#define TEST_POWERUP @""
+#define TEST_POWERUP @"bomb"
 //star
 //turret
 //bomb

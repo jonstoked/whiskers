@@ -307,6 +307,14 @@
 		68EC04D816E151A50084B431 /* meow-08.wav in Resources */ = {isa = PBXBuildFile; fileRef = 68EC04CE16E151A50084B431 /* meow-08.wav */; };
 		68EC04D916E151A50084B431 /* meow-09.wav in Resources */ = {isa = PBXBuildFile; fileRef = 68EC04CF16E151A50084B431 /* meow-09.wav */; };
 		68EC04DA16E151A50084B431 /* meow-10.wav in Resources */ = {isa = PBXBuildFile; fileRef = 68EC04D016E151A50084B431 /* meow-10.wav */; };
+		68EC04DC16E15FAA0084B431 /* mouthpop.wav in Resources */ = {isa = PBXBuildFile; fileRef = 68EC04DB16E15FAA0084B431 /* mouthpop.wav */; };
+		68EC04E416E167760084B431 /* fart-01.wav in Resources */ = {isa = PBXBuildFile; fileRef = 68EC04DD16E167750084B431 /* fart-01.wav */; };
+		68EC04E516E167760084B431 /* fart-02.wav in Resources */ = {isa = PBXBuildFile; fileRef = 68EC04DE16E167750084B431 /* fart-02.wav */; };
+		68EC04E616E167760084B431 /* fart-03.wav in Resources */ = {isa = PBXBuildFile; fileRef = 68EC04DF16E167750084B431 /* fart-03.wav */; };
+		68EC04E716E167760084B431 /* fart-04.wav in Resources */ = {isa = PBXBuildFile; fileRef = 68EC04E016E167750084B431 /* fart-04.wav */; };
+		68EC04E816E167760084B431 /* fart-05.wav in Resources */ = {isa = PBXBuildFile; fileRef = 68EC04E116E167760084B431 /* fart-05.wav */; };
+		68EC04E916E167760084B431 /* fart-06.wav in Resources */ = {isa = PBXBuildFile; fileRef = 68EC04E216E167760084B431 /* fart-06.wav */; };
+		68EC04EA16E167760084B431 /* fart-07.wav in Resources */ = {isa = PBXBuildFile; fileRef = 68EC04E316E167760084B431 /* fart-07.wav */; };
 		68EE772A161BFFC30095DC21 /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = 68EE7722161BFFC30095DC21 /* Icon-72.png */; };
 		68EE772B161BFFC30095DC21 /* Icon-72@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 68EE7723161BFFC30095DC21 /* Icon-72@2x.png */; };
 		68EE772C161BFFC30095DC21 /* Icon-Small-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 68EE7724161BFFC30095DC21 /* Icon-Small-50.png */; };
@@ -824,6 +832,14 @@
 		68EC04CE16E151A50084B431 /* meow-08.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "meow-08.wav"; sourceTree = "<group>"; };
 		68EC04CF16E151A50084B431 /* meow-09.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "meow-09.wav"; sourceTree = "<group>"; };
 		68EC04D016E151A50084B431 /* meow-10.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "meow-10.wav"; sourceTree = "<group>"; };
+		68EC04DB16E15FAA0084B431 /* mouthpop.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = mouthpop.wav; sourceTree = "<group>"; };
+		68EC04DD16E167750084B431 /* fart-01.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "fart-01.wav"; sourceTree = "<group>"; };
+		68EC04DE16E167750084B431 /* fart-02.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "fart-02.wav"; sourceTree = "<group>"; };
+		68EC04DF16E167750084B431 /* fart-03.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "fart-03.wav"; sourceTree = "<group>"; };
+		68EC04E016E167750084B431 /* fart-04.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "fart-04.wav"; sourceTree = "<group>"; };
+		68EC04E116E167760084B431 /* fart-05.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "fart-05.wav"; sourceTree = "<group>"; };
+		68EC04E216E167760084B431 /* fart-06.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "fart-06.wav"; sourceTree = "<group>"; };
+		68EC04E316E167760084B431 /* fart-07.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "fart-07.wav"; sourceTree = "<group>"; };
 		68EE7722161BFFC30095DC21 /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72.png"; sourceTree = "<group>"; };
 		68EE7723161BFFC30095DC21 /* Icon-72@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72@2x.png"; sourceTree = "<group>"; };
 		68EE7724161BFFC30095DC21 /* Icon-Small-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small-50.png"; sourceTree = "<group>"; };
@@ -1635,8 +1651,16 @@
 			isa = PBXGroup;
 			children = (
 				6804B21A15182D5F000918D4 /* mouthpop.caf */,
+				68EC04DD16E167750084B431 /* fart-01.wav */,
+				68EC04DE16E167750084B431 /* fart-02.wav */,
+				68EC04DF16E167750084B431 /* fart-03.wav */,
+				68EC04E016E167750084B431 /* fart-04.wav */,
+				68EC04E116E167760084B431 /* fart-05.wav */,
+				68EC04E216E167760084B431 /* fart-06.wav */,
+				68EC04E316E167760084B431 /* fart-07.wav */,
 				6804B21915182D5F000918D4 /* munch.caf */,
 				6804B21715182D5F000918D4 /* sewingmachine.caf */,
+				68EC04DB16E15FAA0084B431 /* mouthpop.wav */,
 				68EC04C716E151A50084B431 /* meow-01.wav */,
 				68EC04C816E151A50084B431 /* meow-02.wav */,
 				68EC04C916E151A50084B431 /* meow-03.wav */,
@@ -1887,6 +1911,14 @@
 				68EC04D816E151A50084B431 /* meow-08.wav in Resources */,
 				68EC04D916E151A50084B431 /* meow-09.wav in Resources */,
 				68EC04DA16E151A50084B431 /* meow-10.wav in Resources */,
+				68EC04DC16E15FAA0084B431 /* mouthpop.wav in Resources */,
+				68EC04E416E167760084B431 /* fart-01.wav in Resources */,
+				68EC04E516E167760084B431 /* fart-02.wav in Resources */,
+				68EC04E616E167760084B431 /* fart-03.wav in Resources */,
+				68EC04E716E167760084B431 /* fart-04.wav in Resources */,
+				68EC04E816E167760084B431 /* fart-05.wav in Resources */,
+				68EC04E916E167760084B431 /* fart-06.wav in Resources */,
+				68EC04EA16E167760084B431 /* fart-07.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

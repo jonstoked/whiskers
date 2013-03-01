@@ -17,6 +17,9 @@
 //to define the ratio so that your most common object type is 1x1 metre.
 #define PTM_RATIO 32
 
+#define SFX_MUNCH @"munch.caf"
+#define SFX_MOUTHPOP @"mouthpop.wav"
+
 //Tag ranges
 //Sprite tags: 0-100
 //Action tags: 101-200 
@@ -86,9 +89,8 @@
 		//music and sfx
         if([[GameManager sharedGameManager] musicOn])
             [[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"MapleLeafRag.mp3" loop:YES];
-		
-		[[SimpleAudioEngine sharedEngine] preloadEffect:@"munch.caf"];
-		
+        
+		[self loadSFX];
 		
 		// enable touches
 		self.isTouchEnabled = YES;
@@ -155,25 +157,32 @@
         
         if(DEBUG != 1)
             [Flurry logEvent:@"Gameplay" timed:YES];
-        
-//        comingFeb = [CCSprite spriteWithFile:@"comingFeb.png"];
-//        comingFeb.position = ccp(512,56);
-//        [uiLayer addChild:comingFeb];
-//        [self schedule:@selector(removeComingFeb)];
+    
         
         
 	}
 	return self;
 }
 
--(void) removeComingFeb {
+-(void) loadSFX {
+    [[SimpleAudioEngine sharedEngine] preloadEffect:SFX_MUNCH];
+    [[SimpleAudioEngine sharedEngine] preloadEffect:SFX_MOUTHPOP];
     
-    [self unschedule:@selector(removeComingFeb)];
-    id delay = [CCDelayTime actionWithDuration:4.0f];
-    id fade = [CCFadeOut actionWithDuration:0.4f];
-    id seq  = [CCSequence actions:delay,fade, nil];
-    [comingFeb runAction:seq];
+    fartNames = [[NSMutableArray alloc] init];
+    
+    for(int i = 1; i <=7; ++i) {
+        NSString *filename = [NSString stringWithFormat:@"fart-0%i.wav", i];
+        [fartNames addObject:filename];
+        [[SimpleAudioEngine sharedEngine] preloadEffect:filename];
+    }
+}
 
+-(void) playRandomFart {
+    if([GameManager sharedGameManager].sfxOn) {
+        int r = arc4random() % [fartNames count];
+        [[SimpleAudioEngine sharedEngine] playEffect:[fartNames objectAtIndex:r] pitch:1.0f pan:0 gain:0.80f];
+
+    }
 }
 
 -(void) draw
@@ -499,6 +508,7 @@
 			if ((spriteA.tag == kTagBombs && spriteB.tag >= 0 && spriteB.tag <= 3) ||
 				(spriteB.tag == kTagBombs && spriteA.tag >= 0 && spriteA.tag <= 3)) 
 			{
+                [self playRandomFart];
 				if(spriteA.tag == kTagBombs) 
 				{
 					if (std::find(toDestroy.begin(), toDestroy.end(), bodyA) == toDestroy.end()) 
@@ -1256,6 +1266,8 @@
     id remove = [CCSequence actions:[CCDelayTime actionWithDuration:dur], [CCCallFunc actionWithTarget:self selector:@selector(removeExplosion)], nil];
     [circle runAction:remove];
     
+    [[GameManager sharedGameManager] playEffect:SFX_MOUTHPOP pitch:1.0f pan:0 gain:1.3f];
+    
 }
 
 -(void) removeExplosion {
@@ -1416,14 +1428,12 @@
     {
         [[GameManager sharedGameManager] setMusicOn:NO];
         [[SimpleAudioEngine sharedEngine] stopBackgroundMusic];
-        [[musicToggle label] setString:@"Music: Off"];
 
     }
     else
     {
         [[GameManager sharedGameManager] setMusicOn:YES];
         [[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"MapleLeafRag.mp3" loop:YES];
-        [[musicToggle label] setString:@"Music: On"];
 
     }    
 }
@@ -1433,13 +1443,12 @@
     if([[GameManager sharedGameManager] sfxOn])
     {
         [[GameManager sharedGameManager] setSfxOn:NO];
-        [[sfxToggle label] setString:@"SFX: Off"];
         
     }
     else
     {
         [[GameManager sharedGameManager] setSfxOn:YES];
-        [[sfxToggle label] setString:@"SFX: On"];
+        [[GameManager sharedGameManager] playRandomMeow];
         
     }    
 }
