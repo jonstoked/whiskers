@@ -25,7 +25,7 @@
 @synthesize sprite, body, fixture, _hasStar, _aboutToWin, _hasTurret,
 _bulletCount, _isTurning, _currentExtent, _maxExtent, _minExtent, sewingMachineSound,
 _isTouchingKitty, leftEyePos, rightEyePos, smallerKitty, isTouchingKittyCount, particleSystemStarTrail,
-hasMagnet, isBeingSucked, shouldSuck, tailPosition, isFacingOtherKitty, starStreakBatch, wentOffScreenCount;
+hasMagnet, isBeingSucked, shouldSuck, tailPosition, isFacingOtherKitty, starStreakBatch, recentlyWentOffScreen, wentOffScreenCount;
 
 
 +(id) kittyWithParentNode:(CCNode*)parentNode position:(CGPoint)position tag:(int)tag world:(b2World*)world
@@ -183,9 +183,8 @@ hasMagnet, isBeingSucked, shouldSuck, tailPosition, isFacingOtherKitty, starStre
 	if(_isTurning)
 	{		
 		//scale applied torque based on the mass
-        float scale = 1.4;
-		float minTorque = 7.5 * scale;
-		float maxTorque = 2500 * scale;
+		float minTorque = 10.5;
+		float maxTorque = 5000;  //3500
 
         float torque = minTorque + (mass-minMass)/maxMass * maxTorque;
         
@@ -241,9 +240,6 @@ hasMagnet, isBeingSucked, shouldSuck, tailPosition, isFacingOtherKitty, starStre
 -(void) growWithScale: (float) scale
 {
     float myScale = scale;
-//    if(sprite.scale > 0.65f && scale > 1.0f/0.9f) {
-//        myScale = myScale * 0.9f; //don't grow so much when you are big
-//    }
     
 	[sprite runAction: [CCScaleBy actionWithDuration:0.1 scale:myScale]];
 	
@@ -594,7 +590,7 @@ hasMagnet, isBeingSucked, shouldSuck, tailPosition, isFacingOtherKitty, starStre
 {
 	if(!turnAroundRecentlyCalled) {
         
-        if((smallerKitty && isFacingOtherKitty) || recentlyWentOffScreen) {
+        if(smallerKitty && isFacingOtherKitty) {
             turnAroundRecentlyCalled = YES;
             
             //waits three seconds and then allows turnAround() to becalled again
@@ -612,24 +608,20 @@ hasMagnet, isBeingSucked, shouldSuck, tailPosition, isFacingOtherKitty, starStre
 }
 
 -(void) wentOffScreen {
-    
-//    CCLOG(@"kitty wentOffScreen");
-    
-    if(!recentlyWentOffScreen ) {
-        recentlyWentOffScreen = YES;
-        [self schedule:@selector(resetWentOffScreen) interval:0.2f];
-    } else {
-        //force turnAround
+    ++wentOffScreenCount;
+//    if(wentOffScreenCount == 2) {
 //        body->SetTransform(body->GetPosition(),(body->GetAngle() + M_PI));
-        [self turnAround];
-    }
+//    }
+    [self schedule:@selector(resetWentOffScreen) interval:1.0f];
     
 }
 
 -(void) resetWentOffScreen {
+    wentOffScreenCount = 0;
     [self unschedule:@selector(resetWentOffScreen)];
-    recentlyWentOffScreen = NO;
 }
+
+
 
 -(void) scaleBodyMass: (float) myScale  //use this function later with a powerup that modifies mass so one kitty can bounce
 //all the others around

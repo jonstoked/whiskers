@@ -263,29 +263,16 @@
 			//check if body went off screen
 			if(myActor.tag != kTagBullet)
 			{
-                BOOL wentOffScreen = NO;
-				if(b->GetPosition().x > screenSize.width/PTM_RATIO) {
-					b->SetTransform(b2Vec2(0,b->GetPosition().y), b->GetAngle());
-                    wentOffScreen = YES;
-                }
-				else if(b->GetPosition().x < 0) {
-					b->SetTransform(b2Vec2(screenSize.width/PTM_RATIO,b->GetPosition().y), b->GetAngle());
-                    wentOffScreen = YES;
-                }
-				else if(b->GetPosition().y > screenSize.height/PTM_RATIO) {
-					b->SetTransform(b2Vec2(b->GetPosition().x,0), b->GetAngle());
-                    wentOffScreen = YES;
-                }
-				else if(b->GetPosition().y < 0) {
-					b->SetTransform(b2Vec2(b->GetPosition().x,screenSize.height/PTM_RATIO), b->GetAngle());
-                    wentOffScreen = YES;
-                }
-                
-                if(wentOffScreen && [b->GetUserData() isKindOfClass:[Kitty class]]) {
+                if([b->GetUserData() isKindOfClass:[Kitty class]]) {
                     Kitty* kitty = (Kitty*) b->GetUserData();
-                    [kitty wentOffScreen];
-
+                    if(kitty.wentOffScreenCount < 1 && [self bodyOutsideScreen:b]) {
+                        [kitty wentOffScreen];
+                        [self teleportBody:b];
+                    }
+                } else {
+                    [self teleportBody:b];
                 }
+
 
 			}
 			
@@ -664,6 +651,41 @@
     
     return dUnit;
     
+}
+
+-(void) teleportBody: (b2Body*)b {
+    
+    //wrap body to other side of screen
+    if(b->GetPosition().x > screenSize.width/PTM_RATIO) {
+        b->SetTransform(b2Vec2(0,b->GetPosition().y), b->GetAngle());
+    }
+    else if(b->GetPosition().x < 0) {
+        b->SetTransform(b2Vec2(screenSize.width/PTM_RATIO,b->GetPosition().y), b->GetAngle());
+    }
+    else if(b->GetPosition().y > screenSize.height/PTM_RATIO) {
+        b->SetTransform(b2Vec2(b->GetPosition().x,0), b->GetAngle());
+    }
+    else if(b->GetPosition().y < 0) {
+        b->SetTransform(b2Vec2(b->GetPosition().x,screenSize.height/PTM_RATIO), b->GetAngle());
+    }
+
+}
+
+-(BOOL) bodyOutsideScreen: (b2Body*)b {
+    BOOL outside = NO;
+    if(b->GetPosition().x > screenSize.width/PTM_RATIO) {
+        outside = YES;
+    }
+    else if(b->GetPosition().x < 0) {
+        outside = YES;
+    }
+    else if(b->GetPosition().y > screenSize.height/PTM_RATIO) {
+        outside = YES;
+    }
+    else if(b->GetPosition().y < 0) {
+        outside = YES;
+    }
+    return outside;
 }
 
 -(void) ccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
