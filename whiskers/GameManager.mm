@@ -82,6 +82,9 @@ static GameManager* _sharedGameManager = nil;
             sfxOn = NO;
         }
 
+        meowNames = [[NSMutableArray alloc] init];
+        [self loadSFX];
+
     }
     return self;
 }
@@ -165,7 +168,7 @@ static GameManager* _sharedGameManager = nil;
     //create's a single button that will shrink a bit when touched
     float shrinkScale = 0.97f;
     
-    CCMenuItemImage *button = [CCMenuItemImage itemFromNormalImage:imageName selectedImage:imageName target:t selector:s];
+    CCMenuItemJS *button = [CCMenuItemJS itemFromNormalImage:imageName selectedImage:imageName target:t selector:s];
     button.selectedImage.scale = shrinkScale;
     button.selectedImage.position = ccp((button.normalImage.contentSize.width - button.normalImage.contentSize.width*shrinkScale)/2.0f, (button.normalImage.contentSize.height - button.normalImage.contentSize.height*shrinkScale)/2.0f);
     
@@ -173,6 +176,23 @@ static GameManager* _sharedGameManager = nil;
     menu.position = pos;
     
     return menu;
+}
+
+-(CCMenu*) toggleMenuAtPosition:(CGPoint)pos imageNameOn:(NSString*)imageNameOn imageNameOff:(NSString*)imageNameOff
+                                target:(id)t selector:(SEL)s {
+    
+    CCMenuItemImage* on = [[CCMenuItemImage itemFromNormalImage:imageNameOn
+                                                  selectedImage:imageNameOff target:nil selector:nil] retain];
+    //cause we want this one to have sound
+    CCMenuItemJS* off = [[CCMenuItemJS itemFromNormalImage:imageNameOff
+                                                   selectedImage:imageNameOn target:nil selector:nil] retain];
+    CCMenuItemToggle *toggle = [CCMenuItemToggle itemWithTarget:t
+                                                       selector:s items:on, off, nil];
+    CCMenu *menu = [CCMenu menuWithItems:toggle, nil];
+    menu.position = pos;
+    
+    return menu;
+    
 }
 
 -(void) swapIndecesForArray:(NSMutableArray*)array index1:(int)index1 index2:(int)index2 {
@@ -200,6 +220,30 @@ static GameManager* _sharedGameManager = nil;
         [Flurry logEvent:eventName withParameters:eventDict];
     }
     
+}
+
+-(void) loadSFX {
+    
+    for(int i = 1; i <=10; ++i) {
+        
+        NSString *filename;
+        
+        if(i<10) {
+            filename = [NSString stringWithFormat:@"meow-0%i.wav", i];
+        } else {
+            filename = [NSString stringWithFormat:@"meow-%i.wav", i];
+        }
+        [meowNames addObject:filename];
+        [[SimpleAudioEngine sharedEngine] preloadEffect:filename];
+    }
+
+}
+
+-(void) playRandomMeow {
+    
+    int r = arc4random()%[meowNames count];
+    [[SimpleAudioEngine sharedEngine] playEffect:[meowNames objectAtIndex:r] pitch:1.0f pan:0 gain:0.70f];
+
 }
 
 

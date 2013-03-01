@@ -305,6 +305,7 @@
             //if swipe is greater than threshold
 			if ((CGRectContainsPoint(touchableArea, currentTouchWorld)) && ccpDistance(currentTouch, kitty.position) < 120) {
                 [self.parent join];
+                [[GameManager sharedGameManager] playRandomMeow];
             }
         }
         

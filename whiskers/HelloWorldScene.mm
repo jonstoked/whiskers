@@ -1329,40 +1329,9 @@
 
 -(void) resetGame
 {
+    
 	[[CCDirector sharedDirector] replaceScene:[StartMenuScene scene]];
 	
-}
-
--(CCMenu*) menuWithAdobePosition:(CGPoint)pos imageName:(NSString*)imageName target:(id)t selector:(SEL)s {
-    
-    //create's a single button that will shrink a bit when touched
-    float shrinkScale = 0.97f;
-    
-    CCMenuItemImage *button = [CCMenuItemImage itemFromNormalImage:imageName selectedImage:imageName target:t selector:s];
-    button.selectedImage.scale = shrinkScale;
-    button.selectedImage.position = ccp((button.normalImage.contentSize.width - button.normalImage.contentSize.width*shrinkScale)/2.0f, (button.normalImage.contentSize.height - button.normalImage.contentSize.height*shrinkScale)/2.0f);
-    
-    CCMenu *menu = [CCMenu menuWithItems:button, nil];
-
-    menu.position = [self cocosPosFromAdobePos:pos forSprite:button.normalImage];
-    
-    return menu;
-}
-
--(CCMenu*) toggleMenuWithAdobePosition:(CGPoint)pos imageNameOn:(NSString*)imageNameOn imageNameOff:(NSString*)imageNameOff
-                                target:(id)t selector:(SEL)s {
-
-    CCMenuItemImage* on = [[CCMenuItemImage itemFromNormalImage:imageNameOn
-                                    selectedImage:imageNameOff target:nil selector:nil] retain];
-    CCMenuItemImage* off = [[CCMenuItemImage itemFromNormalImage:imageNameOff
-                                     selectedImage:imageNameOn target:nil selector:nil] retain];
-    CCMenuItemToggle *toggle = [CCMenuItemToggle itemWithTarget:t
-                                                       selector:s items:on, off, nil];
-    CCMenu *menu = [CCMenu menuWithItems:toggle, nil];
-    menu.position = [self cocosPosFromAdobePos:pos forSprite:on.normalImage];
-    
-    return menu;
-    
 }
 
 -(CGPoint) cocosPosFromAdobePos:(CGPoint)pos forSprite:(CCSprite*)sprite {
@@ -1370,7 +1339,6 @@
     return ccpAdd(pos, ccp(sprite.contentSize.width/2.0f, -sprite.contentSize.height/2.0f));
     
 }
-
 
 
 -(void) addPauseMenu
@@ -1397,27 +1365,25 @@
     }
     
     //play button
-    CCMenu* playMenu = [self menuWithAdobePosition:ccp(189,531) imageName:@"playButtonPauseMenu.png"
-                                            target:self selector:@selector(playPressed:)];
+    CCMenu* playMenu = [[GameManager sharedGameManager] menuAtPosition:CGPointMake(513,422) imageName:@"playButtonPauseMenu.png" target:self selector:@selector(playPressed:)];
     [pauseMenuLayer addChild:playMenu];
     
     
     //quit button
-    CCMenu* quitMenu = [self menuWithAdobePosition:ccp(676,298) imageName:@"quitButton.png"
-                                            target:self selector:@selector(quitPressed:)];
+    CCMenu *quitMenu = [[GameManager sharedGameManager] menuAtPosition:CGPointMake(756,270) imageName:@"quitButton.png" target:self selector:@selector(quitPressed:)];
     [pauseMenuLayer addChild:quitMenu];
     
     
     //music and sound buttons
     NSString *imageNameOnMusic = [GameManager sharedGameManager].musicOn ? @"musicButtonOn.png" : @"musicButtonOff.png";
     NSString *imageNameOffMusic = ![GameManager sharedGameManager].musicOn ? @"musicButtonOn.png" : @"musicButtonOff.png";
-    CCMenu *musicMenu = [self toggleMenuWithAdobePosition:ccp(188,298) imageNameOn:imageNameOnMusic imageNameOff:imageNameOffMusic target:self selector:@selector(musicToggleTouched:)];
+    CCMenu *musicMenu = [[GameManager sharedGameManager] toggleMenuAtPosition:ccp(298,270) imageNameOn:imageNameOnMusic imageNameOff:imageNameOffMusic target:self selector:@selector(musicToggleTouched:)];
     [pauseMenuLayer addChild:musicMenu];
     
     NSString *imageNameOnSfx = [GameManager sharedGameManager].sfxOn ? @"soundButtonOn.png" : @"soundButtonOff.png";
     NSString *imageNameOffSfx = ![GameManager sharedGameManager].sfxOn ? @"soundButtonOn.png" : @"soundButtonOff.png";
 
-    CCMenu *sfxMenu = [self toggleMenuWithAdobePosition:ccp(429,298) imageNameOn:imageNameOnSfx imageNameOff:imageNameOffSfx target:self selector:@selector(sfxToggleTouched:)];
+    CCMenu *sfxMenu = [[GameManager sharedGameManager] toggleMenuAtPosition:ccp(542,270) imageNameOn:imageNameOnSfx imageNameOff:imageNameOffSfx target:self selector:@selector(sfxToggleTouched:)];
     [pauseMenuLayer addChild:sfxMenu];
 	
 }

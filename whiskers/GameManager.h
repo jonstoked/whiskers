@@ -10,6 +10,8 @@
 #import "cocos2d.h"
 #import "Appirater.h"
 #import "Flurry.h"
+#import "SimpleAudioEngine.h"
+#import "CCMenuItemJS.h"
 
 @class HelloWorld;
 
@@ -29,6 +31,7 @@
     int mustachesUnlocked;
     BOOL hasShownNewStacheMessage;
     int matchCount;
+    NSMutableArray *meowNames;
 	
 }
 

@@ -296,6 +296,17 @@
 		68D909F91523A0BB001965CA /* soundButtonOff.png in Resources */ = {isa = PBXBuildFile; fileRef = 68D909F21523A0BB001965CA /* soundButtonOff.png */; };
 		68D909FA1523A0BB001965CA /* soundButtonOn.png in Resources */ = {isa = PBXBuildFile; fileRef = 68D909F31523A0BB001965CA /* soundButtonOn.png */; };
 		68DA48B916AE49A5009A4D8B /* whiteSquare504.png in Resources */ = {isa = PBXBuildFile; fileRef = 68DA48B816AE49A5009A4D8B /* whiteSquare504.png */; };
+		68EC04C616E13A060084B431 /* CCMenuItemJS.m in Sources */ = {isa = PBXBuildFile; fileRef = 68EC04C516E13A050084B431 /* CCMenuItemJS.m */; };
+		68EC04D116E151A50084B431 /* meow-01.wav in Resources */ = {isa = PBXBuildFile; fileRef = 68EC04C716E151A50084B431 /* meow-01.wav */; };
+		68EC04D216E151A50084B431 /* meow-02.wav in Resources */ = {isa = PBXBuildFile; fileRef = 68EC04C816E151A50084B431 /* meow-02.wav */; };
+		68EC04D316E151A50084B431 /* meow-03.wav in Resources */ = {isa = PBXBuildFile; fileRef = 68EC04C916E151A50084B431 /* meow-03.wav */; };
+		68EC04D416E151A50084B431 /* meow-04.wav in Resources */ = {isa = PBXBuildFile; fileRef = 68EC04CA16E151A50084B431 /* meow-04.wav */; };
+		68EC04D516E151A50084B431 /* meow-05.wav in Resources */ = {isa = PBXBuildFile; fileRef = 68EC04CB16E151A50084B431 /* meow-05.wav */; };
+		68EC04D616E151A50084B431 /* meow-06.wav in Resources */ = {isa = PBXBuildFile; fileRef = 68EC04CC16E151A50084B431 /* meow-06.wav */; };
+		68EC04D716E151A50084B431 /* meow-07.wav in Resources */ = {isa = PBXBuildFile; fileRef = 68EC04CD16E151A50084B431 /* meow-07.wav */; };
+		68EC04D816E151A50084B431 /* meow-08.wav in Resources */ = {isa = PBXBuildFile; fileRef = 68EC04CE16E151A50084B431 /* meow-08.wav */; };
+		68EC04D916E151A50084B431 /* meow-09.wav in Resources */ = {isa = PBXBuildFile; fileRef = 68EC04CF16E151A50084B431 /* meow-09.wav */; };
+		68EC04DA16E151A50084B431 /* meow-10.wav in Resources */ = {isa = PBXBuildFile; fileRef = 68EC04D016E151A50084B431 /* meow-10.wav */; };
 		68EE772A161BFFC30095DC21 /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = 68EE7722161BFFC30095DC21 /* Icon-72.png */; };
 		68EE772B161BFFC30095DC21 /* Icon-72@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 68EE7723161BFFC30095DC21 /* Icon-72@2x.png */; };
 		68EE772C161BFFC30095DC21 /* Icon-Small-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 68EE7724161BFFC30095DC21 /* Icon-Small-50.png */; };
@@ -801,6 +812,18 @@
 		68D909F21523A0BB001965CA /* soundButtonOff.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = soundButtonOff.png; sourceTree = "<group>"; };
 		68D909F31523A0BB001965CA /* soundButtonOn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = soundButtonOn.png; sourceTree = "<group>"; };
 		68DA48B816AE49A5009A4D8B /* whiteSquare504.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = whiteSquare504.png; sourceTree = "<group>"; };
+		68EC04C416E13A050084B431 /* CCMenuItemJS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCMenuItemJS.h; sourceTree = "<group>"; };
+		68EC04C516E13A050084B431 /* CCMenuItemJS.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCMenuItemJS.m; sourceTree = "<group>"; };
+		68EC04C716E151A50084B431 /* meow-01.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "meow-01.wav"; sourceTree = "<group>"; };
+		68EC04C816E151A50084B431 /* meow-02.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "meow-02.wav"; sourceTree = "<group>"; };
+		68EC04C916E151A50084B431 /* meow-03.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "meow-03.wav"; sourceTree = "<group>"; };
+		68EC04CA16E151A50084B431 /* meow-04.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "meow-04.wav"; sourceTree = "<group>"; };
+		68EC04CB16E151A50084B431 /* meow-05.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "meow-05.wav"; sourceTree = "<group>"; };
+		68EC04CC16E151A50084B431 /* meow-06.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "meow-06.wav"; sourceTree = "<group>"; };
+		68EC04CD16E151A50084B431 /* meow-07.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "meow-07.wav"; sourceTree = "<group>"; };
+		68EC04CE16E151A50084B431 /* meow-08.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "meow-08.wav"; sourceTree = "<group>"; };
+		68EC04CF16E151A50084B431 /* meow-09.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "meow-09.wav"; sourceTree = "<group>"; };
+		68EC04D016E151A50084B431 /* meow-10.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "meow-10.wav"; sourceTree = "<group>"; };
 		68EE7722161BFFC30095DC21 /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72.png"; sourceTree = "<group>"; };
 		68EE7723161BFFC30095DC21 /* Icon-72@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72@2x.png"; sourceTree = "<group>"; };
 		68EE7724161BFFC30095DC21 /* Icon-Small-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small-50.png"; sourceTree = "<group>"; };
@@ -1391,6 +1414,8 @@
 				6804B17515182D05000918D4 /* AudioCode.mm */,
 				6804B18915182D05000918D4 /* MyContactListener.h */,
 				6804B18A15182D05000918D4 /* MyContactListener.mm */,
+				68EC04C416E13A050084B431 /* CCMenuItemJS.h */,
+				68EC04C516E13A050084B431 /* CCMenuItemJS.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -1612,6 +1637,16 @@
 				6804B21A15182D5F000918D4 /* mouthpop.caf */,
 				6804B21915182D5F000918D4 /* munch.caf */,
 				6804B21715182D5F000918D4 /* sewingmachine.caf */,
+				68EC04C716E151A50084B431 /* meow-01.wav */,
+				68EC04C816E151A50084B431 /* meow-02.wav */,
+				68EC04C916E151A50084B431 /* meow-03.wav */,
+				68EC04CA16E151A50084B431 /* meow-04.wav */,
+				68EC04CB16E151A50084B431 /* meow-05.wav */,
+				68EC04CC16E151A50084B431 /* meow-06.wav */,
+				68EC04CD16E151A50084B431 /* meow-07.wav */,
+				68EC04CE16E151A50084B431 /* meow-08.wav */,
+				68EC04CF16E151A50084B431 /* meow-09.wav */,
+				68EC04D016E151A50084B431 /* meow-10.wav */,
 			);
 			name = SFX;
 			sourceTree = "<group>";
@@ -1842,6 +1877,16 @@
 				68F30A8916DC4DC800555D35 /* helen.png in Resources */,
 				68F30A8A16DC4DC800555D35 /* johnr.png in Resources */,
 				68F30A8B16DC4DC800555D35 /* margie.png in Resources */,
+				68EC04D116E151A50084B431 /* meow-01.wav in Resources */,
+				68EC04D216E151A50084B431 /* meow-02.wav in Resources */,
+				68EC04D316E151A50084B431 /* meow-03.wav in Resources */,
+				68EC04D416E151A50084B431 /* meow-04.wav in Resources */,
+				68EC04D516E151A50084B431 /* meow-05.wav in Resources */,
+				68EC04D616E151A50084B431 /* meow-06.wav in Resources */,
+				68EC04D716E151A50084B431 /* meow-07.wav in Resources */,
+				68EC04D816E151A50084B431 /* meow-08.wav in Resources */,
+				68EC04D916E151A50084B431 /* meow-09.wav in Resources */,
+				68EC04DA16E151A50084B431 /* meow-10.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2001,6 +2046,7 @@
 				6804B1A015182D05000918D4 /* StartMenuScene.mm in Sources */,
 				68B4935A16C18D8800E895E1 /* FLTwitter.mm in Sources */,
 				689024C416C990B500B410B9 /* Appirater.m in Sources */,
+				68EC04C616E13A060084B431 /* CCMenuItemJS.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

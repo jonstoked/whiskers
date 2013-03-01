@@ -60,30 +60,15 @@
             [scrollableLayer addChild:s];
         }
         
-        CCMenu *twitterButton = [self menuAtPosition:ccp(504,-113) imageName:@"twitterButton.png" target:self selector:@selector(twitterButtonTouched)];
+        CCMenu *twitterButton = [[GameManager sharedGameManager] menuAtPosition:ccp(504,-113) imageName:@"twitterButton.png" target:self selector:@selector(twitterButtonTouched)];
         [scrollableLayer addChild:twitterButton];
         
-        CCMenu *backButton = [self menuAtPosition:ccp(92,730) imageName:@"backButton3.png" target:self selector:@selector(backButtonTouched)];
+        CCMenu *backButton = [[GameManager sharedGameManager] menuAtPosition:ccp(92,730) imageName:@"backButton3.png" target:self selector:@selector(backButtonTouched)];
         [scrollableLayer addChild:backButton];
 
             
 	}	
 	return self;
-}
-
--(CCMenu*) menuAtPosition:(CGPoint)pos imageName:(NSString*)imageName target:(id)t selector:(SEL)s {
-    
-    //create's a single button that will shrink a bit when touched
-    float shrinkScale = 0.97f;
-    
-    CCMenuItemImage *button = [CCMenuItemImage itemFromNormalImage:imageName selectedImage:imageName target:t selector:s];
-    button.selectedImage.scale = shrinkScale;
-    button.selectedImage.position = ccp((button.normalImage.contentSize.width - button.normalImage.contentSize.width*shrinkScale)/2.0f, (button.normalImage.contentSize.height - button.normalImage.contentSize.height*shrinkScale)/2.0f);
-    
-    CCMenu *menu = [CCMenu menuWithItems:button, nil];
-    menu.position = pos;
-    
-    return menu;
 }
 
 - (BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event {

@@ -106,20 +106,11 @@
 	
 }
 
--(void) optionsButtonTouched:(id)sender {
-	
-	CCLOG(@"Options Touched!");
-	
-	
-}
-
 -(void) powerupsButtonTouched:(id)sender {
 	
 	CCLOG(@"Options Touched!");
     [[CCDirector sharedDirector] replaceScene:[PowerupsScene scene]];
-
-	
-	
+    
 }
 
 -(void) toggleMusic:(id)sender {
