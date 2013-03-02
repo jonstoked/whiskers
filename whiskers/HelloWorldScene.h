@@ -54,9 +54,7 @@
     CGSize screenSize;
         
     int addPowerupCount;
-    
-    NSMutableArray *fartNames;
-    
+        
 
 	
 }

@@ -19,6 +19,7 @@
 
 #define SFX_MUNCH @"munch.caf"
 #define SFX_MOUTHPOP @"mouthpop.wav"
+#define SFX_FART @"fart-06.wav"
 
 //Tag ranges
 //Sprite tags: 0-100
@@ -167,22 +168,8 @@
 -(void) loadSFX {
     [[SimpleAudioEngine sharedEngine] preloadEffect:SFX_MUNCH];
     [[SimpleAudioEngine sharedEngine] preloadEffect:SFX_MOUTHPOP];
+    [[SimpleAudioEngine sharedEngine] preloadEffect:SFX_FART];
     
-    fartNames = [[NSMutableArray alloc] init];
-    
-    for(int i = 1; i <=7; ++i) {
-        NSString *filename = [NSString stringWithFormat:@"fart-0%i.wav", i];
-        [fartNames addObject:filename];
-        [[SimpleAudioEngine sharedEngine] preloadEffect:filename];
-    }
-}
-
--(void) playRandomFart {
-    if([GameManager sharedGameManager].sfxOn) {
-        int r = arc4random() % [fartNames count];
-        [[SimpleAudioEngine sharedEngine] playEffect:[fartNames objectAtIndex:r] pitch:1.0f pan:0 gain:0.80f];
-
-    }
 }
 
 -(void) draw
@@ -508,8 +495,8 @@
 			if ((spriteA.tag == kTagBombs && spriteB.tag >= 0 && spriteB.tag <= 3) ||
 				(spriteB.tag == kTagBombs && spriteA.tag >= 0 && spriteA.tag <= 3)) 
 			{
-                [self playRandomFart];
-				if(spriteA.tag == kTagBombs) 
+                [[GameManager sharedGameManager] playEffect:SFX_FART pitch:1.0f pan:0 gain:0.8f];
+				if(spriteA.tag == kTagBombs)
 				{
 					if (std::find(toDestroy.begin(), toDestroy.end(), bodyA) == toDestroy.end()) 
 						toDestroy.push_back(bodyA);
@@ -1456,6 +1443,13 @@
 
 
 -(void) gameDone {
+    
+    for(CCNode *node in gameLayer.children) {
+        if([node isKindOfClass:[Bomb class]]) {
+            Bomb *bomb = (Bomb*) node;
+            [bomb explode];
+        }
+    }
 	
 	//store final kitty scales for use in GameOverScene
 	for(int i=0; i<[kittyArray count]; ++i)

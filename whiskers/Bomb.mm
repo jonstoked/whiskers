@@ -64,7 +64,7 @@
         [self runAction:ease2];
 		
 		float explosionDelay = 8.0f;
-		[self schedule: @selector(explode:) interval:explosionDelay];
+		[self schedule: @selector(explode) interval:explosionDelay];
 		
 		[self schedule: @selector(tick:)];
 
@@ -118,7 +118,7 @@
 	
 }
 
--(void) explode: (ccTime) dt  //modified from http://www.vellios.com/2010/06/12/bombs-with-box2d-cocos2d/  -- thanks Jeremy
+-(void) explode  //modified from http://www.vellios.com/2010/06/12/bombs-with-box2d-cocos2d/  -- thanks Jeremy
 {
 	CCLOG(@"explode called");
     
