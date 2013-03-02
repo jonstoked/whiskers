@@ -309,6 +309,7 @@
 		68EC04DA16E151A50084B431 /* meow-10.wav in Resources */ = {isa = PBXBuildFile; fileRef = 68EC04D016E151A50084B431 /* meow-10.wav */; };
 		68EC04DC16E15FAA0084B431 /* mouthpop.wav in Resources */ = {isa = PBXBuildFile; fileRef = 68EC04DB16E15FAA0084B431 /* mouthpop.wav */; };
 		68EC04E916E167760084B431 /* fart-06.wav in Resources */ = {isa = PBXBuildFile; fileRef = 68EC04E216E167760084B431 /* fart-06.wav */; };
+		68EC04EE16E198DD0084B431 /* sirenWhistle.wav in Resources */ = {isa = PBXBuildFile; fileRef = 68EC04EC16E198DC0084B431 /* sirenWhistle.wav */; };
 		68EE772A161BFFC30095DC21 /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = 68EE7722161BFFC30095DC21 /* Icon-72.png */; };
 		68EE772B161BFFC30095DC21 /* Icon-72@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 68EE7723161BFFC30095DC21 /* Icon-72@2x.png */; };
 		68EE772C161BFFC30095DC21 /* Icon-Small-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 68EE7724161BFFC30095DC21 /* Icon-Small-50.png */; };
@@ -828,6 +829,7 @@
 		68EC04D016E151A50084B431 /* meow-10.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "meow-10.wav"; sourceTree = "<group>"; };
 		68EC04DB16E15FAA0084B431 /* mouthpop.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = mouthpop.wav; sourceTree = "<group>"; };
 		68EC04E216E167760084B431 /* fart-06.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "fart-06.wav"; sourceTree = "<group>"; };
+		68EC04EC16E198DC0084B431 /* sirenWhistle.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = sirenWhistle.wav; sourceTree = "<group>"; };
 		68EE7722161BFFC30095DC21 /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72.png"; sourceTree = "<group>"; };
 		68EE7723161BFFC30095DC21 /* Icon-72@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72@2x.png"; sourceTree = "<group>"; };
 		68EE7724161BFFC30095DC21 /* Icon-Small-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small-50.png"; sourceTree = "<group>"; };
@@ -1647,6 +1649,7 @@
 				68EC04C816E151A50084B431 /* meow-02.wav */,
 				68EC04C916E151A50084B431 /* meow-03.wav */,
 				68EC04CA16E151A50084B431 /* meow-04.wav */,
+				68EC04EC16E198DC0084B431 /* sirenWhistle.wav */,
 				68EC04CB16E151A50084B431 /* meow-05.wav */,
 				68EC04CC16E151A50084B431 /* meow-06.wav */,
 				68EC04CD16E151A50084B431 /* meow-07.wav */,
@@ -1895,6 +1898,7 @@
 				68EC04DA16E151A50084B431 /* meow-10.wav in Resources */,
 				68EC04DC16E15FAA0084B431 /* mouthpop.wav in Resources */,
 				68EC04E916E167760084B431 /* fart-06.wav in Resources */,
+				68EC04EE16E198DD0084B431 /* sirenWhistle.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

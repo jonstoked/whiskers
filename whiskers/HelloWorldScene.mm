@@ -20,6 +20,7 @@
 #define SFX_MUNCH @"munch.caf"
 #define SFX_MOUTHPOP @"mouthpop.wav"
 #define SFX_FART @"fart-06.wav"
+#define SFX_LIGHTNING @"sirenWhistle.wav"
 
 //Tag ranges
 //Sprite tags: 0-100
@@ -349,9 +350,9 @@
 			
 			//kitty-star collision
 			if ((spriteA.tag == kTagStar && spriteB.tag >= 0 && spriteB.tag <= 3) ||
-				(spriteB.tag == kTagStar && spriteA.tag >= 0 && spriteA.tag <= 3))
-			{
-				if(spriteA.tag == kTagStar) 
+				(spriteB.tag == kTagStar && spriteA.tag >= 0 && spriteA.tag <= 3)) {
+                
+				if(spriteA.tag == kTagStar)
 				{
 					if (std::find(toDestroy.begin(), toDestroy.end(), bodyA) == toDestroy.end()) 
 						toDestroy.push_back(bodyA);
@@ -440,7 +441,8 @@
 			if ((spriteA.tag == kTagLightning && spriteB.tag >= 0 && spriteB.tag <= 3) ||
 				(spriteB.tag == kTagLightning && spriteA.tag >= 0 && spriteA.tag <= 3)) 
 			{
-				if(spriteA.tag == kTagLightning) 
+                [[GameManager sharedGameManager] playEffect:SFX_LIGHTNING pitch:1.0f pan:0 gain:0.7f];
+				if(spriteA.tag == kTagLightning)
 				{
 					if (std::find(toDestroy.begin(), toDestroy.end(), bodyA) == toDestroy.end()) 
 						toDestroy.push_back(bodyA);
@@ -1253,7 +1255,7 @@
     id remove = [CCSequence actions:[CCDelayTime actionWithDuration:dur], [CCCallFunc actionWithTarget:self selector:@selector(removeExplosion)], nil];
     [circle runAction:remove];
     
-    [[GameManager sharedGameManager] playEffect:SFX_MOUTHPOP pitch:1.0f pan:0 gain:1.3f];
+    [[GameManager sharedGameManager] playEffect:SFX_MOUTHPOP pitch:1.0f pan:0 gain:2.0f];
     
 }
 

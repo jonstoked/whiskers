@@ -10,9 +10,9 @@
 #define whiskers_Global_h
 
 
-#define AUTO_START 1 //four kitties
+#define AUTO_START 0 //four kitties
 #define ONLY_TWO_KITTIES 0
-#define FORCE_GAME_END 1
+#define FORCE_GAME_END 0
 #define ONE_KITTY_MOVING 0
 #define NO_KITTIES_MOVING 0
 #define DEBUG_KITTY_SCALE 0 //normal start is 0.08f, only one kitty scaled
@@ -21,16 +21,17 @@
 #define DEBUG_WENT_OFFSCREEN 0
 #define SOUND_OFF 0
 
-#define TEST_POWERUP @"bomb"
+#define TEST_POWERUP @""
 //star
 //turret
 //bomb
 //magnet
+//lightning
 
 
 
 
-#define START_SCALE 0.08f
+#define START_SCALE 0.115f //0.08f
 #define WIN_SCALE 0.9f
 #define ABOUT_TO_WIN_SCALE 0.45f  //not currently used
 #define GAME_FONT @"HelveticaNeue-Bold"

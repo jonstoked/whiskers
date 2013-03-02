@@ -64,6 +64,7 @@ hasMagnet, isBeingSucked, shouldSuck, tailPosition, isFacingOtherKitty, starStre
 		//initialize sound effects
 		sewingMachineSound = [[[SimpleAudioEngine sharedEngine] soundSourceForFile:@"sewingmachine.caf"] retain];
 		sewingMachineSound.looping = YES;
+        sewingMachineSound.gain = 0.5f;
 		
 		//add kitty sprite
 		sprite = [CCSprite spriteWithFile:@"francineWhite.png"];
@@ -150,7 +151,7 @@ hasMagnet, isBeingSucked, shouldSuck, tailPosition, isFacingOtherKitty, starStre
 		
         //scale force from min to max as kitty's mass increases
 		float minForce = 60.0;
-		float maxForce = 1100.0; 
+		float maxForce = 1100.0;
 		
 		//determine force
         f = minForce + mass/maxMass * maxForce * (_hasStar ? 2.5f : 1.0f);
@@ -166,11 +167,11 @@ hasMagnet, isBeingSucked, shouldSuck, tailPosition, isFacingOtherKitty, starStre
             f += f * midRangeBoost;
         }
         
-//        if(self.tag == 1) {
+        if(self.tag == 1) {
 //            CCLOG(@"midRangeBoost: %f", midRangeBoost);
 //            CCLOG(@"force: %f", f);
-//            CCLOG(@"scale: %f", sprite.scale);
-//        }
+            CCLOG(@"scale: %f", sprite.scale);
+        }
 		
 		forceVec *= f; //multiply force unit vector by scalar
 		b2Vec2 linVel = body->GetLinearVelocity();
@@ -184,11 +185,11 @@ hasMagnet, isBeingSucked, shouldSuck, tailPosition, isFacingOtherKitty, starStre
 	{		
 		//scale applied torque based on the mass
 		float minTorque = 10.5;
-		float maxTorque = 5000;  //3500
+		float maxTorque = 5000; //3500
 
         float torque = minTorque + (mass-minMass)/maxMass * maxTorque;
         
-        if( body->GetAngularVelocity() > -3.4) {  //mid sizes were turning a little too fast
+        if( body->GetAngularVelocity() > -2.5) {//3.4  //mid sizes were turning a little too fast
             body->ApplyTorque(-torque);
         }
 		
