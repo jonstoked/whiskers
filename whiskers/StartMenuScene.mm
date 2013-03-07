@@ -33,8 +33,10 @@
 		CGSize screenSize = [[CCDirector sharedDirector] winSize];
 		kittyScale = 2.0f;
         
-        if([[GameManager sharedGameManager] musicOn])
-            [[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"HeliotropeBouquet2.mp3" loop:YES];
+        if([[GameManager sharedGameManager] musicOn]) {
+            [[SimpleAudioEngine sharedEngine] setBackgroundMusicVolume:1.0f];
+            [[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"heliotropeBouqet.mp3" loop:YES];
+        }
 		
 		CCLayerColor* colorLayer = [CCLayerColor layerWithColor:ccc4(70, 70, 70, 255)]; 
 		[self addChild:colorLayer z:-10];
@@ -111,22 +113,6 @@
 	CCLOG(@"Options Touched!");
     [[CCDirector sharedDirector] replaceScene:[PowerupsScene scene]];
     
-}
-
--(void) toggleMusic:(id)sender {
-    
-    CCLOG(@"musicOn: %i", [[GameManager sharedGameManager] musicOn]);
-    
-    if([[GameManager sharedGameManager] musicOn])
-    {
-        [[GameManager sharedGameManager] setMusicOn:NO];
-        [[SimpleAudioEngine sharedEngine] stopBackgroundMusic];
-    }
-    else
-    {
-        [[GameManager sharedGameManager] setMusicOn:YES];
-        [[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"HeliotropeBouquet2.mp3" loop:YES];
-    }
 }
 
 

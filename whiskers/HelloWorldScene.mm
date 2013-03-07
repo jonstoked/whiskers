@@ -80,7 +80,7 @@
 		[self addChild:bgLayer z:-10];
 		
 		_buttonSize = 100;
-		_pelletScale = 2.5f; 
+		_pelletScale = 2.5f;
 		_powerupCallCount = 0;
 		_pelletInterval = 7.0f;
         
@@ -89,8 +89,11 @@
 		kittyArray = [[ NSMutableArray alloc ] init];
 		
 		//music and sfx
-        if([[GameManager sharedGameManager] musicOn])
-            [[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"MapleLeafRag.mp3" loop:YES];
+        if([[GameManager sharedGameManager] musicOn]) {
+            [[SimpleAudioEngine sharedEngine] setBackgroundMusicVolume:0.9f];
+            [[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"mapleLeafRag.mp3" loop:YES];
+
+        }
         
 		[self loadSFX];
 		
@@ -1422,7 +1425,7 @@
     else
     {
         [[GameManager sharedGameManager] setMusicOn:YES];
-        [[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"MapleLeafRag.mp3" loop:YES];
+        [[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"mapleLeafRag.mp3" loop:YES];
 
     }    
 }

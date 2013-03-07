@@ -64,7 +64,7 @@ hasMagnet, isBeingSucked, shouldSuck, tailPosition, isFacingOtherKitty, starStre
 		//initialize sound effects
 		sewingMachineSound = [[[SimpleAudioEngine sharedEngine] soundSourceForFile:@"sewingmachine.caf"] retain];
 		sewingMachineSound.looping = YES;
-        sewingMachineSound.gain = 0.5f;
+        sewingMachineSound.gain = 0.4f;
 		
 		//add kitty sprite
 		sprite = [CCSprite spriteWithFile:@"francineWhite.png"];
