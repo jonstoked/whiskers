@@ -705,7 +705,11 @@
                 CGRect touchRect = [[touchRects objectAtIndex:i] CGRectValue];
                 if(CGRectContainsPoint(touchRect, location)) {
                     Kitty *myKitty = (Kitty *) [gameLayer getChildByTag:i];
-                    [myKitty startTurning];
+                    if(CLASSIC) {
+                        [myKitty startTurning];
+                    } else {
+                        [myKitty turnRight];
+                    }
                     [self animateButtonPressWithTag:i+4];
                 }
             }
@@ -893,12 +897,25 @@
 //    [[GameManager sharedGameManager] swapIndecesForArray:offsets index1:2 index2:31];
 //    [[GameManager sharedGameManager] swapIndecesForArray:offsets index1:3 index2:42];
 //    [[GameManager sharedGameManager] swapIndecesForArray:offsets index1:4 index2:14];
-	
-	//add mustaches to kitties
+	   
+    //1,8,12,18
+    NSArray *debugStaches;
+    if(AUTO_START) {
+        debugStaches = [NSArray arrayWithObjects:[NSNumber numberWithInt:1],[NSNumber numberWithInt:8],[NSNumber numberWithInt:12],[NSNumber numberWithInt:18], nil];
+    }
+    
+    //add mustaches to kitties
 	for (int i=0; i<[kittyArray count]; ++i)
 	{
 		Kitty *kitty = (Kitty*) [kittyArray objectAtIndex:i];
-		int mustacheNumber = 1 + [[[[GameManager sharedGameManager] selectedMustacheArray] objectAtIndex:kitty.tag] integerValue];
+        
+        int mustacheNumber;
+        if(AUTO_START != 1) {
+            mustacheNumber = 1 + [[[[GameManager sharedGameManager] selectedMustacheArray] objectAtIndex:kitty.tag] integerValue];
+        } else {
+            mustacheNumber = [[debugStaches objectAtIndex:i] integerValue];
+        }
+        
 		NSString *imageName = [NSString stringWithFormat: @"Layer-%i.png", mustacheNumber];
 		CCSprite *musSprite = [CCSprite spriteWithFile:imageName];
 		musSprite.position = ccp(kitty.sprite.contentSize.width/2 + mustacheXoffset, kitty.sprite.contentSize.height/2 -

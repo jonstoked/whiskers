@@ -110,12 +110,18 @@ hasMagnet, isBeingSucked, shouldSuck, tailPosition, isFacingOtherKitty, starStre
 		boxBodyDef.type = b2_dynamicBody;
 		boxBodyDef.position.Set(position.x/PTM_RATIO, position.y/PTM_RATIO); 
 		boxBodyDef.userData = self;
-		boxBodyDef.linearDamping = 6.0f;  //adds air resistance to box
-        boxBodyDef.angularDamping = 9.0f;  
+        if(CLASSIC) {
+            boxBodyDef.linearDamping = 6.0f;  //adds air resistance to box
+        }
+        boxBodyDef.angularDamping = 9.0f;
 		body = world->CreateBody(&boxBodyDef);
         
         [self createFixtureWithDensity:KITTY_DENSITY friction:0 restitution:0];
-		
+        
+        if(!CLASSIC) {
+            [self turnRight];
+        }
+        
         if(ONE_KITTY_MOVING) {
             if(self.tag == kTagKitty1) {
                 _isMoving = YES;
@@ -139,10 +145,9 @@ hasMagnet, isBeingSucked, shouldSuck, tailPosition, isFacingOtherKitty, starStre
     float minMass = 1.111; //mass at scale 0.08
     float maxMass = 100.0;
     float mass = body->GetMass();
-
 	
 	//make kitty move forward automatically by applying a force every tick
-	if(_isMoving && !isBeingSucked)
+	if(_isMoving && !isBeingSucked && CLASSIC)
 	{
 		float angleRad = body->GetAngle();
 		
@@ -170,12 +175,12 @@ hasMagnet, isBeingSucked, shouldSuck, tailPosition, isFacingOtherKitty, starStre
         if(self.tag == 1) {
 //            CCLOG(@"midRangeBoost: %f", midRangeBoost);
 //            CCLOG(@"force: %f", f);
-            CCLOG(@"scale: %f", sprite.scale);
+//            CCLOG(@"scale: %f", sprite.scale);
         }
 		
 		forceVec *= f; //multiply force unit vector by scalar
-		b2Vec2 linVel = body->GetLinearVelocity();
-        speed = linVel.Length()*PTM_RATIO;
+		b2Vec2 lv = body->GetLinearVelocity();
+        speed = lv.Length()*PTM_RATIO;
 		body->ApplyForce(forceVec, body->GetPosition());
 		
 	}
@@ -193,9 +198,9 @@ hasMagnet, isBeingSucked, shouldSuck, tailPosition, isFacingOtherKitty, starStre
             body->ApplyTorque(-torque);
         }
 		
-		CCLOG(@"Angular Velocity: %f", body->GetAngularVelocity());
-        CCLOG(@"Applying Torque: %f", torque);
-        CCLOG(@"Mass: %f", mass);
+//		CCLOG(@"Angular Velocity: %f", body->GetAngularVelocity());
+//        CCLOG(@"Applying Torque: %f", torque);
+//        CCLOG(@"Mass: %f", mass);
 
 	}
 	
@@ -584,6 +589,25 @@ hasMagnet, isBeingSucked, shouldSuck, tailPosition, isFacingOtherKitty, starStre
     [self unschedule:@selector(stopTurningAgain:)];
     body->SetAngularVelocity(0);
     body->SetFixedRotation(false);
+}
+
+-(void) turnRight {
+    float lv = 1.2f/sprite.scale;
+    float angle = atan2f(body->GetLinearVelocity().y, body->GetLinearVelocity().x);
+    CCLOG(@"angle: %f", angle);
+    if((angle >= M_PI/4.0f && angle <=3*M_PI/4.0f) || body->GetLinearVelocity().Length() == 0) {
+        body->SetLinearVelocity(b2Vec2(lv,0));
+        body->SetTransform(body->GetPosition(), 0);
+    } else if (angle >= -M_PI/4.0f && angle <= M_PI/4.0f) {
+        body->SetLinearVelocity(b2Vec2(0,-lv));
+        body->SetTransform(body->GetPosition(), -M_PI/2.0f);
+    } else if (angle >= -3*M_PI/4.0f && angle <=-M_PI/4.0f) {
+        body->SetLinearVelocity(b2Vec2(-lv,0));
+        body->SetTransform(body->GetPosition(), M_PI);
+    } else {
+        body->SetLinearVelocity(b2Vec2(0,lv));
+        body->SetTransform(body->GetPosition(), M_PI/2.0f);
+    }
 }
 
 //makes kitty turn around if he is touching another kitty for too long

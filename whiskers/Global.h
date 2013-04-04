@@ -10,7 +10,7 @@
 #define whiskers_Global_h
 
 
-#define AUTO_START 0 //four kitties
+#define AUTO_START 1 //four kitties
 #define ONLY_TWO_KITTIES 0
 #define FORCE_GAME_END 0
 #define ONE_KITTY_MOVING 0
@@ -19,9 +19,10 @@
 #define SCALE_ALL_KITTIES 0
 #define DONT_SPAWN_COLLECTIBLES 0
 #define DEBUG_WENT_OFFSCREEN 0
-#define SOUND_OFF 0
+#define SOUND_OFF 1
+#define CLASSIC 0
 
-#define TEST_POWERUP @""
+#define TEST_POWERUP @"turret"
 //star
 //turret
 //bomb
