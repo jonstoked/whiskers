@@ -103,7 +103,7 @@
 	[director setAnimationInterval:1.0/60];
     
     if(DEBUG==1) {
-//        [director setDisplayFPS:YES];
+        [director setDisplayFPS:YES];
 	}
 	
 	// make the OpenGLView a child of the view controller

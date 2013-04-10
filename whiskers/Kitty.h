@@ -60,6 +60,8 @@
     BOOL recentlyWentOffScreen;
     
     int wentOffScreenCount;
+    
+//    NSMutableArra
 }
 
 @property (nonatomic,readwrite) CCSprite* sprite;

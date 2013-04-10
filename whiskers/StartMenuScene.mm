@@ -55,6 +55,10 @@
         
         [[GameManager sharedGameManager] logFlurryEvent:@"Displayed Start Menu"];
         
+        classicModeLabel = [CCLabelTTF labelWithString:@"classic" fontName:GAME_FONT fontSize:22];
+        [self addChild:classicModeLabel];
+        classicModeLabel.position = ccp(screenSize.width/2.0f, screenSize.height*0.1f);
+        
 		
 	}	
 	return self;
@@ -114,6 +118,13 @@
     [[CCDirector sharedDirector] replaceScene:[PowerupsScene scene]];
     
 }
+
+//-(void)ccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+//	UITouch *touch = [touches anyObject];
+//	CGPoint location = [touch locationInView:[touch view]];
+//	location = [[CCDirector sharedDirector] convertToGL:location];
+//    if()
+//}
 
 
 

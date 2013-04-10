@@ -110,7 +110,7 @@ hasMagnet, isBeingSucked, shouldSuck, tailPosition, isFacingOtherKitty, starStre
 		boxBodyDef.type = b2_dynamicBody;
 		boxBodyDef.position.Set(position.x/PTM_RATIO, position.y/PTM_RATIO); 
 		boxBodyDef.userData = self;
-        if(CLASSIC) {
+        if([GameManager sharedGameManager].classicMode) {
             boxBodyDef.linearDamping = 6.0f;  //adds air resistance to box
         }
         boxBodyDef.angularDamping = 9.0f;
@@ -118,7 +118,7 @@ hasMagnet, isBeingSucked, shouldSuck, tailPosition, isFacingOtherKitty, starStre
         
         [self createFixtureWithDensity:KITTY_DENSITY friction:0 restitution:0];
         
-        if(!CLASSIC) {
+        if(![GameManager sharedGameManager].classicMode) {
             [self turnRight];
         }
         
@@ -146,8 +146,11 @@ hasMagnet, isBeingSucked, shouldSuck, tailPosition, isFacingOtherKitty, starStre
     float maxMass = 100.0;
     float mass = body->GetMass();
 	
+    b2Vec2 lv = body->GetLinearVelocity();
+    speed = lv.Length()*PTM_RATIO;
+    
 	//make kitty move forward automatically by applying a force every tick
-	if(_isMoving && !isBeingSucked && CLASSIC)
+	if(_isMoving && !isBeingSucked && [GameManager sharedGameManager].classicMode)
 	{
 		float angleRad = body->GetAngle();
 		
@@ -179,8 +182,6 @@ hasMagnet, isBeingSucked, shouldSuck, tailPosition, isFacingOtherKitty, starStre
         }
 		
 		forceVec *= f; //multiply force unit vector by scalar
-		b2Vec2 lv = body->GetLinearVelocity();
-        speed = lv.Length()*PTM_RATIO;
 		body->ApplyForce(forceVec, body->GetPosition());
 		
 	}
@@ -337,7 +338,7 @@ hasMagnet, isBeingSucked, shouldSuck, tailPosition, isFacingOtherKitty, starStre
 		//a star makes you speedup and blink.  If you hit another kitty, they will shrink once.
 		_hasStar = YES;
 		
-//		//add the particle emitter to leave trail of stars behind kitty
+		//add the particle emitter to leave trail of stars behind kitty
 		particleSystemStarTrail = [CCParticleSystemQuad particleWithFile:@"psStarTrail.plist"];
 		particleSystemStarTrail.positionType = kCCPositionTypeFree;
 		particleSystemStarTrail.tag = 300+self.tag;
@@ -367,7 +368,7 @@ hasMagnet, isBeingSucked, shouldSuck, tailPosition, isFacingOtherKitty, starStre
 	[self.parent removeChildByTag:300+self.tag cleanup:YES];  //remove particle emitter
 	[self stopActionByTag:101];
     
-//    [self unschedule:@selector(addStreakSprite)];
+    [self unschedule:@selector(addStreakSprite)];
 
 	
 }
@@ -376,14 +377,15 @@ hasMagnet, isBeingSucked, shouldSuck, tailPosition, isFacingOtherKitty, starStre
     
     float life = 0.4f;
     
-    CCSprite *s = [CCSprite spriteWithFile:@"whiteSquare504.png"];
+    CCSprite *s = [CCSprite spriteWithFile:@"whiteSquare32.png"];
     s.tag = kTagKitty0Streak + self.tag;
-    s.scale = sprite.scale;
+    s.scale = sprite.boundingBox.size.width / s.contentSize.width;
     s.rotation = self.rotation;
-//    s.color = [[GameManager sharedGameManager] randomWhiskersColor];
+    s.color = [[GameManager sharedGameManager] randomWhiskersColor];
     s.position = self.position;
     
     [starStreakBatch addChild:s];
+//    [self.parent addChild:s z:-10];
     
     id call = [CCCallFuncND actionWithTarget:self selector:@selector(removeSpriteFromParent:data:) data:s];
     id delay = [CCDelayTime actionWithDuration:life];

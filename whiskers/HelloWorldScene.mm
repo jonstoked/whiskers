@@ -126,9 +126,14 @@
 //		 //		flags += b2DebugDraw::e_centerOfMassBit;
 //		 m_debugDraw->SetFlags(flags);
         
-//        starStreakBatch = [CCSpriteBatchNode batchNodeWithFile:@"whiteSquare504.png"];
+        
+//        starStreakBatch = [CCSpriteBatchNode batchNodeWithFile:@"whiteSquare32.png"];
 //        [self addChild:starStreakBatch z:-10];
-		
+        
+
+        
+//        [self schedule:@selector(addRandomBatchSprite) interval:0.5f];
+        
 		[self addPauseMenu];
 		[self addKitties];
 		[self addButtons];
@@ -167,6 +172,16 @@
         
 	}
 	return self;
+}
+
+-(void) addRandomBatchSprite {
+    
+            CCSprite *s = [CCSprite spriteWithFile:@"whiteSquare32.png"];
+            s.scale = 340 / s.contentSize.width;
+            s.color = [[GameManager sharedGameManager] randomWhiskersColor];
+            s.position = [self makeRandomPointWithPadding:10];
+            [starStreakBatch addChild:s];
+    
 }
 
 -(void) loadSFX {
@@ -705,7 +720,7 @@
                 CGRect touchRect = [[touchRects objectAtIndex:i] CGRectValue];
                 if(CGRectContainsPoint(touchRect, location)) {
                     Kitty *myKitty = (Kitty *) [gameLayer getChildByTag:i];
-                    if(CLASSIC) {
+                    if([GameManager sharedGameManager].classicMode) {
                         [myKitty startTurning];
                     } else {
                         [myKitty turnRight];
@@ -1453,11 +1468,15 @@
     {
         [[GameManager sharedGameManager] setSfxOn:NO];
         
+        //todo remove this
+        [GameManager sharedGameManager].classicMode = YES;
+        
     }
     else
     {
         [[GameManager sharedGameManager] setSfxOn:YES];
         [[GameManager sharedGameManager] playRandomMeow];
+        [GameManager sharedGameManager].classicMode = NO;
         
     }    
 }

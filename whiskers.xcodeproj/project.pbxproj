@@ -269,6 +269,8 @@
 		682E615316D544C000D363BC /* libFlurry.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 682E615216D544BF00D363BC /* libFlurry.a */; };
 		682F72DA16E7BC4F00B86C42 /* heliotropeBouqet.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 682F72D816E7BC4F00B86C42 /* heliotropeBouqet.mp3 */; };
 		682F72DB16E7BC4F00B86C42 /* mapleLeafRag.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 682F72D916E7BC4F00B86C42 /* mapleLeafRag.mp3 */; };
+		682FB8EA170DC0A70054EE7D /* whiteSquare32.png in Resources */ = {isa = PBXBuildFile; fileRef = 682FB8E8170DC0A70054EE7D /* whiteSquare32.png */; };
+		682FB8EB170DC0A70054EE7D /* whiteSquare64.png in Resources */ = {isa = PBXBuildFile; fileRef = 682FB8E9170DC0A70054EE7D /* whiteSquare64.png */; };
 		68365ADB16C57EB0003078F4 /* button1.png in Resources */ = {isa = PBXBuildFile; fileRef = 68365AD316C57EB0003078F4 /* button1.png */; };
 		68365ADC16C57EB0003078F4 /* button1down.png in Resources */ = {isa = PBXBuildFile; fileRef = 68365AD416C57EB0003078F4 /* button1down.png */; };
 		68365ADD16C57EB0003078F4 /* button2.png in Resources */ = {isa = PBXBuildFile; fileRef = 68365AD516C57EB0003078F4 /* button2.png */; };
@@ -762,6 +764,8 @@
 		682E615216D544BF00D363BC /* libFlurry.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurry.a; sourceTree = "<group>"; };
 		682F72D816E7BC4F00B86C42 /* heliotropeBouqet.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = heliotropeBouqet.mp3; sourceTree = "<group>"; };
 		682F72D916E7BC4F00B86C42 /* mapleLeafRag.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = mapleLeafRag.mp3; sourceTree = "<group>"; };
+		682FB8E8170DC0A70054EE7D /* whiteSquare32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = whiteSquare32.png; sourceTree = "<group>"; };
+		682FB8E9170DC0A70054EE7D /* whiteSquare64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = whiteSquare64.png; sourceTree = "<group>"; };
 		68365AD316C57EB0003078F4 /* button1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button1.png; sourceTree = "<group>"; };
 		68365AD416C57EB0003078F4 /* button1down.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button1down.png; sourceTree = "<group>"; };
 		68365AD516C57EB0003078F4 /* button2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button2.png; sourceTree = "<group>"; };
@@ -1600,6 +1604,8 @@
 				6804B1C015182D5F000918D4 /* starIcon.png */,
 				6804B1C215182D5F000918D4 /* bulletIcon.png */,
 				68F5E7CF16D9041900C20503 /* comingFeb.png */,
+				682FB8E8170DC0A70054EE7D /* whiteSquare32.png */,
+				682FB8E9170DC0A70054EE7D /* whiteSquare64.png */,
 				6804B1C315182D5F000918D4 /* bombIcon.png */,
 				6816733716A633D5001FA7F8 /* blackOverlay.png */,
 				6804B1BF15182D5F000918D4 /* psSparks.plist */,
@@ -1899,6 +1905,8 @@
 				68EC04EE16E198DD0084B431 /* sirenWhistle.wav in Resources */,
 				682F72DA16E7BC4F00B86C42 /* heliotropeBouqet.mp3 in Resources */,
 				682F72DB16E7BC4F00B86C42 /* mapleLeafRag.mp3 in Resources */,
+				682FB8EA170DC0A70054EE7D /* whiteSquare32.png in Resources */,
+				682FB8EB170DC0A70054EE7D /* whiteSquare64.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

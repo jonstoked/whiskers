@@ -12,7 +12,7 @@
 @implementation GameManager
 static GameManager* _sharedGameManager = nil;                      
 
-@synthesize isPlayerActiveArray, selectedMustacheArray, finalKittyScales, musicOn, sfxOn, kitties, helloWorldScene, debugRects, debugPoints, playCount, mustachesUnlocked, hasShownNewStacheMessage, matchCount;
+@synthesize isPlayerActiveArray, selectedMustacheArray, finalKittyScales, musicOn, sfxOn, kitties, helloWorldScene, debugRects, debugPoints, playCount, mustachesUnlocked, hasShownNewStacheMessage, matchCount, classicMode;
 
 
 +(GameManager*)sharedGameManager 
@@ -84,6 +84,9 @@ static GameManager* _sharedGameManager = nil;
 
         meowNames = [[NSMutableArray alloc] init];
         [self loadSFX];
+        
+        if(CLASSIC)
+            classicMode = YES;
 
     }
     return self;
