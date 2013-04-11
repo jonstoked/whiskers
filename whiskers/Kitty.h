@@ -61,7 +61,8 @@
     
     int wentOffScreenCount;
     
-//    NSMutableArra
+    float starScaleNonClassic;
+    float nextScale;
 }
 
 @property (nonatomic,readwrite) CCSprite* sprite;

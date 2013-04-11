@@ -55,6 +55,7 @@ hasMagnet, isBeingSucked, shouldSuck, tailPosition, isFacingOtherKitty, starStre
 		smallerKitty = YES;
 		kittyCollisionFilter = -(tag+1);
 		isTouchingKittyCount = 0;
+        starScaleNonClassic = 1.75f;
 		
 		//values taken from francine18x18 psd file
 		//used as spawn positions for eye bullets!
@@ -247,9 +248,10 @@ hasMagnet, isBeingSucked, shouldSuck, tailPosition, isFacingOtherKitty, starStre
 -(void) growWithScale: (float) scale
 {
     float myScale = scale;
+    float dur = 0.1f;
     
-	[sprite runAction: [CCScaleBy actionWithDuration:0.1 scale:myScale]];
-	
+	[sprite runAction: [CCScaleBy actionWithDuration:dur scale:myScale]];
+    	
 	//destroy current fixture and re-create a larger one
 	b2Shape *shape = (b2Shape *)fixture->GetShape();
 	b2PolygonShape platformShape;
@@ -269,6 +271,9 @@ hasMagnet, isBeingSucked, shouldSuck, tailPosition, isFacingOtherKitty, starStre
 	body->DestroyFixture(fixture);
 	fixture = body->CreateFixture(&fixdef);
     
+    [self schedule:@selector(updateLinearVelocity) interval:dur];
+//    [self updateLinearVelocity];
+    
 //    if(_hasTurret) {
 //        [self stopActionByTag:103];
 //        
@@ -287,7 +292,9 @@ hasMagnet, isBeingSucked, shouldSuck, tailPosition, isFacingOtherKitty, starStre
 	if(sprite.scale/myScale > START_SCALE)
 	{
         
-		[sprite runAction: [CCScaleBy actionWithDuration:0.1 scale:1.0/myScale]];
+        float dur = 0.1f;
+        
+		[sprite runAction: [CCScaleBy actionWithDuration:dur scale:1.0/myScale]];
         
 		//destroy current fixture and re-create a larger one
 		b2Shape *shape = (b2Shape *)fixture->GetShape();
@@ -305,6 +312,9 @@ hasMagnet, isBeingSucked, shouldSuck, tailPosition, isFacingOtherKitty, starStre
 		fixdef.filter.groupIndex = kittyCollisionFilter;
 		body->DestroyFixture(fixture);
 		fixture = body->CreateFixture(&fixdef);
+        
+        [self schedule:@selector(updateLinearVelocity) interval:dur];
+
         
 	}
     
@@ -355,7 +365,7 @@ hasMagnet, isBeingSucked, shouldSuck, tailPosition, isFacingOtherKitty, starStre
 //        float delay = 3.0f/speed;
 //        [self schedule:@selector(addStreakSprite) interval:delay];
         
-        
+        [self updateLinearVelocity];
 
 		
 	}
@@ -368,7 +378,9 @@ hasMagnet, isBeingSucked, shouldSuck, tailPosition, isFacingOtherKitty, starStre
 	[self.parent removeChildByTag:300+self.tag cleanup:YES];  //remove particle emitter
 	[self stopActionByTag:101];
     
-    [self unschedule:@selector(addStreakSprite)];
+    [self updateLinearVelocity];
+    
+//    [self unschedule:@selector(addStreakSprite)];
 
 	
 }
@@ -594,7 +606,10 @@ hasMagnet, isBeingSucked, shouldSuck, tailPosition, isFacingOtherKitty, starStre
 }
 
 -(void) turnRight {
-    float lv = 1.2f/sprite.scale;
+    float lv = 1.4f/sprite.scale; //was 1.2
+    if(_hasStar) {
+        lv*=starScaleNonClassic;
+    }
     float angle = atan2f(body->GetLinearVelocity().y, body->GetLinearVelocity().x);
     CCLOG(@"angle: %f", angle);
     if((angle >= M_PI/4.0f && angle <=3*M_PI/4.0f) || body->GetLinearVelocity().Length() == 0) {
@@ -609,6 +624,18 @@ hasMagnet, isBeingSucked, shouldSuck, tailPosition, isFacingOtherKitty, starStre
     } else {
         body->SetLinearVelocity(b2Vec2(0,lv));
         body->SetTransform(body->GetPosition(), M_PI/2.0f);
+    }
+}
+
+-(void) updateLinearVelocity {
+    [self unschedule:@selector(updateLinearVelocity)];
+    float lv = 1.4f/sprite.scale; //was 1.2
+    b2Vec2 lvUnit = body->GetLinearVelocity();
+    lvUnit.Normalize();
+    if(_hasStar) {
+        body->SetLinearVelocity(starScaleNonClassic*lv*lvUnit);
+    } else {
+        body->SetLinearVelocity(lv*lvUnit);
     }
 }
 

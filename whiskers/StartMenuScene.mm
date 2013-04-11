@@ -55,9 +55,9 @@
         
         [[GameManager sharedGameManager] logFlurryEvent:@"Displayed Start Menu"];
         
-        classicModeLabel = [CCLabelTTF labelWithString:@"classic" fontName:GAME_FONT fontSize:22];
-        [self addChild:classicModeLabel];
-        classicModeLabel.position = ccp(screenSize.width/2.0f, screenSize.height*0.1f);
+//        classicModeLabel = [CCLabelTTF labelWithString:@"classic" fontName:GAME_FONT fontSize:22];
+//        [self addChild:classicModeLabel];
+//        classicModeLabel.position = ccp(screenSize.width/2.0f, screenSize.height*0.1f);
         
 		
 	}	
