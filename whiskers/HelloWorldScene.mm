@@ -280,7 +280,7 @@
 			{
                 if([b->GetUserData() isKindOfClass:[Kitty class]]) {
                     Kitty* kitty = (Kitty*) b->GetUserData();
-                    if(kitty.wentOffScreenCount < 1 && [self bodyOutsideScreen:b]) {
+                    if((kitty.wentOffScreenCount < 1 && [self bodyOutsideScreen:b]) || ![GameManager sharedGameManager].classicMode) {
                         [kitty wentOffScreen];
                         [self teleportBody:b];
                     }

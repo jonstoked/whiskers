@@ -612,19 +612,66 @@ hasMagnet, isBeingSucked, shouldSuck, tailPosition, isFacingOtherKitty, starStre
     }
     float angle = atan2f(body->GetLinearVelocity().y, body->GetLinearVelocity().x);
     CCLOG(@"angle: %f", angle);
+    float newAngle;
     if((angle >= M_PI/4.0f && angle <=3*M_PI/4.0f) || body->GetLinearVelocity().Length() == 0) {
+        newAngle = 0;
         body->SetLinearVelocity(b2Vec2(lv,0));
         body->SetTransform(body->GetPosition(), 0);
     } else if (angle >= -M_PI/4.0f && angle <= M_PI/4.0f) {
+        newAngle = 90;
         body->SetLinearVelocity(b2Vec2(0,-lv));
         body->SetTransform(body->GetPosition(), -M_PI/2.0f);
     } else if (angle >= -3*M_PI/4.0f && angle <=-M_PI/4.0f) {
+        newAngle = 180;
         body->SetLinearVelocity(b2Vec2(-lv,0));
         body->SetTransform(body->GetPosition(), M_PI);
     } else {
+        newAngle = 270;
         body->SetLinearVelocity(b2Vec2(0,lv));
         body->SetTransform(body->GetPosition(), M_PI/2.0f);
     }
+    
+    [self animateTurnFromAngle:CC_RADIANS_TO_DEGREES(angle) toAngle:newAngle];
+}
+
+-(void) animateTurnFromAngle:(float)a1 toAngle:(float)a2 {
+//    for(int i = 0; i<3; ++i) {
+//        CCSprite *s = [CCSprite spriteWithFile:@"whiteSquare32.png"];
+//        s.color = sprite.color;
+//        s.position = self.position;
+//        s.scale = sprite.boundingBox.size.width/s.contentSize.width;
+//        s.rotation = a1+i*((a2-a1)/3.0f);
+//        [self.parent addChild:s z:-10];
+//        float dur = 0.1f;
+//        dur = 3*dur - i*dur;
+//        
+//        id fadeout = [CCFadeOut actionWithDuration:dur];
+//        [s runAction:fadeout];
+//
+//        id remove = [CCCallFuncND actionWithTarget:self selector:@selector(removeSpriteFromParent:data:) data:s];
+//        id delay = [CCDelayTime actionWithDuration:dur];
+//        id seq = [CCSequence actions:delay,remove, nil];
+//        [self runAction:seq];
+//        
+//    }
+    
+    CCSprite *s = [CCSprite spriteWithFile:@"directionArrow.png"];
+    s.color = sprite.color;
+    s.position = self.position;
+    s.scale = sprite.boundingBox.size.width/s.contentSize.width;
+    s.rotation = a2;
+    [self.parent addChild:s z:-10];
+    float dur = 0.4f;
+    
+    id fadeout = [CCFadeOut actionWithDuration:dur];
+    [s runAction:fadeout];
+    
+    id remove = [CCCallFuncND actionWithTarget:self selector:@selector(removeSpriteFromParent:data:) data:s];
+    id delay = [CCDelayTime actionWithDuration:dur];
+    id seq = [CCSequence actions:delay,remove, nil];
+    [self runAction:seq];
+    
+    
 }
 
 -(void) updateLinearVelocity {
