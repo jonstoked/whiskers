@@ -223,7 +223,11 @@ hasMagnet, isBeingSucked, shouldSuck, tailPosition, isFacingOtherKitty, starStre
 	if(_hasStar)
 	{
 		particleSystemStarTrail.position = self.position;
-		particleSystemStarTrail.angle = -self.rotation + 180.0f;
+//		particleSystemStarTrail.angle = -self.rotation + 180.0f;
+        particleSystemStarTrail.startSpin = self.rotation;
+        particleSystemStarTrail.endSpin = particleSystemStarTrail.startSpin;
+        particleSystemStarTrail.startSize = sprite.boundingBox.size.width;
+		particleSystemStarTrail.endSize = particleSystemStarTrail.startSize;
 	}
     
     tailPosition = ccp(-[sprite boundingBox].size.width/2.0f,-[sprite boundingBox].size.height/2.0f);
@@ -241,11 +245,6 @@ hasMagnet, isBeingSucked, shouldSuck, tailPosition, isFacingOtherKitty, starStre
             }
 
         }
-    }
-    
-    if(_hasStar) {
-        particleSystemStarTrail.startSize = sprite.boundingBox.size.width;
-		particleSystemStarTrail.endSize = particleSystemStarTrail.startSize;
     }
     
     
