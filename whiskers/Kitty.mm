@@ -349,12 +349,12 @@ hasMagnet, isBeingSucked, shouldSuck, tailPosition, isFacingOtherKitty, starStre
 		_hasStar = YES;
 		
 		//add the particle emitter to leave trail of stars behind kitty
-		particleSystemStarTrail = [CCParticleSystemQuad particleWithFile:@"psStarTrail.plist"];
+		particleSystemStarTrail = [CCParticleSystemQuad particleWithFile:@"squares.plist"];
 		particleSystemStarTrail.positionType = kCCPositionTypeFree;
 		particleSystemStarTrail.tag = 300+self.tag;
 		particleSystemStarTrail.startColor = ccc4FFromccc3B(sprite.color);
 		particleSystemStarTrail.endColor = ccc4FFromccc3B(sprite.color);
-		particleSystemStarTrail.startSize = particleSystemStarTrail.startSize*sprite.scale;
+//		particleSystemStarTrail.startSize = particleSystemStarTrail.startSize*sprite.scale;
 		[self.parent addChild:particleSystemStarTrail z:-9];
 		
 		CCSequence* lostStarCall = [CCSequence actions:[CCDelayTime actionWithDuration:5.0f], [CCCallFunc actionWithTarget:self selector:@selector(lostStar)], nil];
@@ -675,14 +675,18 @@ hasMagnet, isBeingSucked, shouldSuck, tailPosition, isFacingOtherKitty, starStre
 }
 
 -(void) updateLinearVelocity {
-    [self unschedule:@selector(updateLinearVelocity)];
-    float lv = 1.4f/sprite.scale; //was 1.2
-    b2Vec2 lvUnit = body->GetLinearVelocity();
-    lvUnit.Normalize();
-    if(_hasStar) {
-        body->SetLinearVelocity(starScaleNonClassic*lv*lvUnit);
-    } else {
-        body->SetLinearVelocity(lv*lvUnit);
+    
+    if(![GameManager sharedGameManager].classicMode) {
+        
+        [self unschedule:@selector(updateLinearVelocity)];
+        float lv = 1.4f/sprite.scale; //was 1.2
+        b2Vec2 lvUnit = body->GetLinearVelocity();
+        lvUnit.Normalize();
+        if(_hasStar) {
+            body->SetLinearVelocity(starScaleNonClassic*lv*lvUnit);
+        } else {
+            body->SetLinearVelocity(lv*lvUnit);
+        }
     }
 }
 
@@ -709,11 +713,15 @@ hasMagnet, isBeingSucked, shouldSuck, tailPosition, isFacingOtherKitty, starStre
 }
 
 -(void) wentOffScreen {
-    ++wentOffScreenCount;
-//    if(wentOffScreenCount == 2) {
-//        body->SetTransform(body->GetPosition(),(body->GetAngle() + M_PI));
-//    }
-    [self schedule:@selector(resetWentOffScreen) interval:1.0f];
+    if([GameManager sharedGameManager].classicMode) {
+        
+//    ++wentOffScreenCount;
+////    if(wentOffScreenCount == 2) {
+////        body->SetTransform(body->GetPosition(),(body->GetAngle() + M_PI));
+////    }
+//    [self schedule:@selector(resetWentOffScreen) interval:1.0f];
+        
+    }
     
 }
 
