@@ -152,7 +152,8 @@
         
         }
 		
-		[self schedule: @selector(tick:)];
+        [self scheduleUpdateWithPriority:1];
+
 		
         if(TEST_POWERUP != @"") {
             [self addPowerup];
@@ -231,8 +232,8 @@
     
 }
 
--(void) tick: (ccTime) dt
-{
+-(void) update: (ccTime) dt {
+
 	//It is recommended that a fixed time step is used with Box2D for stability
 	//of the simulation, however, we are using a variable time step here.
 	//You need to make an informed choice, the following URL is useful
@@ -1305,7 +1306,7 @@
 -(void) pause
 {
 	//[[CCDirector sharedDirector] pause];
-	[self unschedule: @selector(tick:)];
+    [self unscheduleUpdate];
 	[self unschedule: @selector(addPellet:)];
 	[self unschedule: @selector(addPowerup)];
 	[[SimpleAudioEngine sharedEngine] pauseBackgroundMusic];
@@ -1336,7 +1337,7 @@
 
 -(void) unpause
 {	
-	[self schedule: @selector(tick:)];
+    [self scheduleUpdateWithPriority:1];
 	[self schedule: @selector(addPellet:) interval:_pelletInterval];
 	[self schedule: @selector(addPowerup) interval:_powerupInterval];
 	

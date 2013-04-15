@@ -177,9 +177,11 @@ hasMagnet, isBeingSucked, shouldSuck, tailPosition, isFacingOtherKitty, starStre
         }
         
         if(self.tag == 1) {
+            
 //            CCLOG(@"midRangeBoost: %f", midRangeBoost);
 //            CCLOG(@"force: %f", f);
 //            CCLOG(@"scale: %f", sprite.scale);
+        
         }
 		
 		forceVec *= f; //multiply force unit vector by scalar
@@ -239,6 +241,11 @@ hasMagnet, isBeingSucked, shouldSuck, tailPosition, isFacingOtherKitty, starStre
             }
 
         }
+    }
+    
+    if(_hasStar) {
+        particleSystemStarTrail.startSize = sprite.boundingBox.size.width;
+		particleSystemStarTrail.endSize = particleSystemStarTrail.startSize;
     }
     
     
@@ -349,12 +356,19 @@ hasMagnet, isBeingSucked, shouldSuck, tailPosition, isFacingOtherKitty, starStre
 		_hasStar = YES;
 		
 		//add the particle emitter to leave trail of stars behind kitty
-		particleSystemStarTrail = [CCParticleSystemQuad particleWithFile:@"squares.plist"];
+		particleSystemStarTrail = [CCParticleSystemQuad particleWithFile:@"squares.plist"];  //32x32 white pixel
 		particleSystemStarTrail.positionType = kCCPositionTypeFree;
 		particleSystemStarTrail.tag = 300+self.tag;
 		particleSystemStarTrail.startColor = ccc4FFromccc3B(sprite.color);
 		particleSystemStarTrail.endColor = ccc4FFromccc3B(sprite.color);
-//		particleSystemStarTrail.startSize = particleSystemStarTrail.startSize*sprite.scale;
+		particleSystemStarTrail.startSize = sprite.boundingBox.size.width;
+		particleSystemStarTrail.endSize = particleSystemStarTrail.startSize;
+        
+        float sp = speed; //for debugging
+        particleSystemStarTrail.totalParticles = 100;
+        particleSystemStarTrail.life = 0.8f; 
+        particleSystemStarTrail.emissionRate = 3 + 15*(1-sprite.scale);
+
 		[self.parent addChild:particleSystemStarTrail z:-9];
 		
 		CCSequence* lostStarCall = [CCSequence actions:[CCDelayTime actionWithDuration:5.0f], [CCCallFunc actionWithTarget:self selector:@selector(lostStar)], nil];
