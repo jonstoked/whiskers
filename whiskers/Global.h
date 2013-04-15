@@ -20,7 +20,7 @@
 #define DONT_SPAWN_COLLECTIBLES 0
 #define DEBUG_WENT_OFFSCREEN 0
 #define SOUND_OFF 1
-#define CLASSIC 1
+#define CLASSIC 0
 
 #define TEST_POWERUP @"star"
 //star

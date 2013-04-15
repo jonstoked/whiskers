@@ -223,11 +223,13 @@ hasMagnet, isBeingSucked, shouldSuck, tailPosition, isFacingOtherKitty, starStre
 	if(_hasStar)
 	{
 		particleSystemStarTrail.position = self.position;
-//		particleSystemStarTrail.angle = -self.rotation + 180.0f;
         particleSystemStarTrail.startSpin = self.rotation;
         particleSystemStarTrail.endSpin = particleSystemStarTrail.startSpin;
         particleSystemStarTrail.startSize = sprite.boundingBox.size.width;
 		particleSystemStarTrail.endSize = particleSystemStarTrail.startSize;
+//        particleSystemStarTrail.startColor = ccc4FFromccc3B([[GameManager sharedGameManager] randomWhiskersColor]);
+//        particleSystemStarTrail.endColor = particleSystemStarTrail.startColor;
+
 	}
     
     tailPosition = ccp(-[sprite boundingBox].size.width/2.0f,-[sprite boundingBox].size.height/2.0f);
@@ -359,11 +361,11 @@ hasMagnet, isBeingSucked, shouldSuck, tailPosition, isFacingOtherKitty, starStre
 		particleSystemStarTrail.positionType = kCCPositionTypeFree;
 		particleSystemStarTrail.tag = 300+self.tag;
 		particleSystemStarTrail.startColor = ccc4FFromccc3B(sprite.color);
-		particleSystemStarTrail.endColor = ccc4FFromccc3B(sprite.color);
+		particleSystemStarTrail.endColor = particleSystemStarTrail.startColor;
 		particleSystemStarTrail.startSize = sprite.boundingBox.size.width;
 		particleSystemStarTrail.endSize = particleSystemStarTrail.startSize;
         
-        float sp = speed; //for debugging
+//        float sp = speed; //for debugging
         particleSystemStarTrail.totalParticles = 100;
         particleSystemStarTrail.life = 0.8f; 
         particleSystemStarTrail.emissionRate = 3 + 15*(1-sprite.scale);
@@ -373,7 +375,6 @@ hasMagnet, isBeingSucked, shouldSuck, tailPosition, isFacingOtherKitty, starStre
 		CCSequence* lostStarCall = [CCSequence actions:[CCDelayTime actionWithDuration:5.0f], [CCCallFunc actionWithTarget:self selector:@selector(lostStar)], nil];
 		lostStarCall.tag = 101;
 		[self runAction:lostStarCall];
-        
         
 //        float delay = 3.0f/speed;
 //        [self schedule:@selector(addStreakSprite) interval:delay];
@@ -648,25 +649,6 @@ hasMagnet, isBeingSucked, shouldSuck, tailPosition, isFacingOtherKitty, starStre
 }
 
 -(void) animateTurnFromAngle:(float)a1 toAngle:(float)a2 {
-//    for(int i = 0; i<3; ++i) {
-//        CCSprite *s = [CCSprite spriteWithFile:@"whiteSquare32.png"];
-//        s.color = sprite.color;
-//        s.position = self.position;
-//        s.scale = sprite.boundingBox.size.width/s.contentSize.width;
-//        s.rotation = a1+i*((a2-a1)/3.0f);
-//        [self.parent addChild:s z:-10];
-//        float dur = 0.1f;
-//        dur = 3*dur - i*dur;
-//        
-//        id fadeout = [CCFadeOut actionWithDuration:dur];
-//        [s runAction:fadeout];
-//
-//        id remove = [CCCallFuncND actionWithTarget:self selector:@selector(removeSpriteFromParent:data:) data:s];
-//        id delay = [CCDelayTime actionWithDuration:dur];
-//        id seq = [CCSequence actions:delay,remove, nil];
-//        [self runAction:seq];
-//        
-//    }
     
     CCSprite *s = [CCSprite spriteWithFile:@"directionArrow.png"];
     s.color = sprite.color;
@@ -674,7 +656,7 @@ hasMagnet, isBeingSucked, shouldSuck, tailPosition, isFacingOtherKitty, starStre
     s.scale = sprite.boundingBox.size.width/s.contentSize.width;
     s.rotation = a2;
     [self.parent addChild:s z:-10];
-    float dur = 0.4f;
+    float dur = 0.5f;
     
     id fadeout = [CCFadeOut actionWithDuration:dur];
     [s runAction:fadeout];
