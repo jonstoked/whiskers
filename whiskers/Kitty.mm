@@ -650,21 +650,25 @@ hasMagnet, isBeingSucked, shouldSuck, tailPosition, isFacingOtherKitty, starStre
 
 -(void) animateTurnFromAngle:(float)a1 toAngle:(float)a2 {
     
-    CCSprite *s = [CCSprite spriteWithFile:@"directionArrow.png"];
-    s.color = sprite.color;
-    s.position = self.position;
-    s.scale = sprite.boundingBox.size.width/s.contentSize.width;
-    s.rotation = a2;
-    [self.parent addChild:s z:-10];
-    float dur = 0.5f;
+    if(!_hasStar) {
     
-    id fadeout = [CCFadeOut actionWithDuration:dur];
-    [s runAction:fadeout];
-    
-    id remove = [CCCallFuncND actionWithTarget:self selector:@selector(removeSpriteFromParent:data:) data:s];
-    id delay = [CCDelayTime actionWithDuration:dur];
-    id seq = [CCSequence actions:delay,remove, nil];
-    [self runAction:seq];
+        CCSprite *s = [CCSprite spriteWithFile:@"directionArrow.png"];
+        s.color = sprite.color;
+        s.position = self.position;
+        s.scale = sprite.boundingBox.size.width/s.contentSize.width;
+        s.rotation = a2;
+        [self.parent addChild:s z:-10];
+        float dur = 0.5f;
+        
+        id fadeout = [CCFadeOut actionWithDuration:dur];
+        [s runAction:fadeout];
+        
+        id remove = [CCCallFuncND actionWithTarget:self selector:@selector(removeSpriteFromParent:data:) data:s];
+        id delay = [CCDelayTime actionWithDuration:dur];
+        id seq = [CCSequence actions:delay,remove, nil];
+        [self runAction:seq];
+        
+    }
     
     
 }

@@ -37,8 +37,16 @@
 		[self addChild:bgLayer z:-10];
         
         playMenu = [[GameManager sharedGameManager] menuAtPosition:ccp(screenSize.width/2, screenSize.height/2) imageName:@"playButtonMustacheScene.png" target:self selector:@selector(startGame:)];
-		playMenu.opacity = 0;
+		playMenu.opacity = 100;
         [self addChild:playMenu];
+        
+        //mode button
+        NSString *on = [GameManager sharedGameManager].classicMode ? @"modeAnalog.png" : @"modeDigital.png";
+        NSString *off = ![GameManager sharedGameManager].classicMode ? @"modeAnalog.png" : @"modeDigital.png";
+        modeMenu = [[GameManager sharedGameManager] toggleMenuAtPosition:ccp(513,266) imageNameOn:on imageNameOff:off target:self selector:@selector(toggleMode)];
+        modeMenu.opacity = 100;
+        modeMenu.isTouchEnabled = NO;
+        [self addChild:modeMenu];
         
         CCMenu *backMenu = [[GameManager sharedGameManager] menuAtPosition:CGPointMake(516, screenSize.height-47) imageName:@"backButton3.png" target:self selector:@selector(backButtonPressed:)];
         
@@ -90,6 +98,8 @@
 	if(sum >= 2)
 	{
         playMenu.opacity = 255;
+        modeMenu.opacity = playMenu.opacity;
+        modeMenu.isTouchEnabled = YES;
 	}
 		
 }
@@ -126,8 +136,9 @@
 	[playerNode3 runAction:move4];
 	[playerNode3 runAction:rotate4];
     
-    id fadein = [CCFadeTo actionWithDuration:0.6f opacity:100];
-    [playMenu runAction:fadein];
+//    id fadein = [CCFadeTo actionWithDuration:0.6f opacity:100];
+//    [playMenu runAction:fadein];
+//    [modeMenu runAction:fadein];
 }
 
 -(void) startGame:(id)sender {
@@ -148,6 +159,12 @@
 	[[CCTouchDispatcher sharedDispatcher] removeDelegate:self];
 	[[CCDirector sharedDirector] replaceScene:[StartMenuScene scene]];
 	
+}
+
+-(void) toggleMode {
+    
+    [GameManager sharedGameManager].classicMode = ![GameManager sharedGameManager].classicMode;
+
 }
 
 -(void) updateIsPlayerActiveArray

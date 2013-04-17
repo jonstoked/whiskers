@@ -24,6 +24,7 @@
 	float kittyScale;
 	NSMutableArray	*playerNodeArray;
 	CCMenu *playMenu;
+    CCMenu *modeMenu;
 
 }
 
