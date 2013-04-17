@@ -32,7 +32,9 @@
     BOOL hasShownNewStacheMessage;
     int matchCount;
     NSMutableArray *meowNames;
-    BOOL classicMode;
+    BOOL analogMode;
+    int analogMatchCount;
+    int digitalMatchCount;
 	
 }
 
@@ -50,7 +52,10 @@
 @property (nonatomic, assign) int mustachesUnlocked;
 @property (nonatomic, assign) BOOL hasShownNewStacheMessage;
 @property (nonatomic, assign) int matchCount;
-@property (nonatomic, assign) BOOL classicMode;
+@property (nonatomic, assign) BOOL analogMode;
+@property (nonatomic, assign) int analogMatchCount;
+@property (nonatomic, assign) int digitalMatchCount;
+
 
 
 

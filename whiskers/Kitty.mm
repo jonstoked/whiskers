@@ -55,7 +55,7 @@ hasMagnet, isBeingSucked, shouldSuck, tailPosition, isFacingOtherKitty, starStre
 		smallerKitty = YES;
 		kittyCollisionFilter = -(tag+1);
 		isTouchingKittyCount = 0;
-        starScaleNonClassic = 1.75f;
+        starScaleDitalMode = 1.75f;
 		
 		//values taken from francine18x18 psd file
 		//used as spawn positions for eye bullets!
@@ -111,7 +111,7 @@ hasMagnet, isBeingSucked, shouldSuck, tailPosition, isFacingOtherKitty, starStre
 		boxBodyDef.type = b2_dynamicBody;
 		boxBodyDef.position.Set(position.x/PTM_RATIO, position.y/PTM_RATIO); 
 		boxBodyDef.userData = self;
-        if([GameManager sharedGameManager].classicMode) {
+        if([GameManager sharedGameManager].analogMode) {
             boxBodyDef.linearDamping = 6.0f;  //adds air resistance to box
         }
         boxBodyDef.angularDamping = 9.0f;
@@ -119,7 +119,7 @@ hasMagnet, isBeingSucked, shouldSuck, tailPosition, isFacingOtherKitty, starStre
         
         [self createFixtureWithDensity:KITTY_DENSITY friction:0 restitution:0];
         
-        if(![GameManager sharedGameManager].classicMode) {
+        if(![GameManager sharedGameManager].analogMode) {
             [self turnRight];
         }
         
@@ -151,7 +151,7 @@ hasMagnet, isBeingSucked, shouldSuck, tailPosition, isFacingOtherKitty, starStre
     speed = lv.Length()*PTM_RATIO;
     
 	//make kitty move forward automatically by applying a force every tick
-	if(_isMoving && !isBeingSucked && [GameManager sharedGameManager].classicMode)
+	if(_isMoving && !isBeingSucked && [GameManager sharedGameManager].analogMode)
 	{
 		float angleRad = body->GetAngle();
 		
@@ -622,7 +622,7 @@ hasMagnet, isBeingSucked, shouldSuck, tailPosition, isFacingOtherKitty, starStre
 -(void) turnRight {
     float lv = 1.4f/sprite.scale; //was 1.2
     if(_hasStar) {
-        lv*=starScaleNonClassic;
+        lv*=starScaleDitalMode;
     }
     float angle = atan2f(body->GetLinearVelocity().y, body->GetLinearVelocity().x);
     CCLOG(@"angle: %f", angle);
@@ -675,14 +675,14 @@ hasMagnet, isBeingSucked, shouldSuck, tailPosition, isFacingOtherKitty, starStre
 
 -(void) updateLinearVelocity {
     
-    if(![GameManager sharedGameManager].classicMode) {
+    if(![GameManager sharedGameManager].analogMode) {
         
         [self unschedule:@selector(updateLinearVelocity)];
         float lv = 1.4f/sprite.scale; //was 1.2
         b2Vec2 lvUnit = body->GetLinearVelocity();
         lvUnit.Normalize();
         if(_hasStar) {
-            body->SetLinearVelocity(starScaleNonClassic*lv*lvUnit);
+            body->SetLinearVelocity(starScaleDitalMode*lv*lvUnit);
         } else {
             body->SetLinearVelocity(lv*lvUnit);
         }
@@ -712,7 +712,8 @@ hasMagnet, isBeingSucked, shouldSuck, tailPosition, isFacingOtherKitty, starStre
 }
 
 -(void) wentOffScreen {
-    if([GameManager sharedGameManager].classicMode) {
+    
+    if([GameManager sharedGameManager].analogMode) {
         
 //    ++wentOffScreenCount;
 ////    if(wentOffScreenCount == 2) {

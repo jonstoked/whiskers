@@ -61,7 +61,7 @@
     
     int wentOffScreenCount;
     
-    float starScaleNonClassic;
+    float starScaleDitalMode;
     float nextScale;
 }
 

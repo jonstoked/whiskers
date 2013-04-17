@@ -41,8 +41,8 @@
         [self addChild:playMenu];
         
         //mode button
-        NSString *on = [GameManager sharedGameManager].classicMode ? @"modeAnalog.png" : @"modeDigital.png";
-        NSString *off = ![GameManager sharedGameManager].classicMode ? @"modeAnalog.png" : @"modeDigital.png";
+        NSString *on = [GameManager sharedGameManager].analogMode ? @"modeAnalog.png" : @"modeDigital.png";
+        NSString *off = ![GameManager sharedGameManager].analogMode ? @"modeAnalog.png" : @"modeDigital.png";
         modeMenu = [[GameManager sharedGameManager] toggleMenuAtPosition:ccp(513,266) imageNameOn:on imageNameOff:off target:self selector:@selector(toggleMode)];
         modeMenu.opacity = 100;
         modeMenu.isTouchEnabled = NO;
@@ -163,7 +163,7 @@
 
 -(void) toggleMode {
     
-    [GameManager sharedGameManager].classicMode = ![GameManager sharedGameManager].classicMode;
+    [GameManager sharedGameManager].analogMode = ![GameManager sharedGameManager].analogMode;
 
 }
 

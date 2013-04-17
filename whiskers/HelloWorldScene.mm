@@ -54,6 +54,12 @@
         
         screenSize = [CCDirector sharedDirector].winSize;
         
+        if([GameManager sharedGameManager].analogMode) {
+            ++[GameManager sharedGameManager].analogMatchCount;
+        } else {
+            ++[GameManager sharedGameManager].digitalMatchCount;
+        }
+        
 		//gameManager tests
 		isPlayerActiveArray =  [[GameManager sharedGameManager] isPlayerActiveArray];
         
@@ -281,7 +287,7 @@
 			{
                 if([b->GetUserData() isKindOfClass:[Kitty class]]) {
                     Kitty* kitty = (Kitty*) b->GetUserData();
-                    if((kitty.wentOffScreenCount < 1 && [self bodyOutsideScreen:b]) || ![GameManager sharedGameManager].classicMode) {
+                    if((kitty.wentOffScreenCount < 1 && [self bodyOutsideScreen:b]) || ![GameManager sharedGameManager].analogMode) {
                         [kitty wentOffScreen];
                         [self teleportBody:b];
                     }
@@ -721,7 +727,7 @@
                 CGRect touchRect = [[touchRects objectAtIndex:i] CGRectValue];
                 if(CGRectContainsPoint(touchRect, location)) {
                     Kitty *myKitty = (Kitty *) [gameLayer getChildByTag:i];
-                    if([GameManager sharedGameManager].classicMode) {
+                    if([GameManager sharedGameManager].analogMode) {
                         [myKitty startTurning];
                     } else {
                         [myKitty turnRight];
@@ -778,6 +784,12 @@
 	int buttonPosition = padding + _buttonSize;
 	
 	CCSprite* mySprite;
+    
+//    if(([GameManager sharedGameManager].analogMode && [GameManager sharedGameManager].analogMatchCount <= 5) ||
+//       (![GameManager sharedGameManager].analogMode && [GameManager sharedGameManager].digitalMatchCount <= 5)) {
+        showInstruciton = YES;
+        
+//    }
 	
 	
 	for (int i = 0; i <= 3; ++i) 
@@ -786,22 +798,47 @@
 		{
             NSString *fileName = [NSString stringWithFormat: @"button%i.png", i+1];
             mySprite = [CCSprite spriteWithFile:fileName];
+            
+            CGPoint insOffset = ccp(140,158);
+            CCSprite *ins;
+            if(showInstruciton) {
+                NSString *instructionString = [GameManager sharedGameManager].analogMode ? @"holdToTurn.png" : @"tapToTurn.png";
+                ins = [CCSprite spriteWithFile:instructionString];
+                [uiLayer addChild:ins];
+            }
 			
             if(i==0) // bottom left
 			{
 				mySprite.position = ccp(buttonPosition/2,buttonPosition/2);
+                if(showInstruciton) {
+                    ins.position =insOffset;
+                    ins.rotation = 45;
+                    
+                }
 			}
 			else if(i==1) //bottom right
 			{
 				mySprite.position = ccp(screenSize.width - buttonPosition/2, buttonPosition/2);
+                if(showInstruciton) {
+                    ins.position =ccp(screenSize.width - insOffset.x, insOffset.y);
+                    ins.rotation = -45;
+                }
 			}
 			else if(i==2) // top right
 			{
 				mySprite.position = ccp(screenSize.width - buttonPosition/2, screenSize.height - buttonPosition/2);
+                if(showInstruciton) {
+                    ins.position =ccp(screenSize.width - insOffset.x, screenSize.height - insOffset.y);
+                    ins.rotation = -135;
+                }
 			}
 			else if(i==3) // top left
 			{
 				mySprite.position = ccp(buttonPosition/2, screenSize.height - buttonPosition/2);
+                if(showInstruciton) {
+                    ins.position =ccp(insOffset.x, screenSize.height - insOffset.y);
+                    ins.rotation = 135;
+                }
 			}
             
             mySprite.position = ccpAdd(mySprite.position, ccp(mySprite.contentSize.width/2.0f, -mySprite.contentSize.height/2.0f));
@@ -1470,14 +1507,14 @@
         [[GameManager sharedGameManager] setSfxOn:NO];
         
         //todo remove this
-        [GameManager sharedGameManager].classicMode = YES;
+        [GameManager sharedGameManager].analogMode = YES;
         
     }
     else
     {
         [[GameManager sharedGameManager] setSfxOn:YES];
         [[GameManager sharedGameManager] playRandomMeow];
-        [GameManager sharedGameManager].classicMode = NO;
+        [GameManager sharedGameManager].analogMode = NO;
         
     }    
 }

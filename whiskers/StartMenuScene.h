@@ -21,9 +21,7 @@
 	float kittyScale;
     CCMenuItemImage *powerupsButton;
     CCMenu *powerupsMenu;
-    
-    CCLabelTTF *classicModeLabel;
-    
+        
 }
 
 +(id) scene;

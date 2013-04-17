@@ -54,7 +54,8 @@
     CGSize screenSize;
         
     int addPowerupCount;
-        
+    
+    BOOL showInstruciton;
 
 	
 }

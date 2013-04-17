@@ -20,7 +20,7 @@
 #define DONT_SPAWN_COLLECTIBLES 0
 #define DEBUG_WENT_OFFSCREEN 0
 #define SOUND_OFF 1
-#define CLASSIC 0
+#define FORCE_ANALOG 0
 
 #define TEST_POWERUP @"star"
 //star
@@ -77,6 +77,10 @@ typedef enum {
     kTagKitty1Streak,
     kTagKitty2Streak,
     kTagKitty3Streak,
+    kTagInstruction0,
+    kTagInstruction1,
+    kTagInstruction2,
+    kTagInstruction3,
     kTagCount
     
 } kTag;

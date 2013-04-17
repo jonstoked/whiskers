@@ -12,7 +12,7 @@
 @implementation GameManager
 static GameManager* _sharedGameManager = nil;                      
 
-@synthesize isPlayerActiveArray, selectedMustacheArray, finalKittyScales, musicOn, sfxOn, kitties, helloWorldScene, debugRects, debugPoints, playCount, mustachesUnlocked, hasShownNewStacheMessage, matchCount, classicMode;
+@synthesize isPlayerActiveArray, selectedMustacheArray, finalKittyScales, musicOn, sfxOn, kitties, helloWorldScene, debugRects, debugPoints, playCount, mustachesUnlocked, hasShownNewStacheMessage, matchCount, analogMode, analogMatchCount, digitalMatchCount;
 
 
 +(GameManager*)sharedGameManager 
@@ -85,8 +85,8 @@ static GameManager* _sharedGameManager = nil;
         meowNames = [[NSMutableArray alloc] init];
         [self loadSFX];
         
-        if(CLASSIC)
-            classicMode = YES;
+        if(FORCE_ANALOG)
+            analogMode = YES;
 
     }
     return self;
@@ -101,6 +101,9 @@ static GameManager* _sharedGameManager = nil;
     playCount = [[NSUserDefaults standardUserDefaults] integerForKey: @"playCount"];
     mustachesUnlocked = [[NSUserDefaults standardUserDefaults] integerForKey: @"mustachesUnlocked"];
     matchCount = [[NSUserDefaults standardUserDefaults] integerForKey: @"matchCount"];
+    digitalMatchCount = [[NSUserDefaults standardUserDefaults] integerForKey: @"digitalMatchCount"];
+    analogMatchCount = [[NSUserDefaults standardUserDefaults] integerForKey: @"analogMatchCount"];
+
 
     
 }
@@ -114,7 +117,9 @@ static GameManager* _sharedGameManager = nil;
     [[NSUserDefaults standardUserDefaults] setInteger:playCount forKey:@"playCount"];
     [[NSUserDefaults standardUserDefaults] setInteger:mustachesUnlocked forKey:@"mustachesUnlocked"];
     [[NSUserDefaults standardUserDefaults] setInteger:matchCount forKey:@"matchCount"];
-    
+    [[NSUserDefaults standardUserDefaults] setInteger:digitalMatchCount forKey:@"digitalMatchCount"];
+    [[NSUserDefaults standardUserDefaults] setInteger:analogMatchCount forKey:@"analogMatchCount"];
+
 
     [[NSUserDefaults standardUserDefaults] synchronize];
     

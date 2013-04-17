@@ -281,6 +281,8 @@
 		68365AE216C57EB0003078F4 /* button4down.png in Resources */ = {isa = PBXBuildFile; fileRef = 68365ADA16C57EB0003078F4 /* button4down.png */; };
 		6842E1DC171F076A003EDD4E /* modeAnalog.png in Resources */ = {isa = PBXBuildFile; fileRef = 6842E1DA171F076A003EDD4E /* modeAnalog.png */; };
 		6842E1DD171F076A003EDD4E /* modeDigital.png in Resources */ = {isa = PBXBuildFile; fileRef = 6842E1DB171F076A003EDD4E /* modeDigital.png */; };
+		6842E1E0171F18CC003EDD4E /* holdToTurn.png in Resources */ = {isa = PBXBuildFile; fileRef = 6842E1DE171F18CC003EDD4E /* holdToTurn.png */; };
+		6842E1E1171F18CC003EDD4E /* tapToTurn.png in Resources */ = {isa = PBXBuildFile; fileRef = 6842E1DF171F18CC003EDD4E /* tapToTurn.png */; };
 		6890249A16C9877F00B410B9 /* rematchButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 6890249916C9877F00B410B9 /* rematchButton.png */; };
 		6890249E16C98C6500B410B9 /* backButton3.png in Resources */ = {isa = PBXBuildFile; fileRef = 6890249D16C98C6500B410B9 /* backButton3.png */; };
 		689024C416C990B500B410B9 /* Appirater.m in Sources */ = {isa = PBXBuildFile; fileRef = 689024A616C990B300B410B9 /* Appirater.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
@@ -780,6 +782,8 @@
 		68365ADA16C57EB0003078F4 /* button4down.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button4down.png; sourceTree = "<group>"; };
 		6842E1DA171F076A003EDD4E /* modeAnalog.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = modeAnalog.png; sourceTree = "<group>"; };
 		6842E1DB171F076A003EDD4E /* modeDigital.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = modeDigital.png; sourceTree = "<group>"; };
+		6842E1DE171F18CC003EDD4E /* holdToTurn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = holdToTurn.png; sourceTree = "<group>"; };
+		6842E1DF171F18CC003EDD4E /* tapToTurn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tapToTurn.png; sourceTree = "<group>"; };
 		6890249916C9877F00B410B9 /* rematchButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rematchButton.png; sourceTree = "<group>"; };
 		6890249D16C98C6500B410B9 /* backButton3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backButton3.png; sourceTree = "<group>"; };
 		689024A516C990B300B410B9 /* Appirater.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Appirater.h; sourceTree = "<group>"; };
@@ -1611,6 +1615,8 @@
 			isa = PBXGroup;
 			children = (
 				6804B1C115182D5F000918D4 /* lightningIcon copy.png */,
+				6842E1DE171F18CC003EDD4E /* holdToTurn.png */,
+				6842E1DF171F18CC003EDD4E /* tapToTurn.png */,
 				6804B1C015182D5F000918D4 /* starIcon.png */,
 				6804B1C215182D5F000918D4 /* bulletIcon.png */,
 				68EB8AB6171C7138005C37EF /* squares.plist */,
@@ -1923,6 +1929,8 @@
 				68EB8AB7171C7138005C37EF /* squares.plist in Resources */,
 				6842E1DC171F076A003EDD4E /* modeAnalog.png in Resources */,
 				6842E1DD171F076A003EDD4E /* modeDigital.png in Resources */,
+				6842E1E0171F18CC003EDD4E /* holdToTurn.png in Resources */,
+				6842E1E1171F18CC003EDD4E /* tapToTurn.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
