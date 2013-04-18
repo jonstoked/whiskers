@@ -63,6 +63,10 @@
     
     float starScaleDitalMode;
     float nextScale;
+    
+    float startAngleInstruction;
+    
+    CCSprite *instruction;
 }
 
 @property (nonatomic,readwrite) CCSprite* sprite;
@@ -92,6 +96,10 @@
 @property (nonatomic,readwrite) CCSpriteBatchNode *starStreakBatch;
 @property (nonatomic,readwrite) BOOL recentlyWentOffScreen;
 @property (nonatomic,readwrite) int wentOffScreenCount;
+@property (nonatomic,readwrite) float startAngleInstruction;
+@property (nonatomic,readwrite) CCSprite *instruction;
+
+
 
 
 

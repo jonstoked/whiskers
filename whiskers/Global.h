@@ -19,8 +19,8 @@
 #define SCALE_ALL_KITTIES 0
 #define DONT_SPAWN_COLLECTIBLES 0
 #define DEBUG_WENT_OFFSCREEN 0
-#define SOUND_OFF 0
-#define FORCE_ANALOG 0
+#define SOUND_OFF 1
+#define FORCE_ANALOG 1
 
 #define TEST_POWERUP @""
 //star

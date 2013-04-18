@@ -25,7 +25,7 @@
 @synthesize sprite, body, fixture, _hasStar, _aboutToWin, _hasTurret,
 _bulletCount, _isTurning, _currentExtent, _maxExtent, _minExtent, sewingMachineSound,
 _isTouchingKitty, leftEyePos, rightEyePos, smallerKitty, isTouchingKittyCount, particleSystemStarTrail,
-hasMagnet, isBeingSucked, shouldSuck, tailPosition, isFacingOtherKitty, starStreakBatch, recentlyWentOffScreen, wentOffScreenCount;
+hasMagnet, isBeingSucked, shouldSuck, tailPosition, isFacingOtherKitty, starStreakBatch, recentlyWentOffScreen, wentOffScreenCount, startAngleInstruction, instruction;
 
 
 +(id) kittyWithParentNode:(CCNode*)parentNode position:(CGPoint)position tag:(int)tag world:(b2World*)world
@@ -205,6 +205,14 @@ hasMagnet, isBeingSucked, shouldSuck, tailPosition, isFacingOtherKitty, starStre
 //		CCLOG(@"Angular Velocity: %f", body->GetAngularVelocity());
 //        CCLOG(@"Applying Torque: %f", torque);
 //        CCLOG(@"Mass: %f", mass);
+        
+        if(instruction != nil) {
+            instruction.rotation = instruction.rotation + 2;
+            if(instruction.rotation > startAngleInstruction + 90) {
+                [instruction removeFromParentAndCleanup:YES];
+                instruction = nil;
+            }
+        }
 
 	}
 	
@@ -227,8 +235,6 @@ hasMagnet, isBeingSucked, shouldSuck, tailPosition, isFacingOtherKitty, starStre
         particleSystemStarTrail.endSpin = particleSystemStarTrail.startSpin;
         particleSystemStarTrail.startSize = sprite.boundingBox.size.width;
 		particleSystemStarTrail.endSize = particleSystemStarTrail.startSize;
-//        particleSystemStarTrail.startColor = ccc4FFromccc3B([[GameManager sharedGameManager] randomWhiskersColor]);
-//        particleSystemStarTrail.endColor = particleSystemStarTrail.startColor;
 
 	}
     

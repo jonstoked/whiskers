@@ -804,6 +804,9 @@
 	{		
 		if([[isPlayerActiveArray objectAtIndex:i] integerValue])
 		{
+            
+            Kitty *kitty = (Kitty*) [gameLayer getChildByTag:i];
+
             NSString *fileName = [NSString stringWithFormat: @"button%i.png", i+1];
             mySprite = [CCSprite spriteWithFile:fileName];
             
@@ -820,9 +823,15 @@
 			{
 				mySprite.position = ccp(buttonPosition/2,buttonPosition/2);
                 if(showInstruciton) {
-                    ins.position =insOffset;
-                    ins.rotation = 45;
-                    [ins setColor:whiskersGreen];
+                    if([GameManager sharedGameManager].analogMode) {
+                        ins.position =ccp(0,0);
+                        ins.rotation = 90;
+                    } else {
+                        ins.position =insOffset;
+                        ins.rotation = 45;
+
+                    }
+
 
                     
                 }
@@ -831,9 +840,13 @@
 			{
 				mySprite.position = ccp(screenSize.width - buttonPosition/2, buttonPosition/2);
                 if(showInstruciton) {
-                    ins.position =ccp(screenSize.width - insOffset.x, insOffset.y);
-                    ins.rotation = -45;
-                    [ins setColor:whiskersYellow];
+                    if([GameManager sharedGameManager].analogMode) {
+                        ins.position =ccp(screenSize.width,0);
+                        ins.rotation = 0;
+                    } else {
+                        ins.position =ccp(screenSize.width - insOffset.x, insOffset.y);
+                        ins.rotation = -45;
+                    }
 
                 }
 			}
@@ -841,9 +854,13 @@
 			{
 				mySprite.position = ccp(screenSize.width - buttonPosition/2, screenSize.height - buttonPosition/2);
                 if(showInstruciton) {
-                    ins.position =ccp(screenSize.width - insOffset.x, screenSize.height - insOffset.y);
-                    ins.rotation = -135;
-                    [ins setColor:whiskersBlue];
+                    if([GameManager sharedGameManager].analogMode) {
+                        ins.position =ccp(screenSize.width,screenSize.height);
+                        ins.rotation = -90;
+                    } else {
+                        ins.position =ccp(screenSize.width - insOffset.x, screenSize.height - insOffset.y);
+                        ins.rotation = -135;
+                    }
 
                 }
 			}
@@ -851,17 +868,25 @@
 			{
 				mySprite.position = ccp(buttonPosition/2, screenSize.height - buttonPosition/2);
                 if(showInstruciton) {
-                    ins.position =ccp(insOffset.x, screenSize.height - insOffset.y);
-                    ins.rotation = 135;
-                    [ins setColor:whiskersPink];
+                    if([GameManager sharedGameManager].analogMode) {
+                        ins.position =ccp(0,screenSize.height);
+                        ins.rotation = 180;
+                    } else {
+                        ins.position =ccp(insOffset.x, screenSize.height - insOffset.y);
+                        ins.rotation = 135;
+                    }
 
                 }
 			}
             
-            ins.scale = 0.7f;
-            
-//            Kitty *k = (Kitty*) [self getChildByTag:i];
-//            [ins setColor:k.sprite.color];
+            if(![GameManager sharedGameManager].analogMode) {
+                ins.scale = 0.7f;
+                [ins setColor:kitty.sprite.color];
+
+            } else {
+                kitty.startAngleInstruction = ins.rotation;
+                kitty.instruction = ins;
+            }
             
             mySprite.position = ccpAdd(mySprite.position, ccp(mySprite.contentSize.width/2.0f, -mySprite.contentSize.height/2.0f));
             mySprite.anchorPoint = ccp(1,0);
