@@ -19,10 +19,10 @@
 #define SCALE_ALL_KITTIES 0
 #define DONT_SPAWN_COLLECTIBLES 0
 #define DEBUG_WENT_OFFSCREEN 0
-#define SOUND_OFF 1
+#define SOUND_OFF 0
 #define FORCE_ANALOG 0
 
-#define TEST_POWERUP @"star"
+#define TEST_POWERUP @""
 //star
 //turret
 //bomb
@@ -74,12 +74,12 @@ typedef enum {
     kTagMagnet,
     kTagExplosion,
     kTagKitty0Streak,
-    kTagKitty1Streak,
+    kTagKitty1Streak,           //20
     kTagKitty2Streak,
     kTagKitty3Streak,
     kTagInstruction0,
     kTagInstruction1,
-    kTagInstruction2,
+    kTagInstruction2,           //25
     kTagInstruction3,
     kTagCount
     

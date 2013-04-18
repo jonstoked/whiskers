@@ -729,8 +729,16 @@
                     Kitty *myKitty = (Kitty *) [gameLayer getChildByTag:i];
                     if([GameManager sharedGameManager].analogMode) {
                         [myKitty startTurning];
+
                     } else {
                         [myKitty turnRight];
+                        CCSprite *ins = (CCSprite*) [gameLayer getChildByTag:(i + kTagInstruction0)];
+                        if(showInstruciton) {
+                            ins.opacity = ins.opacity - 255.0f/5;
+                            if(ins.opacity < 255.5/5) {
+                                [gameLayer removeChild:ins cleanup:YES];
+                            }
+                        }
                     }
                     [self animateButtonPressWithTag:i+4];
                 }
@@ -799,12 +807,13 @@
             NSString *fileName = [NSString stringWithFormat: @"button%i.png", i+1];
             mySprite = [CCSprite spriteWithFile:fileName];
             
-            CGPoint insOffset = ccp(140,158);
             CCSprite *ins;
+            CGPoint insOffset = ccp(126,126); // ccp(140,158);
             if(showInstruciton) {
                 NSString *instructionString = [GameManager sharedGameManager].analogMode ? @"holdToTurn.png" : @"tapToTurn.png";
                 ins = [CCSprite spriteWithFile:instructionString];
-                [uiLayer addChild:ins];
+                [gameLayer addChild:ins z:-10];
+                ins.tag = i+kTagInstruction0;
             }
 			
             if(i==0) // bottom left
@@ -813,6 +822,8 @@
                 if(showInstruciton) {
                     ins.position =insOffset;
                     ins.rotation = 45;
+                    [ins setColor:whiskersGreen];
+
                     
                 }
 			}
@@ -822,6 +833,8 @@
                 if(showInstruciton) {
                     ins.position =ccp(screenSize.width - insOffset.x, insOffset.y);
                     ins.rotation = -45;
+                    [ins setColor:whiskersYellow];
+
                 }
 			}
 			else if(i==2) // top right
@@ -830,6 +843,8 @@
                 if(showInstruciton) {
                     ins.position =ccp(screenSize.width - insOffset.x, screenSize.height - insOffset.y);
                     ins.rotation = -135;
+                    [ins setColor:whiskersBlue];
+
                 }
 			}
 			else if(i==3) // top left
@@ -838,8 +853,15 @@
                 if(showInstruciton) {
                     ins.position =ccp(insOffset.x, screenSize.height - insOffset.y);
                     ins.rotation = 135;
+                    [ins setColor:whiskersPink];
+
                 }
 			}
+            
+            ins.scale = 0.7f;
+            
+//            Kitty *k = (Kitty*) [self getChildByTag:i];
+//            [ins setColor:k.sprite.color];
             
             mySprite.position = ccpAdd(mySprite.position, ccp(mySprite.contentSize.width/2.0f, -mySprite.contentSize.height/2.0f));
             mySprite.anchorPoint = ccp(1,0);
@@ -1211,6 +1233,7 @@
 }
 
 
+//holy shit this code is terrible, but I aint changin it
 -(void) lightningAnimation
 {
 	//blink the screen diferent colors

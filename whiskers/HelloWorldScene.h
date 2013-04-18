@@ -56,7 +56,7 @@
     int addPowerupCount;
     
     BOOL showInstruciton;
-
+    
 	
 }
 
