@@ -28,8 +28,7 @@
         
         [[GameManager sharedGameManager] logFlurryEvent:@"Displayed Mustache Menu"];
         
-//        [GameManager sharedGameManager].digitalMatchCount = 3; //remove this
-        showNewModeMessage = ([GameManager sharedGameManager].digitalMatchCount == 3 && [GameManager sharedGameManager].analogMatchCount == 0);
+        showNewModeMessage = ([GameManager sharedGameManager].digitalMatchCount >= 3 && [GameManager sharedGameManager].analogMatchCount == 0);
         
 		//self.isTouchEnabled = YES;
 		CGSize screenSize = [[CCDirector sharedDirector] winSize];
@@ -80,7 +79,7 @@
 
 		
 		playerNodeArray = [NSMutableArray arrayWithObjects:playerNode0, playerNode1, playerNode2, playerNode3, nil];
-		for(int i = 0; i < [playerNodeArray count]; ++i)
+		for(int i = 0; i < [playerNodeArray count]; ++i)    
 		{
 			MSGroupNode *currentNode = (MSGroupNode*) [playerNodeArray objectAtIndex:i];
 			currentNode.position = ccp(screenSize.width/2, screenSize.height/2);

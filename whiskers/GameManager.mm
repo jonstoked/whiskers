@@ -195,7 +195,7 @@ static GameManager* _sharedGameManager = nil;
 -(CCMenu*) toggleMenuAtPosition:(CGPoint)pos imageNameOn:(NSString*)imageNameOn imageNameOff:(NSString*)imageNameOff
                                 target:(id)t selector:(SEL)s {
     
-    CCMenuItemImage* on = [[CCMenuItemImage itemFromNormalImage:imageNameOn
+    CCMenuItemJS* on = [[CCMenuItemJS itemFromNormalImage:imageNameOn
                                                   selectedImage:imageNameOff target:nil selector:nil] retain];
     //cause we want this one to have sound
     CCMenuItemJS* off = [[CCMenuItemJS itemFromNormalImage:imageNameOff

@@ -16,5 +16,6 @@
 }
 
 -(void) selected;
+-(void) unselected;
 
 @end
