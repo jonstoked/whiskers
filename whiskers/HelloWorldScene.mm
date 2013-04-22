@@ -54,12 +54,6 @@
         
         screenSize = [CCDirector sharedDirector].winSize;
         
-        if([GameManager sharedGameManager].analogMode) {
-            ++[GameManager sharedGameManager].analogMatchCount;
-        } else {
-            ++[GameManager sharedGameManager].digitalMatchCount;
-        }
-        
 		//gameManager tests
 		isPlayerActiveArray =  [[GameManager sharedGameManager] isPlayerActiveArray];
         
@@ -793,11 +787,11 @@
 	
 	CCSprite* mySprite;
     
-//    if(([GameManager sharedGameManager].analogMode && [GameManager sharedGameManager].analogMatchCount <= 5) ||
-//       (![GameManager sharedGameManager].analogMode && [GameManager sharedGameManager].digitalMatchCount <= 5)) {
+    if(([GameManager sharedGameManager].analogMode && [GameManager sharedGameManager].analogMatchCount <= 0) ||
+       (![GameManager sharedGameManager].analogMode && [GameManager sharedGameManager].digitalMatchCount <= 0)) {
         showInstruciton = YES;
         
-//    }
+    }
 	
 	
 	for (int i = 0; i <= 3; ++i) 
@@ -879,13 +873,15 @@
                 }
 			}
             
-            if(![GameManager sharedGameManager].analogMode) {
-                ins.scale = 0.7f;
-                [ins setColor:kitty.sprite.color];
+            if(showInstruciton) {
+                if(![GameManager sharedGameManager].analogMode) {
+                    ins.scale = 0.7f;
+                    [ins setColor:kitty.sprite.color];
 
-            } else {
-                kitty.startAngleInstruction = ins.rotation;
-                kitty.instruction = ins;
+                } else {
+                    kitty.startAngleInstruction = ins.rotation;
+                    kitty.instruction = ins;
+                }
             }
             
             mySprite.position = ccpAdd(mySprite.position, ccp(mySprite.contentSize.width/2.0f, -mySprite.contentSize.height/2.0f));
@@ -1554,15 +1550,11 @@
     {
         [[GameManager sharedGameManager] setSfxOn:NO];
         
-        //todo remove this
-        [GameManager sharedGameManager].analogMode = YES;
-        
     }
     else
     {
         [[GameManager sharedGameManager] setSfxOn:YES];
         [[GameManager sharedGameManager] playRandomMeow];
-        [GameManager sharedGameManager].analogMode = NO;
         
     }    
 }

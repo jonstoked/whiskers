@@ -129,6 +129,12 @@ static GameManager* _sharedGameManager = nil;
     
     ++matchCount;
     
+    if(analogMode) {
+        ++analogMatchCount;
+    } else {
+        ++digitalMatchCount;
+    }
+    
     //heck, lets give a new mustache every round
     if(mustachesUnlocked < 51) {
         ++mustachesUnlocked;
@@ -260,6 +266,17 @@ static GameManager* _sharedGameManager = nil;
         [[SimpleAudioEngine sharedEngine] playEffect:filePath pitch:pitch pan:pan gain:gain];
     }
 }
+
+//not working
+//-(void) pulseSprite: (CCSprite*) sprite cycle:(float)cycle scale:(float)scale {  //cycle is in seconds, same as wavelength
+//    
+//	CCAction* scaleDown = [CCScaleBy actionWithDuration:cycle/2.0f scale:scale];
+//	CCAction* scaleUp = [CCScaleBy actionWithDuration:cycle/2.0f scale:1/scale];
+//	CCSequence *pulseSequence = [CCSequence actions:scaleDown, scaleUp, nil];
+//	CCRepeatForever *repeatPulse = [CCRepeatForever actionWithAction:pulseSequence];
+//	[sprite runAction:repeatPulse];
+//    
+//}
 
 
 @end

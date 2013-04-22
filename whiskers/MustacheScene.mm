@@ -28,6 +28,9 @@
         
         [[GameManager sharedGameManager] logFlurryEvent:@"Displayed Mustache Menu"];
         
+//        [GameManager sharedGameManager].digitalMatchCount = 3; //remove this
+        showNewModeMessage = ([GameManager sharedGameManager].digitalMatchCount == 3 && [GameManager sharedGameManager].analogMatchCount == 0);
+        
 		//self.isTouchEnabled = YES;
 		CGSize screenSize = [[CCDirector sharedDirector] winSize];
 		kittyScale = 1.5f;
@@ -41,12 +44,25 @@
         [self addChild:playMenu];
         
         //mode button
-        NSString *on = [GameManager sharedGameManager].analogMode ? @"modeAnalog.png" : @"modeDigital.png";
-        NSString *off = ![GameManager sharedGameManager].analogMode ? @"modeAnalog.png" : @"modeDigital.png";
-        modeMenu = [[GameManager sharedGameManager] toggleMenuAtPosition:ccp(513,266) imageNameOn:on imageNameOff:off target:self selector:@selector(toggleMode)];
-        modeMenu.opacity = 100;
-        modeMenu.isTouchEnabled = NO;
-        [self addChild:modeMenu];
+        if([GameManager sharedGameManager].matchCount >= 3) {
+            NSString *on = [GameManager sharedGameManager].analogMode ? @"modeAnalog.png" : @"modeDigital.png";
+            NSString *off = ![GameManager sharedGameManager].analogMode ? @"modeAnalog.png" : @"modeDigital.png";
+            modeMenu = [[GameManager sharedGameManager] toggleMenuAtPosition:ccp(513,270) imageNameOn:on imageNameOff:off target:self selector:@selector(toggleMode)];
+            modeMenu.opacity = 100;
+            modeMenu.isTouchEnabled = NO;
+            [self addChild:modeMenu];
+        }
+        
+        //new mode message
+        if(showNewModeMessage) {
+        
+            newMode = [CCSprite spriteWithFile:@"aNewMode.png"];
+            newMode.position = ccp(512,144);
+            newMode.opacity = 0;
+            [self addChild:newMode];
+            
+        }
+        
         
         CCMenu *backMenu = [[GameManager sharedGameManager] menuAtPosition:CGPointMake(516, screenSize.height-47) imageName:@"backButton3.png" target:self selector:@selector(backButtonPressed:)];
         
@@ -100,6 +116,20 @@
         playMenu.opacity = 255;
         modeMenu.opacity = playMenu.opacity;
         modeMenu.isTouchEnabled = YES;
+        
+        if(showNewModeMessage && newMode != nil) {
+            if(newMode.opacity == 0) {
+                newMode.opacity = 255;
+                float pulseScale = 0.97;
+                CCAction* scaleDown = [CCScaleBy actionWithDuration:0.8 scale:pulseScale];
+                CCAction* scaleUp = [CCScaleBy actionWithDuration:0.8 scale:1/pulseScale];
+                CCSequence *pulseSequence = [CCSequence actions:scaleDown, scaleUp, nil];
+                CCRepeatForever *repeatPulse = [CCRepeatForever actionWithAction:pulseSequence];
+                [newMode runAction:repeatPulse];
+//                [[GameManager sharedGameManager] pulseSprite:newMode cycle:1.4f scale:0.95f];
+            }
+        }
+        
 	}
 		
 }
@@ -164,6 +194,11 @@
 -(void) toggleMode {
     
     [GameManager sharedGameManager].analogMode = ![GameManager sharedGameManager].analogMode;
+    
+    if(showNewModeMessage && newMode.opacity == 255) {
+        [newMode removeFromParentAndCleanup:YES];
+        newMode = nil;
+    }
 
 }
 

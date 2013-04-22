@@ -25,6 +25,9 @@
 	NSMutableArray	*playerNodeArray;
 	CCMenu *playMenu;
     CCMenu *modeMenu;
+    
+    CCSprite *newMode;
+    BOOL showNewModeMessage;
 
 }
 
