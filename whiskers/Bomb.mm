@@ -107,7 +107,11 @@
 	// Create shape definition and add to body
 	b2FixtureDef dynamicFixtureDef;
 	dynamicFixtureDef.shape = &circle;
-	dynamicFixtureDef.density = 1.0f;
+    if([GameManager sharedGameManager].analogMode) {
+        dynamicFixtureDef.density = 1.0f;
+    } else {
+        dynamicFixtureDef.density = 0.2f;
+    }
 	dynamicFixtureDef.friction = 0.1f;
 	dynamicFixtureDef.restitution = 0.0f; 
 	//dynamicFixtureDef.filter.groupIndex = -(_bomberKitty.tag+1);  //this would allow the bomberKitty to travel through the bomb

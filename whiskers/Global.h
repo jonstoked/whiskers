@@ -10,17 +10,20 @@
 #define whiskers_Global_h
 
 
-#define AUTO_START 1 //four kitties
+#define AUTO_START 0 //four kitties
 #define ONLY_TWO_KITTIES 0
 #define FORCE_GAME_END 1
 #define ONE_KITTY_MOVING 0
 #define NO_KITTIES_MOVING 0
-#define DEBUG_KITTY_SCALE 0 //normal start is 0.08f, only one kitty scaled
+#define DEBUG_KITTY_SCALE 0 //0.6f //normal start is 0.08f, only one kitty scaled
 #define SCALE_ALL_KITTIES 0
 #define DONT_SPAWN_COLLECTIBLES 0
 #define DEBUG_WENT_OFFSCREEN 0
-#define SOUND_OFF 1
+#define SOUND_OFF 0
+#define MUSIC_OFF 0
 #define FORCE_ANALOG 0
+#define SHOW_TOUCHES 0
+#define SHOW_INSTRUCTION 0
 
 #define TEST_POWERUP @""
 //star

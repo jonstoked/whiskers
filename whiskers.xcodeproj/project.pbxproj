@@ -283,6 +283,7 @@
 		6842E1DD171F076A003EDD4E /* modeDigital.png in Resources */ = {isa = PBXBuildFile; fileRef = 6842E1DB171F076A003EDD4E /* modeDigital.png */; };
 		6842E1E0171F18CC003EDD4E /* holdToTurn.png in Resources */ = {isa = PBXBuildFile; fileRef = 6842E1DE171F18CC003EDD4E /* holdToTurn.png */; };
 		6842E1E1171F18CC003EDD4E /* tapToTurn.png in Resources */ = {isa = PBXBuildFile; fileRef = 6842E1DF171F18CC003EDD4E /* tapToTurn.png */; };
+		68502E1317281E3700AED391 /* QTouchposeApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 68502E1217281E3700AED391 /* QTouchposeApplication.m */; };
 		6885FFBC1725E56000D53100 /* aNewMode.png in Resources */ = {isa = PBXBuildFile; fileRef = 6885FFBB1725E56000D53100 /* aNewMode.png */; };
 		6890249A16C9877F00B410B9 /* rematchButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 6890249916C9877F00B410B9 /* rematchButton.png */; };
 		6890249E16C98C6500B410B9 /* backButton3.png in Resources */ = {isa = PBXBuildFile; fileRef = 6890249D16C98C6500B410B9 /* backButton3.png */; };
@@ -785,6 +786,8 @@
 		6842E1DB171F076A003EDD4E /* modeDigital.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = modeDigital.png; sourceTree = "<group>"; };
 		6842E1DE171F18CC003EDD4E /* holdToTurn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = holdToTurn.png; sourceTree = "<group>"; };
 		6842E1DF171F18CC003EDD4E /* tapToTurn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tapToTurn.png; sourceTree = "<group>"; };
+		68502E1117281E3700AED391 /* QTouchposeApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QTouchposeApplication.h; sourceTree = "<group>"; };
+		68502E1217281E3700AED391 /* QTouchposeApplication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QTouchposeApplication.m; sourceTree = "<group>"; };
 		6885FFBB1725E56000D53100 /* aNewMode.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = aNewMode.png; sourceTree = "<group>"; };
 		6890249916C9877F00B410B9 /* rematchButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rematchButton.png; sourceTree = "<group>"; };
 		6890249D16C98C6500B410B9 /* backButton3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backButton3.png; sourceTree = "<group>"; };
@@ -965,6 +968,7 @@
 		6804AFAC15182AF7000918D4 /* libs */ = {
 			isa = PBXGroup;
 			children = (
+				68502E1017281E3700AED391 /* Touchpose */,
 				682E615016D544BF00D363BC /* Flurry */,
 				689024A316C990B300B410B9 /* appirater-master */,
 				6804B0A515182AFB000918D4 /* LICENSE_cocos2d.txt */,
@@ -1520,6 +1524,15 @@
 				682E615216D544BF00D363BC /* libFlurry.a */,
 			);
 			path = Flurry;
+			sourceTree = "<group>";
+		};
+		68502E1017281E3700AED391 /* Touchpose */ = {
+			isa = PBXGroup;
+			children = (
+				68502E1117281E3700AED391 /* QTouchposeApplication.h */,
+				68502E1217281E3700AED391 /* QTouchposeApplication.m */,
+			);
+			path = Touchpose;
 			sourceTree = "<group>";
 		};
 		689024A316C990B300B410B9 /* appirater-master */ = {
@@ -2095,6 +2108,7 @@
 				68B4935A16C18D8800E895E1 /* FLTwitter.mm in Sources */,
 				689024C416C990B500B410B9 /* Appirater.m in Sources */,
 				68EC04C616E13A060084B431 /* CCMenuItemJS.m in Sources */,
+				68502E1317281E3700AED391 /* QTouchposeApplication.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

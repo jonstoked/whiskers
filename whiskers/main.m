@@ -7,11 +7,21 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "QTouchposeApplication.h"
+#import "AppDelegate.h"
+#import "Global.h"
 
 int main(int argc, char *argv[]) {
     
     NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
-    int retVal = UIApplicationMain(argc, argv, nil, @"AppDelegate");
+    int retVal;
+    if(!SHOW_TOUCHES) {
+        retVal = UIApplicationMain(argc, argv, nil, @"AppDelegate");
+    } else {
+        retVal = UIApplicationMain(argc, argv,
+                      NSStringFromClass([QTouchposeApplication class]),
+                      NSStringFromClass([AppDelegate class]));
+    }
     [pool release];
     return retVal;
 }

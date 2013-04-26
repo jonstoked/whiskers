@@ -207,7 +207,7 @@ hasMagnet, isBeingSucked, shouldSuck, tailPosition, isFacingOtherKitty, starStre
 //        CCLOG(@"Mass: %f", mass);
         
         if(instruction != nil) {
-            instruction.rotation = instruction.rotation + 2;
+            instruction.rotation = instruction.rotation + 0.8f;
             if(instruction.rotation > startAngleInstruction + 90) {
                 [instruction removeFromParentAndCleanup:YES];
                 instruction = nil;
@@ -224,8 +224,9 @@ hasMagnet, isBeingSucked, shouldSuck, tailPosition, isFacingOtherKitty, starStre
 		isTouchingKittyCount = 0;
     
 	//turn around if kitty has been touching another kitty for the last 60 frames
-	if(isTouchingKittyCount > 60)
+	if(isTouchingKittyCount > 60 && [GameManager sharedGameManager].analogMode) {
 		[self turnAround];
+    }
 	
 	//update star trail position and angle
 	if(_hasStar)
@@ -286,18 +287,6 @@ hasMagnet, isBeingSucked, shouldSuck, tailPosition, isFacingOtherKitty, starStre
 	fixture = body->CreateFixture(&fixdef);
     
     [self schedule:@selector(updateLinearVelocity) interval:dur];
-//    [self updateLinearVelocity];
-    
-//    if(_hasTurret) {
-//        [self stopActionByTag:103];
-//        
-//        //start auto-firing bullets
-//		float rateOfFire = sprite.scale;
-//		CCSequence* shootTurretCall = [CCSequence actions:[CCDelayTime actionWithDuration:rateOfFire], [CCCallFunc actionWithTarget:self selector:@selector(shootTurret)], nil];
-//		CCRepeatForever* repeatSequence = [CCRepeatForever actionWithAction:shootTurretCall];
-//		repeatSequence.tag = 103;
-//		[self runAction:repeatSequence];
-//    }
 }
 
 -(void) shrinkWithScale: (float) scale
@@ -626,7 +615,8 @@ hasMagnet, isBeingSucked, shouldSuck, tailPosition, isFacingOtherKitty, starStre
 }
 
 -(void) turnRight {
-    float lv = 1.4f/sprite.scale; //was 1.2
+    [self updateLinearVelocity];
+    float lv = lvDigital;
     if(_hasStar) {
         lv*=starScaleDitalMode;
     }
@@ -684,7 +674,8 @@ hasMagnet, isBeingSucked, shouldSuck, tailPosition, isFacingOtherKitty, starStre
     if(![GameManager sharedGameManager].analogMode) {
         
         [self unschedule:@selector(updateLinearVelocity)];
-        float lv = 1.4f/sprite.scale; //was 1.2
+        lvDigital = 1.4f/sprite.scale;
+        float lv = lvDigital;
         b2Vec2 lvUnit = body->GetLinearVelocity();
         lvUnit.Normalize();
         if(_hasStar) {

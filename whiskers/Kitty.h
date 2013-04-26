@@ -67,6 +67,8 @@
     float startAngleInstruction;
     
     CCSprite *instruction;
+    
+    float lvDigital;
 }
 
 @property (nonatomic,readwrite) CCSprite* sprite;

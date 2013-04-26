@@ -16,6 +16,7 @@
 #import "HelloWorldScene.h"
 #import "Appirater.h"
 #import "Flurry.h"
+#import "QTouchposeApplication.h"
 
 @implementation AppDelegate
 
@@ -136,6 +137,11 @@
 //    [Appirater setDebug:YES]; //review prompt happens every time app is launched
     
     [Flurry startSession:@"7WDH4KXPNSCCM9C875HD"];
+    
+    if(SHOW_TOUCHES) {
+        QTouchposeApplication *touchposeApplication = (QTouchposeApplication *)application;
+        touchposeApplication.alwaysShowTouches = YES;
+    }
 
     
 

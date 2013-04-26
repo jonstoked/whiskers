@@ -788,7 +788,8 @@
 	CCSprite* mySprite;
     
     if(([GameManager sharedGameManager].analogMode && [GameManager sharedGameManager].analogMatchCount <= 0) ||
-       (![GameManager sharedGameManager].analogMode && [GameManager sharedGameManager].digitalMatchCount <= 0)) {
+       (![GameManager sharedGameManager].analogMode && [GameManager sharedGameManager].digitalMatchCount <= 0) ||
+       SHOW_INSTRUCTION) {
         showInstruciton = YES;
         
     }
