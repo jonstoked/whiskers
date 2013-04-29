@@ -88,9 +88,10 @@ static GameManager* _sharedGameManager = nil;
         meowNames = [[NSMutableArray alloc] init];
         [self loadSFX];
         
-        if(FORCE_ANALOG)
+        if(FORCE_ANALOG) {
             analogMode = YES;
-
+        }
+        
     }
     return self;
 }

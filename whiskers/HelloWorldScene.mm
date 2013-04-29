@@ -516,7 +516,7 @@
 			if ((spriteA.tag == kTagBombs && spriteB.tag >= 0 && spriteB.tag <= 3) ||
 				(spriteB.tag == kTagBombs && spriteA.tag >= 0 && spriteA.tag <= 3)) 
 			{
-                [[GameManager sharedGameManager] playEffect:SFX_FART pitch:1.0f pan:0 gain:0.8f];
+                [[GameManager sharedGameManager] playEffect:SFX_FART pitch:1.0f pan:0 gain:1.0f];
 				if(spriteA.tag == kTagBombs)
 				{
 					if (std::find(toDestroy.begin(), toDestroy.end(), bodyA) == toDestroy.end()) 
@@ -1183,12 +1183,8 @@
         
         if(rand <= lightningProb) {
             [self addLightning];
-            if(spawnTwoPowerups)
-                [self addLightning];
         } else if(rand <= lightningProb + turretProb) {
              [self addTurret];
-            if(spawnTwoPowerups)
-                [self addTurret];
         } else if(rand <= lightningProb + turretProb + bombProb) {
             [self addBombs];
             if(spawnTwoPowerups)
@@ -1210,8 +1206,6 @@
 		Kitty* myKitty = (Kitty*) [gameLayer getChildByTag:tag];
 		float myScale = [[growScales objectAtIndex:i] floatValue];
 		[myKitty growWithScale: myScale];
-		
-		
 	}
 }
 
@@ -1221,7 +1215,6 @@
 		Kitty* myKitty = (Kitty*) [gameLayer getChildByTag:tag];
 		float myScale = [[shrinkScales objectAtIndex:i] floatValue];
 		[myKitty shrinkWithScale: myScale];
-		
 	}
 }
 
@@ -1373,7 +1366,7 @@
     id remove = [CCSequence actions:[CCDelayTime actionWithDuration:dur], [CCCallFunc actionWithTarget:self selector:@selector(removeExplosion)], nil];
     [circle runAction:remove];
     
-    [[GameManager sharedGameManager] playEffect:SFX_MOUTHPOP pitch:1.0f pan:0 gain:2.0f];
+    [[GameManager sharedGameManager] playEffect:SFX_MOUTHPOP pitch:1.0f pan:0 gain:3.6f];
     
 }
 
@@ -1387,7 +1380,6 @@
 
 -(void) pause
 {
-	//[[CCDirector sharedDirector] pause];
     [self unscheduleUpdate];
 	[self unschedule: @selector(addPellet:)];
 	[self unschedule: @selector(addPowerup)];

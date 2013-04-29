@@ -65,7 +65,7 @@ hasMagnet, isBeingSucked, shouldSuck, tailPosition, isFacingOtherKitty, starStre
 		//initialize sound effects
 		sewingMachineSound = [[[SimpleAudioEngine sharedEngine] soundSourceForFile:@"sewingmachine.caf"] retain];
 		sewingMachineSound.looping = YES;
-        sewingMachineSound.gain = 0.4f;
+        sewingMachineSound.gain = 0.3f;
 		
 		//add kitty sprite
 		sprite = [CCSprite spriteWithFile:@"francineWhite.png"];
@@ -421,7 +421,6 @@ hasMagnet, isBeingSucked, shouldSuck, tailPosition, isFacingOtherKitty, starStre
 
 }
 
-//todo: make rate of fire update when scale changes
 -(void) gotTurret
 {
 	if(!_hasTurret)
@@ -434,7 +433,13 @@ hasMagnet, isBeingSucked, shouldSuck, tailPosition, isFacingOtherKitty, starStre
 		[self runAction:lostTurretCall];
 		
 		//start auto-firing bullets
-		float rateOfFire = sprite.scale;
+        
+		float rateOfFire;
+        if(DEBUG_RATE_OF_FIRE !=0) {
+            rateOfFire = DEBUG_RATE_OF_FIRE;
+        } else {
+            rateOfFire = sprite.scale;
+        }
 		CCSequence* shootTurretCall = [CCSequence actions:[CCDelayTime actionWithDuration:rateOfFire], [CCCallFunc actionWithTarget:self selector:@selector(shootTurret)], nil];
 		CCRepeatForever* repeatSequence = [CCRepeatForever actionWithAction:shootTurretCall];
 		repeatSequence.tag = 103;
