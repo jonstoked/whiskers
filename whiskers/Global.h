@@ -12,7 +12,7 @@
 
 #define AUTO_START 0 //four kitties
 #define ONLY_TWO_KITTIES 0
-#define FORCE_GAME_END 1
+#define FORCE_GAME_END 0
 #define ONE_KITTY_MOVING 0
 #define NO_KITTIES_MOVING 0
 #define DEBUG_KITTY_SCALE 0 //normal start is 0.08f, only one kitty scaled

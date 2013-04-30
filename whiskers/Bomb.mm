@@ -67,16 +67,42 @@
 		[self schedule: @selector(explode) interval:explosionDelay];
 		
 		[self schedule: @selector(tick:)];
-
+        
+        
+        blinkRate = 1.0f; //per second
+        [self schedule:@selector(increaseBlinkRate) interval:explosionDelay*3.0f/4];
 		
 	}
 	
 	return self;
 }
 
+-(void) blink {
+    [self unschedule:@selector(blink)];
+    sprite.opacity = 255*0.7f;
+    [self schedule:@selector(unblink) interval:0.1f];
+}
+
+-(void) unblink {
+    [self unschedule:@selector(unblink)];
+    sprite.opacity = 255;
+}
+
+-(void) increaseBlinkRate {
+    
+    blinkRate *=4.0f;
+    
+}
+
 -(void) tick: (ccTime) dt
 {
 	psSparks.position = ccpAdd(sprite.position,ccp(66,50));
+    
+    bombLife += dt;
+    if(bombLife > timeLastBlink + 1.0f/blinkRate) {
+        [self blink];
+        timeLastBlink = bombLife;
+    }
 }
 
 -(void) createBody

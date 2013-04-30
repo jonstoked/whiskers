@@ -21,6 +21,10 @@
 	Kitty* _bomberKitty; // kitty that dropped the BOMB!
 	CGPoint _position;
 	CCParticleSystemQuad *psSparks;
+    
+    float bombLife;
+    float timeLastBlink;
+    float blinkRate;
 	
 	
 }
