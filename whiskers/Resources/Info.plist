@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>English</string>
 	<key>CFBundleDisplayName</key>
-	<string>${PRODUCT_NAME}</string>
+	<string>Whiskers</string>
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleIconFile</key>
@@ -30,12 +30,10 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>1.01</string>
+	<string>1.02</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>UIPrerenderedIcon</key>
-	<true/>
-	<key>UIStatusBarHidden</key>
 	<true/>
 	<key>UIRequiredDeviceCapabilities</key>
 	<dict>
@@ -44,5 +42,9 @@
 		<key>opengles-1</key>
 		<true/>
 	</dict>
+	<key>UIStatusBarHidden</key>
+	<true/>
+	<key>UISupportedInterfaceOrientations~ipad</key>
+	<array/>
 </dict>
 </plist>

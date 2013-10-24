@@ -291,7 +291,6 @@
 		689024C516C990B500B410B9 /* Appirater.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 689024A716C990B300B410B9 /* Appirater.podspec */; };
 		689024C616C990B500B410B9 /* AppiraterLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 689024A916C990B300B410B9 /* AppiraterLocalizable.strings */; };
 		689024C716C990B500B410B9 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 689024BC16C990B400B410B9 /* README.md */; };
-		68962B961518381E00A3E40E /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 68962B951518381E00A3E40E /* Default.png */; };
 		68A09B06155C6EB3003DA47C /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 68A09B05155C6EB3003DA47C /* libz.dylib */; };
 		68A09B08155C6ED2003DA47C /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 68A09B07155C6ED2003DA47C /* libsqlite3.dylib */; };
 		68B4935716C18A2C00E895E1 /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68B4935616C18A2C00E895E1 /* Twitter.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
@@ -895,8 +894,6 @@
 		6804AF7815182AF6000918D4 = {
 			isa = PBXGroup;
 			children = (
-				68A09B07155C6ED2003DA47C /* libsqlite3.dylib */,
-				68A09B05155C6EB3003DA47C /* libz.dylib */,
 				6804AF9715182AF7000918D4 /* whiskers */,
 				6804AF8615182AF7000918D4 /* Frameworks */,
 				6804AF8415182AF7000918D4 /* Products */,
@@ -914,6 +911,8 @@
 		6804AF8615182AF7000918D4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				68A09B07155C6ED2003DA47C /* libsqlite3.dylib */,
+				68A09B05155C6EB3003DA47C /* libz.dylib */,
 				6821DC7C16C996BC002A74E4 /* StoreKit.framework */,
 				6821DC7A16C996B5002A74E4 /* SystemConfiguration.framework */,
 				6821DC7816C996AE002A74E4 /* CFNetwork.framework */,
@@ -1882,7 +1881,6 @@
 				6804B2A315182D5F000918D4 /* mouthpop.caf in Resources */,
 				6804B2AD15182D5F000918D4 /* cb4.png in Resources */,
 				6804B2AE15182D5F000918D4 /* lightningWhite.png in Resources */,
-				68962B961518381E00A3E40E /* Default.png in Resources */,
 				68D909F51523A0BB001965CA /* musicButtonOff.png in Resources */,
 				68D909F61523A0BB001965CA /* musicButtonOn.png in Resources */,
 				68D909F71523A0BB001965CA /* playButtonPauseMenu.png in Resources */,
