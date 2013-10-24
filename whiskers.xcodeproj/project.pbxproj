@@ -296,6 +296,8 @@
 		68B4935716C18A2C00E895E1 /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68B4935616C18A2C00E895E1 /* Twitter.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		68B4935A16C18D8800E895E1 /* FLTwitter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 68B4935916C18D8800E895E1 /* FLTwitter.mm */; };
 		68BBB7B5169F800400701FB1 /* circle171.png in Resources */ = {isa = PBXBuildFile; fileRef = 68BBB7B4169F800400701FB1 /* circle171.png */; };
+		68C16C7D1819C4480010CF87 /* Default-Landscape~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 68C16C7C1819C4480010CF87 /* Default-Landscape~ipad.png */; };
+		68C16C7F1819C4530010CF87 /* Default-Portrait~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 68C16C7E1819C4520010CF87 /* Default-Portrait~ipad.png */; };
 		68D909F51523A0BB001965CA /* musicButtonOff.png in Resources */ = {isa = PBXBuildFile; fileRef = 68D909EE1523A0BB001965CA /* musicButtonOff.png */; };
 		68D909F61523A0BB001965CA /* musicButtonOn.png in Resources */ = {isa = PBXBuildFile; fileRef = 68D909EF1523A0BB001965CA /* musicButtonOn.png */; };
 		68D909F71523A0BB001965CA /* playButtonPauseMenu.png in Resources */ = {isa = PBXBuildFile; fileRef = 68D909F01523A0BB001965CA /* playButtonPauseMenu.png */; };
@@ -826,6 +828,8 @@
 		68B4935816C18D8700E895E1 /* FLTwitter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLTwitter.h; sourceTree = "<group>"; };
 		68B4935916C18D8800E895E1 /* FLTwitter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = FLTwitter.mm; sourceTree = "<group>"; };
 		68BBB7B4169F800400701FB1 /* circle171.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = circle171.png; sourceTree = "<group>"; };
+		68C16C7C1819C4480010CF87 /* Default-Landscape~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape~ipad.png"; sourceTree = "<group>"; };
+		68C16C7E1819C4520010CF87 /* Default-Portrait~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait~ipad.png"; sourceTree = "<group>"; };
 		68D909EE1523A0BB001965CA /* musicButtonOff.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = musicButtonOff.png; sourceTree = "<group>"; };
 		68D909EF1523A0BB001965CA /* musicButtonOn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = musicButtonOn.png; sourceTree = "<group>"; };
 		68D909F01523A0BB001965CA /* playButtonPauseMenu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playButtonPauseMenu.png; sourceTree = "<group>"; };
@@ -894,6 +898,8 @@
 		6804AF7815182AF6000918D4 = {
 			isa = PBXGroup;
 			children = (
+				68C16C7E1819C4520010CF87 /* Default-Portrait~ipad.png */,
+				68C16C7C1819C4480010CF87 /* Default-Landscape~ipad.png */,
 				6804AF9715182AF7000918D4 /* whiskers */,
 				6804AF8615182AF7000918D4 /* Frameworks */,
 				6804AF8415182AF7000918D4 /* Products */,
@@ -1946,6 +1952,8 @@
 				6842E1E0171F18CC003EDD4E /* holdToTurn.png in Resources */,
 				6842E1E1171F18CC003EDD4E /* tapToTurn.png in Resources */,
 				6885FFBC1725E56000D53100 /* aNewMode.png in Resources */,
+				68C16C7D1819C4480010CF87 /* Default-Landscape~ipad.png in Resources */,
+				68C16C7F1819C4530010CF87 /* Default-Portrait~ipad.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
