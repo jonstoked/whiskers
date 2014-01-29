@@ -21,7 +21,7 @@
 	float kittyScale;
     CCMenuItemImage *powerupsButton;
     CCMenu *powerupsMenu;
-        
+    CCLayer *infoLayer;
 }
 
 +(id) scene;

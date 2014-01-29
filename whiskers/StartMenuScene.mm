@@ -84,6 +84,16 @@
 
 }
 
+-(void) setupInfoMenu {
+    
+    infoLayer = [CCLayer node];
+    [self addChild:infoLayer];
+    
+    
+    
+    
+}
+
 -(void) moveInPowerupsButton {
     
     [self unschedule:@selector(moveInPowerupsButton)];
