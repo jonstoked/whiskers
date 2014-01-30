@@ -21,7 +21,9 @@
 	float kittyScale;
     CCMenuItemImage *powerupsButton;
     CCMenu *powerupsMenu;
+    CCMenu *playMenu;
     CCLayer *infoLayer;
+    BOOL infoVisible;
 }
 
 +(id) scene;

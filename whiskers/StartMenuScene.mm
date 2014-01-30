@@ -55,14 +55,19 @@
         
         [[GameManager sharedGameManager] logFlurryEvent:@"Displayed Start Menu"];
         
+        [self setupInfoMenu];
+        
 		
 	}	
 	return self;
 }
 
 -(void) showMenu {
-        
-    CCMenu *playMenu = [[GameManager sharedGameManager] menuAtPosition:CGPointMake(311 - [[CCDirector sharedDirector] winSize].width,489) imageName:@"playButton.png" target:self selector:@selector(playButtonTouched:)];
+    
+    CCMenu *infoMenu = [[GameManager sharedGameManager] menuAtPosition:CGPointMake(49 - [CCDirector sharedDirector].winSize.width,[CCDirector sharedDirector].winSize.height - 49) imageName:@"infoButton.png" target:self selector:@selector(infoButtonTouched:)];
+    [self addChild:infoMenu];
+    
+    playMenu = [[GameManager sharedGameManager] menuAtPosition:CGPointMake(311 - [[CCDirector sharedDirector] winSize].width,489) imageName:@"playButton.png" target:self selector:@selector(playButtonTouched:)];
     
     powerupsMenu = [[GameManager sharedGameManager] menuAtPosition:CGPointMake(511 - [[CCDirector sharedDirector] winSize].width,300) imageName:@"powerupsButton.png" target:self selector:@selector(powerupsButtonTouched:)];
     
@@ -76,9 +81,13 @@
     
     float t2 = 0.1f;
     id movein = [CCEaseBackOut actionWithAction:[CCMoveBy actionWithDuration:0.25f position:ccp([[CCDirector sharedDirector] winSize].width, 0)]];
-    [playMenu runAction:movein];
-    [self schedule:@selector(moveInPowerupsButton) interval:t2];
-    [self schedule:@selector(moveInLogo2) interval:t2*2];
+    [infoMenu runAction:movein];
+    [self schedule:@selector(moveInPlayButton) interval:t2];
+    [self schedule:@selector(moveInPowerupsButton) interval:t2*2];
+    [self schedule:@selector(moveInLogo2) interval:t2*3];
+    
+
+    
 
     
 
@@ -88,10 +97,77 @@
     
     infoLayer = [CCLayer node];
     [self addChild:infoLayer];
+    infoLayer.position = ccp(-[CCDirector sharedDirector].winSize.width,0);
+    
+    CCSprite *bg = [CCSprite spriteWithFile:@"info.png"];
+    bg.position = ccp([[CCDirector sharedDirector] winSize].width/2.0, [[CCDirector sharedDirector] winSize].height/2.0);
+    [infoLayer addChild:bg];
+    
+    CCMenu *link1 = [[GameManager sharedGameManager] menuAtPosition:CGPointMake(733,444) imageName:@"JSlink.png" target:self selector:@selector(link1Touched:)];
+    
+    [infoLayer addChild:link1];
+    
+    CCMenu *link2 = [[GameManager sharedGameManager] menuAtPosition:CGPointMake(730,143) imageName:@"SMlink.png" target:self selector:@selector(link2Touched:)];
+    
+    CCMenu *backButton = [[GameManager sharedGameManager] menuAtPosition:ccp(92,730) imageName:@"backButton3.png" target:self selector:@selector(backButtonTouched)];
+    [infoLayer addChild:backButton];
+    
+    [infoLayer addChild:link2];
     
     
     
     
+    
+}
+
+-(void) infoButtonTouched:(id)sender {
+    
+    if(!infoVisible) {
+        
+        infoVisible = YES;
+        //move in layer
+        id movein = [CCEaseExponentialOut actionWithAction:[CCMoveTo actionWithDuration:0.75f position:ccp(0, 0)]];
+        [infoLayer runAction:movein];
+        
+    }
+    
+}
+
+-(void) backButtonTouched {
+    
+    if(infoVisible) {
+        
+        infoVisible = NO;
+    
+        id movein = [CCEaseExponentialOut actionWithAction:[CCMoveTo actionWithDuration:0.75f position:ccp(-[[CCDirector sharedDirector] winSize].width, 0)]];
+        [infoLayer runAction:movein];
+        
+    }
+    
+}
+
+
+-(void) link1Touched:(id)sender {
+    
+    NSString *stringURL = @"http://jonstoked.com/";
+    NSURL *url = [NSURL URLWithString:stringURL];
+    [[UIApplication sharedApplication] openURL:url];
+    
+}
+
+-(void) link2Touched:(id)sender {
+    
+    NSString *stringURL = @"http://www.studio-mercato.com/";
+    NSURL *url = [NSURL URLWithString:stringURL];
+    [[UIApplication sharedApplication] openURL:url];
+    
+}
+
+-(void) moveInPlayButton {
+    
+    [self unschedule:@selector(moveInPlayButton)];
+    id movein = [CCEaseBackOut actionWithAction:[CCMoveBy actionWithDuration:0.25f position:ccp([[CCDirector sharedDirector] winSize].width, 0)]];
+    [playMenu runAction:movein];
 }
 
 -(void) moveInPowerupsButton {
@@ -107,6 +183,7 @@
     id movein = [CCEaseBackOut actionWithAction:[CCMoveBy actionWithDuration:0.25f position:ccp([[CCDirector sharedDirector] winSize].width, 0)]];
     [logo2 runAction:movein];
 }
+
 
 
 
