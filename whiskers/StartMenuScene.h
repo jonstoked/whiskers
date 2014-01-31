@@ -24,6 +24,7 @@
     CCMenu *playMenu;
     CCLayer *infoLayer;
     BOOL infoVisible;
+    CCLayerColor* colorLayer;
 }
 
 +(id) scene;
