@@ -19,7 +19,7 @@
 	b2Body* body;
 	b2World* _world;
 	Kitty* _bomberKitty; // kitty that dropped the BOMB!
-	CGPoint _position;
+//    CGPoint _position;
 	CCParticleSystemQuad *psSparks;
     
     float bombLife;
