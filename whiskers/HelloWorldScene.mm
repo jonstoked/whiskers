@@ -109,14 +109,14 @@
 		bool doSleep = true;
 		
 		// Construct a world object, which will hold and simulate the rigid bodies.
-		_world = new b2World(gravity, doSleep);
+		_world = new b2World(gravity);
 		
 		_world->SetContinuousPhysics(true);
 		
 		
 		 // Debug Drawing
-		 m_debugDraw = new GLESDebugDraw( PTM_RATIO );
-		 _world->SetDebugDraw(m_debugDraw);
+//         m_debugDraw = new GLESDebugDraw( PTM_RATIO );
+//         _world->SetDebugDraw(m_debugDraw);
 		 
 //		 uint32 flags = 0;
 //		 flags += b2DebugDraw::e_shapeBit;
@@ -166,8 +166,6 @@
         [touchRects addObject:[NSValue valueWithCGRect:CGRectMake(screenSize.width-l,screenSize.height-l,l,l)]];
         [touchRects addObject:[NSValue valueWithCGRect:CGRectMake(0,screenSize.height-l,l,l)]];
         
-        if(DEBUG != 1)
-            [Flurry logEvent:@"Gameplay" timed:YES];
     
         
         
@@ -197,17 +195,17 @@
 	// Default GL states: GL_TEXTURE_2D, GL_VERTEX_ARRAY, GL_COLOR_ARRAY, GL_TEXTURE_COORD_ARRAY
 	// Needed states:  GL_VERTEX_ARRAY, 
 	// Unneeded states: GL_TEXTURE_2D, GL_COLOR_ARRAY, GL_TEXTURE_COORD_ARRAY
-	glDisable(GL_TEXTURE_2D);
-	glDisableClientState(GL_COLOR_ARRAY);
-	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+//    glDisable(GL_TEXTURE_2D);
+//    glDisableClientState(GL_COLOR_ARRAY);
+//    glDisableClientState(GL_TEXTURE_COORD_ARRAY);
 	
 	_world->DrawDebugData();
 	
 	// restore default GL states
-	glEnable(GL_TEXTURE_2D);
-	glEnableClientState(GL_COLOR_ARRAY);
-	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-        
+//    glEnable(GL_TEXTURE_2D);
+//    glEnableClientState(GL_COLOR_ARRAY);
+//    glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+    
     //debug points and rects must be added every frame
     for(NSValue *value in [GameManager sharedGameManager].debugPoints) {
         CGPoint point = [value CGPointValue];
@@ -1018,10 +1016,6 @@
 		musSprite.position = ccp(kitty.sprite.contentSize.width/2 + mustacheXoffset, kitty.sprite.contentSize.height/2 -
                                  [[offsets objectAtIndex:mustacheNumber-1] intValue]);
 		[kitty.sprite addChild:musSprite z:10];
-        
-        //track mustaches in flurry
-        NSDictionary *eventDict = [NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"%i", mustacheNumber], @"mustacheNumber",nil];
-        [[GameManager sharedGameManager] logFlurryEvent:@"Mustache Selected" withParameters:eventDict];
 		
 	}
 	
@@ -1403,9 +1397,6 @@
     
 	id ease = [CCEaseInOut actionWithAction:moveOnScreen rate:3];
 	[pauseMenuLayer runAction:ease];
-    
-    
-    [[GameManager sharedGameManager] logFlurryEvent:@"Displayed Pause Menu"];
 	
 }
 
@@ -1587,8 +1578,6 @@
 // on "dealloc" you need to release all your retained objects
 - (void) dealloc
 {
-    if(DEBUG != 1)
-        [Flurry endTimedEvent:@"Gameplay" withParameters:nil];
     
     //remove any sprites that have physics bodies before you delete the world
     for(CCSprite *sprite in gameLayer.children) {
@@ -1604,7 +1593,7 @@
 	delete _world;
 	_world = NULL;
 	
-	delete m_debugDraw;
+//    delete m_debugDraw;
 	
 	// don't forget to call "super dealloc"
 	[super dealloc];

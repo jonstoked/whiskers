@@ -187,7 +187,6 @@
 		68524F41189AFD690010FEE0 /* JSlink.png in Resources */ = {isa = PBXBuildFile; fileRef = 68524F3E189AFD690010FEE0 /* JSlink.png */; };
 		68524F42189AFD690010FEE0 /* SMlink.png in Resources */ = {isa = PBXBuildFile; fileRef = 68524F3F189AFD690010FEE0 /* SMlink.png */; };
 		68524F44189B016B0010FEE0 /* infoButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 68524F43189B016B0010FEE0 /* infoButton.png */; };
-		68524F48189B132D0010FEE0 /* libFlurry_4.3.1.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 68524F47189B132D0010FEE0 /* libFlurry_4.3.1.a */; };
 		68524F4A189B13790010FEE0 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68524F49189B13790010FEE0 /* Security.framework */; };
 		6885FFBC1725E56000D53100 /* aNewMode.png in Resources */ = {isa = PBXBuildFile; fileRef = 6885FFBB1725E56000D53100 /* aNewMode.png */; };
 		6890249A16C9877F00B410B9 /* rematchButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 6890249916C9877F00B410B9 /* rematchButton.png */; };
@@ -351,6 +350,7 @@
 		E16A63CF1FD6007500EAA665 /* vec4.h in Sources */ = {isa = PBXBuildFile; fileRef = E16A62771FD5FBD300EAA665 /* vec4.h */; };
 		E16A63D01FD6007500EAA665 /* ChangeLog in Sources */ = {isa = PBXBuildFile; fileRef = E16A627A1FD5FBD300EAA665 /* ChangeLog */; };
 		E16A63D11FD6007500EAA665 /* CMakeLists.txt in Sources */ = {isa = PBXBuildFile; fileRef = E16A627B1FD5FBD300EAA665 /* CMakeLists.txt */; };
+		E184F3041FD74AF7005A1C97 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E184F3031FD74AF7005A1C97 /* CoreText.framework */; };
 		E1CABEF91FD7061600864035 /* Box2DConfig.cmake in Resources */ = {isa = PBXBuildFile; fileRef = E1CABE961FD7061600864035 /* Box2DConfig.cmake */; };
 		E1CABEFA1FD7061600864035 /* CMakeLists.txt in Resources */ = {isa = PBXBuildFile; fileRef = E1CABE971FD7061600864035 /* CMakeLists.txt */; };
 		E1CABEFB1FD7061600864035 /* b2BroadPhase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E1CABE991FD7061600864035 /* b2BroadPhase.cpp */; };
@@ -628,8 +628,6 @@
 		68524F3E189AFD690010FEE0 /* JSlink.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = JSlink.png; sourceTree = "<group>"; };
 		68524F3F189AFD690010FEE0 /* SMlink.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SMlink.png; sourceTree = "<group>"; };
 		68524F43189B016B0010FEE0 /* infoButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = infoButton.png; sourceTree = "<group>"; };
-		68524F46189B132D0010FEE0 /* Flurry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flurry.h; sourceTree = "<group>"; };
-		68524F47189B132D0010FEE0 /* libFlurry_4.3.1.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurry_4.3.1.a; sourceTree = "<group>"; };
 		68524F49189B13790010FEE0 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		6885FFBB1725E56000D53100 /* aNewMode.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = aNewMode.png; sourceTree = "<group>"; };
 		6890249916C9877F00B410B9 /* rematchButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rematchButton.png; sourceTree = "<group>"; };
@@ -934,6 +932,7 @@
 		E16A63661FD6000100EAA665 /* utlist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = utlist.h; sourceTree = "<group>"; };
 		E16A63671FD6000100EAA665 /* ZipUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZipUtils.h; sourceTree = "<group>"; };
 		E16A63681FD6000100EAA665 /* ZipUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZipUtils.m; sourceTree = "<group>"; };
+		E184F3031FD74AF7005A1C97 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		E1CABE951FD7061600864035 /* Box2D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Box2D.h; sourceTree = "<group>"; };
 		E1CABE961FD7061600864035 /* Box2DConfig.cmake */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Box2DConfig.cmake; sourceTree = "<group>"; };
 		E1CABE971FD7061600864035 /* CMakeLists.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CMakeLists.txt; sourceTree = "<group>"; };
@@ -1034,6 +1033,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E184F3041FD74AF7005A1C97 /* CoreText.framework in Frameworks */,
 				68524F4A189B13790010FEE0 /* Security.framework in Frameworks */,
 				6821DC7D16C996BC002A74E4 /* StoreKit.framework in Frameworks */,
 				6821DC7B16C996B5002A74E4 /* SystemConfiguration.framework in Frameworks */,
@@ -1049,7 +1049,6 @@
 				6804AF9215182AF7000918D4 /* UIKit.framework in Frameworks */,
 				6804AF9415182AF7000918D4 /* Foundation.framework in Frameworks */,
 				6804AF9615182AF7000918D4 /* CoreGraphics.framework in Frameworks */,
-				68524F48189B132D0010FEE0 /* libFlurry_4.3.1.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1078,6 +1077,7 @@
 		6804AF8615182AF7000918D4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E184F3031FD74AF7005A1C97 /* CoreText.framework */,
 				68524F49189B13790010FEE0 /* Security.framework */,
 				68A09B07155C6ED2003DA47C /* libsqlite3.dylib */,
 				68A09B05155C6EB3003DA47C /* libz.dylib */,
@@ -1136,7 +1136,6 @@
 				E1CABE941FD7061600864035 /* Box2D */,
 				E16A62981FD6000100EAA665 /* cocos2d */,
 				E16A62661FD5FBD300EAA665 /* kazmath */,
-				68524F45189B132D0010FEE0 /* Flurry */,
 				68502E1017281E3700AED391 /* Touchpose */,
 				689024A316C990B300B410B9 /* appirater-master */,
 				6804B0A515182AFB000918D4 /* LICENSE_cocos2d.txt */,
@@ -1379,15 +1378,6 @@
 				68524F26189993870010FEE0 /* AppIcon76x76@2x.png */,
 			);
 			name = Icon;
-			sourceTree = "<group>";
-		};
-		68524F45189B132D0010FEE0 /* Flurry */ = {
-			isa = PBXGroup;
-			children = (
-				68524F46189B132D0010FEE0 /* Flurry.h */,
-				68524F47189B132D0010FEE0 /* libFlurry_4.3.1.a */,
-			);
-			path = Flurry;
 			sourceTree = "<group>";
 		};
 		689024A316C990B300B410B9 /* appirater-master */ = {
@@ -2588,6 +2578,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				DEVELOPMENT_TEAM = 7Q6EW992MS;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = whiskers/Prefix.pch;
@@ -2598,7 +2589,7 @@
 				);
 				"GCC_THUMB_SUPPORT[arch=armv6]" = "";
 				INFOPLIST_FILE = whiskers/Resources/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\\\"$(SRCROOT)/whiskers/Flurry\\\"",
@@ -2621,6 +2612,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
+				DEVELOPMENT_TEAM = 7Q6EW992MS;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = whiskers/Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -2630,7 +2622,7 @@
 				);
 				"GCC_THUMB_SUPPORT[arch=armv6]" = "";
 				INFOPLIST_FILE = whiskers/Resources/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\\\"$(SRCROOT)/whiskers/Flurry\\\"",
@@ -2673,6 +2665,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
+				DEVELOPMENT_TEAM = 7Q6EW992MS;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = whiskers/Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -2682,7 +2675,7 @@
 				);
 				"GCC_THUMB_SUPPORT[arch=armv6]" = "";
 				INFOPLIST_FILE = whiskers/Resources/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\\\"$(SRCROOT)/whiskers/Flurry\\\"",

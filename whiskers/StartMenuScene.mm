@@ -53,8 +53,6 @@
         [logo runAction:shrink];
         [self showMenu];
         
-        [[GameManager sharedGameManager] logFlurryEvent:@"Displayed Start Menu"];
-        
         [self setupInfoMenu];
         
 		

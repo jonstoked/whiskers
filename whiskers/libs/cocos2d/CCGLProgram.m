@@ -141,49 +141,92 @@ typedef void (*GLLogFunction) (GLuint program,
 }
 
 
+//fix: https://stackoverflow.com/questions/30864055/coco2d-2-1-and-xcode-7-ios-9-crash-ccshader
+#define _IPHONE9_0 [[[UIDevice currentDevice] systemVersion] floatValue] == 9.000
+
+#define EXTENSION_STRING "#extension GL_OES_standard_derivatives : enable"
+static NSString * g_extensionStr = @EXTENSION_STRING;
+
+
 - (BOOL)compileShader:(GLuint *)shader type:(GLenum)type byteArray:(const GLchar *)source
 {
     GLint status;
-
     if (!source)
         return NO;
-		
-		const GLchar *sources[] = {
+    
+    
+#ifdef _IPHONE9_0
+    
+    NSLog(@"USING IOS9 shaders");
+    // BEGIN workaround for Xcode 7 ios9----
+    BOOL hasExtension = NO;
+    NSString *sourceStr = [NSString stringWithUTF8String:source];
+    if([sourceStr containsString:g_extensionStr]) {
+        hasExtension = YES;
+        NSArray *strs = [sourceStr componentsSeparatedByString:g_extensionStr];
+        assert(strs.count == 2);
+        sourceStr = [strs componentsJoinedByString:@"\n"];
+        source = (GLchar *)[sourceStr UTF8String];
+    }
+    
+    const GLchar *sources[] = {
+        (hasExtension ? EXTENSION_STRING "\n" : ""),
 #ifdef __CC_PLATFORM_IOS
-			(type == GL_VERTEX_SHADER ? "precision highp float;\n" : "precision mediump float;\n"),
+        (type == GL_VERTEX_SHADER ? "precision highp float;\n" : "precision mediump float;\n"),
 #endif
-			"uniform mat4 CC_PMatrix;\n"
-			"uniform mat4 CC_MVMatrix;\n"
-			"uniform mat4 CC_MVPMatrix;\n"
-			"uniform vec4 CC_Time;\n"
-			"uniform vec4 CC_SinTime;\n"
-			"uniform vec4 CC_CosTime;\n"
-			"uniform vec4 CC_Random01;\n"
-			"//CC INCLUDES END\n\n",
-			source,
-		};
-		
+        "uniform mat4 CC_PMatrix;\n"
+        "uniform mat4 CC_MVMatrix;\n"
+        "uniform mat4 CC_MVPMatrix;\n"
+        "uniform vec4 CC_Time;\n"
+        "uniform vec4 CC_SinTime;\n"
+        "uniform vec4 CC_CosTime;\n"
+        "uniform vec4 CC_Random01;\n"
+        "//CC INCLUDES END\n\n",
+        source,
+    };
+#else
+    
+    NSLog(@"USING IOS8 shaders");
+    
+    const GLchar *sources[] = {
+#ifdef __CC_PLATFORM_IOS
+        (type == GL_VERTEX_SHADER ? "precision highp float;\n" : "precision mediump float;\n"),
+#endif
+        "uniform mat4 CC_PMatrix;\n"
+        "uniform mat4 CC_MVMatrix;\n"
+        "uniform mat4 CC_MVPMatrix;\n"
+        "uniform vec4 CC_Time;\n"
+        "uniform vec4 CC_SinTime;\n"
+        "uniform vec4 CC_CosTime;\n"
+        "uniform vec4 CC_Random01;\n"
+        "//CC INCLUDES END\n\n",
+        source,
+    };
+    
+#endif
+    
+    
     *shader = glCreateShader(type);
     glShaderSource(*shader, sizeof(sources)/sizeof(*sources), sources, NULL);
     glCompileShader(*shader);
-	
+    
     glGetShaderiv(*shader, GL_COMPILE_STATUS, &status);
-	
-	if( ! status ) {
-		GLsizei length;
-		glGetShaderiv(*shader, GL_SHADER_SOURCE_LENGTH, &length);
-		GLchar src[length];
-		
-		glGetShaderSource(*shader, length, NULL, src);
-		CCLOG(@"cocos2d: ERROR: Failed to compile shader:\n%s", src);
-		
-		if( type == GL_VERTEX_SHADER )
-			CCLOG(@"cocos2d: %@", [self vertexShaderLog] );
-		else
-			CCLOG(@"cocos2d: %@", [self fragmentShaderLog] );
-		
-		abort();
-	}
+    
+    if( ! status ) {
+        GLsizei length;
+        glGetShaderiv(*shader, GL_SHADER_SOURCE_LENGTH, &length);
+        GLchar src[length];
+        
+        glGetShaderSource(*shader, length, NULL, src);
+        CCLOG(@"cocos2d: ERROR: Failed to compile shader:\n%s", src);
+        
+        if( type == GL_VERTEX_SHADER )
+            CCLOG(@"cocos2d: %@", [self vertexShaderLog] );
+        else
+            CCLOG(@"cocos2d: %@", [self fragmentShaderLog] );
+        
+        abort();
+    }
     return ( status == GL_TRUE );
 }
 

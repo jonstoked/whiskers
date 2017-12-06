@@ -15,7 +15,6 @@
 #import "Global.h"
 #import "HelloWorldScene.h"
 #import "Appirater.h"
-#import "Flurry.h"
 #import "QTouchposeApplication.h"
 
 @implementation AppDelegate
@@ -51,27 +50,25 @@
 
 - (void) applicationDidFinishLaunching:(UIApplication*)application
 {
-	// Init the window
-	window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+
+    window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 	
 	// Try to use CADisplayLink director
 	// if it fails (SDK < 3.1) use the default director
-    if( ! [CCDirector setDirectorType:kCCDirectorTypeDisplayLink] )
-        [CCDirector setDirectorType:kCCDirectorTypeDefault];
+//    if( ! [CCDirector setDirectorType:kCCDirectorTypeDisplayLink] )
+//        [CCDirector setDirectorType:kCCDirectorTypeDefault];
 	
 	
 	CCDirector *director = [CCDirector sharedDirector];
 	
-	// Init the View Controller
 	viewController = [[RootViewController alloc] initWithNibName:nil bundle:nil];
 	viewController.wantsFullScreenLayout = YES;
 	
-	//
 	// Create the EAGLView manually
 	//  1. Create a RGB565 format. Alternative: RGBA8
 	//	2. depth format of 0 bit. Use 16 or 24 bit for 3d effects, like CCPageTurnTransition
-	//
-	//
+    
+    NSLog(@"window bounds: %@", NSStringFromCGRect(window.bounds));
 	EAGLView *glView = [EAGLView viewWithFrame:[window bounds]
 								   pixelFormat:kEAGLColorFormatRGB565	// kEAGLColorFormatRGBA8
 								   depthFormat:0						// GL_DEPTH_COMPONENT16_OES
@@ -86,42 +83,16 @@
 //	if( ! [director enableRetinaDisplay:YES] )
 //		CCLOG(@"Retina Display Not supported");
 	
-	//
-	// VERY IMPORTANT:
-	// If the rotation is going to be controlled by a UIViewController
-	// then the device orientation should be "Portrait".
-	//
-	// IMPORTANT:
-	// By default, this template only supports Landscape orientations.
-	// Edit the RootViewController.m file to edit the supported orientations.
-	//
-#if GAME_AUTOROTATION == kGameAutorotationUIViewController
-	[director setDeviceOrientation:kCCDeviceOrientationPortrait];
-#else
-	[director setDeviceOrientation:kCCDeviceOrientationLandscapeRight];
-#endif
-	
 	[director setAnimationInterval:1.0/60];
-    
-//    if(DEBUG==1) {
-////        [director setDisplayFPS:YES];
-//	}
 	
-	// make the OpenGLView a child of the view controller
-	[viewController setView:glView];
-	
-	// make the View Controller a child of the main window
-	[window addSubview: viewController.view];
+	[viewController.view addSubview:glView];
+    [window setRootViewController:viewController];
 	
 	[window makeKeyAndVisible];
 	
 	// Default texture format for PNG/BMP/TIFF/JPEG/GIF images
-	// It can be RGBA8888, RGBA4444, RGB5_A1, RGB565
-	// You can change anytime.
 	[CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA8888];
 
-	
-	// Removes the startup flicker
 	[self removeStartupFlicker];
     	
 	// Run the intro Scene
@@ -136,23 +107,21 @@
     [Appirater appLaunched:YES];
 //    [Appirater setDebug:YES]; //review prompt happens every time app is launched
     
-    [Flurry startSession:@"7WDH4KXPNSCCM9C875HD"];
-    
     if(SHOW_TOUCHES) {
         QTouchposeApplication *touchposeApplication = (QTouchposeApplication *)application;
         touchposeApplication.alwaysShowTouches = YES;
     }
+}
 
-    
-
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+    return interfaceOrientation == UIInterfaceOrientationLandscapeRight;
 }
 
 void uncaughtExceptionHandler(NSException *exception) {
     
     CCLOG(@"CRASH: %@", exception);
     CCLOG(@"Stack Trace: %@", [exception callStackSymbols]);
-    
-    [Flurry logError:@"Uncaught" message:[exception name] exception:exception];
     
 }
 
