@@ -111,21 +111,12 @@
     
     [[GameManager sharedGameManager] logFlurryEvent:@"Tapped Twitter Button"];
     
-    if ([[FLTwitter defaultManager] isTwitterAvailable]) {
-        
-        UIViewController * viewController = (UIViewController *)[[AppDelegate get] viewController];
-        [[FLTwitter defaultManager] sendTweetFromViewController:viewController withText:@"@JonStoked The next Whiskers powerup should be..."];
-
-
-    } else {
+    //in the future, you should probably weave in native sharing: https://stackoverflow.com/questions/12503287/tutorial-for-slcomposeviewcontroller-sharing
     
-        //http://www.hightechdad.com/2011/05/18/how-to-pre-populate-twitter-status-updates-the-new-way-via-links-web-intents/
-        
-        NSString *stringURL = @"http://twitter.com/intent/tweet?text=@JonStoked+-+The+next+Whiskers+powerup+should+be...";
-        NSURL *url = [NSURL URLWithString:stringURL];
-        [[UIApplication sharedApplication] openURL:url];
-    
-    }
+    //http://www.hightechdad.com/2011/05/18/how-to-pre-populate-twitter-status-updates-the-new-way-via-links-web-intents/
+    NSString *stringURL = @"http://twitter.com/intent/tweet?text=@JonStoked+-+The+next+Whiskers+powerup+should+be...";
+    NSURL *url = [NSURL URLWithString:stringURL];
+    [[UIApplication sharedApplication] openURL:url];
 }
 
 - (void)onExit
